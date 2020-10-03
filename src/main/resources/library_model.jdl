@@ -1,0 +1,54 @@
+
+entity Book {
+	name String,
+	author String
+}
+
+entity Part {
+	name String,
+	description String,
+	number Integer
+}
+
+entity Chapter {
+	name String,
+	description String,
+	number Integer
+}
+
+entity Scene {
+	name String,
+	number Integer,
+	text TextBlob,
+	timestampStart Instant
+}
+
+entity Image {
+	name String,
+	picture ImageBlob,
+	preview ImageBlob
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Book{part} to Part{book},
+	Part{chapter} to Chapter{part},
+	Chapter{scene} to Scene{chapter},
+	Image{bookToCover} to Book{cover}
+}
+
+relationship ManyToMany {
+	Book{image} to Image{book}
+	Part{image} to Image{part}
+	Chapter{image} to Image{chapter}
+	Scene{image} to Image{scene}
+}
+
+// Set pagination options
+paginate Book, Part, Chapter, Scene, Image with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
