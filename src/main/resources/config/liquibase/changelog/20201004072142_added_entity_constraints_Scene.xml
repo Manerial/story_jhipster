@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Scene.
+    -->
+    <changeSet id="20201004072142-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="scene_id"
+                                 baseTableName="scene_image"
+                                 constraintName="fk_scene_image_scene_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="scene"/>
+
+        <addForeignKeyConstraint baseColumnNames="image_id"
+                                 baseTableName="scene_image"
+                                 constraintName="fk_scene_image_image_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="image"/>
+        
+        <addForeignKeyConstraint baseColumnNames="chapter_id"
+                                 baseTableName="scene"
+                                 constraintName="fk_scene_chapter_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chapter"/>
+
+    </changeSet>
+</databaseChangeLog>

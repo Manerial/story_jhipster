@@ -1,0 +1,27 @@
+{
+  "nidAuxHistoiresApp": {
+    "scene": {
+      "home": {
+        "title": "Scenes",
+        "createLabel": "Create a new Scene",
+        "createOrEditLabel": "Create or edit a Scene",
+        "notFound": "No Scenes found"
+      },
+      "created": "A new Scene is created with identifier {{ param }}",
+      "updated": "A Scene is updated with identifier {{ param }}",
+      "deleted": "A Scene is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Scene {{ id }}?"
+      },
+      "detail": {
+        "title": "Scene"
+      },
+      "name": "Name",
+      "number": "Number",
+      "text": "Text",
+      "timestampStart": "Timestamp Start",
+      "image": "Image",
+      "chapter": "Chapter"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "nidAuxHistoiresApp": {
+    "chapter": {
+      "home": {
+        "title": "Chapters",
+        "createLabel": "Créer un nouveau Chapter",
+        "createOrEditLabel": "Créer ou éditer un Chapter",
+        "notFound": "Aucun Chapter trouvé"
+      },
+      "created": "Un nouveau Chapter a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Chapter avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Chapter avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Chapter {{ id }} ?"
+      },
+      "detail": {
+        "title": "Chapter"
+      },
+      "name": "Name",
+      "description": "Description",
+      "number": "Number",
+      "scene": "Scene",
+      "image": "Image",
+      "part": "Part"
+    }
+  }
+}
