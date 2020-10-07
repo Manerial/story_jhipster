@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -128,7 +129,7 @@ public class BookResource {
 	 *         of books in body.
 	 */
 	@GetMapping("/books")
-	public ResponseEntity<List<BookDTO>> getAllBooks(Pageable pageable,
+	public ResponseEntity<List<BookDTO>> getAllBooks(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
 			@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
 		log.debug("REST request to get a page of Books");
 		Page<BookDTO> page;

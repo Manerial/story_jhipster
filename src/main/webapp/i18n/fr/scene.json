@@ -11,17 +11,25 @@
       "updated": "Le Scene avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Scene avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Scene {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer la Scene {{ id }} ?"
       },
       "detail": {
         "title": "Scene"
       },
-      "name": "Name",
-      "number": "Number",
-      "text": "Text",
-      "timestampStart": "Timestamp Start",
+      "name": "Nom",
+      "number": "Numéro",
+      "text": "Texte",
+      "timestampStart": "Date / Heure",
       "image": "Image",
-      "chapter": "Chapter"
+      "chapter": "Chapitre",
+      "required": {
+        "name": "Le champ Nom est requis",
+        "number": "Le champ Numéro est requis",
+        "chapter": "Le champ Chapitre est requis"
+      },
+      "format": {
+        "timestampStart": "Le champ Date / Heure doit être au format {{ format }}"
+      }
     }
   }
 }

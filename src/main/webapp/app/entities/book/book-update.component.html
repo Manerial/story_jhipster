@@ -34,7 +34,7 @@
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.book.cover" for="field_cover">Cover</label>
                     <select class="form-control" id="field_cover" name="cover" formControlName="coverId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="imageOption.id" *ngFor="let imageOption of images; trackBy: trackById">{{ imageOption.id }}</option>
+                        <option [ngValue]="imageOption.id" *ngFor="let imageOption of images; trackBy: trackById">{{ imageOption.name }}</option>
                     </select>
                 </div>
             </div>

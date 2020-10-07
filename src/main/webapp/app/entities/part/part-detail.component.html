@@ -23,13 +23,13 @@
                 <dt><span jhiTranslate="nidAuxHistoiresApp.part.image">Image</span></dt>
                 <dd>
                     <span *ngFor="let image of part.images; let last = last">
-                        <a [routerLink]="['/image', image?.id, 'view']">{{ image.id }}</a>{{ last ? '' : ', ' }}
+                        <a [routerLink]="['/entities/image', image?.id, 'view']">{{ image.id }}</a>{{ last ? '' : ', ' }}
                     </span>
                 </dd>
                 <dt><span jhiTranslate="nidAuxHistoiresApp.part.book">Book</span></dt>
                 <dd>
                     <div *ngIf="part.bookId">
-                        <a [routerLink]="['/book', part.bookId, 'view']">{{ part.bookId }}</a>
+                        <a [routerLink]="['/entities/book', part.bookId, 'view']">{{ part.bookId }}</a>
                     </div>
                 </dd>
             </dl>
@@ -41,7 +41,7 @@
             </button>
 
             <button type="button"
-                    [routerLink]="['/part', part.id, 'edit']"
+                    [routerLink]="['/entities/part', part.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
