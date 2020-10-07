@@ -20,7 +20,7 @@ entity Scene {
 	name String,
 	number Integer,
 	text TextBlob,
-	timestampStart Instant
+	timestampStart LocalDate
 }
 
 entity Image {

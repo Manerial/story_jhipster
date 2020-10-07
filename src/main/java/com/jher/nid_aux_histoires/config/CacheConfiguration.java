@@ -48,6 +48,23 @@ public class CacheConfiguration {
             createCache(cm, com.jher.nid_aux_histoires.domain.User.class.getName());
             createCache(cm, com.jher.nid_aux_histoires.domain.Authority.class.getName());
             createCache(cm, com.jher.nid_aux_histoires.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Book.class.getName());
+            createCache(cm, com.jher.nid_aux_histoires.domain.Book.class.getName() + ".parts");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Book.class.getName() + ".images");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Part.class.getName());
+            createCache(cm, com.jher.nid_aux_histoires.domain.Part.class.getName() + ".chapters");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Part.class.getName() + ".images");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Chapter.class.getName());
+            createCache(cm, com.jher.nid_aux_histoires.domain.Chapter.class.getName() + ".scenes");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Chapter.class.getName() + ".images");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Scene.class.getName());
+            createCache(cm, com.jher.nid_aux_histoires.domain.Scene.class.getName() + ".images");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Image.class.getName());
+            createCache(cm, com.jher.nid_aux_histoires.domain.Image.class.getName() + ".bookToCovers");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Image.class.getName() + ".books");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Image.class.getName() + ".parts");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Image.class.getName() + ".chapters");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Image.class.getName() + ".scenes");
             // jhipster-needle-ehcache-add-entry
         };
     }

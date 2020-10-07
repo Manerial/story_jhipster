@@ -2,6 +2,7 @@
 @import '~bootstrap/scss/functions';
 @import '~bootswatch/dist/lux/variables';
 @import '~bootstrap/scss/variables';
+@import 'variables';
 
 /* ==============================================================
 Bootstrap tweaks
@@ -29,8 +30,8 @@ Browser Upgrade Prompt
 ========================================================================== */
 .browserupgrade {
   margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
+  background: $white;
+  color: $black;
   padding: 0.2em 0;
 }
 
@@ -47,8 +48,8 @@ Generic styles
 }
 
 .error {
-  color: white;
-  background-color: red;
+  color: $gray;
+  background-color: $red;
 }
 
 .pad {
@@ -69,12 +70,12 @@ Generic styles
 }
 
 .readonly {
-  background-color: #eee;
+  background-color: $white;
   opacity: 1;
 }
 
 .footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  border-top: 1px solid rgba($black, 0.125);
 }
 
 .hand,
@@ -139,7 +140,7 @@ entity detail page css
       margin-bottom: 15px;
     }
     dd {
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid $gray;
       padding-left: 180px;
       margin-left: 0;
     }

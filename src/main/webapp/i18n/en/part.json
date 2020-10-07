@@ -1,0 +1,27 @@
+{
+  "nidAuxHistoiresApp": {
+    "part": {
+      "home": {
+        "title": "Parts",
+        "createLabel": "Create a new Part",
+        "createOrEditLabel": "Create or edit a Part",
+        "notFound": "No Parts found"
+      },
+      "created": "A new Part is created with identifier {{ param }}",
+      "updated": "A Part is updated with identifier {{ param }}",
+      "deleted": "A Part is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Part {{ id }}?"
+      },
+      "detail": {
+        "title": "Part"
+      },
+      "name": "Name",
+      "description": "Description",
+      "number": "Number",
+      "chapter": "Chapter",
+      "image": "Image",
+      "book": "Book"
+    }
+  }
+}
