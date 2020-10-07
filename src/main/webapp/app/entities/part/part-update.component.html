@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label jhiTranslate="nidAuxHistoiresApp.part.image" for="field_images">Image</label>
                     <select class="form-control" id="field_images" multiple name="images" formControlName="images">
-                        <option [ngValue]="getSelected(editForm.get('images')!.value, imageOption)" *ngFor="let imageOption of images; trackBy: trackById">{{ imageOption.id }}</option>
+                        <option [ngValue]="getSelected(editForm.get('images')!.value, imageOption)" *ngFor="let imageOption of images; trackBy: trackById">{{ imageOption.name }}</option>
                     </select>
                 </div>
 
@@ -40,7 +40,7 @@
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.part.book" for="field_book">Book</label>
                     <select class="form-control" id="field_book" name="book" formControlName="bookId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="bookOption.id" *ngFor="let bookOption of books; trackBy: trackById">{{ bookOption.id }}</option>
+                        <option [ngValue]="bookOption.id" *ngFor="let bookOption of books; trackBy: trackById">{{ bookOption.name + " " + bookOption.id }}</option>
                     </select>
                 </div>
             </div>

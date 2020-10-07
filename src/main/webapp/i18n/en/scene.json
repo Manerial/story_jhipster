@@ -19,9 +19,17 @@
       "name": "Name",
       "number": "Number",
       "text": "Text",
-      "timestampStart": "Timestamp Start",
+      "timestampStart": "Date / Time",
       "image": "Image",
-      "chapter": "Chapter"
+      "chapter": "Chapter",
+      "required": {
+        "name": "Name field is required",
+        "number": "Number field is required",
+        "chapter": "Chapter field is required"
+      },
+      "format": {
+        "timestampStart": "Date / Time fied must be in the format {{ format }}"
+      }
     }
   }
 }
