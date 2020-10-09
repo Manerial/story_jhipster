@@ -13,6 +13,15 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+#Export
+export:
+  model:
+    path: src/main/resources/templates/export/
+    book:
+      name: template_book.docx
+    part:
+      name: template_part.docx
+
 logging:
   level:
     ROOT: INFO
