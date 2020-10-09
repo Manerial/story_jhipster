@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jher.nid_aux_histoires.domain.Book;
+import com.jher.nid_aux_histoires.domain.Part;
 import com.jher.nid_aux_histoires.repository.BookRepository;
 import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.PartService;
@@ -79,6 +80,10 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Book : {}", id);
+		Book book = bookRepository.findById(id).get();
+		for (Part part : book.getParts()) {
+			partService.delete(part.getId());
+		}
 		bookRepository.deleteById(id);
 	}
 }
