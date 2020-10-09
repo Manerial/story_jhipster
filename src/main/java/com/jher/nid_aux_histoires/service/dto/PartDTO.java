@@ -71,6 +71,14 @@ public class PartDTO implements Serializable {
 		this.bookId = bookId;
 	}
 
+	public Set<ChapterDTO> getChapters() {
+		return chapters;
+	}
+
+	public void setChapters(Set<ChapterDTO> chapters) {
+		this.chapters = chapters;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -93,13 +101,5 @@ public class PartDTO implements Serializable {
 	public String toString() {
 		return "PartDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", description='" + getDescription() + "'"
 				+ ", number=" + getNumber() + ", images='" + getImages() + "'" + ", bookId=" + getBookId() + "}";
-	}
-
-	public Set<ChapterDTO> getChapters() {
-		return chapters;
-	}
-
-	public void setChapters(Set<ChapterDTO> chapters) {
-		this.chapters = chapters;
 	}
 }
