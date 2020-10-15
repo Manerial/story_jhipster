@@ -12,6 +12,8 @@
         "chapter": "Chapter",
         "scene": "Scene",
         "image": "Image",
+        "idea": "Idea",
+        "wordAnalysis": "Word Analysis",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
