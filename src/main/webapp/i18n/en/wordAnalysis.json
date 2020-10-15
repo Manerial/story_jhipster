@@ -1,0 +1,24 @@
+{
+  "nidAuxHistoiresApp": {
+    "wordAnalysis": {
+      "home": {
+        "title": "Word Analyses",
+        "createLabel": "Create a new Word Analysis",
+        "createOrEditLabel": "Create or edit a Word Analysis",
+        "notFound": "No Word Analyses found"
+      },
+      "created": "A new Word Analysis is created with identifier {{ param }}",
+      "updated": "A Word Analysis is updated with identifier {{ param }}",
+      "deleted": "A Word Analysis is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Word Analysis {{ id }}?"
+      },
+      "detail": {
+        "title": "Word Analysis"
+      },
+      "type": "Type",
+      "name": "Name",
+      "analysis": "Analysis"
+    }
+  }
+}
