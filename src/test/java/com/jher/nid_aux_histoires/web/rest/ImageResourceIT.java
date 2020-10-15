@@ -6,7 +6,6 @@ import com.jher.nid_aux_histoires.repository.ImageRepository;
 import com.jher.nid_aux_histoires.service.ImageService;
 import com.jher.nid_aux_histoires.service.dto.ImageDTO;
 import com.jher.nid_aux_histoires.service.mapper.ImageMapper;
-import com.jher.nid_aux_histoires.web.rest.library.ImageResource;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
