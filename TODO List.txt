@@ -1,3 +1,4 @@
+Etudier l'agencement du projet JHipster
 Importer l'interface du site
 	Vue bibliothèque
 	Vue lecture
@@ -11,10 +12,8 @@ Traduire le site
 Importer les générateurs
 	Générateur de mots
 		Front
-		Back
 	Générateur de personnages
 		Front
-		Back
 Utiliser les variables CSS pour rendre le code générique
 Tester l'application
 	Tests Back
