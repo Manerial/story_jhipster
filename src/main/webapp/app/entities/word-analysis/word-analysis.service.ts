@@ -39,10 +39,7 @@ export class WordAnalysisService {
   }
 
   getTypes(): Observable<IType[]> {
-    return this.http.get<IType[]>(`${this.resourceUrl}/words/types`).pipe(
-      map(response => response as IType[]),
-      map(response => [...response].sort())
-    );
+    return this.http.get<IType[]>(`${this.resourceUrl}/words/types`).pipe(map(response => [...response].sort()));
   }
 
   generateWords(number: number, fixLength: number, type: string): Observable<string[]> {
@@ -53,9 +50,6 @@ export class WordAnalysisService {
 
     return this.http
       .get<string[]>(`${this.resourceUrl}/words`, { params: httpParams })
-      .pipe(
-        map(response => response as string[]),
-        map(response => [...response].sort())
-      );
+      .pipe(map(response => [...response].sort()));
   }
 }
