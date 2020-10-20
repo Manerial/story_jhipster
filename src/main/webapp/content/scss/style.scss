@@ -146,11 +146,6 @@ p {
   height: Calc(100% - #{$nav-height});
 }
 
-.footer {
-  position: sticky;
-  bottom: 5px;
-}
-
 .col-20-perc {
   flex: 0 0 20%;
   max-width: 20%;
