@@ -39,7 +39,7 @@ export const bookRoute: Routes = [
     path: '',
     component: BookComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       defaultSort: 'id,asc',
       pageTitle: 'nidAuxHistoiresApp.book.home.title',
     },
@@ -52,7 +52,7 @@ export const bookRoute: Routes = [
       book: BookResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.book.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -64,7 +64,7 @@ export const bookRoute: Routes = [
       book: BookResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.book.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -76,7 +76,7 @@ export const bookRoute: Routes = [
       book: BookResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.book.home.title',
     },
     canActivate: [UserRouteAccessService],

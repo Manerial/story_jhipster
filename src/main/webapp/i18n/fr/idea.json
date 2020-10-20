@@ -2,23 +2,23 @@
   "nidAuxHistoiresApp": {
     "idea": {
       "home": {
-        "title": "Ideas",
-        "createLabel": "Créer un nouveau Idea",
-        "createOrEditLabel": "Créer ou éditer un Idea",
-        "notFound": "Aucun Idea trouvé"
+        "title": "Idées",
+        "createLabel": "Créer une nouvelle Idée",
+        "createOrEditLabel": "Créer ou éditer une Idée",
+        "notFound": "Aucune Idée trouvé"
       },
-      "created": "Un nouveau Idea a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Idea avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Idea avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Idée a été créé avec l'identifiant {{ param }}",
+      "updated": "L'Idée avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'Idée avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Idea {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer l'Idée {{ id }} ?"
       },
       "detail": {
-        "title": "Idea"
+        "title": "Idée"
       },
       "type": "Type",
-      "value": "Value",
-      "complement": "Complement"
+      "value": "Valeur",
+      "complement": "Compléments"
     }
   }
 }

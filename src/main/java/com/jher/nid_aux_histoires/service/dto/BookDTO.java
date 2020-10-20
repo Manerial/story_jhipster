@@ -15,9 +15,13 @@ public class BookDTO implements Serializable {
 
 	private String author;
 
+	private String description;
+
 	private Set<ImageDTO> images = new HashSet<>();
 
 	private Set<PartDTO> parts = new HashSet<>();
+
+	private byte[] coverPreview;
 
 	private Long coverId;
 
@@ -45,6 +49,14 @@ public class BookDTO implements Serializable {
 		this.author = author;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public Set<ImageDTO> getImages() {
 		return images;
 	}
@@ -59,6 +71,14 @@ public class BookDTO implements Serializable {
 
 	public void setCoverId(Long imageId) {
 		this.coverId = imageId;
+	}
+
+	public byte[] getCoverPreview() {
+		return coverPreview;
+	}
+
+	public void setCoverPreview(byte[] coverPreview) {
+		this.coverPreview = coverPreview;
 	}
 
 	public Set<PartDTO> getParts() {

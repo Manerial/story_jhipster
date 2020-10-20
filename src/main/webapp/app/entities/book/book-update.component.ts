@@ -22,6 +22,7 @@ export class BookUpdateComponent implements OnInit {
     id: [],
     name: [],
     author: [],
+    description: [],
     images: [],
     coverId: [],
   });
@@ -46,6 +47,7 @@ export class BookUpdateComponent implements OnInit {
       id: book.id,
       name: book.name,
       author: book.author,
+      description: book.description,
       images: book.images,
       coverId: book.coverId,
     });
@@ -71,6 +73,7 @@ export class BookUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       author: this.editForm.get(['author'])!.value,
+      description: this.editForm.get(['description'])!.value,
       images: this.editForm.get(['images'])!.value,
       coverId: this.editForm.get(['coverId'])!.value,
     };

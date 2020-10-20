@@ -42,7 +42,10 @@ public class Book implements Serializable {
 	@Column(name = "author")
 	private String author;
 
-	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+	@Column(name = "description")
+	private String description;
+
+	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Part> parts = new HashSet<>();
 
@@ -88,6 +91,19 @@ public class Book implements Serializable {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Book description(String description) {
+		this.description = description;
+		return this;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Set<Part> getParts() {
