@@ -1,0 +1,268 @@
+@import 'src/main/webapp/content/scss/variables';
+
+.hide-element {
+  display: none;
+}
+
+.bk-list {
+  list-style: none;
+  position: relative;
+}
+
+.bk-list li {
+  position: relative;
+  width: 300px;
+  float: left;
+  z-index: 1;
+  margin: 0px 50px 40px 0;
+  -webkit-perspective: 1800px;
+  perspective: 1800px;
+}
+
+.bk-list li:last-child {
+  margin-right: 0;
+}
+
+.bk-info {
+  position: relative;
+  margin-top: 430px;
+}
+
+.bk-list li .bk-book {
+  position: absolute;
+  width: 100%;
+  height: 400px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+}
+
+.bk-list li .bk-book.bk-bookdefault:hover {
+  -webkit-transform: rotate3d(0, 1, 0, 35deg);
+  transform: rotate3d(0, 1, 0, 35deg);
+}
+
+.bk-list li .bk-book > div,
+.bk-list li .bk-front > div {
+  display: block;
+  position: absolute;
+}
+
+.bk-list li .bk-front {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-origin: 0% 50%;
+  transform-origin: 0% 50%;
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  -webkit-transform: translate3d(0, 0, 20px);
+  transform: translate3d(0, 0, 20px);
+  z-index: 10;
+  border-radius: 0 3px 3px 0;
+}
+
+.bk-list li .bk-front > div {
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.bk-list li .bk-front,
+.bk-list li .bk-back,
+.bk-list li .bk-front > div {
+  width: 300px;
+  height: 400px;
+}
+
+.bk-list li .bk-left,
+.bk-list li .bk-right {
+  width: 40px;
+  left: -20px;
+}
+
+.bk-list li .bk-back {
+  -webkit-transform: rotate3d(0, 1, 0, -180deg) translate3d(0, 0, 20px);
+  transform: rotate3d(0, 1, 0, -180deg) translate3d(0, 0, 20px);
+  border-radius: 3px 0 0 3px;
+}
+
+.bk-list li .bk-left {
+  height: 400px;
+  -webkit-transform: rotate3d(0, 1, 0, -90deg);
+  transform: rotate3d(0, 1, 0, -90deg);
+}
+
+.bk-list li .bk-right {
+  height: 400px;
+  -webkit-transform-origin: 50% 0%;
+  transform-origin: 50% 0%;
+  -webkit-transform: rotate3d(0, 1, 0, 90deg) translate3d(0px, 0px, 290px);
+  transform: rotate3d(0, 1, 0, 90deg) translate3d(0px, 0px, 290px);
+}
+
+/* Transform classes */
+
+.bk-list li .bk-book.bk-viewback {
+  -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
+  transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
+    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
+    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
+  }
+  to {
+    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
+    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
+    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
+    -moz-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
+    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
+    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
+    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
+  }
+  to {
+    -ms-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
+    -moz-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
+    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
+    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
+    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
+  }
+}
+
+.rotating {
+  -webkit-animation: rotating 10s linear infinite;
+  -moz-animation: rotating 10s linear infinite;
+  -ms-animation: rotating 10s linear infinite;
+  -o-animation: rotating 10s linear infinite;
+  animation: rotating 10s linear infinite;
+}
+
+/* Main colors and content */
+
+.bk-list li .bk-front > div {
+  border-radius: 0 3px 3px 0;
+  box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bk-list li .bk-front:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  left: -1px;
+  width: 1px;
+}
+
+.bk-list li .bk-cover:after,
+.bk-list li .bk-back:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10px;
+  bottom: 0;
+  width: 3px;
+  background: rgba(0, 0, 0, 0.06);
+  box-shadow: 1px 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.bk-list li .bk-back:after {
+  left: auto;
+  right: 10px;
+}
+
+.bk-left h2 {
+  width: 400px;
+  height: 40px;
+  -webkit-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: rotate(90deg) translateY(-40px);
+  transform: rotate(90deg) translateY(-40px);
+}
+
+.bk-content-current {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* book style */
+
+.bk-book .bk-front,
+.bk-book .bk-back,
+.bk-book .bk-left,
+.bk-book .bk-front:after {
+  background-color: #ffdfca;
+}
+
+.bk-book .bk-right {
+  background-color: #e7ddd0;
+}
+
+.bk-book .bk-cover {
+  background-repeat: no-repeat;
+  background-position: 15px 5px;
+  background-size: calc(100% - 20px);
+}
+
+.bk-book .bk-cover h2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  color: $black;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.bk-book .bk-cover h2 span:first-child,
+.bk-book .bk-left h2 span:first-child {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 13px;
+  padding-right: 20px;
+}
+
+.bk-book .bk-cover h2 span:first-child {
+  display: block;
+}
+
+.bk-book .bk-cover h2 span:last-child,
+.bk-book .bk-left h2 span:last-child {
+  font-family: 'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif;
+}
+
+.bk-book .bk-content p {
+  font-family: Georgia, Times, 'Times New Roman', serif;
+}
+
+.bk-book .bk-left h2 {
+  color: $black;
+  font-size: 15px;
+  line-height: 40px;
+  padding-right: 10px;
+  text-align: right;
+}
+
+.bk-book .bk-back p {
+  color: $black;
+  font-size: 18px;
+  padding: 40px;
+  text-align: center;
+  font-weight: 700;
+}

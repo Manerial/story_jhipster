@@ -39,7 +39,7 @@ export const wordAnalysisRoute: Routes = [
     path: '',
     component: WordAnalysisComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       defaultSort: 'id,asc',
       pageTitle: 'nidAuxHistoiresApp.wordAnalysis.home.title',
     },
@@ -52,7 +52,7 @@ export const wordAnalysisRoute: Routes = [
       wordAnalysis: WordAnalysisResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.wordAnalysis.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -64,7 +64,7 @@ export const wordAnalysisRoute: Routes = [
       wordAnalysis: WordAnalysisResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.wordAnalysis.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -76,7 +76,7 @@ export const wordAnalysisRoute: Routes = [
       wordAnalysis: WordAnalysisResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.wordAnalysis.home.title',
     },
     canActivate: [UserRouteAccessService],

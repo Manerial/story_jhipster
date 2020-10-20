@@ -45,7 +45,7 @@ public class Chapter implements Serializable {
 	@Column(name = "number")
 	private Integer number;
 
-	@OneToMany(mappedBy = "chapter", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "chapter", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Scene> scenes = new HashSet<>();
 
