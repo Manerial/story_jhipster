@@ -27,7 +27,7 @@
         "register": "Créer un compte"
       },
       "admin": {
-        "main": "Administration",
+        "main": "Admin",
         "userManagement": "Gestion des utilisateurs",
         "tracker": "Suivi des utilisateurs",
         "metrics": "Métriques",
@@ -56,19 +56,19 @@
     "messages": {
       "info": {
         "register": {
-          "noaccount": "Vous n'avez pas encore de compte ?",
+          "noaccount": "Vous n'avez pas encore de compte\u00A0?",
           "link": "Créer un compte"
         }
       },
       "error": {
-        "dontmatch": "Le nouveau mot de passe et sa confirmation ne sont pas égaux !"
+        "dontmatch": "Le nouveau mot de passe et sa confirmation ne sont pas égaux\u00A0!"
       },
       "validate": {
         "newpassword": {
           "required": "Votre mot de passe est requis.",
           "minlength": "Votre mot de passe doit comporter au moins 4 caractères.",
           "maxlength": "Votre mot de passe ne doit pas comporter plus de 50 caractères.",
-          "strength": "Robustesse du mot de passe :"
+          "strength": "Robustesse du mot de passe\u00A0:"
         },
         "confirmpassword": {
           "required": "Votre confirmation du mot de passe est requise.",
@@ -128,11 +128,11 @@
     "internalServerError": "Erreur interne du serveur",
     "server.not.reachable": "Serveur inaccessible",
     "url.not.found": "Non trouvé",
-    "NotNull": "Le champ {{fieldName}} ne peut pas être vide !",
-    "Size": "Le champ {{fieldName}} ne respecte pas les critères minimum et maximum !",
-    "userexists": "Login déjà utilisé !",
-    "emailexists": "Email déjà utilisé !",
-    "idexists": "Une nouvelle entité {{entityName}} ne peut pas avoir d'identifiant !",
+    "NotNull": "Le champ {{fieldName}} ne peut pas être vide\u00A0",
+    "Size": "Le champ {{fieldName}} ne respecte pas les critères minimum et maximum\u00A0!",
+    "userexists": "Login déjà utilisé\u00A0!",
+    "emailexists": "Email déjà utilisé\u00A0!",
+    "idexists": "Une nouvelle entité {{entityName}} ne peut pas avoir d'identifiant\u00A0!",
     "idnull": "Identifiant invalide",
     "file": {
       "could.not.extract": "Impossible d'extraire le fichier",

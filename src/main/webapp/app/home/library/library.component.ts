@@ -1,8 +1,10 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { BookService } from 'app/entities/book/book.service';
 import { IBook } from 'app/shared/model/book.model';
 import { JhiAlertService } from 'ng-jhipster';
+import { ResponsiveService } from 'app/shared/util/responsive.service';
+import { SearchService } from 'app/shared/util/search.service';
 
 @Component({
   selector: 'jhi-library',
@@ -11,32 +13,35 @@ import { JhiAlertService } from 'ng-jhipster';
 })
 export class LibraryComponent implements OnInit {
   searchText = '';
-  innerWidth: number = window.innerWidth;
   books: IBook[] = [];
   collapseBooks: boolean[] = [];
   isDownloading: boolean[] = [];
 
   constructor(
     public bookService: BookService,
-    public alertService: JhiAlertService // private navbarService: NavbarService
+    public alertService: JhiAlertService,
+    public responsiveService: ResponsiveService,
+    private navbarService: SearchService
   ) {}
 
+  @HostListener('window:resize')
+  onResize(): void {
+    this.responsiveService.onResize();
+  }
+
   ngOnInit(): void {
-    this.onResize();
     this.bookService.query().subscribe((res: HttpResponse<IBook[]>) => {
       this.books = res.body || [];
-      // this.books = this.books.concat(this.books).concat(this.books).concat(this.books).concat(this.books);
       this.books.forEach(book => {
         if (book.id !== undefined) {
           this.isDownloading[book.id] = false;
           this.collapseBooks[book.id] = true;
         }
       });
-      // this.navbarService.clearAllItems();
     });
-    /* this.navbarService.getCurrentSearch().subscribe(search => {
+    this.navbarService.getCurrentSearch().subscribe(search => {
       this.searchText = search;
-    }); */
+    });
   }
 
   testlot(nb: number): number[] {
@@ -54,11 +59,6 @@ export class LibraryComponent implements OnInit {
       return;
     }
     bookElement.className = bookElement.className.includes('bk-bookdefault') ? 'bk-book bk-viewback' : 'bk-book bk-bookdefault';
-  }
-
-  @HostListener('window:resize')
-  onResize(): void {
-    this.innerWidth = window.innerWidth;
   }
 
   downloadBook(id: number, name: string): void {

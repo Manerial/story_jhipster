@@ -11,7 +11,7 @@
       "updated": "La Scène avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "La Scène avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer la Scène {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer la Scène {{ id }}\u00A0?"
       },
       "detail": {
         "title": "Scène"

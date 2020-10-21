@@ -1,6 +1,6 @@
 {
   "home": {
-    "title": "Bienvenue dans le nid aux histoires !",
+    "title": "Bienvenue dans le nid aux histoires\u00A0!",
     "subtitle": "Ceci est la page d'accueil",
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\"."
@@ -9,6 +9,7 @@
   "library": {
     "title": "Bibliothèque",
     "read": "Lire",
+    "summary": "Résumé",
     "download": "Télécharger",
     "downloading": "En cours",
     "export": {

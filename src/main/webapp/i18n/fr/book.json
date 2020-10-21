@@ -11,7 +11,7 @@
       "updated": "Le Livre avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Livre avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Livre {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer le Livre {{ id }}\u00A0?"
       },
       "detail": {
         "title": "Livre"

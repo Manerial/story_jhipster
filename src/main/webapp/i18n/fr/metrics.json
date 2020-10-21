@@ -20,7 +20,7 @@
         "blocked": "Bloqué",
         "dump": {
           "title": "Threads dump",
-          "id": "Id :",
+          "id": "Id\u00A0:",
           "blockedtime": "Temps bloqué",
           "blockedcount": "Nb fois bloqué",
           "waitedtime": "Temps d'attente",
@@ -40,8 +40,8 @@
       },
       "http": {
         "title": "Requêtes HTTP (temps en millisecondes)",
-        "active": "Requêtes actives :",
-        "total": "Requêtes totales :",
+        "active": "Requêtes actives\u00A0:",
+        "total": "Requêtes totales\u00A0:",
         "table": {
           "code": "Code",
           "count": "Total",
