@@ -1,0 +1,22 @@
+@import '../../../content/scss/variables.scss';
+
+nav.navbar {
+  padding: 0px;
+}
+
+.footer {
+  border-top: 1px solid rgba($black, 0.125);
+}
+
+.footer .navbar-brand {
+  margin-right: 20px !important;
+}
+
+.footer span {
+  font-size: 0.7em;
+}
+
+.footer img {
+  width: 25px;
+  height: 25px;
+}

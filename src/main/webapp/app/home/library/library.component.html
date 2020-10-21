@@ -51,7 +51,7 @@
 	</div>
 
 	<div *ngIf="!responsiveService.isBigScreen" class="m-2">
-		<div *ngFor="let book of books | filter:searchText" class="col pb-4">
+		<div *ngFor="let book of books | bookFilter: searchText" class="col pb-4">
 			<div class="card">
 				<div class="card-body">
 					<h2 class="card-title">{{ book.name }}</h2>
