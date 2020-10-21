@@ -11,7 +11,7 @@
       "updated": "Le Chapitre avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Chapitre avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Chapitre {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer le Chapitre {{ id }}\u00A0?"
       },
       "detail": {
         "title": "Chapitre"

@@ -2,6 +2,8 @@ Etudier l'agencement du projet JHipster
 Importer l'interface du site
 	Vue lecture
 	Vue images
+	Navbar
+	Footer
 Gérer les chemins d'accès
 	Accès ADMIN
 	Accès USER
@@ -16,3 +18,4 @@ Utiliser les variables CSS pour rendre le code générique
 Tester l'application
 	Tests Back
 	Tests Front
+Responsive design

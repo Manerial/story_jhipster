@@ -11,7 +11,7 @@
       "updated": "L'Idée avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "L'Idée avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer l'Idée {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer l'Idée {{ id }}\u00A0?"
       },
       "detail": {
         "title": "Idée"
