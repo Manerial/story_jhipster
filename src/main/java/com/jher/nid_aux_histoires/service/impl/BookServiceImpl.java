@@ -17,6 +17,7 @@ import com.jher.nid_aux_histoires.service.PartService;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
 import com.jher.nid_aux_histoires.service.dto.PartDTO;
 import com.jher.nid_aux_histoires.service.mapper.BookMapper;
+import com.jher.nid_aux_histoires.service.mapper.BookMapperLight;
 
 /**
  * Service Implementation for managing {@link Book}.
@@ -33,10 +34,14 @@ public class BookServiceImpl implements BookService {
 
 	private final BookMapper bookMapper;
 
-	public BookServiceImpl(BookRepository bookRepository, BookMapper bookMapper, PartService partService) {
+	private final BookMapperLight bookMapperLight;
+
+	public BookServiceImpl(BookRepository bookRepository, BookMapper bookMapper, PartService partService,
+			BookMapperLight bookMapperLight) {
 		this.partService = partService;
 		this.bookRepository = bookRepository;
 		this.bookMapper = bookMapper;
+		this.bookMapperLight = bookMapperLight;
 	}
 
 	@Override
@@ -63,7 +68,7 @@ public class BookServiceImpl implements BookService {
 	@Transactional(readOnly = true)
 	public Page<BookDTO> findAll(Pageable pageable) {
 		log.debug("Request to get all Books");
-		return bookRepository.findAll(pageable).map(bookMapper::toDto);
+		return bookRepository.findAll(pageable).map(bookMapperLight::toDto);
 	}
 
 	public Page<BookDTO> findAllWithEagerRelationships(Pageable pageable) {

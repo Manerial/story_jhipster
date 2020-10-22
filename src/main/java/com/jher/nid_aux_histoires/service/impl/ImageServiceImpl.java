@@ -14,6 +14,7 @@ import com.jher.nid_aux_histoires.repository.ImageRepository;
 import com.jher.nid_aux_histoires.service.ImageService;
 import com.jher.nid_aux_histoires.service.dto.ImageDTO;
 import com.jher.nid_aux_histoires.service.mapper.ImageMapper;
+import com.jher.nid_aux_histoires.service.mapper.ImageMapperLight;
 
 /**
  * Service Implementation for managing {@link Image}.
@@ -28,9 +29,13 @@ public class ImageServiceImpl implements ImageService {
 
 	private final ImageMapper imageMapper;
 
-	public ImageServiceImpl(ImageRepository imageRepository, ImageMapper imageMapper) {
+	private final ImageMapperLight imageMapperLight;
+
+	public ImageServiceImpl(ImageRepository imageRepository, ImageMapper imageMapper,
+			ImageMapperLight imageMapperLight) {
 		this.imageRepository = imageRepository;
 		this.imageMapper = imageMapper;
+		this.imageMapperLight = imageMapperLight;
 	}
 
 	@Override
@@ -45,7 +50,7 @@ public class ImageServiceImpl implements ImageService {
 	@Transactional(readOnly = true)
 	public Page<ImageDTO> findAll(Pageable pageable) {
 		log.debug("Request to get all Images");
-		return imageRepository.findAll(pageable).map(imageMapper::toDto);
+		return imageRepository.findAll(pageable).map(imageMapperLight::toDto);
 	}
 
 	@Override

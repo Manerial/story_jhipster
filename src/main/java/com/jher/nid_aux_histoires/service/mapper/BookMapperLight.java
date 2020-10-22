@@ -10,9 +10,11 @@ import com.jher.nid_aux_histoires.service.dto.BookDTO;
  * Mapper for the entity {@link Book} and its DTO {@link BookDTO}.
  */
 @Mapper(componentModel = "spring", uses = { ImageMapper.class })
-public interface BookMapper extends EntityMapper<BookDTO, Book> {
+public interface BookMapperLight extends EntityMapper<BookDTO, Book> {
 	@Mapping(source = "cover.id", target = "coverId")
 	@Mapping(source = "cover.preview", target = "coverPreview")
+	@Mapping(target = "parts", ignore = true)
+	@Mapping(target = "images", ignore = true)
 	BookDTO toDto(Book book);
 
 	@Mapping(target = "parts", ignore = true)
