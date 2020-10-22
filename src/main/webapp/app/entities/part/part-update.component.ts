@@ -51,6 +51,11 @@ export class PartUpdateComponent implements OnInit {
   }
 
   updateForm(part: IPart): void {
+    part.images.forEach(image => {
+      image.picture = null;
+      image.preview = null;
+    });
+
     this.editForm.patchValue({
       id: part.id,
       name: part.name,

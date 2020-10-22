@@ -59,6 +59,11 @@ export class SceneUpdateComponent implements OnInit {
   }
 
   updateForm(scene: IScene): void {
+    scene.images.forEach(image => {
+      image.picture = null;
+      image.preview = null;
+    });
+
     this.editForm.patchValue({
       id: scene.id,
       name: scene.name,
