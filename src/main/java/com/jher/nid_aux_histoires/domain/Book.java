@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -49,13 +50,14 @@ public class Book implements Serializable {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Part> parts = new HashSet<>();
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JoinTable(name = "book_image", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id"))
+	@JsonIgnore
 	private Set<Image> images = new HashSet<>();
 
 	@ManyToOne
-	@JsonIgnoreProperties(value = "bookToCovers", allowSetters = true)
+	@JsonIgnoreProperties(value = "picture", allowSetters = true)
 	private Image cover;
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here
