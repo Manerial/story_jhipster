@@ -1,0 +1,33 @@
+<span class="menu-button menu-bkg">
+	<fa-icon icon="circle"></fa-icon>
+</span>
+
+<span class="fa menu-button" (click)="toggleSommaire()">
+	<fa-icon icon="arrow-circle-right" *ngIf="collapseSummary"></fa-icon>
+	<fa-icon icon="arrow-circle-left" *ngIf="!collapseSummary"></fa-icon>
+</span>
+
+<div *ngIf="!collapseSummary" class="content summary bkg-white no-scrollbar">
+	<div>
+		<h1>Sommaire</h1>
+	</div>
+	<div [ngbCollapse]="collapseSummary">
+		<div *ngIf="!isLoading">
+			<h2 (click)="changeBook(book.id)">
+				{{book.name}}
+			</h2>
+			<div *ngFor="let part of book.parts">
+				<h3 (click)="collapseParts[part.id] = !collapseParts[part.id]; changePart(part.id)">
+					{{part.name}}
+					<span *ngIf="!forceOpenAll" class="fa"
+						[ngClass]="(collapseParts[part.id])?'fa-angle-down':'fa-angle-up'"></span>
+				</h3>
+				<div [ngbCollapse]="isPartCollapse(part.id)">
+					<div *ngFor="let chapter of part.chapters">
+						<h4 (click)="changeChapter(chapter.id)">{{chapter.number}} {{chapter.name}}</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
