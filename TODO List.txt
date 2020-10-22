@@ -3,6 +3,7 @@ Alléger les échanges Back-Front
 	Alléger Part, Chapter et Scene
 Importer l'interface du site
 	Vue lecture
+		Refaire CSS
 	Vue images
 	Navbar
 	Footer
