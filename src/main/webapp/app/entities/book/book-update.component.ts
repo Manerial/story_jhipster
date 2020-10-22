@@ -43,6 +43,11 @@ export class BookUpdateComponent implements OnInit {
   }
 
   updateForm(book: IBook): void {
+    book.images.forEach(image => {
+      image.picture = null;
+      image.preview = null;
+    });
+
     this.editForm.patchValue({
       id: book.id,
       name: book.name,

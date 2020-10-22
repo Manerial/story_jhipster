@@ -1,4 +1,6 @@
 Etudier l'agencement du projet JHipster
+Alléger les échanges Back-Front
+	Alléger Part, Chapter et Scene
 Importer l'interface du site
 	Vue lecture
 	Vue images
