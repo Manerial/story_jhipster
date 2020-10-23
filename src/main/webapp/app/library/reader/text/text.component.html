@@ -1,8 +1,10 @@
 <article>
 	<ng-template [ngTemplateOutlet]="prevnext"></ng-template>
 	<h2 class="h2-dynamic">{{chapter.name}}</h2>
-	<div *ngFor="let scene of chapter.scenes">
-		<p *ngFor="let line of getSceneTextSplit(scene)" class="text-dynamic">{{ line }}</p>
+	<div class="mb-3" >
+		<div *ngFor="let scene of chapter.scenes">
+			<p *ngFor="let line of getSceneTextSplit(scene)" class="text-dynamic">{{ line }}</p>
+		</div>
 	</div>
 	<ng-template [ngTemplateOutlet]="prevnext"></ng-template>
 </article>
