@@ -1,8 +1,4 @@
-<article *ngIf="isLoading">
-	<p class="center bkg-gold text-dynamic">Veuillez sélectionner un chapitre</p>
-</article>
-
-<article *ngIf="!isLoading">
+<article>
 	<ng-template [ngTemplateOutlet]="prevnext"></ng-template>
 	<h2 class="h2-dynamic">{{chapter.name}}</h2>
 	<div *ngFor="let scene of chapter.scenes">
@@ -15,10 +11,14 @@
 	<nav>
 		<ul class="pagination justify-content-center">
 			<li class="page-item">
-				<a class="page-link bkg-gold ml-2 text-dynamic" (click)="readerService.changeChapterNumber(-1)">Précédent</a>
+				<a class="page-link bkg-gold ml-2 text-dynamic" (click)="readerService.changeChapterNumber(-1)">
+					<span jhiTranslate="reader.previous">Previous</span>
+				</a>
 			</li>
 			<li class="page-item">
-				<a class="page-link bkg-gold ml-2 text-dynamic" (click)="readerService.changeChapterNumber(1)">Suivant</a>
+				<a class="page-link bkg-gold ml-2 text-dynamic" (click)="readerService.changeChapterNumber(1)">
+					<span jhiTranslate="reader.next">Next</span>
+				</a>
 			</li>
 		</ul>
 	</nav>
