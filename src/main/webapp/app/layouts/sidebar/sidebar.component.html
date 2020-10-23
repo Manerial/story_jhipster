@@ -1,10 +1,7 @@
-<span class="menu-button menu-bkg">
-	<fa-icon icon="circle"></fa-icon>
-</span>
-
-<span class="fa menu-button" (click)="toggleSommaire()">
-	<fa-icon icon="arrow-circle-right" *ngIf="collapseSummary"></fa-icon>
-	<fa-icon icon="arrow-circle-left" *ngIf="!collapseSummary"></fa-icon>
+<span class="menu-button mt-1 mr-2 ml-2" (click)="toggleSommaire()">
+	<fa-icon class="menu-bkg" icon="circle"></fa-icon>
+	<fa-icon class="menu-arrow" icon="arrow-circle-right" *ngIf="collapseSummary"></fa-icon>
+	<fa-icon class="menu-arrow" icon="arrow-circle-left" *ngIf="!collapseSummary"></fa-icon>
 </span>
 
 <div *ngIf="!collapseSummary" class="content summary bkg-white no-scrollbar">

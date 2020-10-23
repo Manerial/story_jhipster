@@ -9,7 +9,8 @@ type EntityResponseType = HttpResponse<IBook>;
   providedIn: 'root',
 })
 export class ReaderService {
-  private book: Observable<EntityResponseType> = of();
+  private bookObservable: Observable<EntityResponseType> = of();
+  public book: Observable<IBook> = of();
 
   private bookSource = new BehaviorSubject('');
   public currentBookIdObs = this.bookSource.asObservable();
@@ -25,12 +26,12 @@ export class ReaderService {
 
   constructor() {}
 
-  getBook(): Observable<EntityResponseType> {
-    return this.book;
+  getBookObservable(): Observable<EntityResponseType> {
+    return this.bookObservable;
   }
 
-  setBook(book: Observable<EntityResponseType>): void {
-    this.book = book;
+  setBookObservable(bookObservable: Observable<EntityResponseType>): void {
+    this.bookObservable = bookObservable;
   }
 
   changeBook(bookId: number): void {
@@ -55,23 +56,16 @@ export class ReaderService {
   }
 
   changeChapterNumber(variance: number): void {
-    const bookObserver = this.getBook();
-    if (bookObserver !== undefined) {
-      bookObserver.subscribe(book => {
-        if (book.body) {
-          const currentChapterNumber = this.getCurentChapterNumber(book.body);
-          if (book.body.parts) {
-            book.body.parts.forEach(part => {
-              part.chapters.forEach(chapter => {
-                if (chapter.number === currentChapterNumber + variance) {
-                  this.changeChapter(chapter.id);
-                }
-              });
-            });
+    this.book.subscribe(book => {
+      const currentChapterNumber = this.getCurentChapterNumber(book);
+      book.parts.forEach(part => {
+        part.chapters.forEach(chapter => {
+          if (chapter.number === currentChapterNumber + variance) {
+            this.changeChapter(chapter.id);
           }
-        }
+        });
       });
-    }
+    });
   }
 
   getCurentChapterNumber(book: IBook): number {

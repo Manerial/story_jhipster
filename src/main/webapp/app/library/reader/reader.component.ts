@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from 'app/entities/book/book.service';
+import { of } from 'rxjs';
 import { ReaderService } from './reader.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { ReaderService } from './reader.service';
   templateUrl: './reader.component.html',
 })
 export class ReaderComponent implements OnInit {
+  public isLoaded = false;
+
   constructor(private acRoute: ActivatedRoute, private readerService: ReaderService, private bookService: BookService) {}
 
   ngOnInit(): void {
@@ -17,7 +20,12 @@ export class ReaderComponent implements OnInit {
         throw 'Book Id is null';
       }
       const bookId = parseInt(bookIdStr, 10);
-      this.readerService.setBook(this.bookService.find(bookId));
+      this.readerService.setBookObservable(this.bookService.find(bookId));
+
+      this.readerService.getBookObservable().subscribe(book => {
+        if (book.body) this.readerService.book = of(book.body);
+        this.isLoaded = true;
+      });
     });
   }
 }

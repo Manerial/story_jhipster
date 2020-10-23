@@ -1,19 +1,7 @@
 @import 'variables';
 
-@media only screen and (max-width: 1370px) {
-  .nav-item {
-    margin-right: 0.35vw !important;
-  }
-}
-
-@media only screen and (max-width: 850px) {
-  .logo-img {
-    height: 5vw !important;
-    width: 5vw !important;
-  }
-
-  h1,
-  .display-4 {
+@media only screen and (max-width: $screen_w_l) {
+  h1 {
     font-size: 5vw;
   }
 
@@ -36,56 +24,51 @@
   h6 {
     font-size: 150%;
   }
+
+  .text-dynamic {
+    font-size: 2vw;
+  }
+
+  .jhi-sidebar {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+  }
+
+  .addapt-summary.addapt-summary-open {
+    display: none;
+  }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: $screen_w_m) {
   html,
   body {
     overflow: auto !important;
   }
 
-  .container-limit {
-    height: auto !important;
+  article {
+    width: 90%;
   }
 
-  .footer .navbar {
-    display: grid;
+  .text-dynamic {
+    font-size: 12px;
   }
 
-  .footer .navbar .navbar-brand,
-  .footer .navbar .navbar-brand.ml-auto {
-    margin-left: 10px !important;
-  }
-}
-
-@media only screen and (max-height: 350px) {
-  html,
-  body {
-    overflow: auto !important;
+  .jh-card {
+    margin-bottom: 20px;
   }
 
-  .container-limit {
-    height: auto !important;
+  .jhi-sidebar {
+    position: static;
   }
 }
 
-@media only screen and (max-width: 400px) {
-  .logo-img {
-    height: 20px !important;
-    width: 20px !important;
-  }
-
-  h1,
-  .display-4 {
+@media only screen and (max-width: $screen_w_s) {
+  h1 {
     font-size: 20px;
   }
 
-  h2,
-  .navbar-title {
+  h2 {
     font-size: 14px;
-  }
-
-  .navbar .navbar-brand {
-    margin-right: 5px;
   }
 }
