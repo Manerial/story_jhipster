@@ -79,4 +79,11 @@ export class ReaderService {
     });
     return chapterNumber;
   }
+
+  scroll(scroll: number): number {
+    const view = document.getElementsByClassName('container-limit')[0];
+    const saveScroll = view.scrollTop;
+    view.scrollTop = scroll;
+    return saveScroll;
+  }
 }

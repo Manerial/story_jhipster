@@ -1,5 +1,10 @@
 @import 'src/main/webapp/content/scss/variables';
 
+h1,
+h2 {
+  text-align: left;
+}
+
 .hide-element {
   display: none;
 }

@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
   public collapseParts: boolean[] = [];
   public isLoading = true;
   public innerWidth: number = window.innerWidth;
+  private saveScroll = 0;
 
   constructor(public readerService: ReaderService) {}
 
@@ -62,7 +63,14 @@ export class SidebarComponent implements OnInit {
   }
 
   toggleSommaire(): void {
+    const currentScroll = this.readerService.scroll(0);
     this.collapseSummary = !this.collapseSummary;
+    if (this.collapseSummary) {
+      this.readerService.scroll(this.saveScroll);
+      this.saveScroll = 0;
+    } else {
+      this.saveScroll = currentScroll;
+    }
     this.toggleAddaptSummary();
   }
 

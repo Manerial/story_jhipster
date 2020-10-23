@@ -6,7 +6,7 @@
 
 <div *ngIf="!collapseSummary" class="content summary bkg-white no-scrollbar">
 	<div>
-		<h1>Sommaire</h1>
+		<h1><span jhiTranslate="library.summary">Summary</span></h1>
 	</div>
 	<div [ngbCollapse]="collapseSummary">
 		<div *ngIf="!isLoading">
