@@ -7,6 +7,7 @@ import { ReaderService } from '../reader.service';
 @Component({
   selector: 'jhi-reader-text',
   templateUrl: './text.component.html',
+  styleUrls: ['./text.scss'],
 })
 export class TextComponent implements OnInit {
   public book: IBook = new Book();
@@ -16,21 +17,19 @@ export class TextComponent implements OnInit {
   constructor(public readerService: ReaderService) {}
 
   ngOnInit(): void {
-    const bookObserver = this.readerService.getBook();
-    if (bookObserver)
-      bookObserver.subscribe(book => {
-        if (book.body) this.book = book.body;
-        this.readerService.currentChapterIdObs.subscribe(chapterId => {
-          if (chapterId !== '') {
-            this.loadChapter();
-          }
-        });
+    this.readerService.book.subscribe(book => {
+      this.book = book;
+      this.readerService.currentChapterIdObs.subscribe(chapterId => {
+        if (chapterId !== '') {
+          this.loadChapter();
+        }
       });
+    });
   }
 
   loadChapter(): void {
     this.chapter = this.getCurentChapter();
-    document.getElementsByClassName('content')[0].scrollTop = 0;
+    document.getElementsByClassName('container-limit')[0].scrollTop = 0;
     this.isLoading = false;
   }
 

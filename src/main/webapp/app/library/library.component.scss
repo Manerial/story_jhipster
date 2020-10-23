@@ -206,11 +206,11 @@
 .bk-book .bk-back,
 .bk-book .bk-left,
 .bk-book .bk-front:after {
-  background-color: #ffdfca;
+  background-color: $book_color;
 }
 
 .bk-book .bk-right {
-  background-color: #e7ddd0;
+  background-color: $book_color_pages;
 }
 
 .bk-book .bk-cover {
@@ -240,15 +240,6 @@
 
 .bk-book .bk-cover h2 span:first-child {
   display: block;
-}
-
-.bk-book .bk-cover h2 span:last-child,
-.bk-book .bk-left h2 span:last-child {
-  font-family: 'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif;
-}
-
-.bk-book .bk-content p {
-  font-family: Georgia, Times, 'Times New Roman', serif;
 }
 
 .bk-book .bk-left h2 {

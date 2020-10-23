@@ -1,0 +1,29 @@
+@import '../../../content/scss/variables.scss';
+
+@media only screen and (max-width: $screen_w_xl) {
+  .nav-item {
+    margin-right: 0.35vw !important;
+  }
+}
+
+@media only screen and (max-width: $screen_w_l) {
+  .logo-img {
+    height: 5vw !important;
+    width: 5vw !important;
+  }
+
+  .navbar-brand {
+    margin-right: 0.5rem !important;
+  }
+}
+
+@media only screen and (max-width: $screen_w_s) {
+  .logo-img {
+    height: 20px !important;
+    width: 20px !important;
+  }
+
+  .navbar-title {
+    font-size: 14px;
+  }
+}

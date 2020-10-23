@@ -5,8 +5,19 @@ $white: #ffffff;
 $gold: #efcc07;
 $dark_gold: #ccad00;
 $gray: #e2e2e2;
-$dark_gray: #c4c4c4;
-$black: #1e2019;
-$red: #1e2019;
+$black: #000000;
+$book_color: #ffdfca;
+$book_color_pages: #e7ddd0;
 
-$height_nav: calc(100vh - 103px);
+$font_h1: 24px;
+$font_h2: 22px;
+$font_h3: 20px;
+$font_h4: 18px;
+
+$screen_h_s: 350px;
+$screen_w_s: 400px;
+$screen_w_m: 600px;
+$screen_w_l: 850px;
+$screen_w_xl: 1370px;
+
+$height_nav: calc(100vh - 102px);

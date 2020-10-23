@@ -1,6 +1,8 @@
-<jhi-sidebar></jhi-sidebar>
+<div *ngIf="isLoaded">
+	<jhi-sidebar class="jhi-sidebar"></jhi-sidebar>
 
-<div class="content addapt-summary">
-	<jhi-reader-title></jhi-reader-title>
-	<jhi-reader-text></jhi-reader-text>
+	<div class="content addapt-summary">
+		<jhi-reader-title></jhi-reader-title>
+		<jhi-reader-text></jhi-reader-text>
+	</div>
 </div>
