@@ -21,7 +21,6 @@ export const READER_ROUTE: Route = {
   component: ReaderComponent,
   data: {
     authorities: [Authority.USER],
-    pageTitle: 'reader.title',
   },
   canActivate: [UserRouteAccessService],
 };
