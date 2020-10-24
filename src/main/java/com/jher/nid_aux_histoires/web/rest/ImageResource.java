@@ -113,6 +113,62 @@ public class ImageResource {
 	}
 
 	/**
+	 * {@code GET  /images} : get all the images related to a Book.
+	 *
+	 * @param id the id of the Book to retrieve.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+	 *         of images in body.
+	 */
+	@GetMapping("/images/book/{id}")
+	public ResponseEntity<List<ImageDTO>> getAllImagesByBook(@PathVariable Long id) {
+		log.debug("REST request to get a list of Images related to a Book");
+		List<ImageDTO> images = imageService.findAllByBookId(id);
+		return ResponseEntity.ok().body(images);
+	}
+
+	/**
+	 * {@code GET  /images} : get all the images related to a Part.
+	 *
+	 * @param id the id of the Part to retrieve.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+	 *         of images in body.
+	 */
+	@GetMapping("/images/part/{id}")
+	public ResponseEntity<List<ImageDTO>> getAllImagesByPart(@PathVariable Long id) {
+		log.debug("REST request to get a list of Images related to a Part");
+		List<ImageDTO> images = imageService.findAllByPartId(id);
+		return ResponseEntity.ok().body(images);
+	}
+
+	/**
+	 * {@code GET  /images} : get all the images related to a Chapter.
+	 *
+	 * @param id the id of the Chapter to retrieve.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+	 *         of images in body.
+	 */
+	@GetMapping("/images/chapter/{id}")
+	public ResponseEntity<List<ImageDTO>> getAllImagesByChapter(@PathVariable Long id) {
+		log.debug("REST request to get a list of Images related to a Chapter");
+		List<ImageDTO> images = imageService.findAllByChapterId(id);
+		return ResponseEntity.ok().body(images);
+	}
+
+	/**
+	 * {@code GET  /images} : get all the images related to a Scene.
+	 *
+	 * @param id the id of the Scene to retrieve.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+	 *         of images in body.
+	 */
+	@GetMapping("/images/scene/{id}")
+	public ResponseEntity<List<ImageDTO>> getAllImagesByScene(@PathVariable Long id) {
+		log.debug("REST request to get a list of Images related to a Scene");
+		List<ImageDTO> images = imageService.findAllBySceneId(id);
+		return ResponseEntity.ok().body(images);
+	}
+
+	/**
 	 * {@code GET  /images/:id} : get the "id" image.
 	 *
 	 * @param id the id of the imageDTO to retrieve.

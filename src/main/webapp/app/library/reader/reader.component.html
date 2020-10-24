@@ -2,7 +2,12 @@
 	<jhi-sidebar class="jhi-sidebar"></jhi-sidebar>
 
 	<div class="content addapt-summary">
-		<jhi-reader-title></jhi-reader-title>
-		<jhi-reader-text></jhi-reader-text>
+		<div *ngIf="isViewBook">
+			<jhi-reader-title></jhi-reader-title>
+			<jhi-reader-text></jhi-reader-text>
+		</div>
+		<div *ngIf="!isViewBook">
+			<jhi-image-list></jhi-image-list>
+		</div>
 	</div>
 </div>

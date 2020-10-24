@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ReaderService } from 'app/library/reader/reader.service';
 import { Book, IBook } from 'app/shared/model/book.model';
+import { NavbarService } from 'app/shared/util/search.service';
 
 @Component({
   selector: 'jhi-sidebar',
@@ -9,14 +10,15 @@ import { Book, IBook } from 'app/shared/model/book.model';
 })
 export class SidebarComponent implements OnInit {
   public book: IBook = new Book();
-  public forceOpenAll = false;
+  public forceOpenAllImage = false;
+  public forceOpenAllSmall = false;
   public collapseSummary = false;
   public collapseParts: boolean[] = [];
   public isLoading = true;
   public innerWidth: number = window.innerWidth;
   private saveScroll = 0;
 
-  constructor(public readerService: ReaderService) {}
+  constructor(public readerService: ReaderService, private navbarService: NavbarService) {}
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
@@ -27,6 +29,10 @@ export class SidebarComponent implements OnInit {
       this.book.parts.forEach(part => {
         this.collapseParts[part.id] = true;
       });
+    });
+
+    this.navbarService.getCurrentIsViewBook().subscribe(isViewBook => {
+      this.forceOpenAllImage = !isViewBook;
     });
   }
 
@@ -53,13 +59,13 @@ export class SidebarComponent implements OnInit {
 
   checkCollapseSommaire(): void {
     const force = this.innerWidth <= 850;
-    this.forceOpenAll = force;
+    this.forceOpenAllSmall = force;
     this.collapseSummary = force;
     this.toggleAddaptSummary();
   }
 
   isPartCollapse(id: number): boolean {
-    return this.collapseParts[id] && !this.forceOpenAll;
+    return this.collapseParts[id] && !this.forceOpenAll();
   }
 
   toggleSommaire(): void {
@@ -86,6 +92,16 @@ export class SidebarComponent implements OnInit {
       } else {
         item.className = item.className + ' addapt-summary-open';
       }
+    }
+  }
+
+  forceOpenAll(): boolean {
+    return this.forceOpenAllImage || this.forceOpenAllSmall;
+  }
+
+  toggleCollapsePart(id: number): void {
+    if (!this.forceOpenAll()) {
+      this.collapseParts[id] = !this.collapseParts[id];
     }
   }
 }
