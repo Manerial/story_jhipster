@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from 'app/entities/book/book.service';
+import { NavbarService } from 'app/shared/util/search.service';
 import { of } from 'rxjs';
 import { ReaderService } from './reader.service';
 
@@ -11,12 +12,14 @@ import { ReaderService } from './reader.service';
 })
 export class ReaderComponent implements OnInit {
   public isLoaded = false;
+  public isViewBook = true;
 
   constructor(
     private acRoute: ActivatedRoute,
     private readerService: ReaderService,
     private bookService: BookService,
-    private titleService: Title
+    private titleService: Title,
+    private navbarService: NavbarService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +37,10 @@ export class ReaderComponent implements OnInit {
           this.titleService.setTitle(book.body.name);
         }
         this.isLoaded = true;
+      });
+
+      this.navbarService.getCurrentIsViewBook().subscribe(isViewBook => {
+        this.isViewBook = isViewBook;
       });
     });
   }

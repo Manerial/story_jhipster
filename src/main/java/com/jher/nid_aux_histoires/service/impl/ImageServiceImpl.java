@@ -1,5 +1,6 @@
 package com.jher.nid_aux_histoires.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -51,6 +52,34 @@ public class ImageServiceImpl implements ImageService {
 	public Page<ImageDTO> findAll(Pageable pageable) {
 		log.debug("Request to get all Images");
 		return imageRepository.findAll(pageable).map(imageMapperLight::toDto);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<ImageDTO> findAllByBookId(Long id) {
+		log.debug("Request to get all Images");
+		return imageMapperLight.toDto(imageRepository.findAllByBookId(id));
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<ImageDTO> findAllByPartId(Long id) {
+		log.debug("Request to get all Images");
+		return imageMapperLight.toDto(imageRepository.findAllByPartId(id));
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<ImageDTO> findAllByChapterId(Long id) {
+		log.debug("Request to get all Images");
+		return imageMapperLight.toDto(imageRepository.findAllByChapterId(id));
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<ImageDTO> findAllBySceneId(Long id) {
+		log.debug("Request to get all Images");
+		return imageMapperLight.toDto(imageRepository.findAllBySceneId(id));
 	}
 
 	@Override

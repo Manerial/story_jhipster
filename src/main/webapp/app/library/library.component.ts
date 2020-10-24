@@ -4,7 +4,7 @@ import { BookService } from 'app/entities/book/book.service';
 import { IBook } from 'app/shared/model/book.model';
 import { JhiAlertService } from 'ng-jhipster';
 import { ResponsiveService } from 'app/shared/util/responsive.service';
-import { SearchService } from 'app/shared/util/search.service';
+import { NavbarService } from 'app/shared/util/search.service';
 
 @Component({
   selector: 'jhi-library',
@@ -21,7 +21,7 @@ export class LibraryComponent implements OnInit {
     public bookService: BookService,
     public alertService: JhiAlertService,
     public responsiveService: ResponsiveService,
-    private navbarService: SearchService
+    private navbarService: NavbarService
   ) {}
 
   @HostListener('window:resize')

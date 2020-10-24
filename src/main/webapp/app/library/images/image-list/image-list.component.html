@@ -1,0 +1,15 @@
+<article>
+	<div class="row m-2">
+		<div *ngFor="let image of imageList" class="pb-4">
+			<div class="card">
+				<img id="imageViewer" alt="Error occured during the image load"
+					src="data:image/jpg;base64,{{ image.preview }}" />
+				<div class="card-body">
+					<button routerLink="/image/{{ image.id }}"
+						class="btn bkg-gold">{{ image.name }}</button>
+				</div>
+			</div>
+		</div>
+		<h1 *ngIf="imageList.length == 0">Pas d'image</h1>
+	</div>
+</article>
