@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Book, IBook } from 'app/shared/model/book.model';
 import { Chapter, IChapter } from 'app/shared/model/chapter.model';
 import { IScene } from 'app/shared/model/scene.model';
+import { UtilService } from 'app/shared/util/util.service';
 import { Subscription } from 'rxjs';
 import { ReaderService } from '../reader.service';
 
@@ -15,7 +16,7 @@ export class TextComponent implements OnInit, OnDestroy {
   public chapter: IChapter = new Chapter();
   private chapterSubscriber: Subscription = new Subscription();
 
-  constructor(public readerService: ReaderService) {}
+  constructor(public readerService: ReaderService, public utilService: UtilService) {}
 
   ngOnInit(): void {
     this.readerService.book.subscribe(book => {
@@ -37,7 +38,7 @@ export class TextComponent implements OnInit, OnDestroy {
 
   loadChapter(): void {
     this.chapter = this.getCurentChapter();
-    this.readerService.scroll(0);
+    this.utilService.scrollContainerLimitTop(0);
   }
 
   getSceneTextSplit(scene: IScene): string[] {
