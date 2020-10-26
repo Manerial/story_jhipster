@@ -1,0 +1,22 @@
+{
+  "generator": {
+    "word": {
+      "title": "Générateur de mots",
+      "number": "Nombre de mots\u00A0:",
+      "type": "Type de mots\u00A0:",
+      "length": "Taille de mot (si &lt; 2\u00A0: aléatoire)",
+      "generate": "Générer"
+    },
+    "idea": {
+      "title": "Générateur d'idées",
+      "number": "Nombre d'idées\u00A0:",
+      "type": "Type d'idées\u00A0:",
+      "generate": "Générer",
+      "constraint": {
+        "clean": "Nettoyer contraintes",
+        "display": "Afficher contraintes",
+        "hide": "Masquer contraintes"
+      }
+    }
+  }
+}

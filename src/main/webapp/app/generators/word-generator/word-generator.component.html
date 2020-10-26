@@ -1,0 +1,49 @@
+<div class="content">
+	<div class="container">
+		<h1 jhiTranslate="generator.word.title">Générateur de mots</h1>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-sm">
+					<label for="numberOfWords" class="form-check-label" jhiTranslate="generator.word.number">
+						Nombre de mots :
+					</label>
+					<input id="numberOfWords" type="number" min="1" max="200" [(ngModel)]="numberOfWords"
+						class="form-control" />
+				</div>
+				<div class="col-sm">
+					<label for="type" class="form-check-label" jhiTranslate="generator.word.type">
+						Type de mots :
+					</label>
+					<select id="type" class="form-control" [(ngModel)]="currentType">
+						<option *ngFor="let type of typeList" [ngValue]="type">{{ type.name | titlecase }}
+						</option>
+					</select>
+				</div>
+				<div class="col-sm">
+					<label for="fixLength" class="form-check-label" jhiTranslate="generator.word.length">
+						Taille de mot (si &lt; 2 : aléatoire) :
+					</label>
+					<input id="fixLength" type="number" min="0" max="20" [(ngModel)]="fixLength" class="form-control" />
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<button class="btn bkg-gold mt-2" (click)="getWords()" jhiTranslate="generator.word.generate">
+				Générer
+			</button>
+		</div>
+		<div>
+			<div class="row pb-4">
+				<div class="col-sm mw-50">
+					<ul class="list-group">
+						<li *ngFor="let word of words" class="list-group-item list-group-item-action long-text-ellipsis"
+							data-toggle="tooltip" data-placement="left" title="Click to copy">
+							<!--(click)="copyToClipboard(word)"-->
+							{{ word }}
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -150,7 +150,7 @@ public class IdeaResource {
 	 * 
 	 * @return une réponse contenant la liste des entités
 	 */
-	@PostMapping("/personas")
+	@PostMapping("/ideas/personas")
 	public ResponseEntity<List<PersonaDTO>> generatePersonas(@RequestParam int number,
 			@Valid @RequestBody PersonaDTO constraint) {
 		List<PersonaDTO> generatedWords = ideaService.generatePersonas(number, constraint);
@@ -162,7 +162,7 @@ public class IdeaResource {
 	 * 
 	 * @return une réponse contenant la liste des entités
 	 */
-	@PostMapping("/writing_options")
+	@PostMapping("/ideas/writing_options")
 	public ResponseEntity<List<WritingOptionDTO>> generateWritingOptions(@RequestParam int number,
 			@Valid @RequestBody WritingOptionDTO constraint) {
 		List<WritingOptionDTO> generatedWritingOptions = ideaService.generateWritingOptions(number, constraint);

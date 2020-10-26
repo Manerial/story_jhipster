@@ -149,7 +149,7 @@ public class WordAnalysisResource {
 	 * 
 	 * @return une réponse contenant la liste des entités
 	 */
-	@GetMapping("/words")
+	@GetMapping("/word-analyses/words")
 	public ResponseEntity<List<String>> generateWords(@RequestParam int number, @RequestParam int fixLength,
 			@RequestParam String type) {
 		List<String> generatedWords = wordAnalysisService.generateWords(number, fixLength, type);
@@ -161,7 +161,7 @@ public class WordAnalysisResource {
 	 * 
 	 * @return une réponse contenant la liste des entités
 	 */
-	@GetMapping("/words/types")
+	@GetMapping("/word-analyses/types")
 	public ResponseEntity<List<Map<String, String>>> getTypes() {
 		return ResponseEntity.ok().body(wordAnalysisService.getListOfTypes());
 	}

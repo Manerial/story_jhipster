@@ -7,6 +7,7 @@ import { NidAuxHistoiresCoreModule } from 'app/core/core.module';
 import { NidAuxHistoiresAppRoutingModule } from './app-routing.module';
 import { NidAuxHistoiresHomeModule } from './home/home.module';
 import { NidAuxHistoiresLibraryModule } from './library/library.module';
+import { NidAuxHistoiresGeneratorModule } from './generators/generator.module';
 import { NidAuxHistoiresEntityModule } from './entities/entity.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { MainComponent } from './layouts/main/main.component';
@@ -23,6 +24,7 @@ import { ErrorComponent } from './layouts/error/error.component';
     NidAuxHistoiresCoreModule,
     NidAuxHistoiresHomeModule,
     NidAuxHistoiresLibraryModule,
+    NidAuxHistoiresGeneratorModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     NidAuxHistoiresEntityModule,
     NidAuxHistoiresAppRoutingModule,
