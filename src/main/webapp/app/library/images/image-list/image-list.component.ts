@@ -12,10 +12,13 @@ import { Subscription } from 'rxjs';
 })
 export class ImageListComponent implements OnInit, OnDestroy {
   public imageList: IImage[] = [];
+  public isLoading = true;
   private previousChapterId = 0;
   private bookSubscriber: Subscription = new Subscription();
   private partSubscriber: Subscription = new Subscription();
   private chapterSubscriber: Subscription = new Subscription();
+  private entitySubscriber: Subscription = new Subscription();
+  public entityName = '';
 
   constructor(public acRoute: ActivatedRoute, private imageService: ImageService, private readerService: ReaderService) {}
 
@@ -41,12 +44,17 @@ export class ImageListComponent implements OnInit, OnDestroy {
         }
       }
     });
+
+    this.entitySubscriber = this.readerService.currentEntityNameObs.subscribe(entityName => {
+      this.entityName = entityName;
+    });
   }
 
   ngOnDestroy(): void {
     this.bookSubscriber.unsubscribe();
     this.partSubscriber.unsubscribe();
     this.chapterSubscriber.unsubscribe();
+    this.entitySubscriber.unsubscribe();
     this.readerService.changeChapter(this.previousChapterId);
   }
 
@@ -58,8 +66,12 @@ export class ImageListComponent implements OnInit, OnDestroy {
   }
 
   getAllImageByEntity(entity: string, id: number): void {
+    this.isLoading = true;
     this.imageService.getAllImagesByEntityId(entity, id).subscribe(imageList => {
-      if (imageList.body) this.imageList = imageList.body;
+      if (imageList.body) {
+        this.imageList = imageList.body;
+      }
+      this.isLoading = false;
     });
   }
 }
