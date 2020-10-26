@@ -1,9 +1,9 @@
 Etudier l'agencement du projet JHipster
 Alléger les échanges Back-Front
 	Alléger Part, Chapter et Scene
+Bug sur le zoom : ne zoom pas où il faut
 Importer l'interface du site
 	Vues
-		Images
 		Mentions légales
 		Aide
 	Navbar
