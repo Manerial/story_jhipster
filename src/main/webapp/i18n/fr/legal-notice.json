@@ -11,7 +11,7 @@
     },
     "distribution": {
       "title": "Distribution légale",
-      "body": "Toutes les œuvres de ce site sont placées sous la licence CC BY-NC-ND. Cela signifie :",
+      "body": "Toutes les œuvres de ce site sont placées sous la licence CC BY-NC-ND. Cela signifie\u00A0:",
       "list": {
         "cc": "CC (Creative Commons): Que vous pouvez partager ces oeuvres.",
         "by": "BY (Attribution): Si vous citez correctement leur(s) auteur(s).",
@@ -19,8 +19,8 @@
         "nd": "ND (No Derivative): Si les oeuvres partagées ne soit pas altérées* ou modifiées**."
       },
       "exception": {
-        "*": "* : Les oeuvres partagées doivent être sous licence CC BY-NC-ND.",
-        "**": "** : Seront néanmoins tolérées les dérives tenant de la fan-fiction (chaque cas reporté sera étudié individuellement afin d'éviter le plagiat)"
+        "*": "*\u00A0: Les oeuvres partagées doivent être sous licence CC BY-NC-ND.",
+        "**": "**\u00A0: Seront néanmoins tolérées les dérives tenant de la fan-fiction (chaque cas reporté sera étudié individuellement afin d'éviter le plagiat)"
       }
     }
   }

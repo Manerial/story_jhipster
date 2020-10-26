@@ -1,6 +1,6 @@
 {
   "home": {
-    "title": "Welcome on \"Le nid aux histoires\"\u00A0!",
+    "title": "Welcome on the \"Nid aux histoires\"\u00A0!",
     "subtitle": "This is your homepage",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."

@@ -11,7 +11,7 @@
     },
     "distribution": {
       "title": "Legal distribution",
-      "body": "All works on this site are licensed under the CC BY-NC-ND license. That means :",
+      "body": "All works on this site are licensed under the CC BY-NC-ND license. That means\u00A0:",
       "list": {
         "cc": "CC (Creative Commons): That you can share these works.",
         "by": "BY (Attribution): If you cite their author(s) correctly.",
@@ -19,8 +19,8 @@
         "nd": "ND (No Derivative): If the shared works are not altered * or modified **."
       },
       "exception": {
-        "*": "* : Shared works must be licensed under CC BY-NC-ND.",
-        "**": "** : Nonetheless, drifts based on fan-fiction will be tolerated (each reported case will be studied individually in order to avoid plagiarism)"
+        "*": "*\u00A0: Shared works must be licensed under CC BY-NC-ND.",
+        "**": "**\u00A0: Nonetheless, drifts based on fan-fiction will be tolerated (each reported case will be studied individually in order to avoid plagiarism)"
       }
     }
   }
