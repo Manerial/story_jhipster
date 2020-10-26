@@ -14,11 +14,11 @@ export const HOME_ROUTE: Route = {
 };
 
 export const MENTIONS_ROUTE: Route = {
-  path: 'mentions',
+  path: 'legal-notice',
   component: InformationsComponent,
   data: {
     authorities: [],
-    pageTitle: 'mentions.title',
+    pageTitle: 'legal-notice.title',
   },
 };
 

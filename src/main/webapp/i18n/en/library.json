@@ -14,7 +14,7 @@
     "select_chapter": "Please select a chapter",
     "previous": "Previous",
     "next": "Next",
-    "author": "Author: "
+    "author": "Author\u00A0: "
   },
   "image": {
     "no_image": "No image for \"{{ entityName }}\""
