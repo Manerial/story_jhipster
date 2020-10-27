@@ -49,6 +49,27 @@
                     </span>
                 </a>
             </li>
+            <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *jhiHasAnyAuthority="'ROLE_USER'">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
+                    id="generatorsnavBarDropdown">
+                    <span>
+                        <fa-icon icon="flag"></fa-icon>
+                        <span jhiTranslate="global.menu.tools">Generator</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="generatorsnavBarDropdown">
+                    <li>
+                        <a class="dropdown-item" routerLink="generator/word" jhiTranslate="generator.word.title">
+                            Words generator
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="generator/idea" jhiTranslate="generator.idea.title">
+                            Ideas generator
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
                 routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
