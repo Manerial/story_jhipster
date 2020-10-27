@@ -43,8 +43,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mariadb://localhost:3306/nid_aux_histoires?useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password:
+    username: jherment
+    password: 9m1X81FWku4RRRuy
     hikari:
       poolName: Hikari
       auto-commit: false

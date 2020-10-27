@@ -23,6 +23,16 @@ export class Book implements IBook {
   public coverId: number;
 
   constructor();
+  constructor(
+    id?: number,
+    name?: string,
+    author?: string,
+    description?: string,
+    parts?: IPart[],
+    images?: IImage[],
+    coverPreview?: Uint8Array,
+    coverId?: number
+  );
 
   constructor(
     id?: number,
