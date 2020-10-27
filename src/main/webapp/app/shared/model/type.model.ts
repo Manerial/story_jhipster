@@ -8,6 +8,7 @@ export class Type implements IType {
   public type: string;
 
   constructor();
+  constructor(name?: string, type?: string);
 
   constructor(name?: string, type?: string) {
     this.name = name || '';

@@ -98,7 +98,7 @@ export class SceneUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const scene = this.createFromForm();
-    if (scene.id !== undefined) {
+    if (scene.id !== undefined && scene.id !== 0) {
       this.subscribeToSaveResponse(this.sceneService.update(scene));
     } else {
       this.subscribeToSaveResponse(this.sceneService.create(scene));

@@ -73,7 +73,7 @@ export class ChapterUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const chapter = this.createFromForm();
-    if (chapter.id !== undefined) {
+    if (chapter.id !== undefined && chapter.id !== 0) {
       this.subscribeToSaveResponse(this.chapterService.update(chapter));
     } else {
       this.subscribeToSaveResponse(this.chapterService.create(chapter));

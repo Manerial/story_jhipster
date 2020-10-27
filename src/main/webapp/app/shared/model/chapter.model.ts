@@ -21,6 +21,7 @@ export class Chapter implements IChapter {
   public partId: number;
 
   constructor();
+  constructor(id?: number, name?: string, description?: string, number?: number, scenes?: IScene[], images?: IImage[], partId?: number);
 
   constructor(id?: number, name?: string, description?: string, number?: number, scenes?: IScene[], images?: IImage[], partId?: number) {
     this.id = id || 0;
