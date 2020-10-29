@@ -13,7 +13,7 @@ type EntityArrayResponseType = HttpResponse<IBook[]>;
 @Injectable({ providedIn: 'root' })
 export class BookService {
   public resourceUrl = SERVER_API_URL + 'api/books';
-  public exportUrl = SERVER_API_URL + 'api/export/book/';
+  public exportUrl = SERVER_API_URL + 'api/export/book';
 
   constructor(protected http: HttpClient) {}
 
