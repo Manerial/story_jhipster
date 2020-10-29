@@ -1,5 +1,4 @@
 OBLIGATOIRE
-Paramétrer la prod
 
 OPTIONNEL
 Alléger les échanges Back-Front
