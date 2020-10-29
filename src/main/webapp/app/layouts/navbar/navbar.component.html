@@ -59,12 +59,14 @@
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="generatorsnavBarDropdown">
                     <li>
-                        <a class="dropdown-item" routerLink="generator/word" jhiTranslate="generator.word.title">
+                        <a class="dropdown-item" routerLink="generator/word" jhiTranslate="generator.word.title"
+                            (click)="collapseNavbar()">
                             Words generator
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="generator/idea" jhiTranslate="generator.idea.title">
+                        <a class="dropdown-item" routerLink="generator/idea" jhiTranslate="generator.idea.title"
+                            (click)="collapseNavbar()">
                             Ideas generator
                         </a>
                     </li>
