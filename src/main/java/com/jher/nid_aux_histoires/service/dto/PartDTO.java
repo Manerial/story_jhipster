@@ -3,11 +3,12 @@ package com.jher.nid_aux_histoires.service.dto;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Part} entity.
  */
-public class PartDTO implements Serializable {
+public class PartDTO implements Serializable, Comparable<PartDTO> {
 
 	private Long id;
 
@@ -76,7 +77,8 @@ public class PartDTO implements Serializable {
 	}
 
 	public void setChapters(Set<ChapterDTO> chapters) {
-		this.chapters = chapters;
+		this.chapters = new TreeSet<ChapterDTO>();
+		this.chapters.addAll(chapters);
 	}
 
 	@Override
@@ -101,5 +103,10 @@ public class PartDTO implements Serializable {
 	public String toString() {
 		return "PartDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", description='" + getDescription() + "'"
 				+ ", number=" + getNumber() + ", images='" + getImages() + "'" + ", bookId=" + getBookId() + "}";
+	}
+
+	@Override
+	public int compareTo(PartDTO o) {
+		return this.number.compareTo(o.number);
 	}
 }

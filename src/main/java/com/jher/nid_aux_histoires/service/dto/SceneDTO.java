@@ -10,7 +10,7 @@ import javax.persistence.Lob;
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Scene} entity.
  */
-public class SceneDTO implements Serializable {
+public class SceneDTO implements Serializable, Comparable<SceneDTO> {
 
 	private Long id;
 
@@ -106,5 +106,10 @@ public class SceneDTO implements Serializable {
 		return "SceneDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", number=" + getNumber() + ", text='"
 				+ getText() + "'" + ", timestampStart='" + getTimestampStart() + "'" + ", images='" + getImages() + "'"
 				+ ", chapterId=" + getChapterId() + "}";
+	}
+
+	@Override
+	public int compareTo(SceneDTO o) {
+		return this.number.compareTo(o.number);
 	}
 }
