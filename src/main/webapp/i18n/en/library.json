@@ -5,6 +5,7 @@
     "synopsis": "Synopsis",
     "summary": "Summary",
     "download": "Download",
+    "flip": "Click to read the summary",
     "downloading": "Ongoing",
     "export": {
       "ongoing": "The export is in progress.\r\nPlease wait..."

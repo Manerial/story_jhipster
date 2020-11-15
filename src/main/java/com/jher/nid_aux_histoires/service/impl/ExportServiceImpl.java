@@ -1,12 +1,8 @@
 package com.jher.nid_aux_histoires.service.impl;
 
-import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import javax.xml.bind.JAXBException;
-
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +25,19 @@ public class ExportServiceImpl implements ExportService {
 	ExportDocx exportDocx;
 
 	@Override
-	public Path getPathOfExportedBook(long id)
-			throws Docx4JException, IOException, JAXBException, InvalidFormatException {
+	public Path getPathOfExportedBook(long id) {
 		BookDTO book = bookService.findOne(id).get();
-		return exportDocx.launchGeneration(book);
+		String bookPathString = exportDocx.getObjectFilePath(book.getName());
+		return Paths.get(bookPathString);
+	}
+
+	@Override
+	public Path exportBook(long id) {
+		BookDTO book = bookService.findOne(id).get();
+		try {
+			return exportDocx.launchGeneration(book);
+		} catch (Exception e) {
+		}
+		return null;
 	}
 }

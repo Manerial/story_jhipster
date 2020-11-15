@@ -38,7 +38,7 @@
 					<ul class="list-group">
 						<li *ngFor="let word of words" class="list-group-item list-group-item-action long-text-ellipsis"
 							data-toggle="tooltip" data-placement="left" title="Click to copy">
-							<!--(click)="copyToClipboard(word)"-->
+							(click)="copyToClipboard(word)"
 							{{ word }}
 						</li>
 					</ul>

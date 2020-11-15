@@ -4,8 +4,7 @@
 		<div class="main">
 			<ul id="bk-list" class="bk-list clearfix">
 				<li *ngFor="let book of books | bookFilter: searchText">
-					<div class="bk-book bk-bookdefault" [ngClass]="isDownloading[book.id] ? 'rotating' : ''"
-						(click)="flip($event)">
+					<div class="bk-book bk-bookdefault" (click)="flip($event)">
 						<div class="bk-front">
 							<div class="bk-cover"
 								style="background-image: url(data:image/jpg;base64,{{book.coverPreview}})">
@@ -28,13 +27,13 @@
 						</div>
 					</div>
 					<div class="bk-info text-center">
-						<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold" title='Lire "{{ book.name }}"'>
+						<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold">
 							<span>
 								<fa-icon icon="book-open"></fa-icon>
 								<span jhiTranslate="library.read">Read</span>
 							</span>
 						</a>
-						<a (click)="downloadBook(book.id, book.name)" class="btn bkg-gold ml-2" title="Télécharger">
+						<a (click)="downloadBook(book.id, book.name)" class="btn bkg-gold ml-2">
 							<span [ngClass]="isDownloading[book.id] ? 'hide-element' : ''">
 								<fa-icon icon="download"></fa-icon>
 								<span jhiTranslate="library.download">Download</span>
@@ -55,7 +54,7 @@
 			<div class="card">
 				<div class="card-body">
 					<h2 class="card-title">{{ book.name }}</h2>
-					<a (click)="downloadBook(book.id, book.name)" class="btn bkg-gold ml-2 mb-2" title="Télécharger">
+					<a (click)="downloadBook(book.id, book.name)" class="btn bkg-gold ml-2 mb-2">
 						<span [ngClass]="isDownloading[book.id] ? 'hide-element' : ''">
 							<fa-icon icon="download"></fa-icon>
 							<span jhiTranslate="library.download">Download</span>
@@ -65,7 +64,7 @@
 							<span jhiTranslate="library.downloading">Downloading</span>
 						</span>
 					</a>
-					<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold ml-2 mb-2" title='Lire "{{ book.name }}"'>
+					<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold ml-2 mb-2">
 						<span>
 							<fa-icon icon="book-open"></fa-icon>
 							<span jhiTranslate="library.read">Read</span>

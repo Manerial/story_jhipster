@@ -55,9 +55,6 @@ export class LibraryComponent implements OnInit {
   flip(event: MouseEvent): void {
     event.preventDefault();
     const bookElement = event.currentTarget as HTMLDivElement;
-    if (bookElement.className.includes('rotating')) {
-      return;
-    }
     bookElement.className = bookElement.className.includes('bk-bookdefault') ? 'bk-book bk-viewback' : 'bk-book bk-bookdefault';
   }
 

@@ -42,20 +42,34 @@ public class ExportController {
 	 * @throws Docx4JException
 	 */
 	@GetMapping("/export/book/{id}")
-	public ResponseEntity<ByteArrayResource> exportBookById(@Valid @PathVariable int id) {
+	public ResponseEntity<String> exportBookById(@Valid @PathVariable int id) {
 		Path path = null;
 		try {
-			path = exportService.getPathOfExportedBook(id);
+			path = exportService.exportBook(id);
 		} catch (Exception e) {
 			String error = "Error during the generation of the document : " + e.getMessage();
 			log.warn(error, e);
-			return ResponseEntity.badRequest().body(new ByteArrayResource(error.getBytes()));
+			return ResponseEntity.badRequest().body(error);
 		}
 		if (path == null) {
 			String error = "Error during the generation of the document.";
 			log.warn(error);
-			return ResponseEntity.badRequest().body(new ByteArrayResource(error.getBytes()));
+			return ResponseEntity.badRequest().body(error);
 		}
+		return ResponseEntity.ok().body("Export OK for : " + path);
+	}
+
+	/**
+	 * Exporte un livre en Word
+	 * 
+	 * @return une réponse contenant la liste des entités
+	 * @throws JAXBException
+	 * @throws IOException
+	 * @throws Docx4JException
+	 */
+	@GetMapping("/download/book/{id}")
+	public ResponseEntity<ByteArrayResource> getBookWord(@Valid @PathVariable int id) {
+		Path path = exportService.getPathOfExportedBook(id);
 		byte[] data;
 		try {
 			data = Files.readAllBytes(path);
@@ -65,11 +79,6 @@ public class ExportController {
 			return ResponseEntity.badRequest().body(new ByteArrayResource(error.getBytes()));
 		}
 		ByteArrayResource resource = new ByteArrayResource(data);
-		try {
-			Files.delete(path);
-		} catch (IOException e) {
-			log.warn("", e);
-		}
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION,
 						"attachment;filename=\"" + path.getFileName().toString() + "\"")
