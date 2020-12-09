@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IdeaService } from 'app/entities/idea/idea.service';
 import { IPersona, Persona } from 'app/shared/model/idea-generator/persona.model';
 import { IWriting, Writing } from 'app/shared/model/idea-generator/writing.model';
+import { ILocation, Location } from 'app/shared/model/idea-generator/location.model';
 
 @Component({
   selector: 'jhi-idea-generator',
@@ -13,12 +14,14 @@ export class IdeaGeneratorComponent implements OnInit {
   public number = 9;
   public writingConstraint: IWriting = new Writing();
   public personaConstraint: IPersona = new Persona();
+  public locationConstraint: ILocation = new Location();
   public badTraitsConstraint = '';
   public goodTraitsConstraint = '';
   public handicapsConstraint = '';
   public caracteristicsConstraint = '';
   public writingList: IWriting[] = [];
   public personaList: IPersona[] = [];
+  public locationList: ILocation[] = [];
   public hideConstraint = true;
 
   constructor(public ideaService: IdeaService) {}
@@ -34,9 +37,13 @@ export class IdeaGeneratorComponent implements OnInit {
       this.ideaService.generatePersona(this.number, this.personaConstraint).subscribe(response => {
         this.personaList = response;
       });
-    } else {
+    } else if (this.type === 'writing_option') {
       this.ideaService.generateWriting(this.number, this.writingConstraint).subscribe(response => {
         this.writingList = response;
+      });
+    } else if (this.type === 'location') {
+      this.ideaService.generateLocation(this.number, this.locationConstraint).subscribe(response => {
+        this.locationList = response;
       });
     }
   }
@@ -44,6 +51,7 @@ export class IdeaGeneratorComponent implements OnInit {
   resetConstraint(): void {
     this.writingConstraint = new Writing();
     this.personaConstraint = new Persona();
+    this.locationConstraint = new Location();
   }
 
   turnConstraintTraitsToList(): void {

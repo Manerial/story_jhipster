@@ -27,6 +27,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.LocationDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.PersonaDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.WritingOptionDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
@@ -155,6 +156,18 @@ public class IdeaResource {
 			@Valid @RequestBody PersonaDTO constraint) {
 		List<PersonaDTO> generatedWords = ideaService.generatePersonas(number, constraint);
 		return ResponseEntity.ok().body(generatedWords);
+	}
+
+	/**
+	 * Génère une liste de lieux
+	 * 
+	 * @return une réponse contenant la liste des entités
+	 */
+	@PostMapping("/ideas/locations")
+	public ResponseEntity<List<LocationDTO>> generateLocations(@RequestParam int number,
+			@Valid @RequestBody LocationDTO constraint) {
+		List<LocationDTO> generatedLocations = ideaService.generateLocations(number, constraint);
+		return ResponseEntity.ok().body(generatedLocations);
 	}
 
 	/**

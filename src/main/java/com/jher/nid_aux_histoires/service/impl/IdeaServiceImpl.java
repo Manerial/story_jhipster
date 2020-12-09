@@ -16,6 +16,7 @@ import com.jher.nid_aux_histoires.repository.IdeaRepository;
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.WordAnalysisService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.LocationDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.PersonaDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.WritingOptionDTO;
 import com.jher.nid_aux_histoires.service.mapper.IdeaMapper;
@@ -31,16 +32,14 @@ public class IdeaServiceImpl implements IdeaService {
 	private final Logger log = LoggerFactory.getLogger(IdeaServiceImpl.class);
 
 	private final IdeaRepository ideaRepository;
-
-	private final WordAnalysisService wordAnalysisService;
-
 	private final IdeaMapper ideaMapper;
+	private final IdeaGenerator ideaGenerator;
 
 	public IdeaServiceImpl(IdeaRepository ideaRepository, IdeaMapper ideaMapper,
 			WordAnalysisService wordAnalysisService) {
 		this.ideaRepository = ideaRepository;
 		this.ideaMapper = ideaMapper;
-		this.wordAnalysisService = wordAnalysisService;
+		ideaGenerator = new IdeaGenerator(ideaRepository, wordAnalysisService);
 	}
 
 	@Override
@@ -74,7 +73,6 @@ public class IdeaServiceImpl implements IdeaService {
 	@Override
 	public List<PersonaDTO> generatePersonas(int numberOfPersona, PersonaDTO constraint) {
 		List<PersonaDTO> personas = new ArrayList<>();
-		IdeaGenerator ideaGenerator = new IdeaGenerator(ideaRepository, wordAnalysisService);
 		for (int i = 0; i < numberOfPersona; i++) {
 			personas.add(ideaGenerator.generatePersona(constraint));
 		}
@@ -82,9 +80,17 @@ public class IdeaServiceImpl implements IdeaService {
 	}
 
 	@Override
+	public List<LocationDTO> generateLocations(int numberOfLocation, LocationDTO constraint) {
+		List<LocationDTO> locations = new ArrayList<>();
+		for (int i = 0; i < numberOfLocation; i++) {
+			locations.add(ideaGenerator.generateLocation(constraint));
+		}
+		return locations;
+	}
+
+	@Override
 	public List<WritingOptionDTO> generateWritingOptions(int numberOfWritingOption, WritingOptionDTO constraint) {
 		List<WritingOptionDTO> writingOptions = new ArrayList<>();
-		IdeaGenerator ideaGenerator = new IdeaGenerator(ideaRepository, wordAnalysisService);
 		for (int i = 0; i < numberOfWritingOption; i++) {
 			writingOptions.add(ideaGenerator.generateWritingOption(constraint));
 		}

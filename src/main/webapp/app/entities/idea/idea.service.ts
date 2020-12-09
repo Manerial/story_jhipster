@@ -7,6 +7,7 @@ import { createRequestOption } from 'app/shared/util/request-util';
 import { IIdea } from 'app/shared/model/idea.model';
 import { IWriting } from 'app/shared/model/idea-generator/writing.model';
 import { IPersona } from 'app/shared/model/idea-generator/persona.model';
+import { ILocation } from 'app/shared/model/idea-generator/location.model';
 
 type EntityResponseType = HttpResponse<IIdea>;
 type EntityArrayResponseType = HttpResponse<IIdea[]>;
@@ -42,6 +43,12 @@ export class IdeaService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('number', number.toString());
     return this.http.post<IWriting[]>(`${this.resourceUrl}/writing_options`, constraint, { params: httpParams });
+  }
+
+  generateLocation(number: number, constraint: ILocation): Observable<ILocation[]> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('number', number.toString());
+    return this.http.post<ILocation[]>(`${this.resourceUrl}/locations`, constraint, { params: httpParams });
   }
 
   generatePersona(number: number, constraint: IPersona): Observable<IPersona[]> {

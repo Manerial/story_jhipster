@@ -18,6 +18,7 @@
 						<select id="generationTool" class="form-control" [(ngModel)]="type">
 							<option value="persona">Personnage</option>
 							<option value="writing_option">Style d'écriture</option>
+							<option value="location">Lieu</option>
 						</select>
 					</div>
 					<div class="col-sm">
@@ -186,6 +187,37 @@
 							</dl>
 						</div>
 					</div>
+					<div class="card col col-lg-5" *ngIf="type=='location'">
+						<div class="card-body">
+							<dl>
+								<dt><u>Général:</u></dt>
+								<dd></dd>
+								<dl class="pl-2">
+									<dl>
+										<dt>Place:</dt>
+										<dd>
+											<input class="form-control" type="text"
+												[(ngModel)]="locationConstraint.place">
+										</dd>
+									</dl>
+									<dl>
+										<dt>Landscape:</dt>
+										<dd>
+											<input class="form-control" type="text"
+												[(ngModel)]="locationConstraint.landscape">
+										</dd>
+									</dl>
+									<dl>
+										<dt>Matière:</dt>
+										<dd>
+											<input class="form-control" type="text"
+												[(ngModel)]="locationConstraint.material">
+										</dd>
+									</dl>
+								</dl>
+							</dl>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -310,6 +342,30 @@
 								<dl>
 									<dt>Style:</dt>
 									<dd>{{writing.style}}</dd>
+								</dl>
+							</dl>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="type=='location'" class="row" style="margin:0px">
+				<div class="card col-sm-4 col-md-4 col-lg-4 bkg-gray-2" *ngFor="let location of locationList">
+					<div class="card-body">
+						<dl>
+							<dt><u>Général:</u></dt>
+							<dd></dd>
+							<dl class="pl-2">
+								<dl>
+									<dt>Place:</dt>
+									<dd>{{location.place}}</dd>
+								</dl>
+								<dl>
+									<dt>Landscape:</dt>
+									<dd>{{location.landscape}}</dd>
+								</dl>
+								<dl>
+									<dt>Matière:</dt>
+									<dd>{{location.material}}</dd>
 								</dl>
 							</dl>
 						</dl>
