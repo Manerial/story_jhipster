@@ -25,19 +25,28 @@ public class ExportServiceImpl implements ExportService {
 	ExportDocx exportDocx;
 
 	@Override
-	public Path getPathOfExportedBook(long id) {
+	public Path getPathOfExportedBook(long id) throws Exception {
 		BookDTO book = bookService.findOne(id).get();
-		String bookPathString = exportDocx.getObjectFilePath(book.getName());
+		String bookPathString = ExportDocx.getObjectFilePath(book.getName());
 		return Paths.get(bookPathString);
 	}
 
 	@Override
-	public Path exportBook(long id) {
+	public void exportBook(long id) {
 		BookDTO book = bookService.findOne(id).get();
 		try {
-			return exportDocx.launchGeneration(book);
+			exportDocx.launchGeneration(book);
 		} catch (Exception e) {
 		}
-		return null;
+
+		try {
+			exportDocx.convertWordToFormat(book, ExportDocx.FILE_FORMAT.pdf);
+		} catch (Exception e) {
+		}
+
+		try {
+			exportDocx.convertWordToFormat(book, ExportDocx.FILE_FORMAT.epub);
+		} catch (Exception e) {
+		}
 	}
 }

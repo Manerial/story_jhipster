@@ -12,6 +12,11 @@
 
 	<repositories>
 		<!-- jhipster-needle-maven-repository -->
+		<repository>
+			<id>AsposeJavaAPI</id>
+			<name>Aspose Java API</name>
+			<url>https://repository.aspose.com/repo/</url>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -98,6 +103,8 @@
 			<!-- jhipster-needle-maven-add-dependency-management -->
 		</dependencies>
 	</dependencyManagement>
+
+
 
 	<dependencies>
 		<dependency>
@@ -321,13 +328,8 @@
 		<!-- Export -->
 		<dependency>
 			<groupId>org.docx4j</groupId>
-			<artifactId>docx4j-JAXB-MOXy</artifactId>
-			<version>11.1.8</version>
-		</dependency>
-		<dependency>
-			<groupId>org.docx4j</groupId>
-		    <artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
-		    <version>11.1.8</version>
+			<artifactId>docx4j</artifactId>
+			<version>6.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.wickedsource.docx-stamper</groupId>
@@ -977,10 +979,10 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-undertow</artifactId>
 				</dependency>
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                </dependency>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+				</dependency>
 			</dependencies>
 			<build>
 				<plugins>
