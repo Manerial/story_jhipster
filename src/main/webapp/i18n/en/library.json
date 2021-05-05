@@ -9,6 +9,12 @@
     "downloading": "Ongoing",
     "export": {
       "ongoing": "The export is in progress.\r\nPlease wait..."
+    },
+    "download_format": {
+      "title": "Select file format",
+      "question": "Select a file format for \"{{ entityName }}\"",
+      "validate": "Validate",
+      "cancel": "Cancel"
     }
   },
   "reader": {

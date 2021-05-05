@@ -2,8 +2,14 @@ package com.jher.nid_aux_histoires.service;
 
 import java.nio.file.Path;
 
-public interface ExportService {
-	Path getPathOfExportedBook(long id) throws Exception;
+import org.springframework.http.MediaType;
 
-	void exportBook(long id);
+import com.jher.nid_aux_histoires.export.ExportDocx;
+
+public interface ExportService {
+	Path getPathOfExportedBook(long id, ExportDocx.FILE_FORMAT format) throws Exception;
+
+	boolean exportBook(long id);
+
+	MediaType getMediaType(ExportDocx.FILE_FORMAT format);
 }

@@ -51,6 +51,10 @@ public class ExportDocx {
 		docx, pdf, epub
 	};
 
+	public static enum AVAILABLE_FILE_FORMAT {
+		pdf, epub
+	};
+
 	public static final String TEMP_DIR = System.getProperty("user.home") + "\\BooksExports\\";
 	public static final String LINE_BREAK_PLACEHOLDER = "§";
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExportDocx.class);
