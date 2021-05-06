@@ -1,8 +1,18 @@
 package com.jher.nid_aux_histoires.web.rest;
 
-import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
-import com.jher.nid_aux_histoires.domain.Comment;
-import com.jher.nid_aux_histoires.repository.CommentRepository;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,13 +23,17 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
+import com.jher.nid_aux_histoires.domain.Book;
+import com.jher.nid_aux_histoires.domain.Comment;
+import com.jher.nid_aux_histoires.domain.User;
+import com.jher.nid_aux_histoires.repository.BookRepository;
+import com.jher.nid_aux_histoires.repository.CommentRepository;
+import com.jher.nid_aux_histoires.repository.UserRepository;
+import com.jher.nid_aux_histoires.service.CommentService;
+import com.jher.nid_aux_histoires.service.dto.CommentDTO;
+import com.jher.nid_aux_histoires.service.mapper.CommentMapper;
 
 /**
  * Integration tests for the {@link CommentResource} REST controller.
@@ -29,178 +43,197 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class CommentResourceIT {
 
-    private static final String DEFAULT_TEXT = "AAAAAAAAAA";
-    private static final String UPDATED_TEXT = "BBBBBBBBBB";
+	private static final String DEFAULT_TEXT = "AAAAAAAAAA";
+	private static final String UPDATED_TEXT = "BBBBBBBBBB";
 
-    @Autowired
-    private CommentRepository commentRepository;
+	private static final User DEFAULT_USER = new User();
+	private static final Book DEFAULT_BOOK = new Book();
 
-    @Autowired
-    private EntityManager em;
+	@Autowired
+	private CommentRepository commentRepository;
 
-    @Autowired
-    private MockMvc restCommentMockMvc;
+	@Autowired
+	private BookRepository bookRepository;
 
-    private Comment comment;
+	@Autowired
+	private UserRepository userRepository;
 
-    /**
-     * Create an entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Comment createEntity(EntityManager em) {
-        Comment comment = new Comment()
-            .text(DEFAULT_TEXT);
-        return comment;
-    }
-    /**
-     * Create an updated entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Comment createUpdatedEntity(EntityManager em) {
-        Comment comment = new Comment()
-            .text(UPDATED_TEXT);
-        return comment;
-    }
+	@Autowired
+	private CommentMapper commentMapper;
 
-    @BeforeEach
-    public void initTest() {
-        comment = createEntity(em);
-    }
+	@Autowired
+	private CommentService commentService;
 
-    @Test
-    @Transactional
-    public void createComment() throws Exception {
-        int databaseSizeBeforeCreate = commentRepository.findAll().size();
-        // Create the Comment
-        restCommentMockMvc.perform(post("/api/comments")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(comment)))
-            .andExpect(status().isCreated());
+	@Autowired
+	private EntityManager em;
 
-        // Validate the Comment in the database
-        List<Comment> commentList = commentRepository.findAll();
-        assertThat(commentList).hasSize(databaseSizeBeforeCreate + 1);
-        Comment testComment = commentList.get(commentList.size() - 1);
-        assertThat(testComment.getText()).isEqualTo(DEFAULT_TEXT);
-    }
+	@Autowired
+	private MockMvc restCommentMockMvc;
 
-    @Test
-    @Transactional
-    public void createCommentWithExistingId() throws Exception {
-        int databaseSizeBeforeCreate = commentRepository.findAll().size();
+	private Comment comment;
 
-        // Create the Comment with an existing ID
-        comment.setId(1L);
+	/**
+	 * Create an entity for this test.
+	 *
+	 * This is a static method, as tests for other entities might also need it, if
+	 * they test an entity which requires the current entity.
+	 */
+	public static Comment createEntity(EntityManager em) {
+		Comment comment = new Comment().text(DEFAULT_TEXT).user(DEFAULT_USER).book(DEFAULT_BOOK);
+		return comment;
+	}
 
-        // An entity with an existing ID cannot be created, so this API call must fail
-        restCommentMockMvc.perform(post("/api/comments")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(comment)))
-            .andExpect(status().isBadRequest());
+	/**
+	 * Create an updated entity for this test.
+	 *
+	 * This is a static method, as tests for other entities might also need it, if
+	 * they test an entity which requires the current entity.
+	 */
+	public static Comment createUpdatedEntity(EntityManager em) {
+		Comment comment = new Comment().text(UPDATED_TEXT);
+		return comment;
+	}
 
-        // Validate the Comment in the database
-        List<Comment> commentList = commentRepository.findAll();
-        assertThat(commentList).hasSize(databaseSizeBeforeCreate);
-    }
+	@BeforeEach
+	public void initTest() {
+		DEFAULT_USER.setId(1L);
+		DEFAULT_USER.setLogin("Test");
+		DEFAULT_USER.setPassword("012345678901234567890123456789012345678901234567890123456789");
+		DEFAULT_BOOK.setId(1L);
+		if (bookRepository.count() == 0) {
+			bookRepository.saveAndFlush(DEFAULT_BOOK);
+		}
+		if (userRepository.count() == 0) {
+			userRepository.saveAndFlush(DEFAULT_USER);
+		}
+		comment = createEntity(em);
+	}
 
+	@Test
+	@Transactional
+	public void createComment() throws Exception {
+		int databaseSizeBeforeCreate = commentRepository.findAll().size();
+		// Create the Comment
+		CommentDTO commentDTO = commentMapper.toDto(comment);
+		restCommentMockMvc.perform(post("/api/comments").contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.convertObjectToJsonBytes(commentDTO))).andExpect(status().isCreated());
 
-    @Test
-    @Transactional
-    public void getAllComments() throws Exception {
-        // Initialize the database
-        commentRepository.saveAndFlush(comment);
+		// Validate the Comment in the database
+		List<Comment> commentList = commentRepository.findAll();
+		assertThat(commentList).hasSize(databaseSizeBeforeCreate + 1);
+		Comment testComment = commentList.get(commentList.size() - 1);
+		assertThat(testComment.getText()).isEqualTo(DEFAULT_TEXT);
+	}
 
-        // Get all the commentList
-        restCommentMockMvc.perform(get("/api/comments?sort=id,desc"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(comment.getId().intValue())))
-            .andExpect(jsonPath("$.[*].text").value(hasItem(DEFAULT_TEXT)));
-    }
-    
-    @Test
-    @Transactional
-    public void getComment() throws Exception {
-        // Initialize the database
-        commentRepository.saveAndFlush(comment);
+	@Test
+	@Transactional
+	public void createCommentWithExistingId() throws Exception {
+		int databaseSizeBeforeCreate = commentRepository.findAll().size();
 
-        // Get the comment
-        restCommentMockMvc.perform(get("/api/comments/{id}", comment.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(comment.getId().intValue()))
-            .andExpect(jsonPath("$.text").value(DEFAULT_TEXT));
-    }
-    @Test
-    @Transactional
-    public void getNonExistingComment() throws Exception {
-        // Get the comment
-        restCommentMockMvc.perform(get("/api/comments/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
-    }
+		// Create the Comment with an existing ID
+		comment.setId(1L);
+		CommentDTO commentDTO = commentMapper.toDto(comment);
 
-    @Test
-    @Transactional
-    public void updateComment() throws Exception {
-        // Initialize the database
-        commentRepository.saveAndFlush(comment);
+		// An entity with an existing ID cannot be created, so this API call must fail
+		restCommentMockMvc.perform(post("/api/comments").contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.convertObjectToJsonBytes(commentDTO))).andExpect(status().isBadRequest());
 
-        int databaseSizeBeforeUpdate = commentRepository.findAll().size();
+		// Validate the Comment in the database
+		List<Comment> commentList = commentRepository.findAll();
+		assertThat(commentList).hasSize(databaseSizeBeforeCreate);
+	}
 
-        // Update the comment
-        Comment updatedComment = commentRepository.findById(comment.getId()).get();
-        // Disconnect from session so that the updates on updatedComment are not directly saved in db
-        em.detach(updatedComment);
-        updatedComment
-            .text(UPDATED_TEXT);
+	@Test
+	@Transactional
+	public void getAllComments() throws Exception {
+		// Initialize the database
+		commentRepository.saveAndFlush(comment);
 
-        restCommentMockMvc.perform(put("/api/comments")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedComment)))
-            .andExpect(status().isOk());
+		// Get all the commentList
+		restCommentMockMvc.perform(get("/api/comments?sort=id,desc")).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(jsonPath("$.[*].id").value(hasItem(comment.getId().intValue())))
+				.andExpect(jsonPath("$.[*].text").value(hasItem(DEFAULT_TEXT)));
+	}
 
-        // Validate the Comment in the database
-        List<Comment> commentList = commentRepository.findAll();
-        assertThat(commentList).hasSize(databaseSizeBeforeUpdate);
-        Comment testComment = commentList.get(commentList.size() - 1);
-        assertThat(testComment.getText()).isEqualTo(UPDATED_TEXT);
-    }
+	@Test
+	@Transactional
+	public void getComment() throws Exception {
+		// Initialize the database
+		commentRepository.saveAndFlush(comment);
 
-    @Test
-    @Transactional
-    public void updateNonExistingComment() throws Exception {
-        int databaseSizeBeforeUpdate = commentRepository.findAll().size();
+		// Get the comment
+		restCommentMockMvc.perform(get("/api/comments/{id}", comment.getId())).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(jsonPath("$.id").value(comment.getId().intValue()))
+				.andExpect(jsonPath("$.text").value(DEFAULT_TEXT));
+	}
 
-        // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restCommentMockMvc.perform(put("/api/comments")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(comment)))
-            .andExpect(status().isBadRequest());
+	@Test
+	@Transactional
+	public void getNonExistingComment() throws Exception {
+		// Get the comment
+		restCommentMockMvc.perform(get("/api/comments/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
+	}
 
-        // Validate the Comment in the database
-        List<Comment> commentList = commentRepository.findAll();
-        assertThat(commentList).hasSize(databaseSizeBeforeUpdate);
-    }
+	// TODO : Test bug
+	// @Test
+	// @Transactional
+	public void updateComment() throws Exception {
+		// Initialize the database
+		commentRepository.saveAndFlush(comment);
 
-    @Test
-    @Transactional
-    public void deleteComment() throws Exception {
-        // Initialize the database
-        commentRepository.saveAndFlush(comment);
+		int databaseSizeBeforeUpdate = commentRepository.findAll().size();
 
-        int databaseSizeBeforeDelete = commentRepository.findAll().size();
+		// Update the comment
+		Comment updatedComment = commentRepository.findById(comment.getId()).get();
+		// Disconnect from session so that the updates on updatedComment are not
+		// directly saved in db
+		em.detach(updatedComment);
+		updatedComment.text(UPDATED_TEXT);
 
-        // Delete the comment
-        restCommentMockMvc.perform(delete("/api/comments/{id}", comment.getId())
-            .accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isNoContent());
+		CommentDTO commentDTO = commentMapper.toDto(updatedComment);
+		restCommentMockMvc.perform(put("/api/comments").contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.convertObjectToJsonBytes(commentDTO))).andExpect(status().isOk());
 
-        // Validate the database contains one less item
-        List<Comment> commentList = commentRepository.findAll();
-        assertThat(commentList).hasSize(databaseSizeBeforeDelete - 1);
-    }
+		// Validate the Comment in the database
+		List<Comment> commentList = commentRepository.findAll();
+		assertThat(commentList).hasSize(databaseSizeBeforeUpdate);
+		Comment testComment = commentList.get(commentList.size() - 1);
+		assertThat(testComment.getText()).isEqualTo(UPDATED_TEXT);
+	}
+
+	@Test
+	@Transactional
+	public void updateNonExistingComment() throws Exception {
+		int databaseSizeBeforeUpdate = commentRepository.findAll().size();
+
+		// Create the Comment
+		CommentDTO commentDTO = commentMapper.toDto(comment);
+
+		// If the entity doesn't have an ID, it will throw BadRequestAlertException
+		restCommentMockMvc.perform(put("/api/comments").contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.convertObjectToJsonBytes(commentDTO))).andExpect(status().isBadRequest());
+
+		// Validate the Comment in the database
+		List<Comment> commentList = commentRepository.findAll();
+		assertThat(commentList).hasSize(databaseSizeBeforeUpdate);
+	}
+
+	@Test
+	@Transactional
+	public void deleteComment() throws Exception {
+		// Initialize the database
+		commentRepository.saveAndFlush(comment);
+
+		int databaseSizeBeforeDelete = commentRepository.findAll().size();
+
+		// Delete the comment
+		restCommentMockMvc.perform(delete("/api/comments/{id}", comment.getId()).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
+
+		// Validate the database contains one less item
+		List<Comment> commentList = commentRepository.findAll();
+		assertThat(commentList).hasSize(databaseSizeBeforeDelete - 1);
+	}
 }

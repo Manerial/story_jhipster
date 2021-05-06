@@ -40,6 +40,7 @@ export const commentRoute: Routes = [
     component: CommentComponent,
     data: {
       authorities: [Authority.USER],
+      defaultSort: 'id,asc',
       pageTitle: 'nidAuxHistoiresApp.comment.home.title',
     },
     canActivate: [UserRouteAccessService],
