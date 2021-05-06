@@ -1,4 +1,4 @@
-entity Idea {
+entity IdeaResource {
 	type String,
     value String,
     complement String
@@ -40,12 +40,18 @@ entity Image {
 	preview ImageBlob
 }
 
+entity Comment {
+	text String
+}
+
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
 	Book{part} to Part{book},
 	Part{chapter} to Chapter{part},
 	Chapter{scene} to Scene{chapter},
-	Image{bookToCover} to Book{cover}
+	Image{bookToCover} to Book{cover},
+	Comment{book} to Book{comment},
+	Comment{user} to User{comment}
 }
 
 relationship ManyToMany {
@@ -56,7 +62,7 @@ relationship ManyToMany {
 }
 
 // Set pagination options
-paginate * with pagination
+paginate Book, Part, Chapter, Scene, Image with pagination
 
 // Use Data Transfer Objects (DTO)
 dto * with mapstruct
