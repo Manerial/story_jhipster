@@ -12,6 +12,18 @@
                 <dd>
                     <span>{{ comment.text }}</span>
                 </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.comment.book">Book</span></dt>
+                <dd>
+                    <div *ngIf="comment.bookId">
+                        <a [routerLink]="['/entities/book', comment.bookId, 'view']">{{ comment.bookId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.comment.user">User</span></dt>
+                <dd>
+                    <div *ngIf="comment.userLogin">
+                        <a [routerLink]="['/admin/user-management', comment.userLogin, 'view']">{{ comment.userLogin }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
@@ -21,7 +33,7 @@
             </button>
 
             <button type="button"
-                    [routerLink]="['/comment', comment.id, 'edit']"
+                    [routerLink]="['/entities/comment', comment.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>

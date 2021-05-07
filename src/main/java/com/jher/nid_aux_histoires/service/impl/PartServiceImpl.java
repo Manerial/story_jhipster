@@ -1,5 +1,6 @@
 package com.jher.nid_aux_histoires.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -66,8 +67,19 @@ public class PartServiceImpl implements PartService {
 		return partRepository.findAll(pageable).map(partMapper::toDto);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<PartDTO> findAllByBookId(Long bookId) {
+		log.debug("Request to get all Parts");
+		return partMapper.toDto(partRepository.findAllByBookId(bookId));
+	}
+
 	public Page<PartDTO> findAllWithEagerRelationships(Pageable pageable) {
 		return partRepository.findAllWithEagerRelationships(pageable).map(partMapper::toDto);
+	}
+
+	public List<PartDTO> findAllWithEagerRelationships() {
+		return partMapper.toDto(partRepository.findAllWithEagerRelationships());
 	}
 
 	@Override

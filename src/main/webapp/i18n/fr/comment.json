@@ -2,21 +2,23 @@
   "nidAuxHistoiresApp": {
     "comment": {
       "home": {
-        "title": "Comments",
-        "createLabel": "Créer un nouveau Comment",
-        "createOrEditLabel": "Créer ou éditer un Comment",
-        "notFound": "Aucun Comment trouvé"
+        "title": "Commentaires",
+        "createLabel": "Créer un nouveau Commentaire",
+        "createOrEditLabel": "Créer ou éditer un Commentaire",
+        "notFound": "Aucun Commentaire trouvé"
       },
-      "created": "Un nouveau Comment a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Comment avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Comment avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Commentaire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Commentaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Commentaire avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Comment {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer le Commentaire {{ id }} ?"
       },
       "detail": {
-        "title": "Comment"
+        "title": "Commentaire"
       },
-      "text": "Text"
+      "text": "Text",
+      "book": "Livre",
+      "user": "Utilisateur"
     }
   }
 }

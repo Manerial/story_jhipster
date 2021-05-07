@@ -6,6 +6,7 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared/constants/error.constants';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { RegisterService } from './register.service';
+import { User } from 'app/core/user/user.model';
 
 @Component({
   selector: 'jhi-register',
@@ -61,7 +62,8 @@ export class RegisterComponent implements AfterViewInit {
     } else {
       const login = this.registerForm.get(['login'])!.value;
       const email = this.registerForm.get(['email'])!.value;
-      this.registerService.save({ login, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe(
+      const user = new User({ login, email, password, langKey: this.languageService.getCurrentLanguage() });
+      this.registerService.save(user).subscribe(
         () => (this.success = true),
         response => this.processError(response)
       );
