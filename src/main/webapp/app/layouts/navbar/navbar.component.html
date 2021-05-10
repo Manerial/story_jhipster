@@ -238,6 +238,13 @@
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
                     <li *ngSwitchCase="true">
+                        <a class="dropdown-item" routerLink="account" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="id-card" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.account.profile">Profile</span>
+                        </a>
+                    </li>
+                    <li *ngSwitchCase="true">
                         <a class="dropdown-item" routerLink="account/settings" routerLinkActive="active"
                             (click)="collapseNavbar()">
                             <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>

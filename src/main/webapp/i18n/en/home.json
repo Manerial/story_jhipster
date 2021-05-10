@@ -1,7 +1,7 @@
 {
   "home": {
     "title": "Welcome on the \"Nid aux histoires\"\u00A0!",
-    "subtitle": "This is your homepage",
+    "subtitle": "Le Nid is a non-profit website which allows authors who wish so to distribute their works for free.",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     }

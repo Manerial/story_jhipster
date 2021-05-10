@@ -1,7 +1,7 @@
 {
   "home": {
     "title": "Bienvenue dans le nid aux histoires\u00A0!",
-    "subtitle": "Ceci est la page d'accueil",
+    "subtitle": "Le Nid est un site internet à but non lucratif qui permets aux auteurs qui le souhaitent de diffuser gratuitement leurs oeuvres.",
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\"."
     }

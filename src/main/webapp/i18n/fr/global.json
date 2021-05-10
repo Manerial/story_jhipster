@@ -23,7 +23,8 @@
       },
       "account": {
         "main": "Compte",
-        "settings": "Profil",
+        "profile": "Profil",
+        "settings": "Paramètres",
         "password": "Mot de passe",
         "sessions": "Sessions",
         "login": "S'authentifier",
