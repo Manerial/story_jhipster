@@ -107,6 +107,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Comment> comments = new HashSet<>();
 
+	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private Set<Book> books = new HashSet<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -235,6 +239,31 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public User books(Set<Book> books) {
+		this.books = books;
+		return this;
+	}
+
+	public User addBook(Book book) {
+		this.books.add(book);
+		book.setAuthor(this);
+		return this;
+	}
+
+	public User removeBook(Book book) {
+		this.books.remove(book);
+		book.setAuthor(null);
+		return this;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
 	}
 
 	@Override

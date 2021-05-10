@@ -14,7 +14,9 @@
                 </dd>
                 <dt><span jhiTranslate="nidAuxHistoiresApp.book.author">Author</span></dt>
                 <dd>
-                    <span>{{ book.author }}</span>
+                    <div *ngIf="book.authorLogin">
+                        <a [routerLink]="['/admin/user-management', book.authorLogin, 'view']">{{ book.authorLogin }}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="nidAuxHistoiresApp.book.image">Image</span></dt>
                 <dd>

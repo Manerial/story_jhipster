@@ -14,7 +14,9 @@ public class BookDTO implements Serializable {
 
 	private String name;
 
-	private String author;
+	private Long authorId;
+
+	private String authorLogin;
 
 	private String description;
 
@@ -44,12 +46,20 @@ public class BookDTO implements Serializable {
 		this.name = name;
 	}
 
-	public String getAuthor() {
-		return author;
+	public Long getAuthorId() {
+		return authorId;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setAuthorId(Long authorId) {
+		this.authorId = authorId;
+	}
+
+	public String getAuthorLogin() {
+		return authorLogin;
+	}
+
+	public void setAuthorLogin(String authorLogin) {
+		this.authorLogin = authorLogin;
 	}
 
 	public String getDescription() {
@@ -121,7 +131,7 @@ public class BookDTO implements Serializable {
 	// prettier-ignore
 	@Override
 	public String toString() {
-		return "BookDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", author='" + getAuthor() + "'"
+		return "BookDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", author='" + getAuthorLogin() + "'"
 				+ ", images='" + getImages() + "'" + ", coverId=" + getCoverId() + "}";
 	}
 }
