@@ -15,6 +15,8 @@ public class CommentDTO implements Serializable, Comparable<CommentDTO> {
 
 	private String userLogin;
 
+	private Long userId;
+
 	public Long getId() {
 		return id;
 	}
@@ -45,6 +47,14 @@ public class CommentDTO implements Serializable, Comparable<CommentDTO> {
 
 	public void setUserLogin(String userLogin) {
 		this.userLogin = userLogin;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	@Override

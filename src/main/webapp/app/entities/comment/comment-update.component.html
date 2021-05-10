@@ -26,8 +26,8 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.comment.user" for="field_user">User</label>
-                    <select class="form-control" id="field_user" name="user" formControlName="userLogin">
-                        <option [ngValue]="userOption.login" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id + " " + userOption.login }}</option>
+                    <select class="form-control" id="field_user" name="user" formControlName="userId">
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id + " " + userOption.login }}</option>
                     </select>
                 </div>
             </div>

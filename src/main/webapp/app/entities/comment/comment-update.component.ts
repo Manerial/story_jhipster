@@ -27,7 +27,7 @@ export class CommentUpdateComponent implements OnInit {
     id: [],
     text: [],
     bookId: null,
-    userLogin: null,
+    userId: null,
   });
 
   constructor(
@@ -51,7 +51,7 @@ export class CommentUpdateComponent implements OnInit {
       id: comment.id,
       text: comment.text,
       bookId: comment.bookId,
-      userLogin: comment.userLogin,
+      userId: comment.userId,
     });
   }
 
@@ -75,7 +75,7 @@ export class CommentUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       text: this.editForm.get(['text'])!.value,
       bookId: this.editForm.get(['bookId'])!.value,
-      userLogin: this.editForm.get(['userLogin'])!.value,
+      userId: this.editForm.get(['userId'])!.value,
     };
   }
 
