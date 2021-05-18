@@ -28,7 +28,7 @@
 				here -->
 		</createTable>
 		
-        <!-- <addUniqueConstraint columnNames="book_id, user_login" tableName="comment"/> -->
+        <addUniqueConstraint columnNames="book_id, user_id" tableName="comment"/>
 	</changeSet>
 
 	<changeSet id="20210506085457-1-relations" author="jhipster">

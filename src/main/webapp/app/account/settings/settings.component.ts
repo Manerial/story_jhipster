@@ -19,6 +19,7 @@ export class SettingsComponent implements OnInit {
     lastName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     email: [undefined, [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     langKey: [undefined],
+    introduction: [undefined, [Validators.maxLength(5000)]],
   });
 
   constructor(private accountService: AccountService, private fb: FormBuilder, private languageService: JhiLanguageService) {}
@@ -31,6 +32,7 @@ export class SettingsComponent implements OnInit {
           lastName: account.lastName,
           email: account.email,
           langKey: account.langKey,
+          introduction: account.introduction,
         });
 
         this.account = account;
@@ -45,6 +47,7 @@ export class SettingsComponent implements OnInit {
     this.account.lastName = this.settingsForm.get('lastName')!.value;
     this.account.email = this.settingsForm.get('email')!.value;
     this.account.langKey = this.settingsForm.get('langKey')!.value;
+    this.account.introduction = this.settingsForm.get('introduction')!.value;
 
     this.accountService.save(this.account).subscribe(() => {
       this.success = true;

@@ -4,6 +4,7 @@
     "lastName": "Nom : {{lastName}}",
     "firstName": "Prénom : {{firstName}}",
     "email": "E-mail : {{email}}",
-    "bookNumber": "Nombre de livres : {{number}}"
+    "bookNumber": "Nombre de livres : {{number}}",
+    "introduction": "Présentation : {{introduction}}"
   }
 }
