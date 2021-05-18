@@ -72,6 +72,11 @@ public class BookServiceImpl implements BookService {
 		return bookRepository.findAll(pageable).map(bookMapperLight::toDto);
 	}
 
+	@Override
+	public List<BookDTO> findAllByAuthorId(String login) {
+		return bookMapperLight.toDto(bookRepository.findAllByAuthorLogin(login));
+	}
+
 	public Page<BookDTO> findAllWithEagerRelationships(Pageable pageable) {
 		return bookRepository.findAllWithEagerRelationships(pageable).map(bookMapper::toDto);
 	}

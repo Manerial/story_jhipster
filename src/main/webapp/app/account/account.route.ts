@@ -7,14 +7,15 @@ import { passwordResetInitRoute } from './password-reset/init/password-reset-ini
 import { registerRoute } from './register/register.route';
 import { settingsRoute } from './settings/settings.route';
 import { AccountComponent } from './account.component';
+import { Authority } from 'app/shared/constants/authority.constants';
 
 export const accountState: Routes = [
   {
     path: '',
     component: AccountComponent,
     data: {
-      authorities: [],
-      pageTitle: 'account.title',
+      authorities: [Authority.USER],
+      pageTitle: 'global.menu.account.main',
     },
   },
   activateRoute,

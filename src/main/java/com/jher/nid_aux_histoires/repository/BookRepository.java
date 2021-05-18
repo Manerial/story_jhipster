@@ -25,4 +25,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
 	@Query("select book from Book book left join fetch book.images where book.id =:id")
 	Optional<Book> findOneWithEagerRelationships(@Param("id") Long id);
+
+	@Query("select book from Book book left join fetch book.images where book.author.login =:login")
+	List<Book> findAllByAuthorLogin(@Param("login") String login);
 }

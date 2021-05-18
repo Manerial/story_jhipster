@@ -148,6 +148,22 @@ public class BookResource {
 	}
 
 	/**
+	 * {@code GET  /books} : get all the books.
+	 *
+	 * @param pageable  the pagination information.
+	 * @param eagerload flag to eager load entities from relationships (This is
+	 *                  applicable for many-to-many).
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+	 *         of books in body.
+	 */
+	@GetMapping("/books/author/{login}")
+	public ResponseEntity<List<BookDTO>> getBooksByAuthor(@PathVariable String login) {
+		log.debug("REST request to get a page of Books");
+		List<BookDTO> books = bookService.findAllByAuthorId(login);
+		return ResponseEntity.ok().body(books);
+	}
+
+	/**
 	 * {@code GET  /books/:id} : get the "id" book.
 	 *
 	 * @param id the id of the bookDTO to retrieve.

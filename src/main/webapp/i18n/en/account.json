@@ -1,5 +1,9 @@
 {
   "account": {
-    "title": "Account"
+    "title": "Account of [<strong>{{username}}</strong>]",
+    "lastName": "Last name: {{lastName}}",
+    "firstName": "First name: {{firstName}}",
+    "email": "E-mail: {{email}}",
+    "bookNumber": "Number of books: {{number}}"
   }
 }

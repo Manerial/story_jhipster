@@ -30,6 +30,10 @@ export class BookService {
     return this.http.get<IBook>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findAllByAuthor(login: string): Observable<EntityArrayResponseType> {
+    return this.http.get<IBook[]>(`${this.resourceUrl}/author/${login}`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IBook[]>(this.resourceUrl, { params: options, observe: 'response' });
