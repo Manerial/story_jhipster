@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.base.Predicate;
 import com.jher.nid_aux_histoires.config.Constants;
 import com.jher.nid_aux_histoires.domain.Authority;
 import com.jher.nid_aux_histoires.domain.User;
@@ -253,6 +254,14 @@ public class UserService {
 	@Transactional(readOnly = true)
 	public Optional<User> getUserWithAuthoritiesByLogin(String login) {
 		return userRepository.findOneWithAuthoritiesByLogin(login);
+	}
+
+	@Transactional(readOnly = true)
+	public List<UserDTO> getAuthorsLight() {
+		Predicate<Authority> byName = authority -> authority.getName().equals(AuthoritiesConstants.AUTHOR);
+		Predicate<User> byAuthority = user -> user.getAuthorities().stream().filter(byName).count() > 0;
+		List<User> users = userRepository.findAll().stream().filter(byAuthority).collect(Collectors.toList());
+		return userMapperLight.usersToUserDTOs(users);
 	}
 
 	@Transactional(readOnly = true)

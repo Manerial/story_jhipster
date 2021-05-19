@@ -1,5 +1,8 @@
 <article>
-	<h1 class="h1-dynamic">{{book.name}}</h1>
-	<h2 class="h2-dynamic"><span jhiTranslate="reader.author">Author</span>{{ book.authorLogin }}</h2>
-	<p class="text-dynamic">{{book.description}}</p>
+	<h1 class="h1-dynamic">{{ book.name }}</h1>
+	<h2 class="h2-dynamic">
+			<span jhiTranslate="reader.author">Author</span>
+			<a routerLink="/authors/{{book.authorLogin}}/visit">{{ book.authorLogin }}</a>
+		</h2>
+	<p class="text-dynamic">{{ book.description }}</p>
 </article>
