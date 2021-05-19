@@ -6,6 +6,7 @@ import { passwordResetFinishRoute } from './password-reset/finish/password-reset
 import { passwordResetInitRoute } from './password-reset/init/password-reset-init.route';
 import { registerRoute } from './register/register.route';
 import { settingsRoute } from './settings/settings.route';
+import { visitRoute } from './visit/visit.route';
 import { AccountComponent } from './account.component';
 import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
@@ -26,4 +27,5 @@ export const accountState: Routes = [
   passwordResetInitRoute,
   registerRoute,
   settingsRoute,
+  visitRoute,
 ];

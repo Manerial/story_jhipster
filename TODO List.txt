@@ -1,7 +1,6 @@
 OBLIGATOIRE
 
-Page de présentation Auteur
-	Résumé
+Routes vers visit page perso
 
 Interface Compte
 	Gestion des livres (ajouter - supprimer - activer - désactiver)

@@ -1,0 +1,7 @@
+{
+  "visit": {
+    "title": "Profile of [<strong>{{username}}</strong>]",
+    "bookNumber": "Number of books: {{number}}",
+    "introduction": "Introduction: {{introduction}}"
+  }
+}
