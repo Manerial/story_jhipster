@@ -11,7 +11,7 @@
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
         [ngSwitch]="isAuthenticated()">
         <div class="ml-auto"></div>
-        <form *ngIf="router.url === '/library'">
+        <form *ngIf="router.url === '/library' || router.url === '/authors'">
             <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
                 placeholder="Rechercher..." (ngModelChange)="search()" aria-controls="search" aria-expanded="false"
                 aria-label="Rechercher">

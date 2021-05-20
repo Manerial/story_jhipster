@@ -67,6 +67,7 @@ export class RegisterComponent implements AfterViewInit {
         login,
         undefined,
         undefined,
+        undefined,
         email,
         undefined,
         this.languageService.getCurrentLanguage(),

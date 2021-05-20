@@ -3,6 +3,7 @@ export interface IUser {
   login: string;
   firstName: string;
   lastName: string;
+  books: number;
   email: string;
   activated: boolean;
   langKey: string;
@@ -20,6 +21,7 @@ export class User implements IUser {
   public login: string;
   public firstName: string;
   public lastName: string;
+  public books: number;
   public email: string;
   public activated: boolean;
   public langKey: string;
@@ -38,6 +40,7 @@ export class User implements IUser {
     login?: string,
     firstName?: string,
     lastName?: string,
+    books?: number,
     email?: string,
     activated?: boolean,
     langKey?: string,
@@ -55,6 +58,7 @@ export class User implements IUser {
     login?: string,
     firstName?: string,
     lastName?: string,
+    books?: number,
     email?: string,
     activated?: boolean,
     langKey?: string,
@@ -70,6 +74,7 @@ export class User implements IUser {
     this.login = login || '';
     this.firstName = firstName || '';
     this.lastName = lastName || '';
+    this.books = books || 0;
     this.email = email || '';
     this.activated = activated || true;
     this.langKey = langKey || '';

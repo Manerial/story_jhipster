@@ -1,8 +1,20 @@
 <div>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h2 jhiTranslate="authors.title" *ngIf="authors">List of authors</h2>
-            <p *ngFor="let author of authors"><a routerLink="/authors/{{author.login}}/visit">{{ author.login | titlecase }}</a></p>
-        </div>
+    <h2 jhiTranslate="authors.title" *ngIf="authors">List of authors</h2>
+    <div class="table-responsive" id="entities" *ngIf="authors && authors.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th (click)="sort(fields.LOGIN)"><span jhiTranslate="authors.filter.author">Author</span> <fa-icon icon="sort" *ngIf="showIcon(fields.LOGIN, icons.BOTH)"></fa-icon><fa-icon icon="sort-up" *ngIf="showIcon(fields.LOGIN, icons.UP)"></fa-icon><fa-icon icon="sort-down" *ngIf="showIcon(fields.LOGIN, icons.DOWN)"></fa-icon></th>
+                    <th (click)="sort(fields.BOOKS)" ><span jhiTranslate="authors.filter.books">Books</span> </span> <fa-icon icon="sort" *ngIf="showIcon(fields.BOOKS, icons.BOTH)"></fa-icon><fa-icon icon="sort-up" *ngIf="showIcon(fields.BOOKS, icons.UP)"></fa-icon><fa-icon icon="sort-down" *ngIf="showIcon(fields.BOOKS, icons.DOWN)"></fa-icon></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let author of authors | authorFilter: searchText : fieldToSort : ascending">
+                    <td><a routerLink="/authors/{{author.login}}/visit">{{ author.login | titlecase }}</a></td>
+                    <td>{{ author.books }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
