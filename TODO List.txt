@@ -1,10 +1,4 @@
-OBLIGATOIRE
-
-Routes vers visit page perso
-
-Page recherche auteur
-	Similaire à Librairie
-	Lien vers page de présentation Auteur
+OBLIGATOIRE-
 
 Interface Compte
 	Gestion des livres (ajouter - supprimer - activer - désactiver)

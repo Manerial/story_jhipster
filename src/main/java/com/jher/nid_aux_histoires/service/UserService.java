@@ -258,9 +258,10 @@ public class UserService {
 
 	@Transactional(readOnly = true)
 	public List<UserDTO> getAuthorsLight() {
+		userRepository.flush();
 		Predicate<Authority> byName = authority -> authority.getName().equals(AuthoritiesConstants.AUTHOR);
 		Predicate<User> byAuthority = user -> user.getAuthorities().stream().filter(byName).count() > 0;
-		List<User> users = userRepository.findAll().stream().filter(byAuthority).collect(Collectors.toList());
+		List<User> users = userRepository.findAllWithEager().stream().filter(byAuthority).collect(Collectors.toList());
 		return userMapperLight.usersToUserDTOs(users);
 	}
 
