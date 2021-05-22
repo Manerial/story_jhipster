@@ -1,4 +1,10 @@
-OBLIGATOIRE-
+OBLIGATOIRE
+
+Commentaires
+	Interface utilisateur GUI (
+		page commentaires
+			bouton "Ajouter un commentaire"
+			popup commentaire
 
 Interface Compte
 	Gestion des livres (ajouter - supprimer - activer - désactiver)
@@ -6,9 +12,6 @@ Interface Compte
 Import de livres
 	Gestion des styles
 	Import docx - odt - txt
-
-Commentaires
-	Interface utilisateur GUI (bouton commenter + page / popup commentaire)
 
 Outils :
 	Demande de Beta-Lecture

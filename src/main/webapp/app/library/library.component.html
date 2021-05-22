@@ -27,17 +27,17 @@
 						</div>
 					</div>
 					<div class="bk-info text-center">
-						<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold">
-							<span>
-								<fa-icon icon="book-open"></fa-icon>
-								<span jhiTranslate="library.read">Read</span>
-							</span>
-						</a>
-						<a (click)="downloadBook(book)" class="btn bkg-gold ml-2">
-							<span >
-								<fa-icon icon="download"></fa-icon>
-								<span jhiTranslate="library.download">Download</span>
-							</span>
+						<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold mt-2"
+						title="{{ 'library.read' | translate }}">
+							<fa-icon icon="book-open"></fa-icon>
+						</a><!--
+						--><a (click)="downloadBook(book)" class="btn bkg-gold mt-2 ml-2"
+						title="{{ 'library.download' | translate }}">
+							<fa-icon icon="download"></fa-icon>
+						</a><!--
+						--><a routerLink="/comments/book/{{ book.id }}" class="btn bkg-gold mt-2 ml-2"
+						title="{{ 'library.comments' | translate }}">
+							<fa-icon icon="comment"></fa-icon>
 						</a>
 					</div>
 				</li>
@@ -60,6 +60,12 @@
 						<span>
 							<fa-icon icon="book-open"></fa-icon>
 							<span jhiTranslate="library.read">Read</span>
+						</span>
+					</a>
+					<a routerLink="/comments/book/{{ book.id }}" class="btn bkg-gold ml-2 mb-2">
+						<span>
+							<fa-icon icon="comment"></fa-icon>
+							<span jhiTranslate="library.comments">Comment</span>
 						</span>
 					</a>
 					<button class="btn bkg-gold ml-2 mb-2" type="button"

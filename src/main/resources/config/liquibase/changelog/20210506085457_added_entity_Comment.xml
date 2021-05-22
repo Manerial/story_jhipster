@@ -27,8 +27,6 @@
 			<!-- jhipster-needle-liquibase-add-column - JHipster will add columns 
 				here -->
 		</createTable>
-		
-        <addUniqueConstraint columnNames="book_id, user_id" tableName="comment"/>
 	</changeSet>
 
 	<changeSet id="20210506085457-1-relations" author="jhipster">

@@ -30,13 +30,13 @@
 
 .bk-info {
   position: relative;
-  margin-top: 430px;
+  margin-top: calc(#{$book_height} + 2px);
 }
 
 .bk-list li .bk-book {
   position: absolute;
   width: 100%;
-  height: 400px;
+  height: $book_height;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-transition: -webkit-transform 0.5s;
@@ -89,7 +89,7 @@
 .bk-list li .bk-back,
 .bk-list li .bk-front > div {
   width: 300px;
-  height: 400px;
+  height: $book_height;
 }
 
 .bk-list li .bk-left,
@@ -105,13 +105,13 @@
 }
 
 .bk-list li .bk-left {
-  height: 400px;
+  height: $book_height;
   -webkit-transform: rotate3d(0, 1, 0, -90deg);
   transform: rotate3d(0, 1, 0, -90deg);
 }
 
 .bk-list li .bk-right {
-  height: 400px;
+  height: $book_height;
   -webkit-transform-origin: 50% 0%;
   transform-origin: 50% 0%;
   -webkit-transform: rotate3d(0, 1, 0, 90deg) translate3d(0px, 0px, 290px);

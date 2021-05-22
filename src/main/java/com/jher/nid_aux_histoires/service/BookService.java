@@ -69,6 +69,14 @@ public interface BookService {
 	Optional<BookDTO> findOne(Long id);
 
 	/**
+	 * Get the "id" book light version.
+	 *
+	 * @param id the id of the entity.
+	 * @return the entity.
+	 */
+	Optional<BookDTO> findOneLight(Long id);
+
+	/**
 	 * Delete the "id" book.
 	 *
 	 * @param id the id of the entity.
