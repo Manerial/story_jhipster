@@ -1,10 +1,7 @@
 OBLIGATOIRE
 
-Commentaires
-	Interface utilisateur GUI (
-		page commentaires
-			bouton "Ajouter un commentaire"
-			popup commentaire
+Images -> Bonus
+Ajouter musiques, fichiers liés, etc.
 
 Interface Compte
 	Gestion des livres (ajouter - supprimer - activer - désactiver)
@@ -30,9 +27,3 @@ Tri/sélection
 	Genre
 	Auteur
 	Aléatoire
-
-CONTINU
-
-Traduire le site
-
-Responsive design

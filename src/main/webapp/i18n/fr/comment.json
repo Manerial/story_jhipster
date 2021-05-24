@@ -21,6 +21,13 @@
       "user": "Utilisateur",
       "list": {
         "title": "Commentaires pour {{ bookName }}"
+      },
+      "add": {
+        "title": "Ajouter un commentaire",
+        "button": "Commenter",
+        "question": "Votre commentaire",
+        "validate": "Valider",
+        "cancel": "Fermer"
       }
     }
   }

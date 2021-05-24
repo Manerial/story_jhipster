@@ -39,7 +39,7 @@ export class DownloadBookDialogComponent implements OnInit, AfterViewInit {
         anchor.download = this.book?.name! + '.' + this.format;
         anchor.href = downloadURL;
         anchor.click();
-        this.cancel();
+        this.activeModal.close();
       }
     });
   }

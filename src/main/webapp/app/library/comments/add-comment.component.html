@@ -1,0 +1,23 @@
+<form *ngIf="book" name="commentForm" (ngSubmit)="confirmComment()">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="nidAuxHistoiresApp.comment.add.title">Add a comment</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="cancel()">&times;
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <textarea id="enterText" class="form-control" [(ngModel)]="text" name="text" placeholder="{{ 'nidAuxHistoiresApp.comment.add.question' | translate }}"></textarea>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="nidAuxHistoiresApp.comment.add.cancel">Cancel</span>
+        </button>
+
+        <button id="jhi-confirm-download-book" type="submit" class="btn bkg-gold">
+            <fa-icon icon="check"></fa-icon>&nbsp;<span jhiTranslate="nidAuxHistoiresApp.comment.add.validate">Validate</span>
+        </button>
+    </div>
+</form>

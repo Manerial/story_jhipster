@@ -1,15 +1,19 @@
 package com.jher.nid_aux_histoires.service.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Comment} entity.
  */
 public class CommentDTO implements Serializable, Comparable<CommentDTO> {
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
 	private String text;
+
+	private Date createdDate;
 
 	private Long bookId;
 
@@ -31,6 +35,14 @@ public class CommentDTO implements Serializable, Comparable<CommentDTO> {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	public Long getBookId() {

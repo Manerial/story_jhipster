@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jher.nid_aux_histoires.config.Constants;
+import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.domain.User;
 import com.jher.nid_aux_histoires.repository.UserRepository;
 import com.jher.nid_aux_histoires.service.MailService;
@@ -130,13 +131,15 @@ public class UserResource {
 	 * @param userDTO the user to update.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the updated user.
+	 * @throws Exception
 	 * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is
 	 *                                   already in use.
 	 * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is
 	 *                                   already in use.
 	 */
 	@PutMapping("/users")
-	public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO) {
+	public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO) throws Exception {
+		SecurityConfiguration.CheckLoggedUser(userDTO.getLogin());
 		log.debug("REST request to update User : {}", userDTO);
 		Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
 		if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
@@ -221,9 +224,11 @@ public class UserResource {
 	 *
 	 * @param login the login of the user to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+	 * @throws Exception
 	 */
 	@DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
-	public ResponseEntity<Void> deleteUser(@PathVariable String login) {
+	public ResponseEntity<Void> deleteUser(@PathVariable String login) throws Exception {
+		SecurityConfiguration.CheckLoggedUser(login);
 		log.debug("REST request to delete User: {}", login);
 		userService.deleteUser(login);
 		return ResponseEntity.noContent()

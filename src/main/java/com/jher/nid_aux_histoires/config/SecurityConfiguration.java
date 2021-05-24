@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -95,5 +97,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private JWTConfigurer securityConfigurerAdapter() {
 		return new JWTConfigurer(tokenProvider);
+	}
+
+	public static Authentication getLoggedUser() {
+		return SecurityContextHolder.getContext().getAuthentication();
+	}
+
+	public static void CheckLoggedUser(String login) throws Exception {
+		Authentication auth = getLoggedUser();
+		if (login != null && login.equals(auth.getName())) {
+			return;
+		}
+
+		if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals(AuthoritiesConstants.ADMIN))) {
+			return;
+		}
+
+		throw new Exception("User cannot access this resource : role does not match");
 	}
 }

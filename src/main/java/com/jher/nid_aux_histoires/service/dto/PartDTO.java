@@ -9,6 +9,7 @@ import java.util.TreeSet;
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Part} entity.
  */
 public class PartDTO implements Serializable, Comparable<PartDTO> {
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 

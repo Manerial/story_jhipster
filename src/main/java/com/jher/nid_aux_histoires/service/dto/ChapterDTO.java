@@ -11,6 +11,7 @@ import com.jher.nid_aux_histoires.export.ExportDocx;
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Chapter} entity.
  */
 public class ChapterDTO implements Serializable, Comparable<ChapterDTO> {
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 

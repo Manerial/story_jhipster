@@ -21,6 +21,13 @@
       "user": "User",
       "list": {
         "title": "Comments for {{ bookName }}"
+      },
+      "add": {
+        "title": "Add a comment",
+        "button": "Comment",
+        "question": "Your comment",
+        "validate": "Validate",
+        "cancel": "Cancel"
       }
     }
   }

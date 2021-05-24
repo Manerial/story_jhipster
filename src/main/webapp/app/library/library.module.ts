@@ -12,6 +12,7 @@ import { ImageViewerComponent } from './images/image-viewer/image-viewer.compone
 import { ImageListComponent } from './images/image-list/image-list.component';
 import { DownloadBookDialogComponent } from './download-book-dialog.component';
 import { CommentsComponent } from './comments/comments.component';
+import { AddCommentDialogComponent } from './comments/add-comment.component';
 
 @NgModule({
   imports: [NidAuxHistoiresSharedModule, RouterModule.forChild([LIBRARY_ROUTE, READER_ROUTE, COMMENTS_ROUTE, IMAGE_VIEW_ROUTE])],
@@ -25,7 +26,8 @@ import { CommentsComponent } from './comments/comments.component';
     ImageListComponent,
     ImageViewerComponent,
     DownloadBookDialogComponent,
+    AddCommentDialogComponent,
   ],
-  entryComponents: [DownloadBookDialogComponent],
+  entryComponents: [DownloadBookDialogComponent, AddCommentDialogComponent],
 })
 export class NidAuxHistoiresLibraryModule {}

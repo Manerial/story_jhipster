@@ -29,6 +29,7 @@ import com.jher.nid_aux_histoires.domain.Comment;
 import com.jher.nid_aux_histoires.repository.BookRepository;
 import com.jher.nid_aux_histoires.repository.CommentRepository;
 import com.jher.nid_aux_histoires.repository.UserRepository;
+import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.CommentService;
 import com.jher.nid_aux_histoires.service.dto.CommentDTO;
 import com.jher.nid_aux_histoires.service.mapper.CommentMapper;
@@ -190,6 +191,7 @@ public class CommentResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateNonExistingComment() throws Exception {
 		int databaseSizeBeforeUpdate = commentRepository.findAll().size();
 
@@ -207,6 +209,7 @@ public class CommentResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void deleteComment() throws Exception {
 		// Initialize the database
 		commentRepository.saveAndFlush(comment);

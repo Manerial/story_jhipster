@@ -22,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.CommentService;
+import com.jher.nid_aux_histoires.service.UserService;
 import com.jher.nid_aux_histoires.service.dto.CommentDTO;
+import com.jher.nid_aux_histoires.service.dto.UserDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -46,9 +49,11 @@ public class CommentResource {
 	private String applicationName;
 
 	private final CommentService commentService;
+	private final UserService userService;
 
-	public CommentResource(CommentService commentService) {
+	public CommentResource(CommentService commentService, UserService userService) {
 		this.commentService = commentService;
+		this.userService = userService;
 	}
 
 	/**
@@ -66,6 +71,7 @@ public class CommentResource {
 		if (commentDTO.getId() != null) {
 			throw new BadRequestAlertException("A new comment cannot already have an ID", ENTITY_NAME, "idexists");
 		}
+		setUserLogin(commentDTO);
 		CommentDTO result = commentService.save(commentDTO);
 		return ResponseEntity
 				.created(new URI("/api/comments/" + result.getId())).headers(HeaderUtil
@@ -82,14 +88,16 @@ public class CommentResource {
 	 *         the commentDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the commentDTO couldn't be
 	 *         updated.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception
 	 */
 	@PutMapping("/comments")
-	public ResponseEntity<CommentDTO> updateComment(@RequestBody CommentDTO commentDTO) throws URISyntaxException {
+	public ResponseEntity<CommentDTO> updateComment(@RequestBody CommentDTO commentDTO) throws Exception {
+		SecurityConfiguration.CheckLoggedUser(commentDTO.getUserLogin());
 		log.debug("REST request to update Comment : {}", commentDTO);
 		if (commentDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
+		setUserLogin(commentDTO);
 		CommentDTO result = commentService.save(commentDTO);
 		return ResponseEntity.ok().headers(
 				HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, commentDTO.getId().toString()))
@@ -145,13 +153,22 @@ public class CommentResource {
 	 *
 	 * @param id the id of the commentDTO to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+	 * @throws Exception
 	 */
 	@DeleteMapping("/comments/{id}")
-	public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteComment(@PathVariable Long id) throws Exception {
+		CommentDTO commentDTO = commentService.findOne(id).get();
+		SecurityConfiguration.CheckLoggedUser(commentDTO.getUserLogin());
 		log.debug("REST request to delete Comment : {}", id);
 		commentService.delete(id);
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();
+	}
+
+	private void setUserLogin(CommentDTO commentDTO) {
+		String login = SecurityConfiguration.getLoggedUser().getName();
+		UserDTO user = userService.getUserLightByLogin(login);
+		commentDTO.setUserId(user.getId());
 	}
 }
