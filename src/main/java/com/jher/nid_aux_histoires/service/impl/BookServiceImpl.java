@@ -2,6 +2,8 @@ package com.jher.nid_aux_histoires.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jher.nid_aux_histoires.domain.Book;
+import com.jher.nid_aux_histoires.domain.Comment;
 import com.jher.nid_aux_histoires.domain.Part;
 import com.jher.nid_aux_histoires.repository.BookRepository;
 import com.jher.nid_aux_histoires.service.BookService;
+import com.jher.nid_aux_histoires.service.CommentService;
 import com.jher.nid_aux_histoires.service.PartService;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
 import com.jher.nid_aux_histoires.service.dto.PartDTO;
@@ -31,6 +35,8 @@ public class BookServiceImpl implements BookService {
 
 	private final PartService partService;
 
+	private final CommentService commentService;
+
 	private final BookRepository bookRepository;
 
 	private final BookMapper bookMapper;
@@ -38,11 +44,12 @@ public class BookServiceImpl implements BookService {
 	private final BookMapperLight bookMapperLight;
 
 	public BookServiceImpl(BookRepository bookRepository, BookMapper bookMapper, PartService partService,
-			BookMapperLight bookMapperLight) {
+			BookMapperLight bookMapperLight, CommentService commentService) {
 		this.partService = partService;
 		this.bookRepository = bookRepository;
 		this.bookMapper = bookMapper;
 		this.bookMapperLight = bookMapperLight;
+		this.commentService = commentService;
 	}
 
 	@Override
@@ -66,23 +73,33 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	public BookDTO changeVisibility(Long bookId) {
+		Book book = bookRepository.findById(bookId).get();
+		book.setVisibility(!book.getVisibility());
+		bookRepository.save(book);
+		return null;
+	}
+
+	@Override
 	@Transactional(readOnly = true)
 	public Page<BookDTO> findAll(Pageable pageable) {
 		log.debug("Request to get all Books");
 		return bookRepository.findAll(pageable).map(bookMapperLight::toDto);
 	}
 
-	@Override
-	public List<BookDTO> findAllByAuthorId(String login) {
-		return bookMapperLight.toDto(bookRepository.findAllByAuthorLogin(login));
-	}
-
 	public Page<BookDTO> findAllWithEagerRelationships(Pageable pageable) {
 		return bookRepository.findAllWithEagerRelationships(pageable).map(bookMapper::toDto);
 	}
 
+	@Override
+	public List<BookDTO> findAllByAuthorId(String login, boolean filterVisible) {
+		return bookMapperLight.toDto(bookRepository.findAllByAuthorLogin(login)).stream()
+				.filter(filterVisible(filterVisible)).collect(Collectors.toList());
+	}
+
 	public List<BookDTO> findAllWithEagerRelationships() {
-		return bookMapper.toDto(bookRepository.findAllWithEagerRelationships());
+		return bookMapper.toDto(bookRepository.findAllWithEagerRelationships()).stream().filter(filterVisible(true))
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -103,9 +120,19 @@ public class BookServiceImpl implements BookService {
 	public void delete(Long id) {
 		log.debug("Request to delete Book : {}", id);
 		Book book = bookRepository.findById(id).get();
+		for (Comment comment : book.getComments()) {
+			commentService.delete(comment.getId());
+		}
 		for (Part part : book.getParts()) {
 			partService.delete(part.getId());
 		}
 		bookRepository.deleteById(id);
+	}
+
+	private Predicate<BookDTO> filterVisible(boolean filterVisible) {
+		Predicate<BookDTO> predicate = book -> {
+			return book.getVisibility() || !filterVisible;
+		};
+		return predicate;
 	}
 }

@@ -11,6 +11,7 @@ export interface IBook {
   images: IImage[];
   coverPreview?: Uint8Array;
   coverId: number;
+  visibility: boolean;
 }
 
 export class Book implements IBook {
@@ -23,6 +24,7 @@ export class Book implements IBook {
   public images: IImage[];
   public coverPreview?: Uint8Array;
   public coverId: number;
+  public visibility: boolean;
 
   constructor();
   constructor(
@@ -34,7 +36,8 @@ export class Book implements IBook {
     parts?: IPart[],
     images?: IImage[],
     coverPreview?: Uint8Array,
-    coverId?: number
+    coverId?: number,
+    visibility?: boolean
   );
 
   constructor(
@@ -46,7 +49,8 @@ export class Book implements IBook {
     parts?: IPart[],
     images?: IImage[],
     coverPreview?: Uint8Array,
-    coverId?: number
+    coverId?: number,
+    visibility?: boolean
   ) {
     this.id = id || 0;
     this.name = name || '';
@@ -57,5 +61,6 @@ export class Book implements IBook {
     this.images = images || [];
     this.coverPreview = coverPreview;
     this.coverId = coverId || 0;
+    this.visibility = visibility || true;
   }
 }

@@ -5,6 +5,10 @@
     "firstName": "First name: {{firstName}}",
     "email": "E-mail: {{email}}",
     "bookNumber": "Number of books: {{number}}",
-    "introduction": "Introduction: {{introduction}}"
+    "introduction": "Introduction: {{introduction}}",
+    "book": {
+      "visibility": "Visibilité :",
+      "delete": "Delete"
+    }
   }
 }

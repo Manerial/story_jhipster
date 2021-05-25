@@ -21,6 +21,8 @@ public class BookDTO implements Serializable {
 
 	private String description;
 
+	private Boolean visibility;
+
 	private Set<ImageDTO> images = new HashSet<>();
 
 	private Set<PartDTO> parts = new HashSet<>();
@@ -69,6 +71,14 @@ public class BookDTO implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Boolean getVisibility() {
+		return visibility;
+	}
+
+	public void setVisibility(Boolean visibility) {
+		this.visibility = visibility;
 	}
 
 	public Set<ImageDTO> getImages() {

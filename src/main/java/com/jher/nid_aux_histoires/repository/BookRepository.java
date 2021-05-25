@@ -17,7 +17,11 @@ import com.jher.nid_aux_histoires.domain.Book;
  */
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-	@Query(value = "select distinct book from Book book left join fetch book.images", countQuery = "select count(distinct book) from Book book")
+	@Override
+	@Query(value = "select distinct book from Book book where book.visibility = true", countQuery = "select count(distinct book) from Book book")
+	Page<Book> findAll(Pageable pageable);
+
+	@Query(value = "select distinct book from Book book left join fetch book.images where book.visibility = true", countQuery = "select count(distinct book) from Book book")
 	Page<Book> findAllWithEagerRelationships(Pageable pageable);
 
 	@Query("select distinct book from Book book left join fetch book.images")

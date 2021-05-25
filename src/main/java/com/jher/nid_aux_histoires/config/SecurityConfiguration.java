@@ -83,6 +83,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/account/reset-password/finish").permitAll()
             .antMatchers("/api/export/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/users/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            
+            .antMatchers("/api/parts/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/chapters/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/scenes/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            
+            .antMatchers(HttpMethod.PUT, "/api/images/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers(HttpMethod.PUT, "/api/word-analyses/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers(HttpMethod.PUT, "/api/ideas/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers(HttpMethod.DELETE, "/api/images/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers(HttpMethod.DELETE, "/api/word-analyses/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers(HttpMethod.DELETE, "/api/ideas/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/info").permitAll()
