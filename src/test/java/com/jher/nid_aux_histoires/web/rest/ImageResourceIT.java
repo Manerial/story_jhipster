@@ -28,6 +28,7 @@ import org.springframework.util.Base64Utils;
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Image;
 import com.jher.nid_aux_histoires.repository.ImageRepository;
+import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.ImageService;
 import com.jher.nid_aux_histoires.service.dto.ImageDTO;
 import com.jher.nid_aux_histoires.service.mapper.ImageMapper;
@@ -182,6 +183,7 @@ public class ImageResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateImage() throws Exception {
 		// Initialize the database
 		imageRepository.saveAndFlush(image);
@@ -213,6 +215,7 @@ public class ImageResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateNonExistingImage() throws Exception {
 		int databaseSizeBeforeUpdate = imageRepository.findAll().size();
 
@@ -221,7 +224,7 @@ public class ImageResourceIT {
 
 		// If the entity doesn't have an ID, it will throw BadRequestAlertException
 		restImageMockMvc.perform(put("/api/images").contentType(MediaType.APPLICATION_JSON)
-				.content(TestUtil.convertObjectToJsonBytes(imageDTO))).andExpect(status().isBadRequest());
+				.content(TestUtil.convertObjectToJsonBytes(imageDTO))).andExpect(status().is4xxClientError());
 
 		// Validate the Image in the database
 		List<Image> imageList = imageRepository.findAll();
@@ -230,6 +233,7 @@ public class ImageResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void deleteImage() throws Exception {
 		// Initialize the database
 		imageRepository.saveAndFlush(image);

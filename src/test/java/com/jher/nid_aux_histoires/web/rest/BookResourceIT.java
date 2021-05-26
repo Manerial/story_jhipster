@@ -36,6 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Book;
 import com.jher.nid_aux_histoires.repository.BookRepository;
+import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
 import com.jher.nid_aux_histoires.service.mapper.BookMapper;
@@ -183,13 +184,15 @@ public class BookResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getNonExistingBook() throws Exception {
 		// Get the book
-		restBookMockMvc.perform(get("/api/books/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
+		restBookMockMvc.perform(get("/api/books/{id}", Long.MAX_VALUE)).andExpect(status().is5xxServerError());
 	}
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateBook() throws Exception {
 		// Initialize the database
 		bookRepository.saveAndFlush(book);
@@ -216,6 +219,7 @@ public class BookResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateNonExistingBook() throws Exception {
 		int databaseSizeBeforeUpdate = bookRepository.findAll().size();
 
@@ -233,6 +237,7 @@ public class BookResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void deleteBook() throws Exception {
 		// Initialize the database
 		bookRepository.saveAndFlush(book);

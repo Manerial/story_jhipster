@@ -1,8 +1,5 @@
 OBLIGATOIRE
 
-Interface Compte
-	Gestion des livres - Gérer livres désactivés
-
 Images -> Bonus
 Ajouter musiques, fichiers liés, etc.
 
