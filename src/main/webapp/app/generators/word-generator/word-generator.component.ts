@@ -16,7 +16,7 @@ export class WordGeneratorComponent implements OnInit {
   wordForm = this.fb.group({
     type: ['', [Validators.required]],
     numberOfWords: [20, [Validators.required, Validators.min(1), Validators.max(200)]],
-    fixLength: [0, [Validators.min(0), Validators.max(25)]],
+    fixLength: [0, [Validators.required, Validators.min(0), Validators.max(25)]],
   });
 
   constructor(public wordGeneratorService: WordAnalysisService, private fb: FormBuilder, private inputPattern: InputPattern) {}

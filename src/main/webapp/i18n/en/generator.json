@@ -5,7 +5,17 @@
       "number": "Number of words\u00A0:",
       "type": "Type of words\u00A0:",
       "length": "Length of word (if &lt; 2\u00A0: random)",
-      "generate": "Generate"
+      "generate": "Generate",
+      "number.validation": {
+        "required": "The number of words is required.",
+        "min": "Must be greater or equals to 1.",
+        "max": "Must be lesser or equals to 200."
+      },
+      "length.validation": {
+        "required": "The word length is required.",
+        "min": "Must be greater or equals to 0.",
+        "max": "Must be lesser or equals to 25."
+      }
     },
     "idea": {
       "title": "Idea generator",
@@ -16,6 +26,11 @@
         "clean": "Clean constraints",
         "display": "Display constraints",
         "hide": "Hide constraints"
+      },
+      "validation": {
+        "required": "A number of ideas is required.",
+        "min": "Must be greater or equals to 1.",
+        "max": "Must be lesser or equals to 12."
       }
     }
   }
