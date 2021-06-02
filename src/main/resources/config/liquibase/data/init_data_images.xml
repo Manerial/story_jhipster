@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="JHER" id="insertData_image_default">
+		<insert tableName="image">
+			<column name="id" valueNumeric="1" />
+			<column name="name" value="No image" />
+			<column name="picture" valueBlobFile="images/no_image.jpg" />
+			<column name="picture_content_type" value="image/jpg" />
+			<column name="preview" valueBlobFile="images/preview/no_image.jpg" />
+			<column name="preview_content_type" value="image/jpg" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_image">
+		<insert tableName="image">
+			<column name="id" valueNumeric="2" />
+			<column name="name" value="Carte d'Aganriel" />
+			<column name="picture" valueBlobFile="images/map_aganriel.jpg" />
+			<column name="picture_content_type" value="image/jpg" />
+			<column name="preview" valueBlobFile="images/preview/map_aganriel.jpg" />
+			<column name="preview_content_type" value="image/jpg" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

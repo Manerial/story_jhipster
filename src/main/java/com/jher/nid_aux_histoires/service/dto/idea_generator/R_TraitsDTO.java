@@ -2,16 +2,16 @@ package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
 import java.util.List;
 
-public class TraitsDTO {
+public class R_TraitsDTO {
 	private List<String> badTraits;
 	private List<String> caracteristics;
 	private List<String> goodTraits;
 	private List<String> handicaps;
 
-	public TraitsDTO() {
+	public R_TraitsDTO() {
 	}
 
-	public TraitsDTO(TraitsDTO traits) {
+	public R_TraitsDTO(R_TraitsDTO traits) {
 		setBadTraits(traits.getBadTraits());
 		setGoodTraits(traits.getGoodTraits());
 		setCaracteristics(traits.getCaracteristics());

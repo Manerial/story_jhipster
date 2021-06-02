@@ -7,9 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.LocationDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.PersonaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.WritingOptionDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
 
 /**
  * Service Interface for managing
@@ -55,7 +56,7 @@ public interface IdeaService {
 	 * @param constraint      : Liste des contraintes à respecter
 	 * @return la liste des personnages générés
 	 */
-	public List<PersonaDTO> generatePersonas(int numberOfPersona, PersonaDTO constraint);
+	public List<R_PersonaDTO> generateR_Personas(int numberOfPersona, R_PersonaDTO constraint);
 
 	/**
 	 * Génère une liste de lieux en fonction de contraintes
@@ -64,7 +65,7 @@ public interface IdeaService {
 	 * @param constraint        : Liste des contraintes à respecter
 	 * @return la liste des lieux générés
 	 */
-	public List<LocationDTO> generateLocations(int numberOfLocations, LocationDTO constraint);
+	public List<R_LocationDTO> generateR_Locations(int numberOfLocations, R_LocationDTO constraint);
 
 	/**
 	 * Génère une liste d'options d'écriture en fonction de contraintes
@@ -73,5 +74,14 @@ public interface IdeaService {
 	 * @param constraint            : Liste des contraintes à respecter
 	 * @return la liste des d'options d'écriture générés
 	 */
-	public List<WritingOptionDTO> generateWritingOptions(int numberOfWritingOption, WritingOptionDTO constraint);
+	public List<R_WritingOptionDTO> generateR_WritingOptions(int numberOfWritingOption, R_WritingOptionDTO constraint);
+
+	/**
+	 * Génère une liste d'objets en fonction de contraintes
+	 * 
+	 * @param numberOfObject : Nombre d'objets à générer
+	 * @param constraint     : Liste des contraintes à respecter
+	 * @return la liste des d'options d'écriture générés
+	 */
+	public List<R_ObjectDTO> generateR_Object(int numberOfObject, R_ObjectDTO constraint);
 }

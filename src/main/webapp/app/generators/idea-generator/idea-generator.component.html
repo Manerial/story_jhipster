@@ -2,29 +2,47 @@
 	<div class="container">
 		<h1 jhiTranslate="generator.idea.title">Générateur d'idées</h1>
 		<div>
-			<div class="form-group">
+			<form name="form" role="form" class="form-group" [formGroup]="ideaForm">
 				<div class="row">
 					<div class="col-sm">
 						<label for="generationNumber" class="form-check-label" jhiTranslate="generator.idea.number">
 							Nombre d'idées:
 						</label>
-						<input id="generationNumber" type="number" min="1" max="12" class="form-control" required
-							[(ngModel)]="number" />
+						<input id="generationNumber" name="generationNumber" formControlName="generationNumber" 
+						type="number" class="form-control" (keypress)="_keyNumber($event)"/>
+						<div *ngIf="ideaForm.get('generationNumber')!.invalid && (ideaForm.get('generationNumber')!.dirty || ideaForm.get('generationNumber')!.touched)" >
+							<small class="form-text text-danger"
+									*ngIf="ideaForm.get('generationNumber')?.errors?.required"
+									jhiTranslate="nidAuxHistoiresApp.idea.validation.required">
+								A number of ideas is required.
+							</small>
+							<small class="form-text text-danger"
+									*ngIf="ideaForm.get('generationNumber')?.errors?.min"
+									jhiTranslate="nidAuxHistoiresApp.idea.validation.min">
+								Must be greater than 0.
+							</small>
+							<small class="form-text text-danger"
+									*ngIf="ideaForm.get('generationNumber')?.errors?.max"
+									jhiTranslate="nidAuxHistoiresApp.idea.validation.max">
+								Must be lesser than 13.
+							</small>
+						</div>
 					</div>
 					<div class="col-sm">
 						<label for="generationTool" class="form-check-label" jhiTranslate="generator.idea.type">
 							Type d'idées:
 						</label>
-						<select id="generationTool" class="form-control" [(ngModel)]="type">
+						<select id="generationTool" name="generationTool" formControlName="generationTool" class="form-control">
 							<option value="persona">Personnage</option>
 							<option value="writing_option">Style d'écriture</option>
 							<option value="location">Lieu</option>
+							<option value="object">Objet</option>
 						</select>
 					</div>
 					<div class="col-sm">
 					</div>
 				</div>
-			</div>
+			</form>
 
 			<div class="form-group">
 				<button class="btn bkg-gold mt-2 mr-2" (click)="generate()" jhiTranslate="generator.idea.generate">
@@ -46,7 +64,7 @@
 
 			<div class="form-group">
 				<div [ngbCollapse]="hideConstraint">
-					<div class="card col col-lg-5" *ngIf="type=='persona'">
+					<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='persona'">
 						<div class="card-body">
 							<dl>
 								<dl>
@@ -163,7 +181,7 @@
 							</dl>
 						</div>
 					</div>
-					<div class="card col col-lg-5" *ngIf="type=='writing_option'">
+					<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='writing_option'">
 						<div class="card-body">
 							<dl>
 								<dt><u>Général:</u></dt>
@@ -187,7 +205,7 @@
 							</dl>
 						</div>
 					</div>
-					<div class="card col col-lg-5" *ngIf="type=='location'">
+					<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='location'">
 						<div class="card-body">
 							<dl>
 								<dt><u>Général:</u></dt>
@@ -218,12 +236,43 @@
 							</dl>
 						</div>
 					</div>
+					<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='object'">
+						<div class="card-body">
+							<dl>
+								<dt><u>Général:</u></dt>
+								<dd></dd>
+								<dl class="pl-2">
+									<dl>
+										<dt>Objet:</dt>
+										<dd>
+											<input class="form-control" type="text"
+												[(ngModel)]="objectConstraint.object">
+										</dd>
+									</dl>
+									<dl>
+										<dt>Adjectif:</dt>
+										<dd>
+											<input class="form-control" type="text"
+												[(ngModel)]="objectConstraint.adjective">
+										</dd>
+									</dl>
+									<dl>
+										<dt>Suffixe:</dt>
+										<dd>
+											<input class="form-control" type="text"
+												[(ngModel)]="objectConstraint.suffix">
+										</dd>
+									</dl>
+								</dl>
+							</dl>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<div>
-			<div *ngIf="type=='persona'" class="row" style="margin:0px">
+			<div *ngIf="ideaForm.get('generationTool')!.value=='persona'" class="row" style="margin:0px">
 				<div class="card col-sm-4 col-md-4 col-lg-4 bkg-gray-2" *ngFor="let persona of personaList">
 					<div class="card-body">
 						<dl>
@@ -328,7 +377,7 @@
 					</div>
 				</div>
 			</div>
-			<div *ngIf="type=='writing_option'" class="row" style="margin:0px">
+			<div *ngIf="ideaForm.get('generationTool')!.value=='writing_option'" class="row" style="margin:0px">
 				<div class="card col-sm-4 col-md-4 col-lg-4 bkg-gray-2" *ngFor="let writing of writingList">
 					<div class="card-body">
 						<dl>
@@ -348,7 +397,7 @@
 					</div>
 				</div>
 			</div>
-			<div *ngIf="type=='location'" class="row" style="margin:0px">
+			<div *ngIf="ideaForm.get('generationTool')!.value=='location'" class="row" style="margin:0px">
 				<div class="card col-sm-4 col-md-4 col-lg-4 bkg-gray-2" *ngFor="let location of locationList">
 					<div class="card-body">
 						<dl>
@@ -356,16 +405,48 @@
 							<dd></dd>
 							<dl class="pl-2">
 								<dl>
-									<dt>Place:</dt>
+									<dt>Lieu:</dt>
 									<dd>{{location.place}}</dd>
 								</dl>
 								<dl>
-									<dt>Landscape:</dt>
+									<dt>Paysage:</dt>
 									<dd>{{location.landscape}}</dd>
 								</dl>
 								<dl>
 									<dt>Matière:</dt>
 									<dd>{{location.material}}</dd>
+								</dl>
+								<dl>
+									<dt>Proposition:</dt>
+									<dd>{{location.place}} dans {{location.landscape | lowercase}} {{location.material | lowercase}}</dd>
+								</dl>
+							</dl>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="ideaForm.get('generationTool')!.value=='object'" class="row" style="margin:0px">
+				<div class="card col-sm-4 col-md-4 col-lg-4 bkg-gray-2" *ngFor="let object of objectList">
+					<div class="card-body">
+						<dl>
+							<dt><u>Général:</u></dt>
+							<dd></dd>
+							<dl class="pl-2">
+								<dl>
+									<dt>Lieu:</dt>
+									<dd>{{object.object}}</dd>
+								</dl>
+								<dl>
+									<dt>Adjectif:</dt>
+									<dd>{{object.adjective}}</dd>
+								</dl>
+								<dl>
+									<dt>Suffixe:</dt>
+									<dd>{{object.suffix}}</dd>
+								</dl>
+								<dl>
+									<dt>Proposition:</dt>
+									<dd>{{object.object}} {{object.suffix | lowercase}} {{object.adjective | lowercase}}</dd>
 								</dl>
 							</dl>
 						</dl>

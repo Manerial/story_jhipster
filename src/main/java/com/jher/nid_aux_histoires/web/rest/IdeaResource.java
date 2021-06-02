@@ -27,9 +27,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.LocationDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.PersonaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.WritingOptionDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -152,9 +153,9 @@ public class IdeaResource {
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/ideas/personas")
-	public ResponseEntity<List<PersonaDTO>> generatePersonas(@RequestParam int number,
-			@Valid @RequestBody PersonaDTO constraint) {
-		List<PersonaDTO> generatedWords = ideaService.generatePersonas(number, constraint);
+	public ResponseEntity<List<R_PersonaDTO>> generatePersonas(@RequestParam int number,
+			@Valid @RequestBody R_PersonaDTO constraint) {
+		List<R_PersonaDTO> generatedWords = ideaService.generateR_Personas(number, constraint);
 		return ResponseEntity.ok().body(generatedWords);
 	}
 
@@ -164,10 +165,22 @@ public class IdeaResource {
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/ideas/locations")
-	public ResponseEntity<List<LocationDTO>> generateLocations(@RequestParam int number,
-			@Valid @RequestBody LocationDTO constraint) {
-		List<LocationDTO> generatedLocations = ideaService.generateLocations(number, constraint);
+	public ResponseEntity<List<R_LocationDTO>> generateLocations(@RequestParam int number,
+			@Valid @RequestBody R_LocationDTO constraint) {
+		List<R_LocationDTO> generatedLocations = ideaService.generateR_Locations(number, constraint);
 		return ResponseEntity.ok().body(generatedLocations);
+	}
+
+	/**
+	 * Génère une liste d'objets
+	 * 
+	 * @return une réponse contenant la liste des entités
+	 */
+	@PostMapping("/ideas/objects")
+	public ResponseEntity<List<R_ObjectDTO>> generateObject(@RequestParam int number,
+			@Valid @RequestBody R_ObjectDTO constraint) {
+		List<R_ObjectDTO> generatedObject = ideaService.generateR_Object(number, constraint);
+		return ResponseEntity.ok().body(generatedObject);
 	}
 
 	/**
@@ -176,9 +189,9 @@ public class IdeaResource {
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/ideas/writing_options")
-	public ResponseEntity<List<WritingOptionDTO>> generateWritingOptions(@RequestParam int number,
-			@Valid @RequestBody WritingOptionDTO constraint) {
-		List<WritingOptionDTO> generatedWritingOptions = ideaService.generateWritingOptions(number, constraint);
+	public ResponseEntity<List<R_WritingOptionDTO>> generateWritingOptions(@RequestParam int number,
+			@Valid @RequestBody R_WritingOptionDTO constraint) {
+		List<R_WritingOptionDTO> generatedWritingOptions = ideaService.generateR_WritingOptions(number, constraint);
 		return ResponseEntity.ok().body(generatedWritingOptions);
 	}
 }

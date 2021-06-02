@@ -8,6 +8,7 @@ import { IIdea } from 'app/shared/model/idea.model';
 import { IWriting } from 'app/shared/model/idea-generator/writing.model';
 import { IPersona } from 'app/shared/model/idea-generator/persona.model';
 import { ILocation } from 'app/shared/model/idea-generator/location.model';
+import { IObject } from 'app/shared/model/idea-generator/object.model';
 
 type EntityResponseType = HttpResponse<IIdea>;
 type EntityArrayResponseType = HttpResponse<IIdea[]>;
@@ -55,5 +56,11 @@ export class IdeaService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('number', number.toString());
     return this.http.post<IPersona[]>(`${this.resourceUrl}/personas`, constraint, { params: httpParams });
+  }
+
+  generateObject(number: number, constraint: IObject): Observable<IObject[]> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('number', number.toString());
+    return this.http.post<IObject[]>(`${this.resourceUrl}/objects`, constraint, { params: httpParams });
   }
 }

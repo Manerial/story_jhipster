@@ -18,7 +18,12 @@
       },
       "type": "Type",
       "value": "Valeur",
-      "complement": "Compléments"
+      "complement": "Compléments",
+      "validation": {
+        "required": "Un nombre d'idées est requis.",
+        "min": "Doit être plus grand que 0.",
+        "max": "Doit être plus petit que 13."
+      }
     }
   }
 }

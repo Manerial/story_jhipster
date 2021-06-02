@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 import { WordAnalysisService } from 'app/entities/word-analysis/word-analysis.service';
-import { IType, Type } from 'app/shared/model/type.model';
+import { IType } from 'app/shared/model/type.model';
+import { InputPattern } from 'app/shared/util/input-pattern';
 
 @Component({
   selector: 'jhi-word-generator',
@@ -10,29 +12,38 @@ import { IType, Type } from 'app/shared/model/type.model';
 export class WordGeneratorComponent implements OnInit {
   public words: string[] = [];
   public typeList: IType[] = [];
-  public currentType: IType = new Type();
-  public numberOfWords = 5;
-  public fixLength = 0;
 
-  constructor(public wordGeneratorService: WordAnalysisService) {}
+  wordForm = this.fb.group({
+    type: ['', [Validators.required]],
+    numberOfWords: [20, [Validators.required, Validators.min(1), Validators.max(200)]],
+    fixLength: [0, [Validators.min(0), Validators.max(25)]],
+  });
+
+  constructor(public wordGeneratorService: WordAnalysisService, private fb: FormBuilder, private inputPattern: InputPattern) {}
 
   ngOnInit(): void {
     this.wordGeneratorService.getTypes().subscribe(types => {
       if (!types.body) throw 'No types found';
       this.typeList = types.body;
-      this.currentType = this.typeList[0];
+      this.wordForm.controls['type'].setValue(this.typeList[0].type);
     });
   }
 
   getWords(): void {
-    if (this.numberOfWords <= 200 && this.fixLength <= 20) {
-      this.words = [];
-      this.wordGeneratorService.generateWords(this.numberOfWords, this.fixLength, this.currentType.type).subscribe(words => {
-        words.forEach(word => {
-          this.words.push(word);
-        });
-      });
+    if (!this.wordForm.valid) {
+      return;
     }
+
+    const numberOfWords = this.wordForm.get('numberOfWords')!.value;
+    const fixLength = this.wordForm.get('fixLength')!.value;
+    const type = this.wordForm.get('type')!.value;
+
+    this.wordGeneratorService.generateWords(numberOfWords, fixLength, type).subscribe(words => {
+      this.words = [];
+      words.forEach(word => {
+        this.words.push(word);
+      });
+    });
   }
 
   copyToClipboard(val: string): void {
@@ -47,5 +58,9 @@ export class WordGeneratorComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+  }
+
+  _keyNumber(event: any): void {
+    this.inputPattern.forceNumber(event);
   }
 }

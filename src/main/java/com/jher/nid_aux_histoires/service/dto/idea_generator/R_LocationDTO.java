@@ -1,14 +1,14 @@
 package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
-public class LocationDTO {
+public class R_LocationDTO {
 	private String place;
 	private String landscape;
 	private String material;
 
-	public LocationDTO() {
+	public R_LocationDTO() {
 	}
 
-	public LocationDTO(LocationDTO location) {
+	public R_LocationDTO(R_LocationDTO location) {
 		setPlace(location.getPlace());
 		setLandscape(location.getLandscape());
 		setMaterial(location.getMaterial());

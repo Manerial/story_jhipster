@@ -10,11 +10,12 @@ import org.slf4j.LoggerFactory;
 import com.jher.nid_aux_histoires.domain.Idea;
 import com.jher.nid_aux_histoires.repository.IdeaRepository;
 import com.jher.nid_aux_histoires.service.WordAnalysisService;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.LocationDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.PersonaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.PhysicalDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.TraitsDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.WritingOptionDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PhysicalDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_TraitsDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
 import com.jher.nid_aux_histoires.service.impl.WordAnalysisServiceImpl;
 
 public class IdeaGenerator {
@@ -61,43 +62,54 @@ public class IdeaGenerator {
 		return resources.get(index);
 	}
 
-	public WritingOptionDTO generateWritingOption(WritingOptionDTO constraint) {
-		WritingOptionDTO writingOption = new WritingOptionDTO(constraint);
-		String style = getDefaultOrRandom(writingOption.getStyle(), IdeaTypes.style.toString());
-		String theme = getDefaultOrRandom(writingOption.getTheme(), IdeaTypes.theme.toString());
-		writingOption.setStyle(style);
-		writingOption.setTheme(theme);
-		return writingOption;
+	public R_WritingOptionDTO generateR_WritingOption(R_WritingOptionDTO constraint) {
+		R_WritingOptionDTO randomWritingOption = new R_WritingOptionDTO(constraint);
+		String style = getDefaultOrRandom(randomWritingOption.getStyle(), IdeaTypes.style.toString());
+		String theme = getDefaultOrRandom(randomWritingOption.getTheme(), IdeaTypes.theme.toString());
+		randomWritingOption.setStyle(style);
+		randomWritingOption.setTheme(theme);
+		return randomWritingOption;
 	}
 
-	public LocationDTO generateLocation(LocationDTO constraint) {
-		LocationDTO location = new LocationDTO(constraint);
-		String place = getDefaultOrRandom(location.getPlace(), IdeaTypes.place.toString());
-		String landscape = getDefaultOrRandom(location.getLandscape(), IdeaTypes.landscape.toString());
-		String material = getDefaultOrRandom(location.getMaterial(), IdeaTypes.material.toString());
-		location.setPlace(place);
-		location.setLandscape(landscape);
-		location.setMaterial(material);
-		return location;
+	public R_LocationDTO generateR_Location(R_LocationDTO constraint) {
+		R_LocationDTO randomLocation = new R_LocationDTO(constraint);
+		String place = getDefaultOrRandom(randomLocation.getPlace(), IdeaTypes.place.toString());
+		String landscape = getDefaultOrRandom(randomLocation.getLandscape(), IdeaTypes.landscape.toString());
+		String material = getDefaultOrRandom(randomLocation.getMaterial(), IdeaTypes.material.toString());
+		randomLocation.setPlace(place);
+		randomLocation.setLandscape(landscape);
+		randomLocation.setMaterial(material);
+		return randomLocation;
 	}
 
-	public PersonaDTO generatePersona(PersonaDTO constraint) {
-		PersonaDTO persona = new PersonaDTO(constraint);
-		int age = getDefaultOrRandom(persona.getAge(), IdeaTypes.age.toString(), 100);
-		String job = getRandomJob(persona.getJob(), age);
-		String name = getRandomName(persona.getName());
-		PhysicalDTO physical = generatePhysical(persona.getPhysical(), age);
-		String role = getDefaultOrRandom(persona.getRole(), IdeaTypes.role.toString());
-		String title = getRandomTitle(persona.getTitle());
-		TraitsDTO traits = generateTraits(persona.getTraits());
-		persona.setAge(age);
-		persona.setJob(job);
-		persona.setName(name);
-		persona.setPhysical(physical);
-		persona.setRole(role);
-		persona.setTitle(title);
-		persona.setTraits(traits);
-		return persona;
+	public R_ObjectDTO generateR_Object(R_ObjectDTO constraint) {
+		R_ObjectDTO randomObject = new R_ObjectDTO(constraint);
+		String object = getDefaultOrRandom(randomObject.getObject(), IdeaTypes.object.toString());
+		String adjective = getDefaultOrRandom(randomObject.getAdjective(), IdeaTypes.adjective.toString());
+		String suffix = getDefaultOrRandom(randomObject.getSuffix(), IdeaTypes.suffix.toString());
+		randomObject.setAdjective(adjective);
+		randomObject.setObject(object);
+		randomObject.setSuffix(suffix);
+		return randomObject;
+	}
+
+	public R_PersonaDTO generateR_Persona(R_PersonaDTO constraint) {
+		R_PersonaDTO randomPersona = new R_PersonaDTO(constraint);
+		int age = getDefaultOrRandom(randomPersona.getAge(), IdeaTypes.age.toString(), 100);
+		String job = getRandomJob(randomPersona.getJob(), age);
+		String name = getRandomName(randomPersona.getName());
+		R_PhysicalDTO physical = generatePhysical(randomPersona.getPhysical(), age);
+		String role = getDefaultOrRandom(randomPersona.getRole(), IdeaTypes.role.toString());
+		String title = getRandomTitle(randomPersona.getTitle());
+		R_TraitsDTO traits = generateTraits(randomPersona.getTraits());
+		randomPersona.setAge(age);
+		randomPersona.setJob(job);
+		randomPersona.setName(name);
+		randomPersona.setPhysical(physical);
+		randomPersona.setRole(role);
+		randomPersona.setTitle(title);
+		randomPersona.setTraits(traits);
+		return randomPersona;
 	}
 
 	private String getRandomName(String defaultName) {
@@ -124,7 +136,7 @@ public class IdeaGenerator {
 		return prefix + " " + adjective + " " + suffix;
 	}
 
-	private PhysicalDTO generatePhysical(PhysicalDTO physical, int age) {
+	private R_PhysicalDTO generatePhysical(R_PhysicalDTO physical, int age) {
 		String eyesColor = getDefaultOrRandom(physical.getEyesColor(), IdeaTypes.eyes_color.toString());
 		String faceShape = getDefaultOrRandom(physical.getFaceShape(), IdeaTypes.face_shape.toString());
 		String gender = getDefaultOrRandom(physical.getGender(), IdeaTypes.gender.toString());
@@ -216,7 +228,7 @@ public class IdeaGenerator {
 		return value == null || value.equals("");
 	}
 
-	private TraitsDTO generateTraits(TraitsDTO traits) {
+	private R_TraitsDTO generateTraits(R_TraitsDTO traits) {
 		List<String> badTraits = getDefaultOrRandom(traits.getBadTraits(), IdeaTypes.bad_trait.toString(), 1, 3);
 		List<String> carac = getDefaultOrRandom(traits.getCaracteristics(), IdeaTypes.caracteristic.toString(), 2, 5);
 		List<String> goodTraits = getDefaultOrRandom(traits.getGoodTraits(), IdeaTypes.good_trait.toString(), 2, 5);

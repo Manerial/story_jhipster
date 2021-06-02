@@ -1,27 +1,27 @@
 package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
-public class PersonaDTO {
+public class R_PersonaDTO {
 	private int age;
 	private String job;
 	private String name;
-	private PhysicalDTO physical;
+	private R_PhysicalDTO physical;
 	private String role;
 	private String title;
-	private TraitsDTO traits;
+	private R_TraitsDTO traits;
 
-	public PersonaDTO() {
-		this.physical = new PhysicalDTO();
-		this.traits = new TraitsDTO();
+	public R_PersonaDTO() {
+		this.physical = new R_PhysicalDTO();
+		this.traits = new R_TraitsDTO();
 	}
 
-	public PersonaDTO(PersonaDTO persona) {
+	public R_PersonaDTO(R_PersonaDTO persona) {
 		setAge(persona.getAge());
 		setJob(persona.getJob());
 		setName(persona.getName());
-		setPhysical(new PhysicalDTO(persona.getPhysical()));
+		setPhysical(new R_PhysicalDTO(persona.getPhysical()));
 		setRole(persona.getRole());
 		setTitle(persona.getTitle());
-		setTraits(new TraitsDTO(persona.getTraits()));
+		setTraits(new R_TraitsDTO(persona.getTraits()));
 	}
 
 	public int getAge() {
@@ -48,11 +48,11 @@ public class PersonaDTO {
 		this.name = name;
 	}
 
-	public PhysicalDTO getPhysical() {
+	public R_PhysicalDTO getPhysical() {
 		return physical;
 	}
 
-	public void setPhysical(PhysicalDTO physical) {
+	public void setPhysical(R_PhysicalDTO physical) {
 		this.physical = physical;
 	}
 
@@ -72,11 +72,11 @@ public class PersonaDTO {
 		this.title = title;
 	}
 
-	public TraitsDTO getTraits() {
+	public R_TraitsDTO getTraits() {
 		return traits;
 	}
 
-	public void setTraits(TraitsDTO traits) {
+	public void setTraits(R_TraitsDTO traits) {
 		this.traits = traits;
 	}
 }

@@ -5,42 +5,7 @@
 	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-	<changeSet author="JHER" id="insertData_image_default">
-		<insert tableName="image">
-			<column name="id" valueNumeric="1" />
-			<column name="name" value="No image" />
-			<column name="picture" valueBlobFile="images/no_image.jpg" />
-			<column name="picture_content_type" value="image/jpg" />
-			<column name="preview" valueBlobFile="images/preview/no_image.jpg" />
-			<column name="preview_content_type" value="image/jpg" />
-		</insert>
-	</changeSet>
-	<changeSet author="JHER" id="insertData_image">
-		<insert tableName="image">
-			<column name="id" valueNumeric="2" />
-			<column name="name" value="Carte d'Aganriel" />
-			<column name="picture" valueBlobFile="images/map_aganriel.jpg" />
-			<column name="picture_content_type" value="image/jpg" />
-			<column name="preview" valueBlobFile="images/preview/map_aganriel.jpg" />
-			<column name="preview_content_type" value="image/jpg" />
-		</insert>
-	</changeSet>
-	<changeSet author="JHER" id="insertData_word_analysis">
-		<insert tableName="word_analysis">
-			<column name="type" value="french" />
-			<column name="name" value="français" />
-			<column name="analysis" encoding="UTF-8"
-				valueClobFile="wordAnalysis/fr.json" />
-		</insert>
-		<insert tableName="word_analysis">
-			<column name="type" value="name" />
-			<column name="name" value="noms" />
-			<column name="analysis" encoding="UTF-8"
-				valueClobFile="wordAnalysis/name.json" />
-		</insert>
-	</changeSet>
-	<changeSet author="JHER"
-		id="insertData_idea_eyes_color">
+	<changeSet author="JHER" id="insertData_idea_eyes_color">
 		<insert tableName="idea">
 			<column name="type" value="eyes_color" />
 			<column name="value" value="Acier" />
@@ -92,8 +57,7 @@
 			<column name="complement" />
 		</insert>
 	</changeSet>
-	<changeSet author="JHER"
-		id="insertData_idea_face_shape">
+	<changeSet author="JHER" id="insertData_idea_face_shape">
 		<insert tableName="idea">
 			<column name="type" value="face_shape" />
 			<column name="value" value="Allongé" />
@@ -120,8 +84,7 @@
 			<column name="complement" />
 		</insert>
 	</changeSet>
-	<changeSet author="JHER"
-		id="insertData_idea_hair_color">
+	<changeSet author="JHER" id="insertData_idea_hair_color">
 		<insert tableName="idea">
 			<column name="type" value="hair_color" />
 			<column name="value" value="Bleu" />
@@ -173,8 +136,7 @@
 			<column name="complement" />
 		</insert>
 	</changeSet>
-	<changeSet author="JHER"
-		id="insertData_idea_hair_style">
+	<changeSet author="JHER" id="insertData_idea_hair_style">
 		<insert tableName="idea">
 			<column name="type" value="hair_style" />
 			<column name="value" value="Brosse" />
@@ -231,8 +193,7 @@
 			<column name="complement" />
 		</insert>
 	</changeSet>
-	<changeSet author="JHER"
-		id="insertData_idea_morphology">
+	<changeSet author="JHER" id="insertData_idea_morphology">
 		<insert tableName="idea">
 			<column name="type" value="morphology" />
 			<column name="value" value="Anorexique" />
@@ -279,8 +240,7 @@
 			<column name="complement" value="30+" />
 		</insert>
 	</changeSet>
-	<changeSet author="JHER"
-		id="insertData_idea_adjective">
+	<changeSet author="JHER" id="insertData_idea_adjective">
 		<insert tableName="idea">
 			<column name="type" value="adjective" />
 			<column name="value" value="du froid" />
@@ -1545,9 +1505,18 @@
 			<column name="value" value="perfide" />
 			<column name="complement" />
 		</insert>
+		<insert tableName="idea">
+			<column name="type" value="suffix" />
+			<column name="value" value="volant" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="suffix" />
+			<column name="value" value="meurtrier" />
+			<column name="complement" />
+		</insert>
 	</changeSet>
-	<changeSet author="JHER"
-		id="insertData_idea_bad_trait">
+	<changeSet author="JHER" id="insertData_idea_bad_trait">
 		<insert tableName="idea">
 			<column name="type" value="bad_trait" />
 			<column name="value" value="Avide" />
@@ -1604,8 +1573,7 @@
 			<column name="complement" />
 		</insert>
 	</changeSet>
-	<changeSet author="JHER"
-		id="insertData_idea_caracteristics">
+	<changeSet author="JHER" id="insertData_idea_caracteristics">
 		<insert tableName="idea">
 			<column name="type" value="caracteristic" />
 			<column name="value" value="Collectionne des cartes à jouer" />
@@ -1744,8 +1712,7 @@
 			<column name="complement" />
 		</insert>
 	</changeSet>
-	<changeSet author="JHER"
-		id="insertData_idea_good_trait">
+	<changeSet author="JHER" id="insertData_idea_good_trait">
 		<insert tableName="idea">
 			<column name="type" value="good_trait" />
 			<column name="value" value="Blagueur" />
@@ -1897,8 +1864,7 @@
 			<column name="complement" />
 		</insert>
 	</changeSet>
-	<changeSet author="JHER"
-		id="insertData_idea_handicap">
+	<changeSet author="JHER" id="insertData_idea_handicap">
 		<insert tableName="idea">
 			<column name="type" value="handicap" />
 			<column name="value" value="Tetraplegique" />
@@ -3411,6 +3377,11 @@
 			<column name="value" value="Un nid" />
 			<column name="complement" />
 		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un parc" />
+			<column name="complement" />
+		</insert>
 	</changeSet>
 	<changeSet author="JHER" id="insertData_idea_landscape">
 		<insert tableName="idea">
@@ -3657,6 +3628,11 @@
 		</insert>
 		<insert tableName="idea">
 			<column name="type" value="material" />
+			<column name="value" value="De roche" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
 			<column name="value" value="De cristal" />
 			<column name="complement" />
 		</insert>
@@ -3708,6 +3684,1258 @@
 		<insert tableName="idea">
 			<column name="type" value="material" />
 			<column name="value" value="De nuée ardente" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_object">
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Aiguille" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Amulette" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Angon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Anneau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Arbalète" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Arc" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Armure" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Assiette" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bague" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Baguette" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Balafon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Balai" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Balle" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Ballerine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Ballon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bandage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bardiche" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bâton" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bêche" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Berret" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bille" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bocle" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Boîte" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bol" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bombe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bongo" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Boomerang" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bottes" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bouclier" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bougie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Boule" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Bouteille" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Braconnière" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Braies" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Brassard" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Brigandine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Briquet" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Brosse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Cagoule" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Calebasse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Calice" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Camée" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Canne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Canon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Cape" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Carnet" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Carte" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Casque" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Casserole" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Casse-tête" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Catalyseur" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Ceinture" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Ceinturon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Chaise" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Chapeau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Charme" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Chaudron" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Chausson" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Chaussure" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Chemise" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Chiffon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Cimeterre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Ciseau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Cithare" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Clairon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Clé" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Cloche" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Clou" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Codex" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Collant" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Collier" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Conga" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Corde" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Cotte" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Couperet" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Couronne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Coussin" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Couteau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Coutelas" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Couverture" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Crâne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Crayon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Creuset" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Croix" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Cuillère" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Cuirasse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Dague" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Dé" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Diamant" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Disque" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Echarpe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Ecu" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Edredon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Emblème" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Emeraude" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Epaulette" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Epée" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Epieu" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Epine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Eponge" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Espadon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Esponton" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Fanchon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Faucille" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Fauteuil" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Faux" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Fendoir" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Figurine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Filet" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Flacon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Flasque" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Fléau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Flèche" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Fleur" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Flute" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Fouet" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Fourchette" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Gaine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Gantelet" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Gants" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Gemme" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Glaive" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Globe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Gorgerin" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Gourde" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Gourdin" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Grappin" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Grèves" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Grimoir" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Guitare" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Hache" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Hachette" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Hachoir" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Hallebarde" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Harnais" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Harpe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Harpon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Haubert" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Heaume" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Icône" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Illustration" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Image" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Incrustation" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Insigne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Jambard" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Jambière" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Javelot" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Katar" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Laka" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Lame" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Lampe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Lanterne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Lime" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Linge" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Livre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Louche" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Lunettes" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Maillot" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Manteau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Maracasse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Margi" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Marmite" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Marteau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Masque" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Masse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Massue" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Matakam" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Médaille" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Médaillon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Miroir" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Mitaines" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Montre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Morgenstern" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Nœud" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Ocarina" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Orbe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pagne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pantalon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pantoufle" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Parapluie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Parchemin" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Peigne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pelle" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pierre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pilum" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pince" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pioche" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pipe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Plastron" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Plateau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Plume" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Poche" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Poële" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Poignard" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Poignes" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Poinçon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Poing" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Poivrière" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pot" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pourpoint" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Rasoir" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Rateau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Rondache" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Rose" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Ruban" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Rubis" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Sablier" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Sac" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Sacoche" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Saï" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Saladier" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Salière" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Sangle" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Saphire" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Sara" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Sceau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Sceptre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Scie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Seringue" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Shillelagh" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Short" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Soupière" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Spatule" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Sphère" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Statuette" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Stylet" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Stylo" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Sucrier" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Surrin" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Table" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Tableau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Talisman" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Tambour" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Tapis" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Targe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Tasse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Tiare" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Toge" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Tongue" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Tournevis" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Tranchoir" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Tunique" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Urne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Vase" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Verre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Veste" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Violon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Vis" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Vouge" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="Idea">
+			<column name="type" value="object" />
+			<column name="value" value="Pièce" />
 			<column name="complement" />
 		</insert>
 	</changeSet>
