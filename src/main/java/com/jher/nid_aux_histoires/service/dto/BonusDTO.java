@@ -3,65 +3,87 @@ package com.jher.nid_aux_histoires.service.dto;
 import java.io.Serializable;
 
 /**
- * A DTO for the {@link com.jher.nid_aux_histoires.domain.Bonus} entity.
+ * A DTO for the {@link com.jher.nid_aux_histoires.domain.Comment} entity.
  */
-public class BonusDTO implements Serializable {
-    
-    private Long id;
+public class BonusDTO implements Serializable, Comparable<BonusDTO> {
+	private static final long serialVersionUID = 1L;
 
-    private String name;
+	private Long id;
 
-    private String extension;
+	private String name;
 
-    
-    public Long getId() {
-        return id;
-    }
+	private byte[] data;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	private String extension;
 
-    public String getName() {
-        return name;
-    }
+	private Long bookId;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getExtension() {
-        return extension;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setExtension(String extension) {
-        this.extension = extension;
-    }
+	public String getName() {
+		return name;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof BonusDTO)) {
-            return false;
-        }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-        return id != null && id.equals(((BonusDTO) o).id);
-    }
+	public byte[] getData() {
+		return data;
+	}
 
-    @Override
-    public int hashCode() {
-        return 31;
-    }
+	public void setData(byte[] data) {
+		this.data = data;
+	}
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "BonusDTO{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", extension='" + getExtension() + "'" +
-            "}";
-    }
+	public String getExtension() {
+		return extension;
+	}
+
+	public void setExtension(String extension) {
+		this.extension = extension;
+	}
+
+	public Long getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof BonusDTO)) {
+			return false;
+		}
+
+		return id != null && id.equals(((BonusDTO) o).id);
+	}
+
+	@Override
+	public int hashCode() {
+		return 31;
+	}
+
+	// prettier-ignore
+	@Override
+	public String toString() {
+		return "BonusDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", extension='" + getExtension() + "'"
+				+ "}";
+	}
+
+	@Override
+	public int compareTo(BonusDTO o) {
+		return this.id.compareTo(o.id);
+	}
 }
