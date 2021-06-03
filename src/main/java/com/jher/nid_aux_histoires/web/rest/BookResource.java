@@ -49,6 +49,7 @@ public class BookResource {
 	private String applicationName;
 
 	private final BookService bookService;
+
 	private final ExportService exportService;
 
 	public BookResource(BookService bookService, ExportService exportService) {

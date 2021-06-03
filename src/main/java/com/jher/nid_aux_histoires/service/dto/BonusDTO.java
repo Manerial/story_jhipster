@@ -1,6 +1,10 @@
 package com.jher.nid_aux_histoires.service.dto;
 
+import java.io.IOException;
 import java.io.Serializable;
+
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Comment} entity.
@@ -56,6 +60,12 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 
 	public void setBookId(Long bookId) {
 		this.bookId = bookId;
+	}
+
+	public void setFile(MultipartFile file) throws IOException {
+		this.setData(file.getBytes());
+		this.setName(FilenameUtils.getBaseName(file.getOriginalFilename()));
+		this.setExtension(FilenameUtils.getExtension(file.getOriginalFilename()));
 	}
 
 	@Override
