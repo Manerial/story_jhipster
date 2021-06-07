@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Book, IBook } from 'app/shared/model/book.model';
 import { Chapter, IChapter } from 'app/shared/model/chapter.model';
 import { IScene } from 'app/shared/model/scene.model';
@@ -15,6 +15,8 @@ export class TextComponent implements OnInit, OnDestroy {
   public book: IBook = new Book();
   public chapter: IChapter = new Chapter();
   private chapterSubscriber: Subscription = new Subscription();
+  private isArrowDown = false;
+  private isArrowUp = false;
 
   constructor(public readerService: ReaderService, public utilService: UtilService) {}
 
@@ -55,5 +57,77 @@ export class TextComponent implements OnInit, OnDestroy {
       });
     });
     return currentChapter;
+  }
+
+  prev(): void {
+    this.readerService.changeChapterNumber(-1);
+  }
+
+  next(): void {
+    this.readerService.changeChapterNumber(1);
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEventDown(event: KeyboardEvent): void {
+    switch (event.key) {
+      case 'ArrowRight':
+        this.next();
+        event.preventDefault();
+        break;
+      case 'ArrowLeft':
+        this.prev();
+        event.preventDefault();
+        break;
+      case 'ArrowUp':
+        if (!this.isArrowUp) {
+          this.isArrowUp = true;
+          this.scrollUpSmooth();
+        }
+        event.preventDefault();
+        break;
+      case 'ArrowDown':
+        if (!this.isArrowDown) {
+          this.isArrowDown = true;
+          this.scrollDownSmooth();
+        }
+        event.preventDefault();
+        break;
+      default:
+        break;
+    }
+  }
+
+  @HostListener('document:keyup', ['$event'])
+  handleKeyboardEventUp(event: KeyboardEvent): void {
+    switch (event.key) {
+      case 'ArrowUp':
+        this.isArrowUp = false;
+        event.preventDefault();
+        break;
+      case 'ArrowDown':
+        this.isArrowDown = false;
+        event.preventDefault();
+        break;
+      default:
+        break;
+    }
+  }
+
+  scrollDownSmooth(): void {
+    if (this.isArrowDown) {
+      document.getElementById('main-container')?.scrollBy({ top: 50, left: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        this.scrollDownSmooth();
+      }, 120);
+    }
+  }
+
+  scrollUpSmooth(): void {
+    if (this.isArrowUp) {
+      document.getElementById('main-container')?.scrollBy({ top: -50, left: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        this.scrollUpSmooth();
+      }, 120);
+    }
   }
 }

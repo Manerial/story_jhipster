@@ -64,7 +64,7 @@ public class BonusResource {
 	 * @throws IOException
 	 */
 	@PostMapping(path = "/bonuses", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-	public ResponseEntity<BonusDTO> createBonus(@RequestParam("bookId") Long bookId,
+	public ResponseEntity<BonusDTO> createBonus(@RequestParam(name = "bookId", required = false) Long bookId,
 			@RequestParam("file") MultipartFile file) throws URISyntaxException, IOException {
 		BonusDTO bonusDTO = new BonusDTO();
 		log.debug("REST request to save Bonus : {}", bonusDTO);
@@ -93,8 +93,9 @@ public class BonusResource {
 	 * @throws IOException
 	 */
 	@PutMapping(path = "/bonuses", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-	public ResponseEntity<BonusDTO> updateBonus(@RequestParam("id") Long id, @RequestParam("bookId") Long bookId,
-			@RequestParam("file") MultipartFile file) throws URISyntaxException, IOException {
+	public ResponseEntity<BonusDTO> updateBonus(@RequestParam("id") Long id,
+			@RequestParam(name = "bookId", required = false) Long bookId, @RequestParam("file") MultipartFile file)
+			throws URISyntaxException, IOException {
 		BonusDTO bonusDTO = new BonusDTO();
 		bonusDTO.setId(id);
 		bonusDTO.setBookId(bookId);
@@ -137,6 +138,20 @@ public class BonusResource {
 		log.debug("REST request to get Bonus : {}", id);
 		Optional<BonusDTO> bonusDTO = bonusService.findOne(id);
 		return ResponseUtil.wrapOrNotFound(bonusDTO);
+	}
+
+	/**
+	 * {@code GET  /images} : get all the images related to a Book.
+	 *
+	 * @param id the id of the Book to retrieve.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+	 *         of images in body.
+	 */
+	@GetMapping("/bonuses/book/{id}")
+	public ResponseEntity<List<BonusDTO>> getAllBonusesByBook(@PathVariable Long id) {
+		log.debug("REST request to get a list of Bonuses related to a Book");
+		List<BonusDTO> bonuses = bonusService.findAllByBookId(id);
+		return ResponseEntity.ok().body(bonuses);
 	}
 
 	/**

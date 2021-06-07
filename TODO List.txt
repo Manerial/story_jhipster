@@ -1,15 +1,19 @@
 OBLIGATOIRE
 
-Gérer les Bonus
-	GUI List / Download bonus
+GUI :
+	- List / Download bonus
+		- API get bonus by bookId -> A tester
+		- Page livre : si bonus présents, alors bouton bonus
+		- Page download bonus 
+			- reprendre page images
+				- Virer lien images / part / chapter / scene
+				- Virer sidepanel
+	- Générateur de QR_Code
 
 Section Contact
 "Vous pouvez nous contacter via le formulaire proposé ou sur le Discord de la communauté"
 
 Mots clés recherche Google
-
-GUI :
-	- Générateur de QR_Code
 	
 Traduire générateurs (contenu cartes)
 
