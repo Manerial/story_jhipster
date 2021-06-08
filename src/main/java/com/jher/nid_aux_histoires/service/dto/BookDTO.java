@@ -33,9 +33,7 @@ public class BookDTO implements Serializable {
 
 	private Long coverId;
 
-	private Set<BonusDTO> bonuses = new HashSet<>();
-
-	private boolean hasBonuses;
+	private boolean bonuses = false;
 
 	public Long getId() {
 		return id;
@@ -126,21 +124,16 @@ public class BookDTO implements Serializable {
 		this.comments = comments;
 	}
 
-	public Set<BonusDTO> getBonuses() {
+	public boolean getBonuses() {
 		return bonuses;
 	}
 
-	public void setBonuses(Set<BonusDTO> bonuses) {
+	public void setBonuses(boolean bonuses) {
 		this.bonuses = bonuses;
 	}
 
-	public boolean hasBonuses() {
-		setHasBonuses();
-		return this.hasBonuses;
-	}
-
-	public void setHasBonuses() {
-		this.hasBonuses = this.bonuses.size() > 0;
+	public void setBonuses(Set<BonusDTO> bonuses) {
+		this.bonuses = bonuses.size() > 0;
 	}
 
 	@Override
