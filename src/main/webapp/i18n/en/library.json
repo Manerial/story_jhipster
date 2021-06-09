@@ -26,6 +26,11 @@
     "author": "Author\u00A0: "
   },
   "image": {
+    "title": "Images for \"{{ entityName }}\"",
     "no_image": "No image for \"{{ entityName }}\""
+  },
+  "bonus": {
+    "title": "Bonuses for \"{{ entityName }}\"",
+    "no_bonus": "No bonus for \"{{ entityName }}\""
   }
 }

@@ -1,6 +1,7 @@
 OBLIGATOIRE
 
 GUI :
+	- Description pour les bonus
 	- Générateur de QR_Code
 
 Section Contact
