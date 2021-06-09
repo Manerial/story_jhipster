@@ -12,6 +12,9 @@ import com.jher.nid_aux_histoires.service.dto.ImageDTO;
 @Mapper(componentModel = "spring", uses = {})
 public interface ImageMapperLight extends EntityMapper<ImageDTO, Image> {
 
+	@Mapping(target = "picture", ignore = true)
+	ImageDTO toDto(Image imageDTO);
+
 	@Mapping(target = "bookToCovers", ignore = true)
 	@Mapping(target = "removeBookToCover", ignore = true)
 	@Mapping(target = "books", ignore = true)
@@ -23,9 +26,6 @@ public interface ImageMapperLight extends EntityMapper<ImageDTO, Image> {
 	@Mapping(target = "scenes", ignore = true)
 	@Mapping(target = "removeScene", ignore = true)
 	Image toEntity(ImageDTO imageDTO);
-
-	@Mapping(target = "picture", ignore = true)
-	ImageDTO toDto(Image imageDTO);
 
 	default Image fromId(Long id) {
 		if (id == null) {

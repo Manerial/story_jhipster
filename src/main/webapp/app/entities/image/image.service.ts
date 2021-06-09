@@ -39,4 +39,8 @@ export class ImageService {
   getAllImagesByEntityId(entity: string, id: number): Observable<EntityArrayResponseType> {
     return this.http.get<IImage[]>(`${this.resourceUrl}/${entity}/${id}`, { observe: 'response' });
   }
+
+  getAllImagesByBookId(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IImage[]>(`${this.resourceUrl}/book/${id}`, { observe: 'response' });
+  }
 }
