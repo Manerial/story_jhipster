@@ -5,18 +5,18 @@ import { Subscription, combineLatest } from 'rxjs';
 import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IImage } from 'app/shared/model/image.model';
+import { ICover } from 'app/shared/model/cover.model';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { ImageService } from './image.service';
-import { ImageDeleteDialogComponent } from './image-delete-dialog.component';
+import { CoverService } from './cover.service';
+import { CoverDeleteDialogComponent } from './cover-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-image',
-  templateUrl: './image.component.html',
+  selector: 'jhi-cover',
+  templateUrl: './cover.component.html',
 })
-export class ImageComponent implements OnInit, OnDestroy {
-  images?: IImage[];
+export class CoverComponent implements OnInit, OnDestroy {
+  covers?: ICover[];
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -26,7 +26,7 @@ export class ImageComponent implements OnInit, OnDestroy {
   ngbPaginationPage = 1;
 
   constructor(
-    protected imageService: ImageService,
+    protected coverService: CoverService,
     protected activatedRoute: ActivatedRoute,
     protected dataUtils: JhiDataUtils,
     protected router: Router,
@@ -37,14 +37,14 @@ export class ImageComponent implements OnInit, OnDestroy {
   loadPage(page?: number, dontNavigate?: boolean): void {
     const pageToLoad: number = page || this.page || 1;
 
-    this.imageService
+    this.coverService
       .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
       })
       .subscribe(
-        (res: HttpResponse<IImage[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+        (res: HttpResponse<ICover[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
         () => this.onError()
       );
   }
@@ -75,7 +75,7 @@ export class ImageComponent implements OnInit, OnDestroy {
     }
   }
 
-  trackId(index: number, item: IImage): number {
+  trackId(index: number, item: ICover): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return item.id!;
   }
@@ -92,9 +92,9 @@ export class ImageComponent implements OnInit, OnDestroy {
     this.eventSubscriber = this.eventManager.subscribe('imageListModification', () => this.loadPage());
   }
 
-  delete(image: IImage): void {
-    const modalRef = this.modalService.open(ImageDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.image = image;
+  delete(cover: ICover): void {
+    const modalRef = this.modalService.open(CoverDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.image = cover;
   }
 
   sort(): string[] {
@@ -105,11 +105,11 @@ export class ImageComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  protected onSuccess(data: IImage[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+  protected onSuccess(data: ICover[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
-      this.router.navigate(['/entities/image'], {
+      this.router.navigate(['/entities/cover'], {
         queryParams: {
           page: this.page,
           size: this.itemsPerPage,
@@ -117,7 +117,7 @@ export class ImageComponent implements OnInit, OnDestroy {
         },
       });
     }
-    this.images = data || [];
+    this.covers = data || [];
     this.ngbPaginationPage = this.page;
   }
 

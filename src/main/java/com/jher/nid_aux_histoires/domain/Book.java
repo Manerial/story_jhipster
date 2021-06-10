@@ -10,9 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -49,11 +46,6 @@ public class Book implements Serializable {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Part> parts = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	@JoinTable(name = "book_image", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id"))
-	private Set<Image> images = new HashSet<>();
-
 	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Comment> comments = new HashSet<>();
@@ -64,7 +56,7 @@ public class Book implements Serializable {
 
 	@ManyToOne
 	@JsonIgnoreProperties(value = "picture", allowSetters = true)
-	private Image cover;
+	private Cover cover;
 
 	@ManyToOne
 	@JsonIgnoreProperties(value = "books", allowSetters = true)
@@ -151,42 +143,17 @@ public class Book implements Serializable {
 		this.parts = parts;
 	}
 
-	public Set<Image> getImages() {
-		return images;
-	}
-
-	public Book images(Set<Image> images) {
-		this.images = images;
-		return this;
-	}
-
-	public Book addImage(Image image) {
-		this.images.add(image);
-		image.getBooks().add(this);
-		return this;
-	}
-
-	public Book removeImage(Image image) {
-		this.images.remove(image);
-		image.getBooks().remove(this);
-		return this;
-	}
-
-	public void setImages(Set<Image> images) {
-		this.images = images;
-	}
-
-	public Image getCover() {
+	public Cover getCover() {
 		return cover;
 	}
 
-	public Book cover(Image image) {
-		this.cover = image;
+	public Book cover(Cover cover) {
+		this.cover = cover;
 		return this;
 	}
 
-	public void setCover(Image image) {
-		this.cover = image;
+	public void setCover(Cover cover) {
+		this.cover = cover;
 	}
 
 	public Set<Comment> getComments() {

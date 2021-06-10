@@ -7,19 +7,6 @@
         Added the constraints for entity Chapter.
     -->
     <changeSet id="20201004072042-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="chapter_id"
-                                 baseTableName="chapter_image"
-                                 constraintName="fk_chapter_image_chapter_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="chapter"/>
-
-        <addForeignKeyConstraint baseColumnNames="image_id"
-                                 baseTableName="chapter_image"
-                                 constraintName="fk_chapter_image_image_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="image"/>
-        
         <addForeignKeyConstraint baseColumnNames="part_id"
                                  baseTableName="chapter"
                                  constraintName="fk_chapter_part_id"

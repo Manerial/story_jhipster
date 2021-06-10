@@ -6,7 +6,7 @@
       "body": "Ce site est conçu pour être accessible au public le plus large possible (contrastes, choix des couleurs) tout en conservant son identité visuelle. Cependant, il est possible que certains points nous aient échappé lors de sa conception, aussi toute remarque constructive sera la bienvenue sur le <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée à l'accessibilté à tous."
     },
     "download": {
-      "title": "Téléchargement au format Word",
+      "title": "Téléchargement",
       "body": "Vous pouvez télécharger l'œuvre de votre choix au format PDF ou EPUB en cliquant sur l'icone de téléchargement placée sous chaque œuvre."
     },
     "B_Reading": {
@@ -15,11 +15,11 @@
     },
     "generators": {
       "title": "Utilisation des générateurs",
-      "body": "Les générateurs sont mis à votre disposition en tant qu'outils ludiques pour vous permettre de créer librement. Ils seront complétés et étoffés dans le cycle de vie du site. Cependant, si vous souhaitez aider à l'élaboration de nouveaux dictionnaires, vous pouvez vous rendre sur le <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée au partage et a l'amélioration du contenu."
+      "body": "Les générateurs sont mis à votre disposition en tant qu'outils ludiques pour vous permettre de créer librement. Ils seront complétés et étoffés dans le cycle de vie du site. Cependant, si vous souhaitez aider à l'élaboration de nouveaux dictionnaires ou ajouter du nouveau contenu, vous pouvez vous rendre sur le <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée au partage et a l'amélioration du contenu."
     },
     "sharing": {
       "title": "Partager vos œuvres",
-      "body": "Vous souhaitez ajouter votre livre sur ce site\u00A0? Pas de soucis\u00A0! Contactez-nous sur le <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée aux nouveaux auteurs."
+      "body": "Vous souhaitez ajouter votre livre sur ce site\u00A0? Pas de soucis\u00A0! Contactez-nous sur le <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée aux nouveaux auteurs. Afin de faciliter l'intégration de votre œuvre, vous pouvez déjà effectuer un travail préparatoire en suivant ce guide\u00A0:"
     }
   }
 }

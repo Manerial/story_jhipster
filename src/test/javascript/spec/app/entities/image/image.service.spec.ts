@@ -1,15 +1,15 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ImageService } from 'app/entities/image/image.service';
-import { IImage, Image } from 'app/shared/model/image.model';
+import { CoverService } from 'app/entities/cover/cover.service';
+import { ICover, Cover } from 'app/shared/model/cover.model';
 
 describe('Service Tests', () => {
   describe('Image Service', () => {
     let injector: TestBed;
-    let service: ImageService;
+    let service: CoverService;
     let httpMock: HttpTestingController;
-    let elemDefault: IImage;
-    let expectedResult: IImage | IImage[] | boolean | null;
+    let elemDefault: ICover;
+    let expectedResult: ICover | ICover[] | boolean | null;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -17,10 +17,10 @@ describe('Service Tests', () => {
       });
       expectedResult = null;
       injector = getTestBed();
-      service = injector.get(ImageService);
+      service = injector.get(CoverService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Image(0, 'AAAAAAA', 'image/png', 'AAAAAAA', 'image/png', 'AAAAAAA');
+      elemDefault = new Cover(0, 'AAAAAAA', 'image/png', 'AAAAAAA', 'image/png', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -44,7 +44,7 @@ describe('Service Tests', () => {
 
         const expected = Object.assign({}, returnedFromService);
 
-        service.create(new Image()).subscribe(resp => (expectedResult = resp.body));
+        service.create(new Cover()).subscribe(resp => (expectedResult = resp.body));
 
         const req = httpMock.expectOne({ method: 'POST' });
         req.flush(returnedFromService);

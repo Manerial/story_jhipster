@@ -36,7 +36,7 @@
                     <td><a [routerLink]="['/admin/user-management', book.authorLogin, 'view']">{{ book.authorLogin }}</a></td>
                     <td>
                         <div *ngIf="book.coverId">
-                            <a [routerLink]="['/entities/image', book.coverId , 'view']" >{{ book.coverId }}</a>
+                            <a [routerLink]="['/entities/cover', book.coverId , 'view']" >{{ book.coverId }}</a>
                         </div>
                     </td>
                     <td class="text-right">

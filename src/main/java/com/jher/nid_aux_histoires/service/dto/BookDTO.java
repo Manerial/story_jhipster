@@ -23,8 +23,6 @@ public class BookDTO implements Serializable {
 
 	private Boolean visibility;
 
-	private Set<ImageDTO> images = new HashSet<>();
-
 	private Set<PartDTO> parts = new HashSet<>();
 
 	private Set<CommentDTO> comments = new HashSet<>();
@@ -83,20 +81,12 @@ public class BookDTO implements Serializable {
 		this.visibility = visibility;
 	}
 
-	public Set<ImageDTO> getImages() {
-		return images;
-	}
-
-	public void setImages(Set<ImageDTO> images) {
-		this.images = images;
-	}
-
 	public Long getCoverId() {
 		return coverId;
 	}
 
-	public void setCoverId(Long imageId) {
-		this.coverId = imageId;
+	public void setCoverId(Long coverId) {
+		this.coverId = coverId;
 	}
 
 	public byte[] getCoverPreview() {
@@ -157,6 +147,6 @@ public class BookDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "BookDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", author='" + getAuthorLogin() + "'"
-				+ ", images='" + getImages() + "'" + ", coverId=" + getCoverId() + "}";
+				+ ", coverId=" + getCoverId() + "}";
 	}
 }

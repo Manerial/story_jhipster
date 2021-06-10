@@ -1,20 +1,20 @@
 {
   "nidAuxHistoiresApp": {
-    "image": {
+    "cover": {
       "home": {
-        "title": "Images",
-        "createLabel": "Créer une nouvelle Image",
-        "createOrEditLabel": "Créer ou éditer une Image",
-        "notFound": "Aucune Image trouvé"
+        "title": "Couvertures",
+        "createLabel": "Créer une nouvelle Couverture",
+        "createOrEditLabel": "Créer ou éditer une Couverture",
+        "notFound": "Aucune Couverture trouvé"
       },
-      "created": "Une nouvelle Image a été créé avec l'identifiant {{ param }}",
-      "updated": "L'Image avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "L'Image avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Couverture a été créé avec l'identifiant {{ param }}",
+      "updated": "L'Couverture avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'Couverture avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer l'Image {{ id }}\u00A0?"
+        "question": "Etes-vous certain de vouloir supprimer la Couverture {{ id }}\u00A0?"
       },
       "detail": {
-        "title": "Image"
+        "title": "Couverture"
       },
       "name": "Nom",
       "picture": "Photo",

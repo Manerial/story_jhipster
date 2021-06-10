@@ -3,7 +3,7 @@ import { IPart } from 'app/shared/model/part.model';
 import { IChapter } from 'app/shared/model/chapter.model';
 import { IScene } from 'app/shared/model/scene.model';
 
-export interface IImage {
+export interface ICover {
   id: number;
   name: string;
   pictureContentType: string;
@@ -17,7 +17,7 @@ export interface IImage {
   scenes: IScene[];
 }
 
-export class Image implements IImage {
+export class Cover implements ICover {
   public id: number;
   public name: string;
   public pictureContentType: string;

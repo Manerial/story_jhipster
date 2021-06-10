@@ -20,7 +20,6 @@
       "number": "Number",
       "text": "Text",
       "timestampStart": "Date / Time",
-      "image": "Image",
       "chapter": "Chapter",
       "required": {
         "name": "Name field is required",

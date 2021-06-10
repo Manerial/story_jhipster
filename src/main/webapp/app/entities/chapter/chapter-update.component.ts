@@ -7,12 +7,11 @@ import { Observable } from 'rxjs';
 
 import { IChapter, Chapter } from 'app/shared/model/chapter.model';
 import { ChapterService } from './chapter.service';
-import { IImage } from 'app/shared/model/image.model';
-import { ImageService } from 'app/entities/image/image.service';
+import { ICover } from 'app/shared/model/cover.model';
 import { IPart, Part } from 'app/shared/model/part.model';
 import { PartService } from 'app/entities/part/part.service';
 
-type SelectableEntity = IImage | IPart;
+type SelectableEntity = ICover | IPart;
 
 @Component({
   selector: 'jhi-chapter-update',
@@ -20,21 +19,18 @@ type SelectableEntity = IImage | IPart;
 })
 export class ChapterUpdateComponent implements OnInit {
   isSaving = false;
-  images: IImage[] = [];
   parts: IPart[] = [];
 
   editForm = this.fb.group({
     id: [],
-    name: [],
+    name: [Validators.required],
     description: [],
-    number: [],
-    images: [],
-    partId: [],
+    number: [Validators.required],
+    partId: [Validators.required],
   });
 
   constructor(
     protected chapterService: ChapterService,
-    protected imageService: ImageService,
     protected partService: PartService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -43,8 +39,6 @@ export class ChapterUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ chapter }) => {
       this.updateForm(chapter);
-
-      this.imageService.query().subscribe((dataImage: HttpResponse<IImage[]>) => (this.images = dataImage.body || []));
 
       if (chapter.partId !== undefined && chapter.partId !== null && chapter.partId !== 0) {
         this.partService.find(chapter.partId).subscribe((dataPart: HttpResponse<IPart>) => {
@@ -58,17 +52,11 @@ export class ChapterUpdateComponent implements OnInit {
   }
 
   updateForm(chapter: IChapter): void {
-    chapter.images.forEach(image => {
-      image.picture = null;
-      image.preview = null;
-    });
-
     this.editForm.patchValue({
       id: chapter.id,
       name: chapter.name,
       description: chapter.description,
       number: chapter.number,
-      images: chapter.images,
       partId: chapter.partId,
     });
   }
@@ -95,7 +83,6 @@ export class ChapterUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       description: this.editForm.get(['description'])!.value,
       number: this.editForm.get(['number'])!.value,
-      images: this.editForm.get(['images'])!.value,
       partId: this.editForm.get(['partId'])!.value,
     };
   }
@@ -120,7 +107,7 @@ export class ChapterUpdateComponent implements OnInit {
     return item.id;
   }
 
-  getSelected(selectedVals: IImage[], option: IImage): IImage {
+  getSelected(selectedVals: ICover[], option: ICover): ICover {
     if (selectedVals) {
       for (let i = 0; i < selectedVals.length; i++) {
         if (option.id === selectedVals[i].id) {

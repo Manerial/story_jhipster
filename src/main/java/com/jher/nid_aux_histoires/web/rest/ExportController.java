@@ -22,12 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jher.nid_aux_histoires.export.ExportDocx;
 import com.jher.nid_aux_histoires.export.ExportDocx.AVAILABLE_FILE_FORMAT;
-import com.jher.nid_aux_histoires.export.ExportDocx.FILE_FORMAT;
 import com.jher.nid_aux_histoires.service.BonusService;
 import com.jher.nid_aux_histoires.service.ExportService;
-import com.jher.nid_aux_histoires.service.ImageService;
 import com.jher.nid_aux_histoires.service.dto.BonusDTO;
-import com.jher.nid_aux_histoires.service.dto.ImageDTO;
 
 @RestController
 @RequestMapping("/api")
@@ -39,12 +36,9 @@ public class ExportController {
 
 	private final BonusService bonusService;
 
-	private final ImageService imageService;
-
-	public ExportController(ExportService exportService, BonusService bonusService, ImageService imageService) {
+	public ExportController(ExportService exportService, BonusService bonusService) {
 		this.exportService = exportService;
 		this.bonusService = bonusService;
-		this.imageService = imageService;
 	}
 
 	/**
@@ -121,25 +115,5 @@ public class ExportController {
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"" + fileName + "\"")
 				.contentType(MediaType.MULTIPART_FORM_DATA).contentLength(bonusDTO.getData().length)
 				.body(bonusDTO.getData());
-	}
-
-	/**
-	 * Exporte une image au format spécifié
-	 * 
-	 * @return une réponse contenant le fichier à télécharger
-	 */
-	@GetMapping("/download/image/{id}")
-	public ResponseEntity<byte[]> getImage(@PathVariable Long id) throws Exception {
-		log.debug("REST request to get Image : {}", id);
-		Optional<ImageDTO> opt = imageService.findOne(id);
-		if (!opt.isPresent()) {
-			String error = "Error during the reading of the document. Document not found";
-			return ResponseEntity.badRequest().body(error.getBytes());
-		}
-		ImageDTO imageDTO = imageService.findOne(id).get();
-		String fileName = imageDTO.getName() + "." + imageDTO.getExtension();
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"" + fileName + "\"")
-				.contentType(exportService.getMediaType(FILE_FORMAT.valueOf(imageDTO.getExtension())))
-				.contentLength(imageDTO.getPicture().length).body(imageDTO.getPicture());
 	}
 }

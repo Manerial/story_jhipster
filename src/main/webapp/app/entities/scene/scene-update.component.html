@@ -55,13 +55,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label jhiTranslate="nidAuxHistoiresApp.scene.image" for="field_images">Image</label>
-                    <select class="form-control" id="field_images" multiple name="images" formControlName="images">
-                        <option [ngValue]="getSelected(editForm.get('images')!.value, imageOption)" *ngFor="let imageOption of images; trackBy: trackById">{{ imageOption.name }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.scene.chapter" for="field_chapter">Chapter</label>
                     <select class="form-control" id="field_chapter" name="chapter" formControlName="chapterId">
                         <option [ngValue]="null"></option>

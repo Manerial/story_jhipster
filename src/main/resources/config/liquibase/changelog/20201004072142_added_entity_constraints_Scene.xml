@@ -6,20 +6,7 @@
     <!--
         Added the constraints for entity Scene.
     -->
-    <changeSet id="20201004072142-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="scene_id"
-                                 baseTableName="scene_image"
-                                 constraintName="fk_scene_image_scene_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="scene"/>
-
-        <addForeignKeyConstraint baseColumnNames="image_id"
-                                 baseTableName="scene_image"
-                                 constraintName="fk_scene_image_image_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="image"/>
-        
+    <changeSet id="20201004072142-2" author="jhipster">        
         <addForeignKeyConstraint baseColumnNames="chapter_id"
                                  baseTableName="scene"
                                  constraintName="fk_scene_chapter_id"

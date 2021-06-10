@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { IPart, Part } from 'app/shared/model/part.model';
 import { PartService } from './part.service';
-import { IImage } from 'app/shared/model/image.model';
-import { ImageService } from 'app/entities/image/image.service';
+import { ICover } from 'app/shared/model/cover.model';
 import { IBook } from 'app/shared/model/book.model';
 import { BookService } from 'app/entities/book/book.service';
 
-type SelectableEntity = IImage | IBook;
+type SelectableEntity = ICover | IBook;
 
 @Component({
   selector: 'jhi-part-update',
@@ -20,21 +19,18 @@ type SelectableEntity = IImage | IBook;
 })
 export class PartUpdateComponent implements OnInit {
   isSaving = false;
-  images: IImage[] = [];
   books: IBook[] = [];
 
   editForm = this.fb.group({
     id: [],
-    name: [],
+    name: [Validators.required],
     description: [],
-    number: [],
-    images: [],
-    bookId: [],
+    number: [Validators.required],
+    bookId: [Validators.required],
   });
 
   constructor(
     protected partService: PartService,
-    protected imageService: ImageService,
     protected bookService: BookService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -44,24 +40,16 @@ export class PartUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ part }) => {
       this.updateForm(part);
 
-      this.imageService.query().subscribe((res: HttpResponse<IImage[]>) => (this.images = res.body || []));
-
       this.bookService.query().subscribe((res: HttpResponse<IBook[]>) => (this.books = res.body || []));
     });
   }
 
   updateForm(part: IPart): void {
-    part.images.forEach(image => {
-      image.picture = null;
-      image.preview = null;
-    });
-
     this.editForm.patchValue({
       id: part.id,
       name: part.name,
       description: part.description,
       number: part.number,
-      images: part.images,
       bookId: part.bookId,
     });
   }
@@ -88,7 +76,6 @@ export class PartUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       description: this.editForm.get(['description'])!.value,
       number: this.editForm.get(['number'])!.value,
-      images: this.editForm.get(['images'])!.value,
       bookId: this.editForm.get(['bookId'])!.value,
     };
   }
@@ -113,7 +100,7 @@ export class PartUpdateComponent implements OnInit {
     return item.id;
   }
 
-  getSelected(selectedVals: IImage[], option: IImage): IImage {
+  getSelected(selectedVals: ICover[], option: ICover): ICover {
     if (selectedVals) {
       for (let i = 0; i < selectedVals.length; i++) {
         if (option.id === selectedVals[i].id) {

@@ -20,7 +20,6 @@
       "description": "Description",
       "number": "Number",
       "chapter": "Chapter",
-      "image": "Image",
       "book": "Book"
     }
   }

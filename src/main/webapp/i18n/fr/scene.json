@@ -20,7 +20,6 @@
       "number": "Numéro",
       "text": "Texte",
       "timestampStart": "Date / Heure",
-      "image": "Image",
       "chapter": "Chapitre",
       "required": {
         "name": "Le champ Nom est requis",

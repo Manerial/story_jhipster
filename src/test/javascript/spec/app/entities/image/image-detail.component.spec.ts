@@ -4,25 +4,25 @@ import { of } from 'rxjs';
 import { JhiDataUtils } from 'ng-jhipster';
 
 import { NidAuxHistoiresTestModule } from '../../../test.module';
-import { ImageDetailComponent } from 'app/entities/image/image-detail.component';
-import { Image } from 'app/shared/model/image.model';
+import { CoverDetailComponent } from 'app/entities/cover/cover-detail.component';
+import { Cover } from 'app/shared/model/cover.model';
 
 describe('Component Tests', () => {
   describe('Image Management Detail Component', () => {
-    let comp: ImageDetailComponent;
-    let fixture: ComponentFixture<ImageDetailComponent>;
+    let comp: CoverDetailComponent;
+    let fixture: ComponentFixture<CoverDetailComponent>;
     let dataUtils: JhiDataUtils;
-    const route = ({ data: of({ image: new Image(123) }) } as any) as ActivatedRoute;
+    const route = ({ data: of({ image: new Cover(123) }) } as any) as ActivatedRoute;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [NidAuxHistoiresTestModule],
-        declarations: [ImageDetailComponent],
+        declarations: [CoverDetailComponent],
         providers: [{ provide: ActivatedRoute, useValue: route }],
       })
-        .overrideTemplate(ImageDetailComponent, '')
+        .overrideTemplate(CoverDetailComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(ImageDetailComponent);
+      fixture = TestBed.createComponent(CoverDetailComponent);
       comp = fixture.componentInstance;
       dataUtils = fixture.debugElement.injector.get(JhiDataUtils);
     });
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         // THEN
-        expect(comp.image).toEqual(jasmine.objectContaining({ id: 123 }));
+        expect(comp.cover).toEqual(jasmine.objectContaining({ id: 123 }));
       });
     });
 

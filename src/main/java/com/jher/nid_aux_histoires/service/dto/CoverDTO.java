@@ -5,9 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Lob;
 
 /**
- * A DTO for the {@link com.jher.nid_aux_histoires.domain.Image} entity.
+ * A DTO for the {@link com.jher.nid_aux_histoires.domain.Cover} entity.
  */
-public class ImageDTO implements Serializable {
+public class CoverDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -81,11 +81,11 @@ public class ImageDTO implements Serializable {
 		if (this == o) {
 			return true;
 		}
-		if (!(o instanceof ImageDTO)) {
+		if (!(o instanceof CoverDTO)) {
 			return false;
 		}
 
-		return id != null && id.equals(((ImageDTO) o).id);
+		return id != null && id.equals(((CoverDTO) o).id);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class ImageDTO implements Serializable {
 	// prettier-ignore
 	@Override
 	public String toString() {
-		return "ImageDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", picture='" + getPicture() + "'"
+		return "CoverDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", picture='" + getPicture() + "'"
 				+ ", preview='" + getPreview() + "'" + "}";
 	}
 }

@@ -10,9 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -48,11 +45,6 @@ public class Chapter implements Serializable {
 	@OneToMany(mappedBy = "chapter", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Scene> scenes = new HashSet<>();
-
-	@ManyToMany
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	@JoinTable(name = "chapter_image", joinColumns = @JoinColumn(name = "chapter_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id"))
-	private Set<Image> images = new HashSet<>();
 
 	@ManyToOne
 	@JsonIgnoreProperties(value = "chapters", allowSetters = true)
@@ -129,31 +121,6 @@ public class Chapter implements Serializable {
 
 	public void setScenes(Set<Scene> scenes) {
 		this.scenes = scenes;
-	}
-
-	public Set<Image> getImages() {
-		return images;
-	}
-
-	public Chapter images(Set<Image> images) {
-		this.images = images;
-		return this;
-	}
-
-	public Chapter addImage(Image image) {
-		this.images.add(image);
-		image.getChapters().add(this);
-		return this;
-	}
-
-	public Chapter removeImage(Image image) {
-		this.images.remove(image);
-		image.getChapters().remove(this);
-		return this;
-	}
-
-	public void setImages(Set<Image> images) {
-		this.images = images;
 	}
 
 	public Part getPart() {

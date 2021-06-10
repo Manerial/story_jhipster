@@ -2,8 +2,6 @@ package com.jher.nid_aux_histoires.service.dto;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Lob;
 
@@ -23,8 +21,6 @@ public class SceneDTO implements Serializable, Comparable<SceneDTO> {
 	private String text;
 
 	private Date timestampStart;
-
-	private Set<ImageDTO> images = new HashSet<>();
 
 	private Long chapterId;
 
@@ -68,14 +64,6 @@ public class SceneDTO implements Serializable, Comparable<SceneDTO> {
 		this.timestampStart = timestampStart;
 	}
 
-	public Set<ImageDTO> getImages() {
-		return images;
-	}
-
-	public void setImages(Set<ImageDTO> images) {
-		this.images = images;
-	}
-
 	public Long getChapterId() {
 		return chapterId;
 	}
@@ -105,8 +93,8 @@ public class SceneDTO implements Serializable, Comparable<SceneDTO> {
 	@Override
 	public String toString() {
 		return "SceneDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", number=" + getNumber() + ", text='"
-				+ getText() + "'" + ", timestampStart='" + getTimestampStart() + "'" + ", images='" + getImages() + "'"
-				+ ", chapterId=" + getChapterId() + "}";
+				+ getText() + "'" + ", timestampStart='" + getTimestampStart() + "'" + ", chapterId=" + getChapterId()
+				+ "}";
 	}
 
 	@Override

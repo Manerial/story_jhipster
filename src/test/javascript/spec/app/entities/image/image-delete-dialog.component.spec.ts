@@ -6,27 +6,27 @@ import { JhiEventManager } from 'ng-jhipster';
 import { NidAuxHistoiresTestModule } from '../../../test.module';
 import { MockEventManager } from '../../../helpers/mock-event-manager.service';
 import { MockActiveModal } from '../../../helpers/mock-active-modal.service';
-import { ImageDeleteDialogComponent } from 'app/entities/image/image-delete-dialog.component';
-import { ImageService } from 'app/entities/image/image.service';
+import { CoverDeleteDialogComponent } from 'app/entities/cover/cover-delete-dialog.component';
+import { CoverService } from 'app/entities/cover/cover.service';
 
 describe('Component Tests', () => {
-  describe('Image Management Delete Component', () => {
-    let comp: ImageDeleteDialogComponent;
-    let fixture: ComponentFixture<ImageDeleteDialogComponent>;
-    let service: ImageService;
+  describe('Cover Management Delete Component', () => {
+    let comp: CoverDeleteDialogComponent;
+    let fixture: ComponentFixture<CoverDeleteDialogComponent>;
+    let service: CoverService;
     let mockEventManager: MockEventManager;
     let mockActiveModal: MockActiveModal;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [NidAuxHistoiresTestModule],
-        declarations: [ImageDeleteDialogComponent],
+        declarations: [CoverDeleteDialogComponent],
       })
-        .overrideTemplate(ImageDeleteDialogComponent, '')
+        .overrideTemplate(CoverDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(ImageDeleteDialogComponent);
+      fixture = TestBed.createComponent(CoverDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(ImageService);
+      service = fixture.debugElement.injector.get(CoverService);
       mockEventManager = TestBed.get(JhiEventManager);
       mockActiveModal = TestBed.get(NgbActiveModal);
     });

@@ -18,15 +18,15 @@ import com.jher.nid_aux_histoires.domain.Part;
 @Repository
 public interface PartRepository extends JpaRepository<Part, Long> {
 
-	@Query(value = "select distinct part from Part part left join fetch part.images", countQuery = "select count(distinct part) from Part part")
+	@Query(value = "select distinct part from Part part", countQuery = "select count(distinct part) from Part part")
 	Page<Part> findAllWithEagerRelationships(Pageable pageable);
 
-	@Query("select distinct part from Part part left join fetch part.images")
+	@Query("select distinct part from Part part")
 	List<Part> findAllWithEagerRelationships();
 
-	@Query("select part from Part part left join fetch part.images where part.id =:id")
+	@Query("select part from Part part where part.id =:id")
 	Optional<Part> findOneWithEagerRelationships(@Param("id") Long id);
 
-	@Query("select part from Part part left join fetch part.images where part.book.id =:bookId")
+	@Query("select part from Part part where part.book.id =:bookId")
 	List<Part> findAllByBookId(@Param("bookId") Long bookId);
 }

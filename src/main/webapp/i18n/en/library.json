@@ -26,9 +26,9 @@
     "next": "Next",
     "author": "Author\u00A0: "
   },
-  "image": {
-    "title": "Images for \"{{ entityName }}\"",
-    "no_image": "No image for \"{{ entityName }}\""
+  "cover": {
+    "title": "Covers for \"{{ entityName }}\"",
+    "no_cover": "No cover for \"{{ entityName }}\""
   },
   "bonus": {
     "title": "Bonuses for \"{{ entityName }}\"",
