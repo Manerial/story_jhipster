@@ -1,11 +1,10 @@
 OBLIGATOIRE
 
 GUI :
-	- Description pour les bonus
 	- Générateur de QR_Code
 
 Section Contact
-"Vous pouvez nous contacter via le formulaire proposé ou sur le Discord de la communauté"
+	"Vous pouvez nous contacter via le formulaire proposé ou sur le Discord de la communauté"
 
 Mots clés recherche Google
 	

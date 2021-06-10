@@ -65,11 +65,12 @@ export class CommentUpdateComponent implements OnInit {
     if (comment.id !== undefined) {
       this.subscribeToSaveResponse(this.commentService.update(comment));
     } else {
+      delete comment.id;
       this.subscribeToSaveResponse(this.commentService.create(comment));
     }
   }
 
-  private createFromForm(): IComment {
+  private createFromForm(): any {
     return {
       ...new Comment(),
       id: this.editForm.get(['id'])!.value,

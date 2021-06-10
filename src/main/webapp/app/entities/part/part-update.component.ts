@@ -76,11 +76,12 @@ export class PartUpdateComponent implements OnInit {
     if (part.id !== undefined && part.id !== 0) {
       this.subscribeToSaveResponse(this.partService.update(part));
     } else {
+      delete part.id;
       this.subscribeToSaveResponse(this.partService.create(part));
     }
   }
 
-  private createFromForm(): IPart {
+  private createFromForm(): any {
     return {
       ...new Part(),
       id: this.editForm.get(['id'])!.value,

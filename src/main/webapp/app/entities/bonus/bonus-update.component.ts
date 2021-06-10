@@ -47,11 +47,12 @@ export class BonusUpdateComponent implements OnInit {
     if (bonus.id !== undefined) {
       this.subscribeToSaveResponse(this.bonusService.update(bonus));
     } else {
+      delete bonus.id;
       this.subscribeToSaveResponse(this.bonusService.create(bonus));
     }
   }
 
-  private createFromForm(): IBonus {
+  private createFromForm(): any {
     return {
       ...new Bonus(),
       id: this.editForm.get(['id'])!.value,

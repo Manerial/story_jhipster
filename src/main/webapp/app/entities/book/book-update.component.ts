@@ -68,11 +68,12 @@ export class BookUpdateComponent implements OnInit {
     if (book.id !== undefined && book.id !== 0) {
       this.subscribeToSaveResponse(this.bookService.update(book));
     } else {
+      delete book.id;
       this.subscribeToSaveResponse(this.bookService.create(book));
     }
   }
 
-  private createFromForm(): IBook {
+  private createFromForm(): any {
     return {
       ...new Book(),
       id: this.editForm.get(['id'])!.value,

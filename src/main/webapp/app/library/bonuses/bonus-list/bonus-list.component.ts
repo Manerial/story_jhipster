@@ -17,6 +17,7 @@ export class BonusListComponent implements OnInit {
   public imageIsLoading = true;
   public bonusIsLoading = true;
   public entityName = '';
+  public showDescription: boolean[] = [];
 
   constructor(
     public acRoute: ActivatedRoute,
@@ -53,12 +54,15 @@ export class BonusListComponent implements OnInit {
     this.bonusService.getAllBonusByBookId(id).subscribe(bonusList => {
       if (bonusList.body) {
         this.bonusList = bonusList.body;
+        for (const bonus of this.bonusList) {
+          this.showDescription[bonus.id] = false;
+        }
       }
       this.bonusIsLoading = false;
     });
   }
 
-  download(bonus: IBonus): void {
+  downloadBonus(bonus: IBonus): void {
     this.bonusService.download(bonus.id).subscribe(data => {
       if (data.body != null) {
         const downloadURL = window.URL.createObjectURL(data.body);
@@ -68,5 +72,21 @@ export class BonusListComponent implements OnInit {
         anchor.click();
       }
     });
+  }
+
+  downloadImage(image: IImage): void {
+    this.imageService.download(image.id).subscribe(data => {
+      if (data.body != null) {
+        const downloadURL = window.URL.createObjectURL(data.body);
+        const anchor = document.createElement('a');
+        anchor.download = image.name + '.' + image.pictureContentType.split('/')[1];
+        anchor.href = downloadURL;
+        anchor.click();
+      }
+    });
+  }
+
+  toggleDescription(bonusId: any): void {
+    this.showDescription[bonusId] = !this.showDescription[bonusId];
   }
 }

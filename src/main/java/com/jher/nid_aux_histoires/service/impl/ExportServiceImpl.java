@@ -91,6 +91,12 @@ public class ExportServiceImpl implements ExportService {
 			return new MediaType("application", "epub+zip");
 		case pdf:
 			return MediaType.APPLICATION_PDF;
+		case jpg:
+			return new MediaType("image", "jpg");
+		case jpeg:
+			return MediaType.IMAGE_JPEG;
+		case png:
+			return MediaType.IMAGE_PNG;
 		default:
 			return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
 		}

@@ -22,6 +22,8 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 
 	private Long bookId;
 
+	private String description;
+
 	public Long getId() {
 		return id;
 	}
@@ -66,6 +68,14 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 		this.setData(file.getBytes());
 		this.setName(FilenameUtils.getBaseName(file.getOriginalFilename()));
 		this.setExtension(FilenameUtils.getExtension(file.getOriginalFilename()));
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

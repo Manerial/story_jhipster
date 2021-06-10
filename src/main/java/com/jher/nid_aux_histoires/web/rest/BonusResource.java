@@ -65,11 +65,13 @@ public class BonusResource {
 	 */
 	@PostMapping(path = "/bonuses", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
 	public ResponseEntity<BonusDTO> createBonus(@RequestParam(name = "bookId", required = false) Long bookId,
+			@RequestParam(name = "description", required = false) String description,
 			@RequestParam("file") MultipartFile file) throws URISyntaxException, IOException {
 		BonusDTO bonusDTO = new BonusDTO();
 		log.debug("REST request to save Bonus : {}", bonusDTO);
 		bonusDTO.setFile(file);
 		bonusDTO.setBookId(bookId);
+		bonusDTO.setDescription(description);
 		if (bonusDTO.getId() != null) {
 			throw new BadRequestAlertException("A new bonus cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -94,11 +96,13 @@ public class BonusResource {
 	 */
 	@PutMapping(path = "/bonuses", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
 	public ResponseEntity<BonusDTO> updateBonus(@RequestParam("id") Long id,
-			@RequestParam(name = "bookId", required = false) Long bookId, @RequestParam("file") MultipartFile file)
-			throws URISyntaxException, IOException {
+			@RequestParam(name = "bookId", required = false) Long bookId,
+			@RequestParam(name = "description", required = false) String description,
+			@RequestParam("file") MultipartFile file) throws URISyntaxException, IOException {
 		BonusDTO bonusDTO = new BonusDTO();
 		bonusDTO.setId(id);
 		bonusDTO.setBookId(bookId);
+		bonusDTO.setDescription(description);
 		log.debug("REST request to update Bonus : {}", bonusDTO);
 		bonusDTO.setFile(file);
 		if (id == null) {
