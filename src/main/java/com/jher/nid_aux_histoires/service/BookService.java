@@ -1,6 +1,5 @@
 package com.jher.nid_aux_histoires.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -46,26 +45,28 @@ public interface BookService {
 	Page<BookDTO> findAll(Pageable pageable);
 
 	/**
-	 * Get all the books.
+	 * Get all the books tagged as Visible.
 	 *
 	 * @param pageable the pagination information.
 	 * @return the list of entities.
 	 */
-	List<BookDTO> findAllByAuthorId(String login, boolean filterVisible);
+	Page<BookDTO> findAllVisible(Pageable pageable);
 
 	/**
-	 * Get all the books with eager load of many-to-many relationships.
+	 * Get all the books by Author.
 	 *
+	 * @param pageable the pagination information.
 	 * @return the list of entities.
 	 */
-	Page<BookDTO> findAllWithEagerRelationships(Pageable pageable);
+	Page<BookDTO> findAllByAuthorId(Pageable pageable, String login);
 
 	/**
-	 * Get all the books with eager load of many-to-many relationships.
+	 * Get all the books tagged as Visible by Author.
 	 *
+	 * @param pageable the pagination information.
 	 * @return the list of entities.
 	 */
-	List<BookDTO> findAllWithEagerRelationships();
+	Page<BookDTO> findAllVisibleByAuthorId(Pageable pageable, String login);
 
 	/**
 	 * Get the "id" book.

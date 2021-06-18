@@ -18,6 +18,7 @@
       },
       "name": "Name",
       "number": "Number",
+      "numberAuto": "(if < 1, will be filled in automatically)",
       "text": "Text",
       "timestampStart": "Date / Time",
       "chapter": "Chapter",

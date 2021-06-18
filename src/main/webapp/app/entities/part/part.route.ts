@@ -39,7 +39,7 @@ export const partRoute: Routes = [
     path: '',
     component: PartComponent,
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       defaultSort: 'id,asc',
       pageTitle: 'nidAuxHistoiresApp.part.home.title',
     },
@@ -52,7 +52,7 @@ export const partRoute: Routes = [
       part: PartResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.part.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -64,7 +64,7 @@ export const partRoute: Routes = [
       part: PartResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.part.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -76,7 +76,7 @@ export const partRoute: Routes = [
       part: PartResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.part.home.title',
     },
     canActivate: [UserRouteAccessService],

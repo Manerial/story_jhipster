@@ -3,7 +3,6 @@ package com.jher.nid_aux_histoires.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -142,27 +140,5 @@ public class WordAnalysisResource {
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();
-	}
-
-	/**
-	 * Génère une liste de mots en fonction de contraintes
-	 * 
-	 * @return une réponse contenant la liste des entités
-	 */
-	@GetMapping("/word-analyses/words")
-	public ResponseEntity<List<String>> generateWords(@RequestParam int number, @RequestParam int fixLength,
-			@RequestParam String type) {
-		List<String> generatedWords = wordAnalysisService.generateWords(number, fixLength, type);
-		return ResponseEntity.ok().body(generatedWords);
-	}
-
-	/**
-	 * Fournit la liste des objets dans la BDD
-	 * 
-	 * @return une réponse contenant la liste des entités
-	 */
-	@GetMapping("/word-analyses/types")
-	public ResponseEntity<List<Map<String, String>>> getTypes() {
-		return ResponseEntity.ok().body(wordAnalysisService.getListOfTypes());
 	}
 }

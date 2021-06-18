@@ -29,7 +29,6 @@ import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Cover;
 import com.jher.nid_aux_histoires.repository.CoverRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
-import com.jher.nid_aux_histoires.service.CoverService;
 import com.jher.nid_aux_histoires.service.dto.CoverDTO;
 import com.jher.nid_aux_histoires.service.mapper.CoverMapper;
 
@@ -59,9 +58,6 @@ public class CoverResourceIT {
 
 	@Autowired
 	private CoverMapper coverMapper;
-
-	@Autowired
-	private CoverService coverService;
 
 	@Autowired
 	private EntityManager em;

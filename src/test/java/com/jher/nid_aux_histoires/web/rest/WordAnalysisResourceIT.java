@@ -28,7 +28,6 @@ import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.WordAnalysis;
 import com.jher.nid_aux_histoires.repository.WordAnalysisRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
-import com.jher.nid_aux_histoires.service.WordAnalysisService;
 import com.jher.nid_aux_histoires.service.dto.WordAnalysisDTO;
 import com.jher.nid_aux_histoires.service.mapper.WordAnalysisMapper;
 
@@ -54,9 +53,6 @@ public class WordAnalysisResourceIT {
 
 	@Autowired
 	private WordAnalysisMapper wordAnalysisMapper;
-
-	@Autowired
-	private WordAnalysisService wordAnalysisService;
 
 	@Autowired
 	private EntityManager em;

@@ -20,7 +20,11 @@
       "author": "Author",
       "description": "Description",
       "part": "Part",
-      "cover": "Cover"
+      "cover": "Cover",
+      "visibility": "Visibility: ",
+      "required": {
+        "name": "Name field is required"
+      }
     }
   }
 }

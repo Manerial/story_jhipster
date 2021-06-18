@@ -2,7 +2,7 @@
     <h2 id="page-heading">
         <span jhiTranslate="nidAuxHistoiresApp.bonus.home.title">Bonuses</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bonus" [routerLink]="['/bonus/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bonus" [routerLink]="['/entities/bonus/new']">
             <fa-icon icon="plus"></fa-icon>
             <span  jhiTranslate="nidAuxHistoiresApp.bonus.home.createLabel">
             Create a new Bonus
@@ -30,20 +30,20 @@
             </thead>
             <tbody>
                 <tr *ngFor="let bonus of bonuses ;trackBy: trackId">
-                    <td><a [routerLink]="['/bonus', bonus.id, 'view']">{{ bonus.id }}</a></td>
+                    <td><a [routerLink]="['/entities/bonus', bonus.id, 'view']">{{ bonus.id }}</a></td>
                     <td>{{ bonus.name }}</td>
                     <td>{{ bonus.extension }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
-                                    [routerLink]="['/bonus', bonus.id, 'view']"
+                                    [routerLink]="['/entities/bonus', bonus.id, 'view']"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
                             <button type="submit"
-                                    [routerLink]="['/bonus', bonus.id, 'edit']"
+                                    [routerLink]="['/entities/bonus', bonus.id, 'edit']"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>

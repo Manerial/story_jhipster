@@ -14,7 +14,6 @@ type StringArrayResponseType = HttpResponse<string[]>;
 @Injectable({ providedIn: 'root' })
 export class BookService {
   public resourceUrl = SERVER_API_URL + 'api/books';
-  public resourceLightUrl = SERVER_API_URL + 'api/books_light';
   public downloadUrl = SERVER_API_URL + 'api/download';
 
   constructor(protected http: HttpClient) {}
@@ -28,7 +27,7 @@ export class BookService {
   }
 
   updateVisibility(id: number): Observable<EntityResponseType> {
-    return this.http.get<IBook>(`${this.resourceUrl}/visibility/${id}`, { observe: 'response' });
+    return this.http.put<IBook>(`${this.resourceUrl}/visibility/${id}`, null, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
@@ -36,7 +35,7 @@ export class BookService {
   }
 
   findLight(id: number): Observable<EntityResponseType> {
-    return this.http.get<IBook>(`${this.resourceLightUrl}/${id}`, { observe: 'response' });
+    return this.http.get<IBook>(`${this.resourceUrl}/light/${id}`, { observe: 'response' });
   }
 
   findAllByAuthor(login: string): Observable<EntityArrayResponseType> {

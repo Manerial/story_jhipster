@@ -39,7 +39,7 @@ export const sceneRoute: Routes = [
     path: '',
     component: SceneComponent,
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       defaultSort: 'id,asc',
       pageTitle: 'nidAuxHistoiresApp.scene.home.title',
     },
@@ -52,7 +52,7 @@ export const sceneRoute: Routes = [
       scene: SceneResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.scene.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -64,7 +64,7 @@ export const sceneRoute: Routes = [
       scene: SceneResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.scene.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -76,7 +76,7 @@ export const sceneRoute: Routes = [
       scene: SceneResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.scene.home.title',
     },
     canActivate: [UserRouteAccessService],

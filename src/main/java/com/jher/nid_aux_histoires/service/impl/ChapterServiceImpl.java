@@ -44,6 +44,9 @@ public class ChapterServiceImpl implements ChapterService {
 	public ChapterDTO save(ChapterDTO chapterDTO) {
 		log.debug("Request to save Chapter : {}", chapterDTO);
 		Chapter chapter = chapterMapper.toEntity(chapterDTO);
+		if (chapter.getNumber() <= 0) {
+			chapter.setNumber(findNextNumberForBookId(chapter.getPart().getId()));
+		}
 		chapter = chapterRepository.save(chapter);
 		return chapterMapper.toDto(chapter);
 	}
@@ -68,18 +71,27 @@ public class ChapterServiceImpl implements ChapterService {
 		return chapterRepository.findAll(pageable).map(chapterMapper::toDto);
 	}
 
-	public Page<ChapterDTO> findAllWithEagerRelationships(Pageable pageable) {
-		return chapterRepository.findAllWithEagerRelationships(pageable).map(chapterMapper::toDto);
+	@Override
+	@Transactional(readOnly = true)
+	public Page<ChapterDTO> findAllByAuthorLogin(Pageable pageable, String authorLogin) {
+		return chapterRepository.findAllByAuthorLogin(pageable, authorLogin).map(chapterMapper::toDto);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public String findAuthorLoginByChapterId(Long id) {
+		return chapterRepository.findAuthorLoginByChapterId(id);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<ChapterDTO> findOne(Long id) {
 		log.debug("Request to get Chapter : {}", id);
-		return chapterRepository.findOneWithEagerRelationships(id).map(chapterMapper::toDto);
+		return chapterRepository.findOne(id).map(chapterMapper::toDto);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public void delete(Long id) {
 		log.debug("Request to delete Chapter : {}", id);
 		Chapter chapter = chapterRepository.findById(id).get();
@@ -87,5 +99,15 @@ public class ChapterServiceImpl implements ChapterService {
 			sceneService.delete(scene.getId());
 		}
 		chapterRepository.deleteById(id);
+	}
+
+	@Transactional(readOnly = true)
+	private int findNextNumberForBookId(Long bookId) {
+		log.debug("Request to get all Parts");
+		int bigest = 1;
+		for (Chapter chapter : chapterRepository.findAllByPartId(bookId)) {
+			bigest = (bigest > chapter.getNumber()) ? bigest : chapter.getNumber() + 1;
+		}
+		return bigest;
 	}
 }

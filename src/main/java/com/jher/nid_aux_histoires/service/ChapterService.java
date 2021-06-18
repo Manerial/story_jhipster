@@ -38,11 +38,20 @@ public interface ChapterService {
 	Page<ChapterDTO> findAll(Pageable pageable);
 
 	/**
-	 * Get all the chapters with eager load of many-to-many relationships.
+	 * Get all the chapters by author Id.
 	 *
+	 * @param pageable the pagination information.
 	 * @return the list of entities.
 	 */
-	Page<ChapterDTO> findAllWithEagerRelationships(Pageable pageable);
+	Page<ChapterDTO> findAllByAuthorLogin(Pageable pageable, String authorLogin);
+
+	/**
+	 * Get the author of the "id" chapter.
+	 *
+	 * @param id the id of the entity.
+	 * @return the entity.
+	 */
+	String findAuthorLoginByChapterId(Long id);
 
 	/**
 	 * Get the "id" chapter.

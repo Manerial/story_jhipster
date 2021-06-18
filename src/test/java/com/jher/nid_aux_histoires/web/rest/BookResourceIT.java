@@ -2,10 +2,6 @@ package com.jher.nid_aux_histoires.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -14,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -27,7 +22,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -64,9 +58,6 @@ public class BookResourceIT {
 
 	@Mock
 	private BookService bookServiceMock;
-
-	@Autowired
-	private BookService bookService;
 
 	@Autowired
 	private EntityManager em;
@@ -149,24 +140,6 @@ public class BookResourceIT {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*].id").value(hasItem(book.getId().intValue())))
 				.andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
-	}
-
-	@SuppressWarnings({ "unchecked" })
-	public void getAllBooksWithEagerRelationshipsIsEnabled() throws Exception {
-		when(bookServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-		restBookMockMvc.perform(get("/api/books?eagerload=true")).andExpect(status().isOk());
-
-		verify(bookServiceMock, times(1)).findAllWithEagerRelationships(any());
-	}
-
-	@SuppressWarnings({ "unchecked" })
-	public void getAllBooksWithEagerRelationshipsIsNotEnabled() throws Exception {
-		when(bookServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-		restBookMockMvc.perform(get("/api/books?eagerload=true")).andExpect(status().isOk());
-
-		verify(bookServiceMock, times(1)).findAllWithEagerRelationships(any());
 	}
 
 	@Test

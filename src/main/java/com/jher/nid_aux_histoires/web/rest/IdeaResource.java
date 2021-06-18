@@ -5,8 +5,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,16 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -145,53 +138,5 @@ public class IdeaResource {
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();
-	}
-
-	/**
-	 * Génère une liste de personnages
-	 * 
-	 * @return une réponse contenant la liste des entités
-	 */
-	@PostMapping("/ideas/personas")
-	public ResponseEntity<List<R_PersonaDTO>> generatePersonas(@RequestParam int number,
-			@Valid @RequestBody R_PersonaDTO constraint) {
-		List<R_PersonaDTO> generatedWords = ideaService.generateR_Personas(number, constraint);
-		return ResponseEntity.ok().body(generatedWords);
-	}
-
-	/**
-	 * Génère une liste de lieux
-	 * 
-	 * @return une réponse contenant la liste des entités
-	 */
-	@PostMapping("/ideas/locations")
-	public ResponseEntity<List<R_LocationDTO>> generateLocations(@RequestParam int number,
-			@Valid @RequestBody R_LocationDTO constraint) {
-		List<R_LocationDTO> generatedLocations = ideaService.generateR_Locations(number, constraint);
-		return ResponseEntity.ok().body(generatedLocations);
-	}
-
-	/**
-	 * Génère une liste d'objets
-	 * 
-	 * @return une réponse contenant la liste des entités
-	 */
-	@PostMapping("/ideas/objects")
-	public ResponseEntity<List<R_ObjectDTO>> generateObject(@RequestParam int number,
-			@Valid @RequestBody R_ObjectDTO constraint) {
-		List<R_ObjectDTO> generatedObject = ideaService.generateR_Object(number, constraint);
-		return ResponseEntity.ok().body(generatedObject);
-	}
-
-	/**
-	 * Génère une liste d'options d'écriture
-	 * 
-	 * @return une réponse contenant la liste des entités
-	 */
-	@PostMapping("/ideas/writing_options")
-	public ResponseEntity<List<R_WritingOptionDTO>> generateWritingOptions(@RequestParam int number,
-			@Valid @RequestBody R_WritingOptionDTO constraint) {
-		List<R_WritingOptionDTO> generatedWritingOptions = ideaService.generateR_WritingOptions(number, constraint);
-		return ResponseEntity.ok().body(generatedWritingOptions);
 	}
 }

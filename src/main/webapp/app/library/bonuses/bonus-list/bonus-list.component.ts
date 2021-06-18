@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BonusService } from 'app/entities/bonus/bonus.service';
 import { BookService } from 'app/entities/book/book.service';
-import { CoverService } from 'app/entities/cover/cover.service';
 import { IBonus } from 'app/shared/model/bonus.model';
 
 @Component({

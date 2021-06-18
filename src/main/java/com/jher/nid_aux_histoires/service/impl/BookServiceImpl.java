@@ -1,9 +1,6 @@
 package com.jher.nid_aux_histoires.service.impl;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,33 +84,37 @@ public class BookServiceImpl implements BookService {
 		return bookRepository.findAll(pageable).map(bookMapperLight::toDto);
 	}
 
-	public Page<BookDTO> findAllWithEagerRelationships(Pageable pageable) {
-		return bookRepository.findAllWithEagerRelationships(pageable).map(bookMapper::toDto);
+	@Override
+	@Transactional(readOnly = true)
+	public Page<BookDTO> findAllVisible(Pageable pageable) {
+		log.debug("Request to get all Books");
+		return bookRepository.findAllVisible(pageable).map(bookMapperLight::toDto);
 	}
 
 	@Override
-	public List<BookDTO> findAllByAuthorId(String login, boolean filterVisible) {
-		return bookMapperLight.toDto(bookRepository.findAllByAuthorLogin(login)).stream()
-				.filter(filterVisible(filterVisible)).collect(Collectors.toList());
+	@Transactional(readOnly = true)
+	public Page<BookDTO> findAllByAuthorId(Pageable pageable, String login) {
+		return bookRepository.findAllByAuthorLogin(pageable, login).map(bookMapperLight::toDto);
 	}
 
-	public List<BookDTO> findAllWithEagerRelationships() {
-		return bookMapper.toDto(bookRepository.findAllWithEagerRelationships()).stream().filter(filterVisible(true))
-				.collect(Collectors.toList());
+	@Override
+	@Transactional(readOnly = true)
+	public Page<BookDTO> findAllVisibleByAuthorId(Pageable pageable, String login) {
+		return bookRepository.findAllVisibleByAuthorLogin(pageable, login).map(bookMapperLight::toDto);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<BookDTO> findOne(Long id) {
 		log.debug("Request to get Book : {}", id);
-		return bookRepository.findOneWithEagerRelationships(id).map(bookMapper::toDto);
+		return bookRepository.findOne(id).map(bookMapper::toDto);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<BookDTO> findOneLight(Long id) {
 		log.debug("Request to get Book : {}", id);
-		return bookRepository.findOneWithEagerRelationships(id).map(bookMapperLight::toDto);
+		return bookRepository.findOne(id).map(bookMapperLight::toDto);
 	}
 
 	@Override
@@ -127,12 +128,5 @@ public class BookServiceImpl implements BookService {
 			partService.delete(part.getId());
 		}
 		bookRepository.deleteById(id);
-	}
-
-	private Predicate<BookDTO> filterVisible(boolean filterVisible) {
-		Predicate<BookDTO> predicate = book -> {
-			return book.getVisibility() || !filterVisible;
-		};
-		return predicate;
 	}
 }

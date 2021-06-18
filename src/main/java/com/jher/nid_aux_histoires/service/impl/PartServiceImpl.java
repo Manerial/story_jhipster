@@ -1,6 +1,5 @@
 package com.jher.nid_aux_histoires.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -44,6 +43,9 @@ public class PartServiceImpl implements PartService {
 	public PartDTO save(PartDTO partDTO) {
 		log.debug("Request to save Part : {}", partDTO);
 		Part part = partMapper.toEntity(partDTO);
+		if (part.getNumber() <= 0) {
+			part.setNumber(findNextNumberForBookId(part.getBook().getId()));
+		}
 		part = partRepository.save(part);
 		return partMapper.toDto(part);
 	}
@@ -69,24 +71,21 @@ public class PartServiceImpl implements PartService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<PartDTO> findAllByBookId(Long bookId) {
-		log.debug("Request to get all Parts");
-		return partMapper.toDto(partRepository.findAllByBookId(bookId));
-	}
-
-	public Page<PartDTO> findAllWithEagerRelationships(Pageable pageable) {
-		return partRepository.findAllWithEagerRelationships(pageable).map(partMapper::toDto);
-	}
-
-	public List<PartDTO> findAllWithEagerRelationships() {
-		return partMapper.toDto(partRepository.findAllWithEagerRelationships());
+	public Page<PartDTO> findAllByAuthorLogin(Pageable pageable, String authorLogin) {
+		return partRepository.findAllByAuthorLogin(pageable, authorLogin).map(partMapper::toDto);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<PartDTO> findOne(Long id) {
 		log.debug("Request to get Part : {}", id);
-		return partRepository.findOneWithEagerRelationships(id).map(partMapper::toDto);
+		return partRepository.findOne(id).map(partMapper::toDto);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public String findAuthorLoginByPartId(Long id) {
+		return partRepository.findAuthorLoginByPartId(id);
 	}
 
 	@Override
@@ -97,5 +96,15 @@ public class PartServiceImpl implements PartService {
 			chapterService.delete(chapter.getId());
 		}
 		partRepository.deleteById(id);
+	}
+
+	@Transactional(readOnly = true)
+	private int findNextNumberForBookId(Long bookId) {
+		log.debug("Request to get all Parts");
+		int bigest = 1;
+		for (Part part : partRepository.findAllByBookId(bookId)) {
+			bigest = (bigest > part.getNumber()) ? bigest : part.getNumber() + 1;
+		}
+		return bigest;
 	}
 }

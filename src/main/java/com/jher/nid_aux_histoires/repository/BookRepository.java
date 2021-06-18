@@ -1,6 +1,5 @@
 package com.jher.nid_aux_histoires.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -17,19 +16,18 @@ import com.jher.nid_aux_histoires.domain.Book;
  */
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-	@Override
-	@Query(value = "select distinct book from Book book where book.visibility = true", countQuery = "select count(distinct book) from Book book")
+	@Query(value = "select distinct book from Book book", countQuery = "select count(distinct book) from Book book")
 	Page<Book> findAll(Pageable pageable);
 
 	@Query(value = "select distinct book from Book book where book.visibility = true", countQuery = "select count(distinct book) from Book book")
-	Page<Book> findAllWithEagerRelationships(Pageable pageable);
-
-	@Query("select distinct book from Book book")
-	List<Book> findAllWithEagerRelationships();
-
-	@Query("select book from Book book where book.id =:id")
-	Optional<Book> findOneWithEagerRelationships(@Param("id") Long id);
+	Page<Book> findAllVisible(Pageable pageable);
 
 	@Query("select book from Book book where book.author.login =:login")
-	List<Book> findAllByAuthorLogin(@Param("login") String login);
+	Page<Book> findAllByAuthorLogin(Pageable pageable, @Param("login") String login);
+
+	@Query("select book from Book book where book.author.login =:login and book.visibility = true")
+	Page<Book> findAllVisibleByAuthorLogin(Pageable pageable, @Param("login") String login);
+
+	@Query("select book from Book book where book.id =:id")
+	Optional<Book> findOne(@Param("id") Long id);
 }
