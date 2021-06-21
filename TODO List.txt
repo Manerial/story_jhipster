@@ -3,8 +3,6 @@ Gestion autonome des histoires :
 
 	Gestion des livres :
 		Gérer la couverture (upload)
-		
-	Gestion des bonus
 	
 	Auteur pour couvertures
 
