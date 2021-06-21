@@ -19,7 +19,7 @@
       "name": "Nom",
       "author": "Auteur",
       "description": "Description",
-      "part": "Partie",
+      "parts": "Parties",
       "cover": "Couverture",
       "visibility": "Visibilité : ",
       "required": {

@@ -23,7 +23,6 @@ type SelectableEntity = ICover | IChapter;
 export class SceneUpdateComponent implements OnInit {
   isSaving = false;
   chapters: IChapter[] = [];
-  timestampStartDp: any;
   datetimeFormat = Regex.datetimeFormat;
 
   editForm = this.fb.group({
@@ -31,7 +30,8 @@ export class SceneUpdateComponent implements OnInit {
     name: [null, [Validators.required]],
     number: [null, [Validators.required]],
     text: [null, [Validators.required]],
-    timestampStart: [null, [Validators.pattern(Regex.datetime)]],
+    timeStart: [],
+    dateStart: [],
     chapterId: [null, [Validators.required]],
   });
 
@@ -58,7 +58,8 @@ export class SceneUpdateComponent implements OnInit {
       name: scene.name,
       number: scene.number,
       text: scene.text,
-      timestampStart: scene.timestampStart,
+      timeStart: String(scene.timestampStart).substring(11, 19),
+      dateStart: String(scene.timestampStart).substring(0, 10),
       chapterId: scene.chapterId,
     });
   }
@@ -101,9 +102,15 @@ export class SceneUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       number: this.editForm.get(['number'])!.value,
       text: this.editForm.get(['text'])!.value,
-      timestampStart: this.editForm.get(['timestampStart'])!.value,
+      timestampStart: this.formFieldToDate(),
       chapterId: this.editForm.get(['chapterId'])!.value,
     };
+  }
+
+  private formFieldToDate(): Date {
+    const date = this.editForm.get(['dateStart'])!.value;
+    const time = this.editForm.get(['timeStart'])!.value;
+    return new Date(date + 'T' + time + '.000+0000');
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IScene>>): void {

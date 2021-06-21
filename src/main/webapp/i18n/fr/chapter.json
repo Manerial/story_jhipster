@@ -20,7 +20,7 @@
       "description": "Description",
       "number": "Numéro",
       "numberAuto": "(si < 1, sera renseigné automatiquement)",
-      "scene": "Scène",
+      "scenes": "Scènes",
       "part": "Partie",
       "required": {
         "name": "Le champ Nom est requis",

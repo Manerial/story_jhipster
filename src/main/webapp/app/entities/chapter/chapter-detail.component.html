@@ -26,6 +26,12 @@
                         <a [routerLink]="['/entities/part', chapter.partId, 'view']">{{ chapter.partId }}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.chapter.scenes">Scenes</span></dt>
+                <dd>
+                    <div *ngFor="let scene of chapter.scenes">
+                        <a [routerLink]="['/entities/scene', scene.id, 'view']">{{ scene.id }} - {{ scene.name }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

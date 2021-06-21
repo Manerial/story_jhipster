@@ -20,7 +20,7 @@
       "description": "Description",
       "number": "Numéro",
       "numberAuto": "(si < 1, sera renseigné automatiquement)",
-      "chapter": "Chapitre",
+      "chapters": "Chapitres",
       "book": "Livre",
       "required": {
         "name": "Le champ Nom est requis",
