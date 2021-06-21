@@ -57,7 +57,7 @@ export class ChapterUpdateComponent implements OnInit {
       name: chapter.name,
       description: chapter.description,
       number: chapter.number,
-      partId: chapter.partId,
+      partId: chapter.partId !== 0 ? chapter.partId : null,
     });
   }
 

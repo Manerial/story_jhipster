@@ -1,10 +1,6 @@
 package com.jher.nid_aux_histoires.service.dto;
 
-import java.io.IOException;
 import java.io.Serializable;
-
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Comment} entity.
@@ -18,7 +14,7 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 
 	private byte[] data;
 
-	private String extension;
+	private String dataContentType;
 
 	private Long bookId;
 
@@ -48,12 +44,12 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 		this.data = data;
 	}
 
-	public String getExtension() {
-		return extension;
+	public String getDataContentType() {
+		return dataContentType;
 	}
 
-	public void setExtension(String extension) {
-		this.extension = extension;
+	public void setDataContentType(String dataContentType) {
+		this.dataContentType = dataContentType;
 	}
 
 	public Long getBookId() {
@@ -62,12 +58,6 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 
 	public void setBookId(Long bookId) {
 		this.bookId = bookId;
-	}
-
-	public void setFile(MultipartFile file) throws IOException {
-		this.setData(file.getBytes());
-		this.setName(FilenameUtils.getBaseName(file.getOriginalFilename()));
-		this.setExtension(FilenameUtils.getExtension(file.getOriginalFilename()));
 	}
 
 	public String getDescription() {
@@ -98,8 +88,8 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 	// prettier-ignore
 	@Override
 	public String toString() {
-		return "BonusDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", extension='" + getExtension() + "'"
-				+ "}";
+		return "BonusDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", dataContentType='"
+				+ getDataContentType() + "'" + "}";
 	}
 
 	@Override
