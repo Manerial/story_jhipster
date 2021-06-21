@@ -10,6 +10,7 @@ import { PartService } from './part.service';
 import { ICover } from 'app/shared/model/cover.model';
 import { IBook } from 'app/shared/model/book.model';
 import { BookService } from 'app/entities/book/book.service';
+import { AccountService } from 'app/core/auth/account.service';
 
 type SelectableEntity = ICover | IBook;
 
@@ -32,6 +33,7 @@ export class PartUpdateComponent implements OnInit {
   constructor(
     protected partService: PartService,
     protected bookService: BookService,
+    private accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -40,7 +42,11 @@ export class PartUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ part }) => {
       this.updateForm(part);
 
-      this.bookService.query().subscribe((res: HttpResponse<IBook[]>) => (this.books = res.body || []));
+      this.accountService.identity().subscribe(account => {
+        if (account) {
+          this.bookService.findAllByAuthor(account.login).subscribe((res: HttpResponse<IBook[]>) => (this.books = res.body || []));
+        }
+      });
     });
   }
 

@@ -19,11 +19,9 @@ export class CoverUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    name: [],
-    picture: [],
+    name: [null, [Validators.required]],
+    picture: [null, [Validators.required]],
     pictureContentType: [],
-    preview: [],
-    previewContentType: [],
   });
 
   constructor(
@@ -47,8 +45,6 @@ export class CoverUpdateComponent implements OnInit {
       name: cover.name,
       picture: cover.picture,
       pictureContentType: cover.pictureContentType,
-      preview: cover.preview,
-      previewContentType: cover.previewContentType,
     });
   }
 
@@ -100,8 +96,6 @@ export class CoverUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       pictureContentType: this.editForm.get(['pictureContentType'])!.value,
       picture: this.editForm.get(['picture'])!.value,
-      previewContentType: this.editForm.get(['previewContentType'])!.value,
-      preview: this.editForm.get(['preview'])!.value,
     };
   }
 

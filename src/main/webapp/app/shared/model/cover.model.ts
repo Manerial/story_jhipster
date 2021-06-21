@@ -1,7 +1,4 @@
 import { IBook } from 'app/shared/model/book.model';
-import { IPart } from 'app/shared/model/part.model';
-import { IChapter } from 'app/shared/model/chapter.model';
-import { IScene } from 'app/shared/model/scene.model';
 
 export interface ICover {
   id: number;
@@ -11,10 +8,6 @@ export interface ICover {
   previewContentType: string;
   preview: any;
   bookToCovers: IBook[];
-  books: IBook[];
-  parts: IPart[];
-  chapters: IChapter[];
-  scenes: IScene[];
 }
 
 export class Cover implements ICover {
@@ -25,10 +18,6 @@ export class Cover implements ICover {
   public previewContentType: string;
   public preview: any;
   public bookToCovers: IBook[];
-  public books: IBook[];
-  public parts: IPart[];
-  public chapters: IChapter[];
-  public scenes: IScene[];
 
   constructor();
   constructor(
@@ -38,11 +27,7 @@ export class Cover implements ICover {
     picture?: any,
     previewContentType?: string,
     preview?: any,
-    bookToCovers?: IBook[],
-    books?: IBook[],
-    parts?: IPart[],
-    chapters?: IChapter[],
-    scenes?: IScene[]
+    bookToCovers?: IBook[]
   );
 
   constructor(
@@ -52,11 +37,7 @@ export class Cover implements ICover {
     picture?: any,
     previewContentType?: string,
     preview?: any,
-    bookToCovers?: IBook[],
-    books?: IBook[],
-    parts?: IPart[],
-    chapters?: IChapter[],
-    scenes?: IScene[]
+    bookToCovers?: IBook[]
   ) {
     this.id = id || 0;
     this.name = name || '';
@@ -65,9 +46,5 @@ export class Cover implements ICover {
     this.previewContentType = previewContentType || '';
     this.preview = preview;
     this.bookToCovers = bookToCovers || [];
-    this.books = books || [];
-    this.parts = parts || [];
-    this.chapters = chapters || [];
-    this.scenes = scenes || [];
   }
 }
