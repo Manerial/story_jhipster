@@ -17,13 +17,13 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="picture" type="longblob">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="picture_content_type" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="preview" type="longblob">
                 <constraints nullable="true" />
@@ -32,7 +32,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="owner_id" type="bigint">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>

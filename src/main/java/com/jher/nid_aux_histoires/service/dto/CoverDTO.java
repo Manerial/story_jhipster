@@ -14,6 +14,10 @@ public class CoverDTO implements Serializable {
 
 	private String name;
 
+	private Long ownerId;
+
+	private String ownerLogin;
+
 	@Lob
 	private byte[] picture;
 
@@ -38,6 +42,22 @@ public class CoverDTO implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Long getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(Long ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public String getOwnerLogin() {
+		return ownerLogin;
+	}
+
+	public void setOwnerLogin(String ownerLogin) {
+		this.ownerLogin = ownerLogin;
 	}
 
 	public byte[] getPicture() {

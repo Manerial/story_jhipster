@@ -38,4 +38,7 @@
 	<include file="config/liquibase/data/init_data_word_analysis.xml" relativeToChangelogFile="false" />
 	<include file="config/liquibase/data/init_data_idea.xml" relativeToChangelogFile="false" />
 	
+	<include file="config/liquibase/changelog/00000000000000_fake_data_for_test.xml" relativeToChangelogFile="false" context="test"/>
+	
+	
 </databaseChangeLog>

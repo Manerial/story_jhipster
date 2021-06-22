@@ -13,6 +13,7 @@
 			<column name="picture_content_type" value="image/jpg" />
 			<column name="preview" valueBlobFile="images/preview/no_image.jpg" />
 			<column name="preview_content_type" value="image/jpg" />
+			<column name="owner_id" value="3" />
 		</insert>
 	</changeSet>
 </databaseChangeLog>

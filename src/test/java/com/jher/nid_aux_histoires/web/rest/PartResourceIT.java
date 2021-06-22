@@ -29,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Part;
+import com.jher.nid_aux_histoires.repository.BookRepository;
 import com.jher.nid_aux_histoires.repository.PartRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.PartService;
@@ -60,6 +61,9 @@ public class PartResourceIT {
 	private PartRepository partRepositoryMock;
 
 	@Autowired
+	private BookRepository bookRepository;
+
+	@Autowired
 	private PartMapper partMapper;
 
 	@Mock
@@ -79,8 +83,9 @@ public class PartResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Part createEntity(EntityManager em) {
+	public Part createEntity(EntityManager em) {
 		Part part = new Part().name(DEFAULT_NAME).description(DEFAULT_DESCRIPTION).number(DEFAULT_NUMBER);
+		part.setBook(bookRepository.getOne(1L));
 		return part;
 	}
 
@@ -90,8 +95,9 @@ public class PartResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Part createUpdatedEntity(EntityManager em) {
+	public Part createUpdatedEntity(EntityManager em) {
 		Part part = new Part().name(UPDATED_NAME).description(UPDATED_DESCRIPTION).number(UPDATED_NUMBER);
+		part.setBook(bookRepository.getOne(1L));
 		return part;
 	}
 
@@ -106,7 +112,9 @@ public class PartResourceIT {
 	public void createPart() throws Exception {
 		int databaseSizeBeforeCreate = partRepository.findAll().size();
 		// Create the Part
+
 		PartDTO partDTO = partMapper.toDto(part);
+
 		restPartMockMvc.perform(post("/api/parts").contentType(MediaType.APPLICATION_JSON)
 				.content(TestUtil.convertObjectToJsonBytes(partDTO))).andExpect(status().isCreated());
 
@@ -143,6 +151,7 @@ public class PartResourceIT {
 	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getAllParts() throws Exception {
 		// Initialize the database
+
 		partRepository.saveAndFlush(part);
 
 		// Get all the partList
@@ -159,6 +168,7 @@ public class PartResourceIT {
 	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getPart() throws Exception {
 		// Initialize the database
+
 		partRepository.saveAndFlush(part);
 
 		// Get the part
@@ -183,6 +193,7 @@ public class PartResourceIT {
 	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updatePart() throws Exception {
 		// Initialize the database
+
 		partRepository.saveAndFlush(part);
 
 		int databaseSizeBeforeUpdate = partRepository.findAll().size();
@@ -230,6 +241,7 @@ public class PartResourceIT {
 	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void deletePart() throws Exception {
 		// Initialize the database
+
 		partRepository.saveAndFlush(part);
 
 		int databaseSizeBeforeDelete = partRepository.findAll().size();

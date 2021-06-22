@@ -28,6 +28,7 @@ import org.springframework.util.Base64Utils;
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Cover;
 import com.jher.nid_aux_histoires.repository.CoverRepository;
+import com.jher.nid_aux_histoires.repository.UserRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.dto.CoverDTO;
 import com.jher.nid_aux_histoires.service.mapper.CoverMapper;
@@ -60,6 +61,9 @@ public class CoverResourceIT {
 	private CoverMapper coverMapper;
 
 	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
 	private EntityManager em;
 
 	@Autowired
@@ -73,10 +77,11 @@ public class CoverResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Cover createEntity(EntityManager em) {
+	public Cover createEntity(EntityManager em) {
 		Cover cover = new Cover().name(DEFAULT_NAME).picture(DEFAULT_PICTURE)
 				.pictureContentType(DEFAULT_PICTURE_CONTENT_TYPE).preview(DEFAULT_PREVIEW)
 				.previewContentType(DEFAULT_PREVIEW_CONTENT_TYPE);
+		cover.setOwner(userRepository.getOne(1L));
 		return cover;
 	}
 
@@ -86,10 +91,11 @@ public class CoverResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Cover createUpdatedEntity(EntityManager em) {
+	public Cover createUpdatedEntity(EntityManager em) {
 		Cover cover = new Cover().name(UPDATED_NAME).picture(UPDATED_PICTURE)
 				.pictureContentType(UPDATED_PICTURE_CONTENT_TYPE).preview(UPDATED_PREVIEW)
 				.previewContentType(UPDATED_PREVIEW_CONTENT_TYPE);
+		cover.setOwner(userRepository.getOne(1L));
 		return cover;
 	}
 

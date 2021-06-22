@@ -30,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Chapter;
 import com.jher.nid_aux_histoires.repository.ChapterRepository;
+import com.jher.nid_aux_histoires.repository.PartRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.ChapterService;
 import com.jher.nid_aux_histoires.service.dto.ChapterDTO;
@@ -60,6 +61,9 @@ public class ChapterResourceIT {
 	private ChapterRepository chapterRepositoryMock;
 
 	@Autowired
+	private PartRepository partRepository;
+
+	@Autowired
 	private ChapterMapper chapterMapper;
 
 	@Mock
@@ -79,8 +83,9 @@ public class ChapterResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Chapter createEntity(EntityManager em) {
+	public Chapter createEntity(EntityManager em) {
 		Chapter chapter = new Chapter().name(DEFAULT_NAME).description(DEFAULT_DESCRIPTION).number(DEFAULT_NUMBER);
+		chapter.setPart(partRepository.getOne(1L));
 		return chapter;
 	}
 
@@ -90,8 +95,9 @@ public class ChapterResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Chapter createUpdatedEntity(EntityManager em) {
+	public Chapter createUpdatedEntity(EntityManager em) {
 		Chapter chapter = new Chapter().name(UPDATED_NAME).description(UPDATED_DESCRIPTION).number(UPDATED_NUMBER);
+		chapter.setPart(partRepository.getOne(1L));
 		return chapter;
 	}
 

@@ -115,6 +115,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Book> books = new HashSet<>();
 
+	@OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private Set<Cover> covers = new HashSet<>();
+
+	@OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private Set<Bonus> bonuses = new HashSet<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -276,6 +284,56 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	public void setBooks(Set<Book> books) {
 		this.books = books;
+	}
+
+	public Set<Cover> getCovers() {
+		return covers;
+	}
+
+	public User covers(Set<Cover> covers) {
+		this.covers = covers;
+		return this;
+	}
+
+	public User addCover(Cover cover) {
+		this.covers.add(cover);
+		cover.setOwner(this);
+		return this;
+	}
+
+	public User removeCover(Cover cover) {
+		this.covers.remove(cover);
+		cover.setOwner(null);
+		return this;
+	}
+
+	public void setCovers(Set<Cover> covers) {
+		this.covers = covers;
+	}
+
+	public Set<Bonus> getBonuses() {
+		return bonuses;
+	}
+
+	public User bonuss(Set<Bonus> bonuss) {
+		this.bonuses = bonuss;
+		return this;
+	}
+
+	public User addBonus(Bonus bonus) {
+		this.bonuses.add(bonus);
+		bonus.setOwner(this);
+		return this;
+	}
+
+	public User removeBonus(Bonus bonus) {
+		this.bonuses.remove(bonus);
+		bonus.setOwner(null);
+		return this;
+	}
+
+	public void setBonuss(Set<Bonus> bonuss) {
+		this.bonuses = bonuss;
 	}
 
 	@Override

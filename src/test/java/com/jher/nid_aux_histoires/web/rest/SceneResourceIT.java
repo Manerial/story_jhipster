@@ -33,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Scene;
+import com.jher.nid_aux_histoires.repository.ChapterRepository;
 import com.jher.nid_aux_histoires.repository.SceneRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.SceneService;
@@ -67,6 +68,9 @@ public class SceneResourceIT {
 	private SceneRepository sceneRepositoryMock;
 
 	@Autowired
+	private ChapterRepository chapterRepository;
+
+	@Autowired
 	private SceneMapper sceneMapper;
 
 	@Mock
@@ -95,9 +99,10 @@ public class SceneResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Scene createEntity(EntityManager em) {
+	public Scene createEntity(EntityManager em) {
 		Scene scene = new Scene().name(DEFAULT_NAME).number(DEFAULT_NUMBER).text(DEFAULT_TEXT)
 				.timestampStart(DEFAULT_TIMESTAMP_START);
+		scene.setChapter(chapterRepository.getOne(1L));
 		return scene;
 	}
 
@@ -107,9 +112,10 @@ public class SceneResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Scene createUpdatedEntity(EntityManager em) {
+	public Scene createUpdatedEntity(EntityManager em) {
 		Scene scene = new Scene().name(UPDATED_NAME).number(UPDATED_NUMBER).text(UPDATED_TEXT)
 				.timestampStart(UPDATED_TIMESTAMP_START);
+		scene.setChapter(chapterRepository.getOne(1L));
 		return scene;
 	}
 
@@ -124,6 +130,7 @@ public class SceneResourceIT {
 	public void createScene() throws Exception {
 		int databaseSizeBeforeCreate = sceneRepository.findAll().size();
 		// Create the Scene
+
 		SceneDTO sceneDTO = sceneMapper.toDto(scene);
 		restSceneMockMvc.perform(post("/api/scenes").contentType(MediaType.APPLICATION_JSON)
 				.content(TestUtil.convertObjectToJsonBytes(sceneDTO))).andExpect(status().isCreated());
@@ -162,6 +169,7 @@ public class SceneResourceIT {
 	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getAllScenes() throws Exception {
 		// Initialize the database
+
 		sceneRepository.saveAndFlush(scene);
 
 		// Get all the sceneList
@@ -179,6 +187,7 @@ public class SceneResourceIT {
 	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getScene() throws Exception {
 		// Initialize the database
+
 		sceneRepository.saveAndFlush(scene);
 
 		// Get the scene
@@ -210,6 +219,7 @@ public class SceneResourceIT {
 	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateScene() throws Exception {
 		// Initialize the database
+
 		sceneRepository.saveAndFlush(scene);
 
 		int databaseSizeBeforeUpdate = sceneRepository.findAll().size();
@@ -259,6 +269,7 @@ public class SceneResourceIT {
 	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void deleteScene() throws Exception {
 		// Initialize the database
+
 		sceneRepository.saveAndFlush(scene);
 
 		int databaseSizeBeforeDelete = sceneRepository.findAll().size();
