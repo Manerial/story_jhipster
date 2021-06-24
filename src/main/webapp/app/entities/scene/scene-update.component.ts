@@ -48,7 +48,21 @@ export class SceneUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ scene }) => {
       this.updateForm(scene);
 
-      this.chapterService.query().subscribe((res: HttpResponse<IChapter[]>) => (this.chapters = res.body || []));
+      this.getChapters(scene);
+    });
+  }
+
+  getChapters(scene: IScene): void {
+    this.chapterService.query().subscribe((res: HttpResponse<IChapter[]>) => (this.chapters = res.body || []));
+    this.getDefaultChapter(scene);
+  }
+
+  getDefaultChapter(scene: IScene): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['chapterId']) {
+        scene.chapterId = Number(params['chapterId']);
+        this.updateForm(scene);
+      }
     });
   }
 

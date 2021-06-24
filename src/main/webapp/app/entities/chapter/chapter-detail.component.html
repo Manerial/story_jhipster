@@ -31,6 +31,11 @@
                     <div *ngFor="let scene of chapter.scenes">
                         <a [routerLink]="['/entities/scene', scene.id, 'view']">{{ scene.id }} - {{ scene.name }}</a>
                     </div>
+                    <div>
+                        <a [routerLink]="['/entities/scene/new']" [queryParams]="{chapterId: chapter.id}">
+                            <fa-icon icon="plus"></fa-icon>
+                        </a>
+                    </div>
                 </dd>
             </dl>
 
