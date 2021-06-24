@@ -24,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.ChapterService;
+import com.jher.nid_aux_histoires.service.PartService;
 import com.jher.nid_aux_histoires.service.dto.ChapterDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
@@ -48,8 +49,11 @@ public class ChapterResource {
 
 	private final ChapterService chapterService;
 
-	public ChapterResource(ChapterService chapterService) {
+	private final PartService partService;
+
+	public ChapterResource(ChapterService chapterService, PartService partService) {
 		this.chapterService = chapterService;
+		this.partService = partService;
 	}
 
 	/**
@@ -64,6 +68,7 @@ public class ChapterResource {
 	@PostMapping("/chapters")
 	public ResponseEntity<ChapterDTO> createChapter(@RequestBody ChapterDTO chapterDTO) throws Exception {
 		log.debug("REST request to save Chapter : {}", chapterDTO);
+		checkChapter(chapterDTO);
 		if (chapterDTO.getId() != null) {
 			throw new BadRequestAlertException("A new chapter cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -88,7 +93,7 @@ public class ChapterResource {
 	@PutMapping("/chapters")
 	public ResponseEntity<ChapterDTO> updateChapter(@RequestBody ChapterDTO chapterDTO) throws Exception {
 		log.debug("REST request to update Chapter : {}", chapterDTO);
-		SecurityConfiguration.CheckLoggedUser(chapterService.findAuthorLoginByChapterId(chapterDTO.getId()));
+		checkChapter(chapterDTO);
 		if (chapterDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -151,5 +156,17 @@ public class ChapterResource {
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();
+	}
+
+	private void checkChapter(ChapterDTO chapterDTO) throws Exception {
+		if (chapterDTO.getId() != null) {
+			SecurityConfiguration.CheckLoggedUser(chapterService.findAuthorLoginByChapterId(chapterDTO.getId()));
+		}
+
+		Long partId = chapterDTO.getPartId();
+		String login = partService.findAuthorLoginByPartId(partId);
+		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getLoggedUser().getName())) {
+			throw new Exception("You have no access to this resource (Part : " + partId + ")");
+		}
 	}
 }

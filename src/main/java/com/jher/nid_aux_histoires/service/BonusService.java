@@ -31,6 +31,14 @@ public interface BonusService {
 	Page<BonusDTO> findAll(Pageable pageable);
 
 	/**
+	 * Get all the bonuses by Owner login.
+	 *
+	 * @param pageable the pagination information.
+	 * @return the list of entities.
+	 */
+	Page<BonusDTO> findAllByOwnerLogin(Pageable pageable, String login);
+
+	/**
 	 * Get all the bonuses by book.
 	 *
 	 * @param pageable the pagination information.

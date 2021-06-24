@@ -2,6 +2,8 @@ package com.jher.nid_aux_histoires.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,6 +17,9 @@ import com.jher.nid_aux_histoires.domain.Bonus;
 @SuppressWarnings("unused")
 @Repository
 public interface BonusRepository extends JpaRepository<Bonus, Long> {
-	@Query("select distinct bonus from Bonus bonus left join fetch bonus.book where bonus.book.id =:id")
+	@Query("select distinct bonus from Bonus bonus where bonus.book.id =:id")
 	List<Bonus> findAllByBookId(@Param("id") Long id);
+
+	@Query("select distinct bonus from Bonus bonus where bonus.owner.login =:login")
+	Page<Bonus> findAllByOwnerLogin(Pageable pageable, @Param("login") String login);
 }

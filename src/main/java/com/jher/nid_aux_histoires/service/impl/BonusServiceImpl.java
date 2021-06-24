@@ -55,6 +55,12 @@ public class BonusServiceImpl implements BonusService {
 	}
 
 	@Override
+	public Page<BonusDTO> findAllByOwnerLogin(Pageable pageable, String login) {
+		log.debug("Request to get all Bonuses by Owner");
+		return bonusRepository.findAllByOwnerLogin(pageable, login).map(bonusMapper::toDto);
+	}
+
+	@Override
 	public List<BonusDTO> findAllByBookId(Long id) {
 		log.debug("Request to get all Bonuses by Book");
 		return bonusMapperLight.toDto(bonusRepository.findAllByBookId(id));

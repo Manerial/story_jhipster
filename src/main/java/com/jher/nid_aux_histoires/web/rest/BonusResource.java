@@ -1,8 +1,6 @@
 package com.jher.nid_aux_histoires.web.rest;
 
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.BonusService;
+import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.dto.BonusDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
@@ -47,8 +47,11 @@ public class BonusResource {
 
 	private final BonusService bonusService;
 
-	public BonusResource(BonusService bonusService) {
+	private final BookService bookService;
+
+	public BonusResource(BonusService bonusService, BookService bookService) {
 		this.bonusService = bonusService;
+		this.bookService = bookService;
 	}
 
 	/**
@@ -58,12 +61,12 @@ public class BonusResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new bonusDTO, or with status {@code 400 (Bad Request)} if
 	 *         the bonus has already an ID.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
-	 * @throws IOException
+	 * @throws Exception
 	 */
 	@PostMapping(path = "/bonuses")
-	public ResponseEntity<BonusDTO> createBonus(@RequestBody BonusDTO bonusDTO) throws URISyntaxException, IOException {
+	public ResponseEntity<BonusDTO> createBonus(@RequestBody BonusDTO bonusDTO) throws Exception {
 		log.debug("REST request to save Bonus : {}", bonusDTO);
+		checkBonus(bonusDTO);
 		if (bonusDTO.getId() != null) {
 			throw new BadRequestAlertException("A new bonus cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -83,12 +86,12 @@ public class BonusResource {
 	 *         bonusDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the bonusDTO couldn't be
 	 *         updated.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
-	 * @throws IOException
+	 * @throws Exception
 	 */
 	@PutMapping(path = "/bonuses")
-	public ResponseEntity<BonusDTO> updateBonus(@RequestBody BonusDTO bonusDTO) throws URISyntaxException, IOException {
+	public ResponseEntity<BonusDTO> updateBonus(@RequestBody BonusDTO bonusDTO) throws Exception {
 		log.debug("REST request to update Bonus : {}", bonusDTO);
+		checkBonus(bonusDTO);
 		if (bonusDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -108,7 +111,12 @@ public class BonusResource {
 	@GetMapping("/bonuses")
 	public ResponseEntity<List<BonusDTO>> getAllBonuses(Pageable pageable) {
 		log.debug("REST request to get a page of Bonuses");
-		Page<BonusDTO> page = bonusService.findAll(pageable);
+		Page<BonusDTO> page;
+		if (SecurityConfiguration.IsAdmin()) {
+			page = bonusService.findAll(pageable);
+		} else {
+			page = bonusService.findAllByOwnerLogin(pageable, SecurityConfiguration.getLoggedUser().getName());
+		}
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
 		return ResponseEntity.ok().headers(headers).body(page.getContent());
@@ -147,13 +155,26 @@ public class BonusResource {
 	 *
 	 * @param id the id of the bonusDTO to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+	 * @throws Exception
 	 */
 	@DeleteMapping("/bonuses/{id}")
-	public ResponseEntity<Void> deleteBonus(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteBonus(@PathVariable Long id) throws Exception {
 		log.debug("REST request to delete Bonus : {}", id);
+		BonusDTO bonusDTO = bonusService.findOne(id).get();
+		SecurityConfiguration.CheckLoggedUser(bonusDTO.getOwnerLogin());
 		bonusService.delete(id);
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();
+	}
+
+	private void checkBonus(BonusDTO bonusDTO) throws Exception {
+		SecurityConfiguration.CheckLoggedUser(bonusDTO.getOwnerLogin());
+
+		Long bookId = bonusDTO.getBookId();
+		String login = bookService.findOneLight(bookId).get().getAuthorLogin();
+		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getLoggedUser().getName())) {
+			throw new Exception("You have no access to this resource (Book : " + bookId + ")");
+		}
 	}
 }
