@@ -19,6 +19,7 @@
       "name": "Name",
       "file": "File",
       "description": "Description",
+      "dataContentType": "Data Content Type",
       "book": "Book",
       "required": {
         "name": "Field Name is required",

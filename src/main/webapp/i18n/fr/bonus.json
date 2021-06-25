@@ -19,6 +19,7 @@
       "name": "Nom",
       "file": "Fichier",
       "description": "Description",
+      "dataContentType": "Type de contenu",
       "book": "Livre",
       "required": {
         "name": "Le champ Nom est requis",
