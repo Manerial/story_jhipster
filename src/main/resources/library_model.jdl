@@ -12,7 +12,8 @@ entity WordAnalysis {
 
 entity Book {
 	name String,
-	author String
+	description String,
+    visibility Boolean
 }
 
 entity Part {
@@ -40,8 +41,21 @@ entity Cover {
 	preview ImageBlob
 }
 
+entity Bonus {
+	name String,
+    description String,
+    isImage Boolean,
+	data Blob
+}
+
 entity Comment {
-	text String
+	text String,
+    createdDate String
+}
+
+entity Library {
+	finished Boolean,
+    favorit Boolean
 }
 
 // defining multiple OneToMany relationships with comments
@@ -49,20 +63,22 @@ relationship OneToMany {
 	Book{part} to Part{book},
 	Part{chapter} to Chapter{part},
 	Chapter{scene} to Scene{chapter},
-	Cover{bookToCover} to Book{cover},
+	Cover{book} to Book{cover},
 	Comment{book} to Book{comment},
-	Comment{user} to User{comment}
+	User to Comment{comment},
+    User to Book{author},
+    User to Cover{owner},
+    User to Library{user}
+    Book to Library{book},
+    Chapter to Library{curentChapter},
 }
 
 relationship ManyToMany {
-	Book{cover} to Cover{book}
-	Part{cover} to Cover{part}
-	Chapter{cover} to Cover{chapter}
-	Scene{cover} to Cover{scene}
+	Bonus{book} to Book{bonus},
 }
 
 // Set pagination options
-paginate Book, Part, Chapter, Scene, Cover with pagination
+paginate Book, Part, Chapter, Scene, Cover, Bonus, Comment with pagination
 
 // Use Data Transfer Objects (DTO)
 dto * with mapstruct

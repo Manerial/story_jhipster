@@ -1,16 +1,17 @@
-Gestion autonome des histoires :
-	Gestion des livres :
-		Gérer la couverture (upload)
-
 Analytics ?
 
-Marquer comme "lu"
+Table Bibliothèque
+	-ID Utilisateur
+	-ID Livre
+	-Chapitre en cours
+	-Marqueur "Terminé"
+	-Marqueur "Favorit"
 
 GUI :
-	- Si bonus => image, bouton "voir" image
+	- Si bonus => preview
+	- Taille bonus
+	- Supprimer image viewer
 	- Générateur de QR_Code
-
-Marque-page, Favorits
 
 Section Contact
 	"Vous pouvez nous contacter via le formulaire proposé ou sur le Discord de la communauté"
