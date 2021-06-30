@@ -98,6 +98,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "introduction")
 	private String introduction = null;
 
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private Set<Library> libraries = new HashSet<>();
+
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "jhi_user_authority", joinColumns = {

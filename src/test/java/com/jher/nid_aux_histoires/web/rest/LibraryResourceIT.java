@@ -1,11 +1,18 @@
 package com.jher.nid_aux_histoires.web.rest;
 
-import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
-import com.jher.nid_aux_histoires.domain.Library;
-import com.jher.nid_aux_histoires.repository.LibraryRepository;
-import com.jher.nid_aux_histoires.service.LibraryService;
-import com.jher.nid_aux_histoires.service.dto.LibraryDTO;
-import com.jher.nid_aux_histoires.service.mapper.LibraryMapper;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,13 +23,16 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
+import com.jher.nid_aux_histoires.domain.Library;
+import com.jher.nid_aux_histoires.repository.BookRepository;
+import com.jher.nid_aux_histoires.repository.ChapterRepository;
+import com.jher.nid_aux_histoires.repository.LibraryRepository;
+import com.jher.nid_aux_histoires.repository.UserRepository;
+import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
+import com.jher.nid_aux_histoires.service.dto.LibraryDTO;
+import com.jher.nid_aux_histoires.service.mapper.LibraryMapper;
 
 /**
  * Integration tests for the {@link LibraryResource} REST controller.
@@ -32,200 +42,202 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class LibraryResourceIT {
 
-    private static final Boolean DEFAULT_FINISHED = false;
-    private static final Boolean UPDATED_FINISHED = true;
+	private static final Boolean DEFAULT_FINISHED = false;
+	private static final Boolean UPDATED_FINISHED = true;
 
-    private static final Boolean DEFAULT_FAVORIT = false;
-    private static final Boolean UPDATED_FAVORIT = true;
+	private static final Boolean DEFAULT_FAVORIT = false;
+	private static final Boolean UPDATED_FAVORIT = true;
 
-    @Autowired
-    private LibraryRepository libraryRepository;
+	@Autowired
+	private LibraryRepository libraryRepository;
 
-    @Autowired
-    private LibraryMapper libraryMapper;
+	@Autowired
+	private LibraryMapper libraryMapper;
 
-    @Autowired
-    private LibraryService libraryService;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Autowired
-    private EntityManager em;
+	@Autowired
+	private BookRepository bookRepository;
 
-    @Autowired
-    private MockMvc restLibraryMockMvc;
+	@Autowired
+	private ChapterRepository chapterRepository;
 
-    private Library library;
+	@Autowired
+	private EntityManager em;
 
-    /**
-     * Create an entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Library createEntity(EntityManager em) {
-        Library library = new Library()
-            .finished(DEFAULT_FINISHED)
-            .favorit(DEFAULT_FAVORIT);
-        return library;
-    }
-    /**
-     * Create an updated entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Library createUpdatedEntity(EntityManager em) {
-        Library library = new Library()
-            .finished(UPDATED_FINISHED)
-            .favorit(UPDATED_FAVORIT);
-        return library;
-    }
+	@Autowired
+	private MockMvc restLibraryMockMvc;
 
-    @BeforeEach
-    public void initTest() {
-        library = createEntity(em);
-    }
+	private Library library;
 
-    @Test
-    @Transactional
-    public void createLibrary() throws Exception {
-        int databaseSizeBeforeCreate = libraryRepository.findAll().size();
-        // Create the Library
-        LibraryDTO libraryDTO = libraryMapper.toDto(library);
-        restLibraryMockMvc.perform(post("/api/libraries")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(libraryDTO)))
-            .andExpect(status().isCreated());
+	/**
+	 * Create an entity for this test.
+	 *
+	 * This is a static method, as tests for other entities might also need it, if
+	 * they test an entity which requires the current entity.
+	 */
+	public Library createEntity(EntityManager em) {
+		Library library = new Library().finished(DEFAULT_FINISHED).favorit(DEFAULT_FAVORIT);
 
-        // Validate the Library in the database
-        List<Library> libraryList = libraryRepository.findAll();
-        assertThat(libraryList).hasSize(databaseSizeBeforeCreate + 1);
-        Library testLibrary = libraryList.get(libraryList.size() - 1);
-        assertThat(testLibrary.isFinished()).isEqualTo(DEFAULT_FINISHED);
-        assertThat(testLibrary.isFavorit()).isEqualTo(DEFAULT_FAVORIT);
-    }
+		library.setBook(bookRepository.getOne(1L));
+		library.setUser(userRepository.getOne(1L));
+		library.setCurentChapter(chapterRepository.getOne(1L));
+		return library;
+	}
 
-    @Test
-    @Transactional
-    public void createLibraryWithExistingId() throws Exception {
-        int databaseSizeBeforeCreate = libraryRepository.findAll().size();
+	/**
+	 * Create an updated entity for this test.
+	 *
+	 * This is a static method, as tests for other entities might also need it, if
+	 * they test an entity which requires the current entity.
+	 */
+	public static Library createUpdatedEntity(EntityManager em) {
+		Library library = new Library().finished(UPDATED_FINISHED).favorit(UPDATED_FAVORIT);
+		return library;
+	}
 
-        // Create the Library with an existing ID
-        library.setId(1L);
-        LibraryDTO libraryDTO = libraryMapper.toDto(library);
+	@BeforeEach
+	public void initTest() {
+		library = createEntity(em);
+	}
 
-        // An entity with an existing ID cannot be created, so this API call must fail
-        restLibraryMockMvc.perform(post("/api/libraries")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(libraryDTO)))
-            .andExpect(status().isBadRequest());
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void createLibrary() throws Exception {
+		int databaseSizeBeforeCreate = libraryRepository.findAll().size();
+		// Create the Library
+		LibraryDTO libraryDTO = libraryMapper.toDto(library);
+		restLibraryMockMvc.perform(post("/api/libraries").contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.convertObjectToJsonBytes(libraryDTO))).andExpect(status().isCreated());
 
-        // Validate the Library in the database
-        List<Library> libraryList = libraryRepository.findAll();
-        assertThat(libraryList).hasSize(databaseSizeBeforeCreate);
-    }
+		// Validate the Library in the database
+		List<Library> libraryList = libraryRepository.findAll();
+		assertThat(libraryList).hasSize(databaseSizeBeforeCreate + 1);
+		Library testLibrary = libraryList.get(libraryList.size() - 1);
+		assertThat(testLibrary.isFinished()).isEqualTo(DEFAULT_FINISHED);
+		assertThat(testLibrary.isFavorit()).isEqualTo(DEFAULT_FAVORIT);
+	}
 
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void createLibraryWithExistingId() throws Exception {
+		int databaseSizeBeforeCreate = libraryRepository.findAll().size();
 
-    @Test
-    @Transactional
-    public void getAllLibraries() throws Exception {
-        // Initialize the database
-        libraryRepository.saveAndFlush(library);
+		// Create the Library with an existing ID
+		library.setId(1L);
+		LibraryDTO libraryDTO = libraryMapper.toDto(library);
 
-        // Get all the libraryList
-        restLibraryMockMvc.perform(get("/api/libraries?sort=id,desc"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(library.getId().intValue())))
-            .andExpect(jsonPath("$.[*].finished").value(hasItem(DEFAULT_FINISHED.booleanValue())))
-            .andExpect(jsonPath("$.[*].favorit").value(hasItem(DEFAULT_FAVORIT.booleanValue())));
-    }
-    
-    @Test
-    @Transactional
-    public void getLibrary() throws Exception {
-        // Initialize the database
-        libraryRepository.saveAndFlush(library);
+		// An entity with an existing ID cannot be created, so this API call must fail
+		restLibraryMockMvc.perform(post("/api/libraries").contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.convertObjectToJsonBytes(libraryDTO))).andExpect(status().isBadRequest());
 
-        // Get the library
-        restLibraryMockMvc.perform(get("/api/libraries/{id}", library.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(library.getId().intValue()))
-            .andExpect(jsonPath("$.finished").value(DEFAULT_FINISHED.booleanValue()))
-            .andExpect(jsonPath("$.favorit").value(DEFAULT_FAVORIT.booleanValue()));
-    }
-    @Test
-    @Transactional
-    public void getNonExistingLibrary() throws Exception {
-        // Get the library
-        restLibraryMockMvc.perform(get("/api/libraries/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
-    }
+		// Validate the Library in the database
+		List<Library> libraryList = libraryRepository.findAll();
+		assertThat(libraryList).hasSize(databaseSizeBeforeCreate);
+	}
 
-    @Test
-    @Transactional
-    public void updateLibrary() throws Exception {
-        // Initialize the database
-        libraryRepository.saveAndFlush(library);
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void getAllLibraries() throws Exception {
+		// Initialize the database
+		libraryRepository.saveAndFlush(library);
 
-        int databaseSizeBeforeUpdate = libraryRepository.findAll().size();
+		// Get all the libraryList
+		restLibraryMockMvc.perform(get("/api/libraries?sort=id,desc")).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(jsonPath("$.[*].id").value(hasItem(library.getId().intValue())))
+				.andExpect(jsonPath("$.[*].finished").value(hasItem(DEFAULT_FINISHED.booleanValue())))
+				.andExpect(jsonPath("$.[*].favorit").value(hasItem(DEFAULT_FAVORIT.booleanValue())));
+	}
 
-        // Update the library
-        Library updatedLibrary = libraryRepository.findById(library.getId()).get();
-        // Disconnect from session so that the updates on updatedLibrary are not directly saved in db
-        em.detach(updatedLibrary);
-        updatedLibrary
-            .finished(UPDATED_FINISHED)
-            .favorit(UPDATED_FAVORIT);
-        LibraryDTO libraryDTO = libraryMapper.toDto(updatedLibrary);
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void getLibrary() throws Exception {
+		// Initialize the database
+		libraryRepository.saveAndFlush(library);
 
-        restLibraryMockMvc.perform(put("/api/libraries")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(libraryDTO)))
-            .andExpect(status().isOk());
+		// Get the library
+		restLibraryMockMvc.perform(get("/api/libraries/{id}", library.getId())).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(jsonPath("$.id").value(library.getId().intValue()))
+				.andExpect(jsonPath("$.finished").value(DEFAULT_FINISHED.booleanValue()))
+				.andExpect(jsonPath("$.favorit").value(DEFAULT_FAVORIT.booleanValue()));
+	}
 
-        // Validate the Library in the database
-        List<Library> libraryList = libraryRepository.findAll();
-        assertThat(libraryList).hasSize(databaseSizeBeforeUpdate);
-        Library testLibrary = libraryList.get(libraryList.size() - 1);
-        assertThat(testLibrary.isFinished()).isEqualTo(UPDATED_FINISHED);
-        assertThat(testLibrary.isFavorit()).isEqualTo(UPDATED_FAVORIT);
-    }
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void getNonExistingLibrary() throws Exception {
+		// Get the library
+		restLibraryMockMvc.perform(get("/api/libraries/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
+	}
 
-    @Test
-    @Transactional
-    public void updateNonExistingLibrary() throws Exception {
-        int databaseSizeBeforeUpdate = libraryRepository.findAll().size();
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void updateLibrary() throws Exception {
+		// Initialize the database
+		libraryRepository.saveAndFlush(library);
 
-        // Create the Library
-        LibraryDTO libraryDTO = libraryMapper.toDto(library);
+		int databaseSizeBeforeUpdate = libraryRepository.findAll().size();
 
-        // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restLibraryMockMvc.perform(put("/api/libraries")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(libraryDTO)))
-            .andExpect(status().isBadRequest());
+		// Update the library
+		Library updatedLibrary = libraryRepository.findById(library.getId()).get();
+		// Disconnect from session so that the updates on updatedLibrary are not
+		// directly saved in db
+		em.detach(updatedLibrary);
+		updatedLibrary.finished(UPDATED_FINISHED).favorit(UPDATED_FAVORIT);
+		LibraryDTO libraryDTO = libraryMapper.toDto(updatedLibrary);
 
-        // Validate the Library in the database
-        List<Library> libraryList = libraryRepository.findAll();
-        assertThat(libraryList).hasSize(databaseSizeBeforeUpdate);
-    }
+		restLibraryMockMvc.perform(put("/api/libraries").contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.convertObjectToJsonBytes(libraryDTO))).andExpect(status().isOk());
 
-    @Test
-    @Transactional
-    public void deleteLibrary() throws Exception {
-        // Initialize the database
-        libraryRepository.saveAndFlush(library);
+		// Validate the Library in the database
+		List<Library> libraryList = libraryRepository.findAll();
+		assertThat(libraryList).hasSize(databaseSizeBeforeUpdate);
+		Library testLibrary = libraryList.get(libraryList.size() - 1);
+		assertThat(testLibrary.isFinished()).isEqualTo(UPDATED_FINISHED);
+		assertThat(testLibrary.isFavorit()).isEqualTo(UPDATED_FAVORIT);
+	}
 
-        int databaseSizeBeforeDelete = libraryRepository.findAll().size();
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void updateNonExistingLibrary() throws Exception {
+		int databaseSizeBeforeUpdate = libraryRepository.findAll().size();
 
-        // Delete the library
-        restLibraryMockMvc.perform(delete("/api/libraries/{id}", library.getId())
-            .accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isNoContent());
+		// Create the Library
+		LibraryDTO libraryDTO = libraryMapper.toDto(library);
 
-        // Validate the database contains one less item
-        List<Library> libraryList = libraryRepository.findAll();
-        assertThat(libraryList).hasSize(databaseSizeBeforeDelete - 1);
-    }
+		// If the entity doesn't have an ID, it will throw BadRequestAlertException
+		restLibraryMockMvc.perform(put("/api/libraries").contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.convertObjectToJsonBytes(libraryDTO))).andExpect(status().isBadRequest());
+
+		// Validate the Library in the database
+		List<Library> libraryList = libraryRepository.findAll();
+		assertThat(libraryList).hasSize(databaseSizeBeforeUpdate);
+	}
+
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void deleteLibrary() throws Exception {
+		// Initialize the database
+		libraryRepository.saveAndFlush(library);
+
+		int databaseSizeBeforeDelete = libraryRepository.findAll().size();
+
+		// Delete the library
+		restLibraryMockMvc.perform(delete("/api/libraries/{id}", library.getId()).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
+
+		// Validate the database contains one less item
+		List<Library> libraryList = libraryRepository.findAll();
+		assertThat(libraryList).hasSize(databaseSizeBeforeDelete - 1);
+	}
 }

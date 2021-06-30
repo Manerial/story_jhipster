@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="chapter"/>
 
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="library"
+                                 constraintName="fk_library_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>
