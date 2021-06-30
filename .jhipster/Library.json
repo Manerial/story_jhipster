@@ -1,0 +1,40 @@
+{
+  "name": "Library",
+  "fields": [
+    {
+      "fieldName": "finished",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "favorit",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "book",
+      "otherEntityRelationshipName": "library",
+      "relationshipName": "book",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "chapter",
+      "otherEntityRelationshipName": "library",
+      "relationshipName": "curentChapter",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210629121130",
+  "entityTableName": "library",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

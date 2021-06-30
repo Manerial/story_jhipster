@@ -21,6 +21,7 @@
       "description": "Description",
       "dataContentType": "Type de contenu",
       "book": "Livre",
+      "owner": "Propriétaire",
       "required": {
         "name": "Le champ Nom est requis",
         "book": "Le champ Livre est requis"

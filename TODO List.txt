@@ -1,13 +1,9 @@
 Analytics ?
 
-Table Bibliothèque
-	-ID Utilisateur
-	-ID Livre
-	-Chapitre en cours
-	-Marqueur "Terminé"
-	-Marqueur "Favorit"
-
 GUI :
+	- Bouton ajouter aux favorits
+	- Page favorits
+	- Quand lecture, récupérer chapitre en cours
 	- Si bonus => preview
 	- Taille bonus
 	- Supprimer image viewer
