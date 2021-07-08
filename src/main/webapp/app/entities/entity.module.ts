@@ -80,12 +80,12 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
         loadChildren: () => import('./comment/comment.module').then(m => m.NidAuxHistoiresCommentModule),
       },
       {
-        path: 'entities/library',
+        path: 'entities/bookStatus',
         data: {
           authorities: [Authority.ADMIN],
         },
         canActivate: [UserRouteAccessService],
-        loadChildren: () => import('./library/library.module').then(m => m.NidAuxHistoiresLibraryModule),
+        loadChildren: () => import('./bookStatus/bookStatus.module').then(m => m.NidAuxHistoiresBookStatusModule),
       },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),

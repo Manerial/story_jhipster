@@ -1,5 +1,5 @@
 {
-  "name": "Library",
+  "name": "BookStatus",
   "fields": [
     {
       "fieldName": "finished",
@@ -14,20 +14,20 @@
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "book",
-      "otherEntityRelationshipName": "library",
+      "otherEntityRelationshipName": "bookStatus",
       "relationshipName": "book",
       "otherEntityField": "id"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "chapter",
-      "otherEntityRelationshipName": "library",
+      "otherEntityRelationshipName": "bookStatus",
       "relationshipName": "curentChapter",
       "otherEntityField": "id"
     }
   ],
   "changelogDate": "20210629121130",
-  "entityTableName": "library",
+  "entityTableName": "bookStatus",
   "dto": "mapstruct",
   "pagination": "pagination",
   "service": "serviceImpl",

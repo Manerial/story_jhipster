@@ -3,6 +3,7 @@ Analytics ?
 GUI :
 	- Bouton ajouter aux favorits
 	- Page favorits
+
 	- Quand lecture, récupérer chapitre en cours
 	- Si bonus => preview
 	- Taille bonus

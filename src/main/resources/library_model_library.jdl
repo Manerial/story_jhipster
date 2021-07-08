@@ -1,4 +1,4 @@
-entity Library {
+entity BookStatus {
 	finished Boolean,
     favorit Boolean
 }
@@ -17,12 +17,12 @@ entity Chapter {
 
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
-    Book to Library{book},
-    Chapter to Library{curentChapter}
+    Book to BookStatus{book},
+    Chapter to BookStatus{curentChapter}
 }
 
 // Set pagination options
-paginate Library with pagination
+paginate BookStatus with pagination
 
 // Use Data Transfer Objects (DTO)
 dto * with mapstruct
