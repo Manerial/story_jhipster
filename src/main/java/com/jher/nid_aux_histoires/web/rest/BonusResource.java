@@ -115,7 +115,7 @@ public class BonusResource {
 		if (SecurityConfiguration.IsAdmin()) {
 			page = bonusService.findAll(pageable);
 		} else {
-			page = bonusService.findAllByOwnerLogin(pageable, SecurityConfiguration.getLoggedUser().getName());
+			page = bonusService.findAllByOwnerLogin(pageable, SecurityConfiguration.getUserLogin());
 		}
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -173,7 +173,7 @@ public class BonusResource {
 
 		Long bookId = bonusDTO.getBookId();
 		String login = bookService.findOneLight(bookId).get().getAuthorLogin();
-		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getLoggedUser().getName())) {
+		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
 			throw new Exception("You have no access to this resource (Book : " + bookId + ")");
 		}
 	}

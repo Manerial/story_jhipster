@@ -1,7 +1,6 @@
 Analytics ?
 
 GUI :
-	- Bouton ajouter aux favorits
 	- Page favorits
 
 	- Quand lecture, récupérer chapitre en cours
@@ -9,6 +8,8 @@ GUI :
 	- Taille bonus
 	- Supprimer image viewer
 	- Générateur de QR_Code
+
+Générateur de créature
 
 Section Contact
 	"Vous pouvez nous contacter via le formulaire proposé ou sur le Discord de la communauté"

@@ -252,7 +252,7 @@ public class BookResource {
 		Long coverId = bookDTO.getCoverId();
 		if (coverId != null && coverId != 0) {
 			String login = coverService.findOne(coverId).get().getOwnerLogin();
-			if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getLoggedUser().getName())) {
+			if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
 				throw new Exception("You have no access to this resource (Cover : " + coverId + ")");
 			}
 		}

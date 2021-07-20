@@ -81,6 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/activate").permitAll()
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()
+            
             .antMatchers("/api/export/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/users/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/books/import").hasAuthority(AuthoritiesConstants.ADMIN)
@@ -92,7 +93,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/scenes/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
             .antMatchers("/api/covers/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
             .antMatchers("/api/bonus/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
-            .antMatchers("/api/bonus/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER)
             
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
@@ -114,6 +114,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return SecurityContextHolder.getContext().getAuthentication();
 	}
 
+	public static String getUserLogin() {
+		return getLoggedUser().getName();
+	}
+
 	public static void CheckLoggedUser(String login) throws Exception {
 		if (IsLoggedUser(login) || IsAdmin()) {
 			return;
@@ -123,8 +127,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	public static boolean IsLoggedUser(String login) {
-		Authentication auth = getLoggedUser();
-		return login != null && login.equals(auth.getName());
+		return getUserLogin().equals(login);
 	}
 
 	public static boolean IsAdmin() {

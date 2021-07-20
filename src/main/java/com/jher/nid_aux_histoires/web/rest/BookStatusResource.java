@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.BookStatusService;
 import com.jher.nid_aux_histoires.service.dto.BookStatusDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
@@ -56,12 +57,13 @@ public class BookStatusResource {
 	 *
 	 * @param bookStatusDTO the bookStatusDTO to create.
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
-	 *         body the new bookStatusDTO, or with status {@code 400 (Bad Request)} if
-	 *         the bookStatus has already an ID.
+	 *         body the new bookStatusDTO, or with status {@code 400 (Bad Request)}
+	 *         if the bookStatus has already an ID.
 	 * @throws URISyntaxException if the Location URI syntax is incorrect.
 	 */
 	@PostMapping("/bookStatuses")
-	public ResponseEntity<BookStatusDTO> createBookStatus(@RequestBody BookStatusDTO bookStatusDTO) throws URISyntaxException {
+	public ResponseEntity<BookStatusDTO> createBookStatus(@RequestBody BookStatusDTO bookStatusDTO)
+			throws URISyntaxException {
 		log.debug("REST request to save BookStatus : {}", bookStatusDTO);
 		if (bookStatusDTO.getId() != null) {
 			throw new BadRequestAlertException("A new book status cannot already have an ID", ENTITY_NAME, "idexists");
@@ -78,22 +80,22 @@ public class BookStatusResource {
 	 *
 	 * @param bookStatusDTO the bookStatusDTO to update.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
-	 *         the updated bookStatusDTO, or with status {@code 400 (Bad Request)} if
-	 *         the bookStatusDTO is not valid, or with status
+	 *         the updated bookStatusDTO, or with status {@code 400 (Bad Request)}
+	 *         if the bookStatusDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the bookStatusDTO couldn't be
 	 *         updated.
 	 * @throws URISyntaxException if the Location URI syntax is incorrect.
 	 */
 	@PutMapping("/bookStatuses")
-	public ResponseEntity<BookStatusDTO> updateBookStatus(@RequestBody BookStatusDTO bookStatusDTO) throws URISyntaxException {
+	public ResponseEntity<BookStatusDTO> updateBookStatus(@RequestBody BookStatusDTO bookStatusDTO)
+			throws URISyntaxException {
 		log.debug("REST request to update BookStatus : {}", bookStatusDTO);
 		if (bookStatusDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
 		BookStatusDTO result = bookStatusService.save(bookStatusDTO);
-		return ResponseEntity.ok().headers(
-				HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, bookStatusDTO.getId().toString()))
-				.body(result);
+		return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME,
+				bookStatusDTO.getId().toString())).body(result);
 	}
 
 	/**
@@ -104,9 +106,25 @@ public class BookStatusResource {
 	 *         of bookStatuses in body.
 	 */
 	@GetMapping("/bookStatuses")
-	public ResponseEntity<List<BookStatusDTO>> getAllLibraries(Pageable pageable) {
-		log.debug("REST request to get a page of Libraries");
-		Page<BookStatusDTO> page = bookStatusService.findAll(pageable);
+	public ResponseEntity<List<BookStatusDTO>> getAllBookStatus(Pageable pageable) {
+		log.debug("REST request to get a page of BookStatus");
+		Page<BookStatusDTO> page = bookStatusService.findAllByUser(pageable, SecurityConfiguration.getUserLogin());
+		HttpHeaders headers = PaginationUtil
+				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+		return ResponseEntity.ok().headers(headers).body(page.getContent());
+	}
+
+	/**
+	 * {@code GET  /bookStatuses} : get all the bookStatuses.
+	 *
+	 * @param pageable the pagination information.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+	 *         of bookStatuses in body.
+	 */
+	@GetMapping("/bookStatuses/user")
+	public ResponseEntity<List<BookStatusDTO>> getAllBookStatusByUser(Pageable pageable) {
+		log.debug("REST request to get a page of BookStatus");
+		Page<BookStatusDTO> page = bookStatusService.findAllByUser(pageable, SecurityConfiguration.getUserLogin());
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
 		return ResponseEntity.ok().headers(headers).body(page.getContent());

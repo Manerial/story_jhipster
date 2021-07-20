@@ -120,7 +120,7 @@ public class ChapterResource {
 		if (SecurityConfiguration.IsAdmin()) {
 			page = chapterService.findAll(pageable);
 		} else {
-			page = chapterService.findAllByAuthorLogin(pageable, SecurityConfiguration.getLoggedUser().getName());
+			page = chapterService.findAllByAuthorLogin(pageable, SecurityConfiguration.getUserLogin());
 		}
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -165,7 +165,7 @@ public class ChapterResource {
 
 		Long partId = chapterDTO.getPartId();
 		String login = partService.findAuthorLoginByPartId(partId);
-		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getLoggedUser().getName())) {
+		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
 			throw new Exception("You have no access to this resource (Part : " + partId + ")");
 		}
 	}

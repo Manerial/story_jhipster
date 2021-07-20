@@ -27,7 +27,7 @@ export class BookStatusUpdateComponent implements OnInit {
     id: [],
     finished: [],
     favorit: [],
-    bookId: [],
+    bookId: [Validators.required],
     curentChapterId: [],
   });
 
@@ -67,13 +67,14 @@ export class BookStatusUpdateComponent implements OnInit {
     this.isSaving = true;
     const bookStatus = this.createFromForm();
     if (bookStatus.id !== undefined) {
+      delete bookStatus.id;
       this.subscribeToSaveResponse(this.bookStatusService.update(bookStatus));
     } else {
       this.subscribeToSaveResponse(this.bookStatusService.create(bookStatus));
     }
   }
 
-  private createFromForm(): IBookStatus {
+  private createFromForm(): any {
     return {
       ...new BookStatus(),
       id: this.editForm.get(['id'])!.value,

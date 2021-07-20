@@ -7,6 +7,10 @@ import { ResponsiveService } from 'app/shared/util/responsive.service';
 import { NavbarService } from 'app/shared/util/search.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DownloadBookDialogComponent } from './download-book-dialog.component';
+import { BookStatusService } from 'app/entities/bookStatus/bookStatus.service';
+import { BookStatus, IBookStatus } from 'app/shared/model/bookStatus.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'jhi-library',
@@ -16,12 +20,15 @@ import { DownloadBookDialogComponent } from './download-book-dialog.component';
 export class LibraryComponent implements OnInit {
   searchText = '';
   books: IBook[] = [];
+  bookStatusList: IBookStatus[] = [];
   collapseBooks: boolean[] = [];
   format = 'pdf';
-  test = true;
+  account!: Account;
 
   constructor(
     public bookService: BookService,
+    public bookStatusService: BookStatusService,
+    private accountService: AccountService,
     public alertService: JhiAlertService,
     public responsiveService: ResponsiveService,
     private navbarService: NavbarService,
@@ -34,16 +41,24 @@ export class LibraryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bookService.query().subscribe((res: HttpResponse<IBook[]>) => {
-      this.books = res.body || [];
+    this.bookService.query().subscribe((books: HttpResponse<IBook[]>) => {
+      this.books = books.body || [];
       this.books.forEach(book => {
         if (book.id !== undefined) {
           this.collapseBooks[book.id] = true;
         }
       });
+      this.bookStatusService.query().subscribe((bookStatusList: HttpResponse<IBookStatus[]>) => {
+        this.bookStatusList = bookStatusList.body || [];
+      });
     });
     this.navbarService.getCurrentSearch().subscribe(search => {
       this.searchText = search;
+    });
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        this.account = account;
+      }
     });
   }
 
@@ -66,7 +81,28 @@ export class LibraryComponent implements OnInit {
     modalRef.componentInstance.book = book;
   }
 
-  favorits(book: IBook): void {
-    this.test = !this.test;
+  findBookStatusByBookId(bookId: number): IBookStatus {
+    const resultList = this.bookStatusList.filter(bookStatus => bookStatus.bookId === bookId);
+    if (resultList.length === 0) {
+      const result = new BookStatus();
+      result.bookId = bookId;
+      result.userId = this.account.id;
+      this.bookStatusList.push(result);
+      return result;
+    } else {
+      return resultList[0];
+    }
+  }
+
+  favorits(bookId: number): void {
+    const bookStatus: any = this.findBookStatusByBookId(bookId);
+    bookStatus.favorit = !bookStatus.favorit;
+    if (bookStatus.id === 0) {
+      delete bookStatus.id;
+      delete bookStatus.curentChapterId;
+      this.bookStatusService.create(bookStatus).subscribe();
+    } else {
+      this.bookStatusService.update(bookStatus).subscribe();
+    }
   }
 }

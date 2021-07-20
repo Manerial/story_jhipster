@@ -118,7 +118,7 @@ public class SceneResource {
 		if (SecurityConfiguration.IsAdmin()) {
 			page = sceneService.findAll(pageable);
 		} else {
-			page = sceneService.findAllByAuthorLogin(pageable, SecurityConfiguration.getLoggedUser().getName());
+			page = sceneService.findAllByAuthorLogin(pageable, SecurityConfiguration.getUserLogin());
 		}
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -163,7 +163,7 @@ public class SceneResource {
 
 		Long chapterId = sceneDTO.getChapterId();
 		String login = chapterService.findAuthorLoginByChapterId(chapterId);
-		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getLoggedUser().getName())) {
+		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
 			throw new Exception("You have no access to this resource (Chapter : " + chapterId + ")");
 		}
 	}
