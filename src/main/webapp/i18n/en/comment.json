@@ -29,7 +29,8 @@
         "validate": "Validate",
         "cancel": "Cancel",
         "read": "Read"
-      }
+      },
+      "empty": "No comments for this book"
     }
   }
 }
