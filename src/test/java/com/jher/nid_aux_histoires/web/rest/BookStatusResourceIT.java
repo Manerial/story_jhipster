@@ -27,8 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.BookStatus;
 import com.jher.nid_aux_histoires.repository.BookRepository;
-import com.jher.nid_aux_histoires.repository.ChapterRepository;
 import com.jher.nid_aux_histoires.repository.BookStatusRepository;
+import com.jher.nid_aux_histoires.repository.ChapterRepository;
 import com.jher.nid_aux_histoires.repository.UserRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.dto.BookStatusDTO;
@@ -81,7 +81,7 @@ public class BookStatusResourceIT {
 		BookStatus bookStatus = new BookStatus().finished(DEFAULT_FINISHED).favorit(DEFAULT_FAVORIT);
 
 		bookStatus.setBook(bookRepository.getOne(1L));
-		bookStatus.setUser(userRepository.getOne(1L));
+		bookStatus.setUser(userRepository.getOne(3L));
 		bookStatus.setCurentChapter(chapterRepository.getOne(1L));
 		return bookStatus;
 	}
@@ -142,7 +142,7 @@ public class BookStatusResourceIT {
 	@Test
 	@Transactional
 	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
-	public void getAllLibraries() throws Exception {
+	public void getAllBookStatuses() throws Exception {
 		// Initialize the database
 		bookStatusRepository.saveAndFlush(bookStatus);
 
@@ -233,7 +233,8 @@ public class BookStatusResourceIT {
 		int databaseSizeBeforeDelete = bookStatusRepository.findAll().size();
 
 		// Delete the bookStatus
-		restBookStatusMockMvc.perform(delete("/api/bookStatuses/{id}", bookStatus.getId()).accept(MediaType.APPLICATION_JSON))
+		restBookStatusMockMvc
+				.perform(delete("/api/bookStatuses/{id}", bookStatus.getId()).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNoContent());
 
 		// Validate the database contains one less item
