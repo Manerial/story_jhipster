@@ -11,6 +11,7 @@ import { BookStatusService } from 'app/entities/bookStatus/bookStatus.service';
 import { BookStatus, IBookStatus } from 'app/shared/model/bookStatus.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-library',
@@ -24,15 +25,17 @@ export class LibraryComponent implements OnInit {
   collapseBooks: boolean[] = [];
   format = 'pdf';
   account!: Account;
+  favorits = false;
 
   constructor(
     public bookService: BookService,
     public bookStatusService: BookStatusService,
-    private accountService: AccountService,
+    public accountService: AccountService,
     public alertService: JhiAlertService,
     public responsiveService: ResponsiveService,
-    private navbarService: NavbarService,
-    protected modalService: NgbModal
+    public navbarService: NavbarService,
+    public modalService: NgbModal,
+    public router: Router
   ) {}
 
   @HostListener('window:resize')
@@ -41,6 +44,29 @@ export class LibraryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.favorits = this.router.url.indexOf('favorits') > 0;
+
+    if (this.favorits) {
+      this.getFavorits();
+    } else {
+      this.getBooks();
+    }
+    this.getSearchAccount();
+  }
+
+  getSearchAccount(): void {
+    this.navbarService.getCurrentSearch().subscribe(search => {
+      this.searchText = search;
+    });
+
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        this.account = account;
+      }
+    });
+  }
+
+  getBooks(): void {
     this.bookService.query().subscribe((books: HttpResponse<IBook[]>) => {
       this.books = books.body || [];
       this.books.forEach(book => {
@@ -52,22 +78,20 @@ export class LibraryComponent implements OnInit {
         this.bookStatusList = bookStatusList.body || [];
       });
     });
-    this.navbarService.getCurrentSearch().subscribe(search => {
-      this.searchText = search;
-    });
-    this.accountService.identity().subscribe(account => {
-      if (account) {
-        this.account = account;
-      }
-    });
   }
 
-  testlot(nb: number): number[] {
-    const res = [];
-    for (let i = 0; i < nb; i++) {
-      res.push(i);
-    }
-    return res;
+  getFavorits(): void {
+    this.bookService.findAllFavorits().subscribe((books: HttpResponse<IBook[]>) => {
+      this.books = books.body || [];
+      this.books.forEach(book => {
+        if (book.id !== undefined) {
+          this.collapseBooks[book.id] = true;
+        }
+      });
+      this.bookStatusService.query().subscribe((bookStatusList: HttpResponse<IBookStatus[]>) => {
+        this.bookStatusList = bookStatusList.body || [];
+      });
+    });
   }
 
   flip(event: MouseEvent): void {
@@ -94,7 +118,7 @@ export class LibraryComponent implements OnInit {
     }
   }
 
-  favorits(bookId: number): void {
+  toggleFavorits(bookId: number): void {
     const bookStatus: any = this.findBookStatusByBookId(bookId);
     bookStatus.favorit = !bookStatus.favorit;
     if (bookStatus.id === 0) {

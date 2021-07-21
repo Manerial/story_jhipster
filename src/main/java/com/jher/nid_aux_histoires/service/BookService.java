@@ -69,6 +69,14 @@ public interface BookService {
 	Page<BookDTO> findAllVisibleByAuthorId(Pageable pageable, String login);
 
 	/**
+	 * Get all the books tagged as Visible and Favorits by Author.
+	 *
+	 * @param pageable the pagination information.
+	 * @return the list of entities.
+	 */
+	Page<BookDTO> findAllFavoritsVisible(Pageable pageable, String login);
+
+	/**
 	 * Get the "id" book.
 	 *
 	 * @param id the id of the entity.

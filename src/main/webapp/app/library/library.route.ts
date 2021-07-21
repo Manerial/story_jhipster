@@ -19,6 +19,16 @@ export const LIBRARY_ROUTE: Route = {
   canActivate: [UserRouteAccessService],
 };
 
+export const FAVORITS_ROUTE: Route = {
+  path: 'favorits',
+  component: LibraryComponent,
+  data: {
+    authorities: [Authority.USER],
+    pageTitle: 'library.favorits.title',
+  },
+  canActivate: [UserRouteAccessService],
+};
+
 export const READER_ROUTE: Route = {
   path: 'reader/book/:bookId',
   component: ReaderComponent,
