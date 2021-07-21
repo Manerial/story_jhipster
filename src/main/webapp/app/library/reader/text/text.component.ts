@@ -1,4 +1,5 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { BookStatusService } from 'app/entities/bookStatus/bookStatus.service';
 import { Book, IBook } from 'app/shared/model/book.model';
 import { Chapter, IChapter } from 'app/shared/model/chapter.model';
 import { IScene } from 'app/shared/model/scene.model';
@@ -18,16 +19,25 @@ export class TextComponent implements OnInit, OnDestroy {
   private isArrowDown = false;
   private isArrowUp = false;
 
-  constructor(public readerService: ReaderService, public utilService: UtilService) {}
+  constructor(public readerService: ReaderService, public utilService: UtilService, public bookStatusService: BookStatusService) {}
 
   ngOnInit(): void {
     this.readerService.book.subscribe(book => {
       this.book = book;
       this.chapterSubscriber = this.readerService.currentChapterIdObs.subscribe(chapterId => {
         if (chapterId !== '') {
+          // Si on est en train de lire
           this.loadChapter();
         } else if (this.chapter.id === 0) {
-          this.readerService.changeChapter(book.parts[0].chapters[0].id);
+          this.bookStatusService.findByBook(this.book.id).subscribe(bookStatus => {
+            if (bookStatus.body) {
+              // Si on a déjà lu un chapitre
+              this.readerService.changeChapter(bookStatus.body.curentChapterId);
+            } else {
+              // Chapitre 0 du livre
+              this.readerService.changeChapter(this.book.parts[0].chapters[0].id);
+            }
+          });
         }
       });
     });
