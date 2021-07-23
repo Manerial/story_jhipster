@@ -1,6 +1,6 @@
 package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
-public class R_ObjectDTO {
+public class R_ObjectDTO implements Random_Interface {
 	private String object;
 	private String adjective;
 	private String suffix;

@@ -1,6 +1,6 @@
 package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
-public class R_WritingOptionDTO {
+public class R_WritingOptionDTO implements Random_Interface {
 	private String style;
 	private String theme;
 

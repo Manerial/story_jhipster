@@ -58,19 +58,19 @@ public interface WordAnalysisService {
 	 * Génère une liste de mots en fonction d'un type
 	 * 
 	 * @param numberOfWords : Nombre de mots à générer
-	 * @param fixLength     : La taille des mots à générer. Si < 0, random
+	 * @param fixLength     : La taille des mots à générer. Si < 2, random
 	 * @param type          : type de mots à générer
 	 * @return la liste des mots générés
 	 * @throws JSONException
 	 */
-	public List<String> generateWords(int numberOfWords, int fixLength, String type);
+	public List<String> generate(int numberOfWords, int fixLength, String type);
 
 	/**
-	 * Génère un de mots en fonction d'un type
+	 * Génère un mot en fonction d'un type
 	 * 
-	 * @param type : type de mots à générer
+	 * @param type : type de mot à générer
 	 * @return le mot généré
 	 * @throws JSONException
 	 */
-	public String generateWord(String type);
+	public String generate(String type);
 }

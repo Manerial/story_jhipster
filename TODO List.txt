@@ -1,12 +1,8 @@
 Analytics ?
 
 GUI :
-	- Si bonus => preview
-	- Taille bonus
-	- Supprimer image viewer
 	- Générateur de QR_Code
-
-Générateur de créature
+	- Générateur de créature
 
 Section Contact
 	"Vous pouvez nous contacter via le formulaire proposé ou sur le Discord de la communauté"

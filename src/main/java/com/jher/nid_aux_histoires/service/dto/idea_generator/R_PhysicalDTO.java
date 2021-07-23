@@ -1,6 +1,6 @@
 package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
-public class R_PhysicalDTO {
+public class R_PhysicalDTO implements Random_Interface {
 	private String eyesColor;
 	private String faceShape;
 	private String hairColor;

@@ -15,4 +15,6 @@ import com.jher.nid_aux_histoires.domain.Idea;
 public interface IdeaRepository extends JpaRepository<Idea, Long> {
 
 	List<Idea> findByType(String type);
+
+	Idea findByTypeAndComplement(String string, String complement);
 }

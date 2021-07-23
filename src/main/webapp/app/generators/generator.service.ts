@@ -3,11 +3,12 @@ import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
-import { IWriting } from 'app/shared/model/idea-generator/writing.model';
+import { IWritingOption } from 'app/shared/model/idea-generator/writing-option.model';
 import { IPersona } from 'app/shared/model/idea-generator/persona.model';
 import { ILocation } from 'app/shared/model/idea-generator/location.model';
 import { IObject } from 'app/shared/model/idea-generator/object.model';
 import { IType } from 'app/shared/model/type.model';
+import { IHonoraryTitle } from 'app/shared/model/idea-generator/honorary-title.model';
 
 type ITypeArrayResponseType = HttpResponse<IType[]>;
 
@@ -17,10 +18,10 @@ export class GeneratorService {
 
   constructor(protected http: HttpClient) {}
 
-  generateWriting(number: number, constraint: IWriting): Observable<IWriting[]> {
+  generateWritingOption(number: number, constraint: IWritingOption): Observable<IWritingOption[]> {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('number', number.toString());
-    return this.http.post<IWriting[]>(`${this.resourceUrl}/writing_options`, constraint, { params: httpParams });
+    return this.http.post<IWritingOption[]>(`${this.resourceUrl}/writing_options`, constraint, { params: httpParams });
   }
 
   generateLocation(number: number, constraint: ILocation): Observable<ILocation[]> {
@@ -33,6 +34,12 @@ export class GeneratorService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('number', number.toString());
     return this.http.post<IPersona[]>(`${this.resourceUrl}/personas`, constraint, { params: httpParams });
+  }
+
+  generateHonoraryTitle(number: number): Observable<IHonoraryTitle[]> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('number', number.toString());
+    return this.http.post<IHonoraryTitle[]>(`${this.resourceUrl}/honorary_titles`, null, { params: httpParams });
   }
 
   generateObject(number: number, constraint: IObject): Observable<IObject[]> {
