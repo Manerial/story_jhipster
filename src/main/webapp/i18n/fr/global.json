@@ -101,7 +101,10 @@
       "dev": "Développement"
     },
     "item-count": "Affichage {{first}} - {{second}} de {{total}} items.",
-    "secret": "Vous avez déclenché le premier code…"
+    "secret": {
+      "1": "Vous avez déclenché le premier code…",
+      "2": "Vous avez déclenché le second code…"
+    }
   },
   "entity": {
     "action": {

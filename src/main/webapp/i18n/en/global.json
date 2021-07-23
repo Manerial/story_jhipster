@@ -100,7 +100,10 @@
       "dev": "Development"
     },
     "item-count": "Showing {{first}} - {{second}} of {{total}} items.",
-    "secret": "You triggered the first code…"
+    "secret": {
+      "1": "You triggered the first code…",
+      "2": "You triggered the second code…"
+    }
   },
   "entity": {
     "action": {
