@@ -40,9 +40,11 @@ public interface PartService {
 	/**
 	 * Get all the parts related to an author.
 	 *
+	 * @param pageable the pagination information.
+	 * @param login    the author login.
 	 * @return the list of entities.
 	 */
-	Page<PartDTO> findAllByAuthorLogin(Pageable pageable, String authorLogin);
+	Page<PartDTO> findAllByAuthorLogin(Pageable pageable, String login);
 
 	/**
 	 * Get the "id" part.

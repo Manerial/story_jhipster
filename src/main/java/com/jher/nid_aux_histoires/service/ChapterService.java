@@ -41,9 +41,10 @@ public interface ChapterService {
 	 * Get all the chapters by author Id.
 	 *
 	 * @param pageable the pagination information.
+	 * @param login    the author login.
 	 * @return the list of entities.
 	 */
-	Page<ChapterDTO> findAllByAuthorLogin(Pageable pageable, String authorLogin);
+	Page<ChapterDTO> findAllByAuthorLogin(Pageable pageable, String login);
 
 	/**
 	 * Get the author of the "id" chapter.

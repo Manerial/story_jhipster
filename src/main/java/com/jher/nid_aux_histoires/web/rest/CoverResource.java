@@ -58,7 +58,7 @@ public class CoverResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new coverDTO, or with status {@code 400 (Bad Request)} if
 	 *         the cover has already an ID.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PostMapping("/covers")
 	public ResponseEntity<CoverDTO> createCover(@RequestBody CoverDTO coverDTO) throws Exception {
@@ -83,7 +83,7 @@ public class CoverResource {
 	 *         coverDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the coverDTO couldn't be
 	 *         updated.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PutMapping("/covers")
 	public ResponseEntity<CoverDTO> updateCover(@RequestBody CoverDTO coverDTO) throws Exception {
@@ -138,7 +138,7 @@ public class CoverResource {
 	 *
 	 * @param id the id of the coverDTO to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@DeleteMapping("/covers/{id}")
 	public ResponseEntity<Void> deleteCover(@PathVariable Long id) throws Exception {

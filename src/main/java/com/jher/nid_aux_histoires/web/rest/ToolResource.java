@@ -66,11 +66,12 @@ public class ToolResource {
 	/**
 	 * {@code GET  /encode_text} : Get the QR_Code of a text.
 	 *
-	 * @param text the text to transform.
+	 * @param text          the text to transform.
+	 * @param barcodeFormat the barcode format (QRCode, DataMatrix, etc)
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)}
 	 * @throws URISyntaxException if the Location URI syntax is incorrect.
-	 * @throws IOException
-	 * @throws WriterException
+	 * @throws IOException        if the image cannot be read
+	 * @throws WriterException    if the image cannot be write
 	 */
 	@GetMapping("/encode_text")
 	public ResponseEntity<byte[]> generateEncodedImage(@RequestParam String text,
@@ -128,11 +129,9 @@ public class ToolResource {
 	/**
 	 * {@code GET  /decode_image} : Get the text of an encoded image.
 	 *
-	 * @param text the text to transform.
+	 * @param image the image to decode.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)}
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
-	 * @throws IOException
-	 * @throws WriterException
+	 * @throws IOException if the image cannot be read
 	 */
 	@PostMapping("/decode_image")
 	public ResponseEntity<String> decodeImage(@RequestParam MultipartFile image) throws IOException {

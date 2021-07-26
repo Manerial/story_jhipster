@@ -131,11 +131,10 @@ public class UserResource {
 	 * @param userDTO the user to update.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the updated user.
-	 * @throws Exception
-	 * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is
-	 *                                   already in use.
-	 * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is
-	 *                                   already in use.
+	 * @throws Exception as following EmailAlreadyUsedException
+	 *                   {@code 400 (Bad Request)} if the email is already in use.
+	 *                   LoginAlreadyUsedException {@code 400 (Bad Request)} if the
+	 *                   login is already in use.
 	 */
 	@PutMapping("/users")
 	public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO) throws Exception {
@@ -209,7 +208,6 @@ public class UserResource {
 	/**
 	 * {@code GET /users/:login} : get the "login" user.
 	 *
-	 * @param login the login of the user to find.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the "login" user, or with status {@code 404 (Not Found)}.
 	 */
@@ -224,7 +222,7 @@ public class UserResource {
 	 *
 	 * @param login the login of the user to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
 	public ResponseEntity<Void> deleteUser(@PathVariable String login) throws Exception {

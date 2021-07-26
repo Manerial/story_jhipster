@@ -63,7 +63,7 @@ public class ChapterResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new chapterDTO, or with status {@code 400 (Bad Request)} if
 	 *         the chapter has already an ID.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PostMapping("/chapters")
 	public ResponseEntity<ChapterDTO> createChapter(@RequestBody ChapterDTO chapterDTO) throws Exception {
@@ -88,7 +88,7 @@ public class ChapterResource {
 	 *         the chapterDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the chapterDTO couldn't be
 	 *         updated.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PutMapping("/chapters")
 	public ResponseEntity<ChapterDTO> updateChapter(@RequestBody ChapterDTO chapterDTO) throws Exception {
@@ -106,9 +106,7 @@ public class ChapterResource {
 	/**
 	 * {@code GET  /chapters} : get all the chapters.
 	 *
-	 * @param pageable  the pagination information.
-	 * @param eagerload flag to eager load entities from relationships (This is
-	 *                  applicable for many-to-many).
+	 * @param pageable the pagination information.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
 	 *         of chapters in body.
 	 */
@@ -133,7 +131,7 @@ public class ChapterResource {
 	 * @param id the id of the chapterDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the chapterDTO, or with status {@code 404 (Not Found)}.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@GetMapping("/chapters/{id}")
 	public ResponseEntity<ChapterDTO> getChapterById(@PathVariable Long id) throws Exception {

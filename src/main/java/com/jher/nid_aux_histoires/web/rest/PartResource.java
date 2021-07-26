@@ -62,7 +62,7 @@ public class PartResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new partDTO, or with status {@code 400 (Bad Request)} if the
 	 *         part has already an ID.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PostMapping("/parts")
 	public ResponseEntity<PartDTO> createPart(@RequestBody PartDTO partDTO) throws Exception {
@@ -87,7 +87,7 @@ public class PartResource {
 	 *         partDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the partDTO couldn't be
 	 *         updated.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PutMapping("/parts")
 	public ResponseEntity<PartDTO> updatePart(@RequestBody PartDTO partDTO) throws Exception {
@@ -105,9 +105,7 @@ public class PartResource {
 	/**
 	 * {@code GET  /parts} : get all the parts.
 	 *
-	 * @param pageable  the pagination information.
-	 * @param eagerload flag to eager load entities from relationships (This is
-	 *                  applicable for many-to-many).
+	 * @param pageable the pagination information.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
 	 *         of parts in body.
 	 */
@@ -131,7 +129,7 @@ public class PartResource {
 	 * @param id the id of the partDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the partDTO, or with status {@code 404 (Not Found)}.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@GetMapping("/parts/{id}")
 	public ResponseEntity<PartDTO> getPartById(@PathVariable Long id) throws Exception {

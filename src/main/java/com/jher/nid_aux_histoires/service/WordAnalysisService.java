@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -58,10 +57,9 @@ public interface WordAnalysisService {
 	 * Génère une liste de mots en fonction d'un type
 	 * 
 	 * @param numberOfWords : Nombre de mots à générer
-	 * @param fixLength     : La taille des mots à générer. Si < 2, random
+	 * @param fixLength     : La taille des mots à générer. Si inférieur à 2, random
 	 * @param type          : type de mots à générer
 	 * @return la liste des mots générés
-	 * @throws JSONException
 	 */
 	public List<String> generate(int numberOfWords, int fixLength, String type);
 
@@ -70,7 +68,6 @@ public interface WordAnalysisService {
 	 * 
 	 * @param type : type de mot à générer
 	 * @return le mot généré
-	 * @throws JSONException
 	 */
 	public String generate(String type);
 }

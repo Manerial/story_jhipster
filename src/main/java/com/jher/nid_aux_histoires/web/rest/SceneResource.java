@@ -62,7 +62,7 @@ public class SceneResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new sceneDTO, or with status {@code 400 (Bad Request)} if
 	 *         the scene has already an ID.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PostMapping("/scenes")
 	public ResponseEntity<SceneDTO> createScene(@RequestBody SceneDTO sceneDTO) throws Exception {
@@ -87,7 +87,7 @@ public class SceneResource {
 	 *         sceneDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the sceneDTO couldn't be
 	 *         updated.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PutMapping("/scenes")
 	public ResponseEntity<SceneDTO> updateScene(@RequestBody SceneDTO sceneDTO) throws Exception {
@@ -105,9 +105,7 @@ public class SceneResource {
 	/**
 	 * {@code GET  /scenes} : get all the scenes.
 	 *
-	 * @param pageable  the pagination information.
-	 * @param eagerload flag to eager load entities from relationships (This is
-	 *                  applicable for many-to-many).
+	 * @param pageable the pagination information.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
 	 *         of scenes in body.
 	 */
@@ -131,7 +129,7 @@ public class SceneResource {
 	 * @param id the id of the sceneDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the sceneDTO, or with status {@code 404 (Not Found)}.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@GetMapping("/scenes/{id}")
 	public ResponseEntity<SceneDTO> getSceneById(@PathVariable Long id) throws Exception {

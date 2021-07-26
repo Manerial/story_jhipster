@@ -33,7 +33,7 @@ public interface CommentService {
 	/**
 	 * Get all the comments by bookId.
 	 *
-	 * @param pageable the pagination information.
+	 * @param id the book id.
 	 * @return the list of entities.
 	 */
 	List<CommentDTO> findAllByBookId(Long id);

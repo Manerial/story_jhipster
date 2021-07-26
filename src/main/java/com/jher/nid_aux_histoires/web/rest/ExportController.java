@@ -44,6 +44,7 @@ public class ExportController {
 	/**
 	 * Exporte un livre en Word
 	 * 
+	 * @param id : l'Id du livre à exporter
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/export/book/{id}")
@@ -68,6 +69,8 @@ public class ExportController {
 	/**
 	 * Exporte un livre au format spécifié
 	 * 
+	 * @param id     : l'Id du livre à récupérer
+	 * @param format : le format du livre à récupérer
 	 * @return une réponse contenant le fichier à télécharger
 	 */
 	@GetMapping("/download/book/{id}")
@@ -100,10 +103,11 @@ public class ExportController {
 	/**
 	 * Exporte un bonus au format spécifié
 	 * 
+	 * @param id : l'Id du livre à récupérer
 	 * @return une réponse contenant le fichier à télécharger
 	 */
 	@GetMapping("/download/bonus/{id}")
-	public ResponseEntity<byte[]> getBonus(@PathVariable Long id) throws Exception {
+	public ResponseEntity<byte[]> getBonus(@PathVariable Long id) {
 		log.debug("REST request to get Bonus : {}", id);
 		Optional<BonusDTO> opt = bonusService.findOne(id);
 		if (!opt.isPresent()) {
