@@ -38,240 +38,308 @@
 							<option value="location">Lieu</option>
 							<option value="object">Objet</option>
 							<option value="honorary_title">Titre honorifique</option>
+							<option value="creature">Creature</option>
 						</select>
 					</div>
 					<div class="col-sm">
 					</div>
 				</div>
 			</form>
-
-			<div class="form-group">
-				<button class="btn bkg-gold mt-2 mr-2" (click)="generate()" jhiTranslate="generator.idea.generate">
-					Générer
-				</button>
-				<button class="btn bkg-gold mt-2 mr-2" type="button" (click)="resetConstraint()"
-					jhiTranslate="generator.idea.constraint.clean">
-					Nettoyer contraintes
-				</button>
-				<button class="btn bkg-gold mt-2" type="button" (click)="hideConstraint = !hideConstraint">
-					<span *ngIf="hideConstraint" jhiTranslate="generator.idea.constraint.display">
-						Afficher contraintes
-					</span>
-					<span *ngIf="!hideConstraint" jhiTranslate="generator.idea.constraint.hide">
-						Masquer contraintes
-					</span>
-				</button>
-			</div>
-
-			<div class="form-group">
-				<div [ngbCollapse]="hideConstraint">
-					<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='persona'">
-						<div class="card-body">
-							<dl>
+			
+			<!-- CONSTRAINT -->
+			<div>
+				<div class="form-group">
+					<button class="btn bkg-gold mt-2 mr-2" (click)="generate()" jhiTranslate="generator.idea.generate">
+						Générer
+					</button>
+					<button class="btn bkg-gold mt-2 mr-2" type="button" (click)="resetConstraint()"
+						jhiTranslate="generator.idea.constraint.clean">
+						Nettoyer contraintes
+					</button>
+					<button class="btn bkg-gold mt-2" type="button" (click)="hideConstraint = !hideConstraint">
+						<span *ngIf="hideConstraint" jhiTranslate="generator.idea.constraint.display">
+							Afficher contraintes
+						</span>
+						<span *ngIf="!hideConstraint" jhiTranslate="generator.idea.constraint.hide">
+							Masquer contraintes
+						</span>
+					</button>
+				</div>
+				
+				<div class="form-group">
+					<div [ngbCollapse]="hideConstraint">
+						<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='persona'">
+							<div class="card-body">
+								<dl>
+									<dl>
+										<dt><u>Général:</u></dt>
+										<dd></dd>
+										<dl class="pl-2">
+											<dl>
+												<dt>Nom:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="personaConstraint.name"></dd>
+											</dl>
+											<dl>
+												<dt>Race:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="personaConstraint.race"></dd>
+											</dl>
+											<dl>
+												<dt>Age:</dt>
+												<dd><input class="form-control" type="number"
+														[(ngModel)]="personaConstraint.age"></dd>
+											</dl>
+											<dl>
+												<dt>Job:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="personaConstraint.job"></dd>
+											</dl>
+											<dl>
+												<dt>Rôle:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="personaConstraint.role"></dd>
+											</dl>
+										</dl>
+										<dt><u>Physique:</u></dt>
+										<dd></dd>
+										<dl class="pl-2">
+											<dl>
+												<dt>Genre:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="personaConstraint.physical.gender">
+												</dd>
+											</dl>
+											<dl>
+												<dt>Taille (cm):</dt>
+												<dd><input class="form-control" type="number"
+														[(ngModel)]="personaConstraint.physical.height">
+												</dd>
+											</dl>
+											<dl>
+												<dt>Poids (g):</dt>
+												<dd><input class="form-control" type="number"
+														[(ngModel)]="personaConstraint.physical.weight">
+												</dd>
+											</dl>
+											<dl>
+												<dt>Couleur cheveux:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="personaConstraint.physical.hairColor">
+												</dd>
+											</dl>
+											<dl>
+												<dt>Style coiffure:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="personaConstraint.physical.hairStyle">
+												</dd>
+											</dl>
+											<dl>
+												<dt>Couleur yeux:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="personaConstraint.physical.eyesColor">
+												</dd>
+											</dl>
+											<dl>
+												<dt>Visage:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="personaConstraint.physical.faceShape">
+												</dd>
+											</dl>
+											<dl>
+												<dt>Morphologie:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="personaConstraint.physical.morphology">
+												</dd>
+											</dl>
+										</dl>
+										<dt><u>Traits:</u></dt>
+										<dd></dd>
+										<dl class="pl-2">
+											<dl>
+												<dt>Bons:</dt>
+												<dd><textarea class="form-control" [(ngModel)]="pe_goodTraitsConstraint"
+														placeholder="a, b, c"></textarea>
+												</dd>
+											</dl>
+											<dl>
+												<dt>Mauvais:</dt>
+												<dd><textarea class="form-control" [(ngModel)]="pe_badTraitsConstraint"
+														placeholder="a, b, c"></textarea>
+												</dd>
+											</dl>
+											<dl>
+												<dt>Passe-temps:</dt>
+												<dd><textarea class="form-control" [(ngModel)]="pe_caracteristicsConstraint"
+														placeholder="a, b, c"></textarea>
+												</dd>
+											</dl>
+											<dl>
+												<dt>Handicapes:</dt>
+												<dd><textarea class="form-control" [(ngModel)]="pe_handicapsConstraint"
+														placeholder="a, b, c"></textarea>
+												</dd>
+											</dl>
+										</dl>
+									</dl>
+								</dl>
+							</div>
+						</div>
+						<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='creature'">
+							<div class="card-body">
+								<dl>
+									<dl>
+										<dt><u>Général:</u></dt>
+										<dd></dd>
+										<dl class="pl-2">
+											<dl>
+												<dt>Nom:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="creatureConstraint.name"></dd>
+											</dl>
+											<dl>
+												<dt>Peau:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="creatureConstraint.skin"></dd>
+											</dl>
+											<dl>
+												<dt>Taille:</dt>
+												<dd><input class="form-control" type="number"
+														[(ngModel)]="creatureConstraint.height"></dd>
+											</dl>
+											<dl>
+												<dt>Poids:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="creatureConstraint.weight"></dd>
+											</dl>
+											<dl>
+												<dt>Membres externes:</dt>
+												<dd><input class="form-control" type="text"
+														[(ngModel)]="creatureConstraint.nbMoveMembers"></dd>
+											</dl>
+										</dl>
+										<dl class="pl-2">
+											<dl>
+												<dt>Lieux de vie:</dt>
+												<dd><textarea class="form-control" [(ngModel)]="cr_locationConstraint"
+														placeholder="a, b, c"></textarea>
+												</dd>
+											</dl>
+											<dl>
+												<dt>Alimentation:</dt>
+												<dd><textarea class="form-control" [(ngModel)]="cr_dietConstraint"
+														placeholder="a, b, c"></textarea>
+												</dd>
+											</dl>
+											<dl>
+												<dt>Attributs:</dt>
+												<dd><textarea class="form-control" [(ngModel)]="cr_attributeConstraint"
+														placeholder="a, b, c"></textarea>
+												</dd>
+											</dl>
+											<dl>
+												<dt>Compétences:</dt>
+												<dd><textarea class="form-control" [(ngModel)]="cr_skillConstraint"
+														placeholder="a, b, c"></textarea>
+												</dd>
+											</dl>
+										</dl>
+									</dl>
+								</dl>
+							</div>
+						</div>
+						<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='writing_option'">
+							<div class="card-body">
 								<dl>
 									<dt><u>Général:</u></dt>
 									<dd></dd>
 									<dl class="pl-2">
 										<dl>
-											<dt>Nom:</dt>
-											<dd><input class="form-control" type="text"
-													[(ngModel)]="personaConstraint.name"></dd>
+											<dt>Thème:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="writingOptionConstraint.theme">
+											</dd>
 										</dl>
 										<dl>
-											<dt>Race:</dt>
-											<dd><input class="form-control" type="text"
-													[(ngModel)]="personaConstraint.race"></dd>
-										</dl>
-										<dl>
-											<dt>Age:</dt>
-											<dd><input class="form-control" type="number"
-													[(ngModel)]="personaConstraint.age"></dd>
-										</dl>
-										<dl>
-											<dt>Job:</dt>
-											<dd><input class="form-control" type="text"
-													[(ngModel)]="personaConstraint.job"></dd>
-										</dl>
-										<dl>
-											<dt>Rôle:</dt>
-											<dd><input class="form-control" type="text"
-													[(ngModel)]="personaConstraint.role"></dd>
+											<dt>Style:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="writingOptionConstraint.style">
+											</dd>
 										</dl>
 									</dl>
-									<dt><u>Physique:</u></dt>
+								</dl>
+							</div>
+						</div>
+						<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='location'">
+							<div class="card-body">
+								<dl>
+									<dt><u>Général:</u></dt>
 									<dd></dd>
 									<dl class="pl-2">
 										<dl>
-											<dt>Genre:</dt>
-											<dd><input class="form-control" type="text"
-													[(ngModel)]="personaConstraint.physical.gender">
+											<dt>Place:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="locationConstraint.place">
 											</dd>
 										</dl>
 										<dl>
-											<dt>Taille (cm):</dt>
-											<dd><input class="form-control" type="number"
-													[(ngModel)]="personaConstraint.physical.height">
+											<dt>Landscape:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="locationConstraint.landscape">
 											</dd>
 										</dl>
 										<dl>
-											<dt>Poids (g):</dt>
-											<dd><input class="form-control" type="number"
-													[(ngModel)]="personaConstraint.physical.weight">
-											</dd>
-										</dl>
-										<dl>
-											<dt>Couleur cheveux:</dt>
-											<dd><input class="form-control" type="text"
-													[(ngModel)]="personaConstraint.physical.hairColor">
-											</dd>
-										</dl>
-										<dl>
-											<dt>Style coiffure:</dt>
-											<dd><input class="form-control" type="text"
-													[(ngModel)]="personaConstraint.physical.hairStyle">
-											</dd>
-										</dl>
-										<dl>
-											<dt>Couleur yeux:</dt>
-											<dd><input class="form-control" type="text"
-													[(ngModel)]="personaConstraint.physical.eyesColor">
-											</dd>
-										</dl>
-										<dl>
-											<dt>Visage:</dt>
-											<dd><input class="form-control" type="text"
-													[(ngModel)]="personaConstraint.physical.faceShape">
-											</dd>
-										</dl>
-										<dl>
-											<dt>Morphologie:</dt>
-											<dd><input class="form-control" type="text"
-													[(ngModel)]="personaConstraint.physical.morphology">
+											<dt>Matière:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="locationConstraint.material">
 											</dd>
 										</dl>
 									</dl>
-									<dt><u>Traits:</u></dt>
+								</dl>
+							</div>
+						</div>
+						<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='object'">
+							<div class="card-body">
+								<dl>
+									<dt><u>Général:</u></dt>
 									<dd></dd>
 									<dl class="pl-2">
 										<dl>
-											<dt>Bons:</dt>
-											<dd><textarea class="form-control" [(ngModel)]="goodTraitsConstraint"
-													placeholder="a, b, c"></textarea>
+											<dt>Objet:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="objectConstraint.object">
 											</dd>
 										</dl>
 										<dl>
-											<dt>Mauvais:</dt>
-											<dd><textarea class="form-control" [(ngModel)]="badTraitsConstraint"
-													placeholder="a, b, c"></textarea>
+											<dt>Adjectif:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="objectConstraint.adjective">
 											</dd>
 										</dl>
 										<dl>
-											<dt>Passe-temps:</dt>
-											<dd><textarea class="form-control" [(ngModel)]="caracteristicsConstraint"
-													placeholder="a, b, c"></textarea>
-											</dd>
-										</dl>
-										<dl>
-											<dt>Handicapes:</dt>
-											<dd><textarea class="form-control" [(ngModel)]="handicapsConstraint"
-													placeholder="a, b, c"></textarea>
+											<dt>Suffixe:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="objectConstraint.suffix">
 											</dd>
 										</dl>
 									</dl>
 								</dl>
-							</dl>
-						</div>
-					</div>
-					<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='writing_option'">
-						<div class="card-body">
-							<dl>
-								<dt><u>Général:</u></dt>
-								<dd></dd>
-								<dl class="pl-2">
-									<dl>
-										<dt>Thème:</dt>
-										<dd>
-											<input class="form-control" type="text"
-												[(ngModel)]="writingOptionConstraint.theme">
-										</dd>
-									</dl>
-									<dl>
-										<dt>Style:</dt>
-										<dd>
-											<input class="form-control" type="text"
-												[(ngModel)]="writingOptionConstraint.style">
-										</dd>
-									</dl>
-								</dl>
-							</dl>
-						</div>
-					</div>
-					<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='location'">
-						<div class="card-body">
-							<dl>
-								<dt><u>Général:</u></dt>
-								<dd></dd>
-								<dl class="pl-2">
-									<dl>
-										<dt>Place:</dt>
-										<dd>
-											<input class="form-control" type="text"
-												[(ngModel)]="locationConstraint.place">
-										</dd>
-									</dl>
-									<dl>
-										<dt>Landscape:</dt>
-										<dd>
-											<input class="form-control" type="text"
-												[(ngModel)]="locationConstraint.landscape">
-										</dd>
-									</dl>
-									<dl>
-										<dt>Matière:</dt>
-										<dd>
-											<input class="form-control" type="text"
-												[(ngModel)]="locationConstraint.material">
-										</dd>
-									</dl>
-								</dl>
-							</dl>
-						</div>
-					</div>
-					<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='object'">
-						<div class="card-body">
-							<dl>
-								<dt><u>Général:</u></dt>
-								<dd></dd>
-								<dl class="pl-2">
-									<dl>
-										<dt>Objet:</dt>
-										<dd>
-											<input class="form-control" type="text"
-												[(ngModel)]="objectConstraint.object">
-										</dd>
-									</dl>
-									<dl>
-										<dt>Adjectif:</dt>
-										<dd>
-											<input class="form-control" type="text"
-												[(ngModel)]="objectConstraint.adjective">
-										</dd>
-									</dl>
-									<dl>
-										<dt>Suffixe:</dt>
-										<dd>
-											<input class="form-control" type="text"
-												[(ngModel)]="objectConstraint.suffix">
-										</dd>
-									</dl>
-								</dl>
-							</dl>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
+		<!-- TABLE -->
 		<div>
 			<div *ngIf="ideaForm.get('generationTool')!.value=='persona'" class="row" style="margin:0px">
 				<div class="card col-sm-4 col-md-4 col-lg-4 bkg-gray-2" *ngFor="let persona of personaList">
@@ -369,6 +437,72 @@
 									<dt>Handicapes:</dt>
 									<dd>
 										<div *ngFor="let handicap of persona.traits.handicaps"> {{handicap}}
+											<br />
+										</div>
+									</dd>
+								</dl>
+							</dl>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="ideaForm.get('generationTool')!.value=='creature'" class="row" style="margin:0px">
+				<div class="card col-sm-4 col-md-4 col-lg-4 bkg-gray-2" *ngFor="let creature of creatureList">
+					<div class="card-body">
+						<dl>
+							<dt><u>Général:</u></dt>
+							<dd></dd>
+							<dl class="pl-2">
+								<dl>
+									<dt>Nom:</dt>
+									<dd>{{creature.name}}</dd>
+								</dl>
+								<dl>
+									<dt>Peau:</dt>
+									<dd>{{creature.skin}}</dd>
+								</dl>
+								<dl>
+									<dt>Taille:</dt>
+									<dd>{{(creature.height / 100).toFixed(2)}}m</dd>
+								</dl>
+								<dl>
+									<dt>Poids:</dt>
+									<dd>{{(creature.weight / 1000).toFixed(2)}}kg</dd>
+								</dl>
+								<dl>
+									<dt>Membres externes:</dt>
+									<dd>{{creature.nbMoveMembers}}</dd>
+								</dl>
+							</dl>
+							<dl class="pl-2">
+								<dl>
+									<dt>Lieux de vie:</dt>
+									<dd>
+										<div *ngFor="let location of creature.locations"> {{location}}
+											<br />
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>Alimentation:</dt>
+									<dd>
+										<div *ngFor="let diet of creature.diets"> {{diet}}
+											<br />
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>Attributs:</dt>
+									<dd>
+										<div *ngFor="let attribute of creature.attributes"> {{attribute}}
+											<br />
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>Compétences:</dt>
+									<dd>
+										<div *ngFor="let skill of creature.skills"> {{skill}}
 											<br />
 										</div>
 									</dd>

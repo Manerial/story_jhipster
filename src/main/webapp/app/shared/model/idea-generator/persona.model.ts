@@ -22,16 +22,7 @@ export class Persona implements IPersona {
 
   constructor();
 
-  constructor(
-    age?: number,
-    job?: string,
-    name?: string,
-    race?: string,
-    physical?: IPhysical,
-    role?: string,
-    title?: string,
-    traits?: ITraits
-  ) {
+  constructor(age?: number, job?: string, name?: string, race?: string, physical?: IPhysical, role?: string, traits?: ITraits) {
     this.age = age || 0;
     this.job = job || '';
     this.name = name || '';

@@ -1,12 +1,12 @@
 package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
-import java.util.List;
+import java.util.Set;
 
 public class R_TraitsDTO implements Random_Interface {
-	private List<String> badTraits;
-	private List<String> caracteristics;
-	private List<String> goodTraits;
-	private List<String> handicaps;
+	private Set<String> badTraits;
+	private Set<String> caracteristics;
+	private Set<String> goodTraits;
+	private Set<String> handicaps;
 
 	public R_TraitsDTO() {
 	}
@@ -18,35 +18,35 @@ public class R_TraitsDTO implements Random_Interface {
 		setHandicaps(traits.getHandicaps());
 	}
 
-	public List<String> getBadTraits() {
+	public Set<String> getBadTraits() {
 		return badTraits;
 	}
 
-	public void setBadTraits(List<String> badTraits) {
+	public void setBadTraits(Set<String> badTraits) {
 		this.badTraits = badTraits;
 	}
 
-	public List<String> getCaracteristics() {
+	public Set<String> getCaracteristics() {
 		return caracteristics;
 	}
 
-	public void setCaracteristics(List<String> caracteristics) {
+	public void setCaracteristics(Set<String> caracteristics) {
 		this.caracteristics = caracteristics;
 	}
 
-	public List<String> getGoodTraits() {
+	public Set<String> getGoodTraits() {
 		return goodTraits;
 	}
 
-	public void setGoodTraits(List<String> goodTraits) {
+	public void setGoodTraits(Set<String> goodTraits) {
 		this.goodTraits = goodTraits;
 	}
 
-	public List<String> getHandicaps() {
+	public Set<String> getHandicaps() {
 		return handicaps;
 	}
 
-	public void setHandicaps(List<String> handicaps) {
+	public void setHandicaps(Set<String> handicaps) {
 		this.handicaps = handicaps;
 	}
 }

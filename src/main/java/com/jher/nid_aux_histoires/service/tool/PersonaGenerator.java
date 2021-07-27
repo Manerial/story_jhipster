@@ -1,6 +1,7 @@
 package com.jher.nid_aux_histoires.service.tool;
 
 import java.util.List;
+import java.util.Set;
 
 import com.jher.nid_aux_histoires.domain.Idea;
 import com.jher.nid_aux_histoires.repository.IdeaRepository;
@@ -11,7 +12,6 @@ import com.jher.nid_aux_histoires.service.dto.idea_generator.R_TraitsDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.Random_Interface;
 
 public class PersonaGenerator extends RandomEntityGenerator {
-
 	private WordAnalysisService wordAnalysisService;
 
 	public PersonaGenerator(IdeaRepository ideaRepository, WordAnalysisService wordAnalysisService) {
@@ -143,10 +143,10 @@ public class PersonaGenerator extends RandomEntityGenerator {
 	}
 
 	private R_TraitsDTO generateTraits(R_TraitsDTO traits) {
-		List<String> badTraits = getDefaultOrRandom(traits.getBadTraits(), REG_Element.bad_trait.toString(), 1, 3);
-		List<String> carac = getDefaultOrRandom(traits.getCaracteristics(), REG_Element.hobby.toString(), 2, 5);
-		List<String> goodTraits = getDefaultOrRandom(traits.getGoodTraits(), REG_Element.good_trait.toString(), 2, 5);
-		List<String> handicaps = getDefaultOrRandom(traits.getHandicaps(), REG_Element.handicap.toString(), 0, 3);
+		Set<String> badTraits = getDefaultOrRandom(traits.getBadTraits(), REG_Element.bad_trait, 1, 3);
+		Set<String> carac = getDefaultOrRandom(traits.getCaracteristics(), REG_Element.hobby, 2, 5);
+		Set<String> goodTraits = getDefaultOrRandom(traits.getGoodTraits(), REG_Element.good_trait, 2, 5);
+		Set<String> handicaps = getDefaultOrRandom(traits.getHandicaps(), REG_Element.handicap, 0, 3);
 		traits.setBadTraits(badTraits);
 		traits.setCaracteristics(carac);
 		traits.setGoodTraits(goodTraits);

@@ -9,6 +9,7 @@ import { ILocation } from 'app/shared/model/idea-generator/location.model';
 import { IObject } from 'app/shared/model/idea-generator/object.model';
 import { IType } from 'app/shared/model/type.model';
 import { IHonoraryTitle } from 'app/shared/model/idea-generator/honorary-title.model';
+import { ICreature } from 'app/shared/model/idea-generator/creature.model';
 
 type ITypeArrayResponseType = HttpResponse<IType[]>;
 
@@ -34,6 +35,12 @@ export class GeneratorService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('number', number.toString());
     return this.http.post<IPersona[]>(`${this.resourceUrl}/personas`, constraint, { params: httpParams });
+  }
+
+  generateCreature(number: number, constraint: ICreature): Observable<ICreature[]> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('number', number.toString());
+    return this.http.post<ICreature[]>(`${this.resourceUrl}/creatures`, constraint, { params: httpParams });
   }
 
   generateHonoraryTitle(number: number): Observable<IHonoraryTitle[]> {
