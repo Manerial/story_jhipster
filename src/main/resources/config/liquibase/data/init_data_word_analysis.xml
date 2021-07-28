@@ -18,5 +18,11 @@
 			<column name="analysis" encoding="UTF-8"
 				valueClobFile="wordAnalysis/name.json" />
 		</insert>
+		<insert tableName="word_analysis">
+			<column name="type" value="animal" />
+			<column name="name" value="animaux" />
+			<column name="analysis" encoding="UTF-8"
+				valueClobFile="wordAnalysis/animal.json" />
+		</insert>
 	</changeSet>
 </databaseChangeLog>

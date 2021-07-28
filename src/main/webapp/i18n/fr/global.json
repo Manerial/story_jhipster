@@ -24,7 +24,7 @@
         "wordAnalysis": "Analyse de mots",
         "comment": "Commentaire",
         "bonus": "Bonus",
-        "library": "Bibliothèque",
+        "bookStatus": "Status de livre",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
