@@ -29,15 +29,18 @@ export class TextComponent implements OnInit, OnDestroy {
           // Si on est en train de lire
           this.loadChapter();
         } else if (this.chapter.id === 0) {
-          this.bookStatusService.findByBook(this.book.id).subscribe(bookStatus => {
-            if (bookStatus.body) {
-              // Si on a déjà lu un chapitre
-              this.readerService.changeChapter(bookStatus.body.curentChapterId);
-            } else {
+          this.bookStatusService.findByBook(this.book.id).subscribe(
+            bookStatus => {
+              if (bookStatus.body) {
+                // Si on a déjà lu un chapitre
+                this.readerService.changeChapter(bookStatus.body.curentChapterId);
+              }
+            },
+            () => {
               // Chapitre 0 du livre
               this.readerService.changeChapter(this.book.parts[0].chapters[0].id);
             }
-          });
+          );
         }
       });
     });
