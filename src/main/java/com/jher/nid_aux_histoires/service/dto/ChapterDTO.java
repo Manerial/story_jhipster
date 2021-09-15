@@ -7,9 +7,12 @@ import java.util.TreeSet;
 
 import com.jher.nid_aux_histoires.export.ExportDocx;
 
+import lombok.Data;
+
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Chapter} entity.
  */
+@Data
 public class ChapterDTO implements Serializable, Comparable<ChapterDTO> {
 	private static final long serialVersionUID = 1L;
 
@@ -24,50 +27,6 @@ public class ChapterDTO implements Serializable, Comparable<ChapterDTO> {
 	private Set<SceneDTO> scenes = new HashSet<>();
 
 	private Long partId;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-
-	public Long getPartId() {
-		return partId;
-	}
-
-	public void setPartId(Long partId) {
-		this.partId = partId;
-	}
-
-	public Set<SceneDTO> getScenes() {
-		return scenes;
-	}
 
 	public void setScenes(Set<SceneDTO> scenes) {
 		this.scenes = new TreeSet<SceneDTO>();

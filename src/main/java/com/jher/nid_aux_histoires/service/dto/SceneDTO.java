@@ -5,9 +5,12 @@ import java.util.Date;
 
 import javax.persistence.Lob;
 
+import lombok.Data;
+
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Scene} entity.
  */
+@Data
 public class SceneDTO implements Serializable, Comparable<SceneDTO> {
 	private static final long serialVersionUID = 1L;
 
@@ -23,54 +26,6 @@ public class SceneDTO implements Serializable, Comparable<SceneDTO> {
 	private Date timestampStart;
 
 	private Long chapterId;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public Date getTimestampStart() {
-		return timestampStart;
-	}
-
-	public void setTimestampStart(Date timestampStart) {
-		this.timestampStart = timestampStart;
-	}
-
-	public Long getChapterId() {
-		return chapterId;
-	}
-
-	public void setChapterId(Long chapterId) {
-		this.chapterId = chapterId;
-	}
 
 	@Override
 	public boolean equals(Object o) {

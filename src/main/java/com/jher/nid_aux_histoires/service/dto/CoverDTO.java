@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Lob;
 
+import lombok.Data;
+
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Cover} entity.
  */
+@Data
 public class CoverDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,70 +30,6 @@ public class CoverDTO implements Serializable {
 	private byte[] preview;
 
 	private String previewContentType;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Long getOwnerId() {
-		return ownerId;
-	}
-
-	public void setOwnerId(Long ownerId) {
-		this.ownerId = ownerId;
-	}
-
-	public String getOwnerLogin() {
-		return ownerLogin;
-	}
-
-	public void setOwnerLogin(String ownerLogin) {
-		this.ownerLogin = ownerLogin;
-	}
-
-	public byte[] getPicture() {
-		return picture;
-	}
-
-	public void setPicture(byte[] picture) {
-		this.picture = picture;
-	}
-
-	public String getPictureContentType() {
-		return pictureContentType;
-	}
-
-	public void setPictureContentType(String pictureContentType) {
-		this.pictureContentType = pictureContentType;
-	}
-
-	public byte[] getPreview() {
-		return preview;
-	}
-
-	public void setPreview(byte[] preview) {
-		this.preview = preview;
-	}
-
-	public String getPreviewContentType() {
-		return previewContentType;
-	}
-
-	public void setPreviewContentType(String previewContentType) {
-		this.previewContentType = previewContentType;
-	}
 
 	@Override
 	public boolean equals(Object o) {
