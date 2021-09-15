@@ -94,14 +94,16 @@ public class ChapterServiceImpl implements ChapterService {
 	@Transactional(readOnly = true)
 	public void delete(Long id) {
 		log.debug("Request to delete Chapter : {}", id);
-		Chapter chapter = chapterRepository.findById(id).get();
-		for (Scene scene : chapter.getScenes()) {
-			sceneService.delete(scene.getId());
+		Optional<Chapter> O_chapter = chapterRepository.findById(id);
+		if (O_chapter.isPresent()) {
+			Chapter chapter = chapterRepository.findById(id).get();
+			for (Scene scene : chapter.getScenes()) {
+				sceneService.delete(scene.getId());
+			}
+			chapterRepository.deleteById(id);
 		}
-		chapterRepository.deleteById(id);
 	}
 
-	@Transactional(readOnly = true)
 	private int findNextNumberForBookId(Long bookId) {
 		log.debug("Request to get all Parts");
 		int bigest = 1;

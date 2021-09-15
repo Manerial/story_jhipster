@@ -267,7 +267,11 @@ public class UserService {
 
 	@Transactional(readOnly = true)
 	public UserDTO getUserLightByLogin(String login) {
-		return userMapperLight.userToUserDTO(userRepository.findOneByLogin(login).get());
+		Optional<User> user = userRepository.findOneByLogin(login);
+		if (user.isPresent()) {
+			return userMapperLight.userToUserDTO(userRepository.findOneByLogin(login).get());
+		}
+		return null;
 	}
 
 	@Transactional(readOnly = true)

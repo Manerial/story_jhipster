@@ -143,12 +143,16 @@ public class ExportDocx {
 
 	private void setProperties(String file, String author, String title) throws IOException, InvalidFormatException {
 		OPCPackage opc = OPCPackage.open(file);
-		PackageProperties pp = opc.getPackageProperties();
+		try {
+			PackageProperties pp = opc.getPackageProperties();
 
-		pp.setCreatorProperty(author);
-		pp.setTitleProperty(title);
+			pp.setCreatorProperty(author);
+			pp.setTitleProperty(title);
+		} catch (Exception e) {
 
-		opc.close();
+		} finally {
+			opc.close();
+		}
 	}
 
 	private void appendFileList(List<File> files) throws IOException, Docx4JException {
