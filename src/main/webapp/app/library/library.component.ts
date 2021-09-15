@@ -122,8 +122,6 @@ export class LibraryComponent implements OnInit {
     const bookStatus: any = this.findBookStatusByBookId(bookId);
     bookStatus.favorit = !bookStatus.favorit;
     if (bookStatus.id === 0) {
-      delete bookStatus.id;
-      delete bookStatus.curentChapterId;
       this.bookStatusService.create(bookStatus).subscribe();
     } else {
       this.bookStatusService.update(bookStatus).subscribe();

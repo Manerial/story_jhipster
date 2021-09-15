@@ -104,7 +104,6 @@ export class SceneUpdateComponent implements OnInit {
     if (scene.id !== undefined && scene.id !== 0) {
       this.subscribeToSaveResponse(this.sceneService.update(scene));
     } else {
-      delete scene.id;
       this.subscribeToSaveResponse(this.sceneService.create(scene));
     }
   }
@@ -121,10 +120,11 @@ export class SceneUpdateComponent implements OnInit {
     };
   }
 
-  private formFieldToDate(): Date {
+  private formFieldToDate(): Date | undefined {
     const date = this.editForm.get(['dateStart'])!.value;
     const time = this.editForm.get(['timeStart'])!.value;
-    return new Date(date + 'T' + time + '.000+0000');
+    const dateStr = date + 'T' + time + '.000+0000';
+    return !isNaN(Date.parse(dateStr)) ? new Date(dateStr) : undefined;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IScene>>): void {

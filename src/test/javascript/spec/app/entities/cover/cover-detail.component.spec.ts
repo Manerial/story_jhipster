@@ -8,11 +8,11 @@ import { CoverDetailComponent } from 'app/entities/cover/cover-detail.component'
 import { Cover } from 'app/shared/model/cover.model';
 
 describe('Component Tests', () => {
-  describe('Image Management Detail Component', () => {
+  describe('Cover Management Detail Component', () => {
     let comp: CoverDetailComponent;
     let fixture: ComponentFixture<CoverDetailComponent>;
     let dataUtils: JhiDataUtils;
-    const route = ({ data: of({ image: new Cover(123) }) } as any) as ActivatedRoute;
+    const route = ({ data: of({ cover: new Cover(123) }) } as any) as ActivatedRoute;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -28,7 +28,7 @@ describe('Component Tests', () => {
     });
 
     describe('OnInit', () => {
-      it('Should load image on init', () => {
+      it('Should load cover on init', () => {
         // WHEN
         comp.ngOnInit();
 

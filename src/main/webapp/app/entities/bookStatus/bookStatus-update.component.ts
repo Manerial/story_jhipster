@@ -67,7 +67,6 @@ export class BookStatusUpdateComponent implements OnInit {
     this.isSaving = true;
     const bookStatus = this.createFromForm();
     if (bookStatus.id !== undefined) {
-      delete bookStatus.id;
       this.subscribeToSaveResponse(this.bookStatusService.update(bookStatus));
     } else {
       this.subscribeToSaveResponse(this.bookStatusService.create(bookStatus));

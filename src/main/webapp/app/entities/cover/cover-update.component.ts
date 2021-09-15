@@ -97,7 +97,6 @@ export class CoverUpdateComponent implements OnInit {
     if (cover.id !== undefined && cover.id !== 0) {
       this.subscribeToSaveResponse(this.coverService.update(cover));
     } else {
-      delete cover.id;
       this.subscribeToSaveResponse(this.coverService.create(cover));
     }
   }

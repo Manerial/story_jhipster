@@ -49,7 +49,6 @@ export class IdeaUpdateComponent implements OnInit {
     if (idea.id !== undefined) {
       this.subscribeToSaveResponse(this.ideaService.update(idea));
     } else {
-      delete idea.id;
       this.subscribeToSaveResponse(this.ideaService.create(idea));
     }
   }
