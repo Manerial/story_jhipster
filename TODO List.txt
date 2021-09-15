@@ -1,7 +1,7 @@
 Analytics ?
 
 Bugs :
-	Objets
+	reprise de la lecture
 
 GUI :
 	- Générateur de QR_Code

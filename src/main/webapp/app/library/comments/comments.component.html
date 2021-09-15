@@ -1,7 +1,7 @@
 <div class="content">
     <h2 jhiTranslate="nidAuxHistoiresApp.comment.list.title" [translateValues]="{ bookName: book.name }" *ngIf="book">List of comments for {{ book.name }}</h2>
     <div class="container">
-        <a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold mt-2 ml-2">
+        <a routerLink="/reader/book/{{ book?.id }}" class="btn bkg-gold mt-2 ml-2">
             <p jhiTranslate="nidAuxHistoiresApp.comment.add.read">Read</p>
     	</a>
         <a (click)="addComment()" class="btn bkg-gold mt-2 ml-2">
