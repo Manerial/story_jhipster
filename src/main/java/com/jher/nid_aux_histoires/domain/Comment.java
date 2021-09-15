@@ -16,12 +16,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
 /**
  * A Comment.
  */
 @Entity
 @Table(name = "comment")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Data
 public class Comment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -48,38 +51,9 @@ public class Comment implements Serializable {
 		this.createdDate = new Date();
 	}
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getText() {
-		return text;
-	}
-
 	public Comment text(String text) {
 		this.text = text;
 		return this;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Book getBook() {
-		return book;
 	}
 
 	public Comment book(Book book) {
@@ -87,25 +61,10 @@ public class Comment implements Serializable {
 		return this;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
 	public Comment user(User user) {
 		this.user = user;
 		return this;
 	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-	// setters here
 
 	@Override
 	public boolean equals(Object o) {

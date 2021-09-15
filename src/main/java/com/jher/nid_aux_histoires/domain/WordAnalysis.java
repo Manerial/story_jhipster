@@ -12,12 +12,15 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import lombok.Data;
+
 /**
  * A WordAnalysis.
  */
 @Entity
 @Table(name = "word_analysis")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Data
 public class WordAnalysis implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -35,30 +38,9 @@ public class WordAnalysis implements Serializable {
 	@Column(name = "analysis", columnDefinition = "CLOB")
 	private String analysis;
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getType() {
-		return type;
-	}
-
 	public WordAnalysis type(String type) {
 		this.type = type;
 		return this;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public WordAnalysis name(String name) {
@@ -66,24 +48,10 @@ public class WordAnalysis implements Serializable {
 		return this;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAnalysis() {
-		return analysis;
-	}
-
 	public WordAnalysis analysis(String analysis) {
 		this.analysis = analysis;
 		return this;
 	}
-
-	public void setAnalysis(String analysis) {
-		this.analysis = analysis;
-	}
-	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-	// setters here
 
 	@Override
 	public boolean equals(Object o) {

@@ -19,12 +19,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
 /**
  * A Part.
  */
 @Entity
 @Table(name = "part")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Data
 public class Part implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -50,30 +53,9 @@ public class Part implements Serializable {
 	@JsonIgnoreProperties(value = "parts", allowSetters = true)
 	private Book book;
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 	public Part name(String name) {
 		this.name = name;
 		return this;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public Part description(String description) {
@@ -81,25 +63,9 @@ public class Part implements Serializable {
 		return this;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
 	public Part number(Integer number) {
 		this.number = number;
 		return this;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-
-	public Set<Chapter> getChapters() {
-		return chapters;
 	}
 
 	public Part chapters(Set<Chapter> chapters) {
@@ -119,24 +85,10 @@ public class Part implements Serializable {
 		return this;
 	}
 
-	public void setChapters(Set<Chapter> chapters) {
-		this.chapters = chapters;
-	}
-
-	public Book getBook() {
-		return book;
-	}
-
 	public Part book(Book book) {
 		this.book = book;
 		return this;
 	}
-
-	public void setBook(Book book) {
-		this.book = book;
-	}
-	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-	// setters here
 
 	@Override
 	public boolean equals(Object o) {

@@ -19,12 +19,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
 /**
  * A Chapter.
  */
 @Entity
 @Table(name = "chapter")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Data
 public class Chapter implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -54,30 +57,9 @@ public class Chapter implements Serializable {
 	@JsonIgnoreProperties(value = "chapters", allowSetters = true)
 	private Part part;
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 	public Chapter name(String name) {
 		this.name = name;
 		return this;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public Chapter description(String description) {
@@ -85,25 +67,9 @@ public class Chapter implements Serializable {
 		return this;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
 	public Chapter number(Integer number) {
 		this.number = number;
 		return this;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-
-	public Set<Scene> getScenes() {
-		return scenes;
 	}
 
 	public Chapter scenes(Set<Scene> scenes) {
@@ -123,24 +89,10 @@ public class Chapter implements Serializable {
 		return this;
 	}
 
-	public void setScenes(Set<Scene> scenes) {
-		this.scenes = scenes;
-	}
-
-	public Part getPart() {
-		return part;
-	}
-
 	public Chapter part(Part part) {
 		this.part = part;
 		return this;
 	}
-
-	public void setPart(Part part) {
-		this.part = part;
-	}
-	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-	// setters here
 
 	@Override
 	public boolean equals(Object o) {

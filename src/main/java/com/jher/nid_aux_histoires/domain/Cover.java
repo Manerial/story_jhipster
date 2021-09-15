@@ -25,12 +25,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
 /**
  * A Cover.
  */
 @Entity
 @Table(name = "cover")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Data
 public class Cover implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -65,30 +68,9 @@ public class Cover implements Serializable {
 	@JsonIgnoreProperties(value = "cover", allowSetters = true)
 	private User owner;
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 	public Cover name(String name) {
 		this.name = name;
 		return this;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public byte[] getPicture() {
-		return picture;
 	}
 
 	public Cover picture(byte[] picture) {
@@ -96,34 +78,14 @@ public class Cover implements Serializable {
 		return this;
 	}
 
-	public void setPicture(byte[] picture) {
-		this.picture = picture;
-	}
-
-	public String getPictureContentType() {
-		return pictureContentType;
-	}
-
 	public Cover pictureContentType(String pictureContentType) {
 		this.pictureContentType = pictureContentType;
 		return this;
 	}
 
-	public void setPictureContentType(String pictureContentType) {
-		this.pictureContentType = pictureContentType;
-	}
-
-	public byte[] getPreview() {
-		return preview;
-	}
-
 	public Cover preview(byte[] preview) {
 		this.preview = preview;
 		return this;
-	}
-
-	public void setPreview(byte[] preview) {
-		this.preview = preview;
 	}
 
 	public void generatePreview() {
@@ -157,21 +119,9 @@ public class Cover implements Serializable {
 		return outputImage;
 	}
 
-	public String getPreviewContentType() {
-		return previewContentType;
-	}
-
 	public Cover previewContentType(String previewContentType) {
 		this.previewContentType = previewContentType;
 		return this;
-	}
-
-	public void setPreviewContentType(String previewContentType) {
-		this.previewContentType = previewContentType;
-	}
-
-	public Set<Book> getBookToCovers() {
-		return bookToCovers;
 	}
 
 	public Cover bookToCovers(Set<Book> books) {
@@ -191,25 +141,10 @@ public class Cover implements Serializable {
 		return this;
 	}
 
-	public void setBookToCovers(Set<Book> books) {
-		this.bookToCovers = books;
-	}
-
-	public User getOwner() {
-		return owner;
-	}
-
 	public Cover owner(User owner) {
 		this.owner = owner;
 		return this;
 	}
-
-	public void setOwner(User owner) {
-		this.owner = owner;
-	}
-
-	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-	// setters here
 
 	@Override
 	public boolean equals(Object o) {
