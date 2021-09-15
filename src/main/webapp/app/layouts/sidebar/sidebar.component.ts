@@ -32,8 +32,8 @@ export class SidebarComponent implements OnInit {
     this.readerService.book.subscribe(book => {
       this.book = book;
       this.isLoading = false;
-      this.book.parts.forEach(part => {
-        this.collapseParts[part.id] = true;
+      this.book.parts?.forEach(part => {
+        this.collapseParts[part.id!] = true;
       });
     });
   }

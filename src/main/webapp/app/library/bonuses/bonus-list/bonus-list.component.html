@@ -5,12 +5,12 @@
 		<div *ngFor="let bonus of bonusList" class="col-sm-6 mt-2">
 			<div class="card">
 				<div class="card-body">
-					<h3>{{ bonus.name }}.{{ bonus.dataContentType.split("/")[1] }}</h3>
-					<p *ngIf="showDescription[bonus.id]">{{ bonus.description }}</p>
-					<a (click)="toggleDescription(bonus.id)"
+					<h3>{{ bonus.name }}.{{ bonus.dataContentType!.split("/")[1] }}</h3>
+					<p *ngIf="showDescription[bonus.id!]">{{ bonus.description }}</p>
+					<a (click)="toggleDescription(bonus.id!)"
 						class="btn bkg-gold">
-						<fa-icon icon="plus" *ngIf="!showDescription[bonus.id]"></fa-icon>
-						<fa-icon icon="minus" *ngIf="showDescription[bonus.id]"></fa-icon>
+						<fa-icon icon="plus" *ngIf="!showDescription[bonus.id!]"></fa-icon>
+						<fa-icon icon="minus" *ngIf="showDescription[bonus.id!]"></fa-icon>
 					</a>
 					<a (click)="downloadBonus(bonus)" class="btn bkg-gold ml-2"
 					title="{{ 'library.download' | translate }}">

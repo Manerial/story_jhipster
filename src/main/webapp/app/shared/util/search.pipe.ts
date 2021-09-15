@@ -38,15 +38,15 @@ export class AuthorFilterPipe implements PipeTransform {
 
     if (field === fields.LOGIN) {
       if (ascending) {
-        users.sort((a, b) => a.login.localeCompare(b.login));
+        users.sort((a, b) => a.login!.localeCompare(b.login!));
       } else {
-        users.sort((a, b) => b.login.localeCompare(a.login));
+        users.sort((a, b) => b.login!.localeCompare(a.login!));
       }
     } else if (field === fields.BOOKS) {
       if (ascending) {
-        users.sort((a, b) => a.books - b.books);
+        users.sort((a, b) => a.books! - b.books!);
       } else {
-        users.sort((a, b) => b.books - a.books);
+        users.sort((a, b) => b.books! - a.books!);
       }
     }
 

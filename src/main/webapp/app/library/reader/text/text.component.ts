@@ -29,16 +29,16 @@ export class TextComponent implements OnInit, OnDestroy {
           // Si on est en train de lire
           this.loadChapter();
         } else if (this.chapter.id === 0) {
-          this.bookStatusService.findByBook(this.book.id).subscribe(
+          this.bookStatusService.findByBook(this.book.id!).subscribe(
             bookStatus => {
               if (bookStatus.body) {
                 // Si on a déjà lu un chapitre
-                this.readerService.changeChapter(bookStatus.body.curentChapterId);
+                this.readerService.changeChapter(bookStatus.body.curentChapterId!);
               }
             },
             () => {
               // Chapitre 0 du livre
-              this.readerService.changeChapter(this.book.parts[0].chapters[0].id);
+              this.readerService.changeChapter(this.book.parts![0].chapters![0].id!);
             }
           );
         }
@@ -47,7 +47,7 @@ export class TextComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.readerService.changeChapter(this.chapter.id);
+    this.readerService.changeChapter(this.chapter.id!);
     this.chapterSubscriber.unsubscribe();
   }
 
@@ -62,8 +62,8 @@ export class TextComponent implements OnInit, OnDestroy {
 
   getCurentChapter(): IChapter {
     let currentChapter: IChapter = new Chapter();
-    this.book.parts.forEach(part => {
-      part.chapters.forEach(chapter => {
+    this.book.parts?.forEach(part => {
+      part.chapters?.forEach(chapter => {
         if (chapter.id === this.readerService.currentChapterId) {
           currentChapter = chapter;
         }
