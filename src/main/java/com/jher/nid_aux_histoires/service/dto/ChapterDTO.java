@@ -103,7 +103,7 @@ public class ChapterDTO implements Serializable, Comparable<ChapterDTO> {
 		for (SceneDTO scene : scenes) {
 			text += scene.getText() + ExportDocx.LINE_BREAK_PLACEHOLDER;
 		}
-		return text.replaceAll("\r\n", ExportDocx.LINE_BREAK_PLACEHOLDER);
+		return text.replace("\r\n", ExportDocx.LINE_BREAK_PLACEHOLDER);
 	}
 
 	@Override

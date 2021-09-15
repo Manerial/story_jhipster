@@ -35,6 +35,7 @@ import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.Random_Interface;
 import com.jher.nid_aux_histoires.service.mapper.IdeaMapper;
 import com.jher.nid_aux_histoires.service.tool.REG_Entity;
 
@@ -243,31 +244,37 @@ public class IdeaResourceIT {
 
 	@Test
 	public void createRandomPersona() {
-		ideaService.generate(1000, REG_Entity.persona, new R_PersonaDTO());
+		List<Random_Interface> list = ideaService.generate(1000, REG_Entity.persona, new R_PersonaDTO());
+		assertThat(list).hasSize(1000);
 	}
 
 	@Test
 	public void createRandomHonoraryTitle() {
-		ideaService.generate(1000, REG_Entity.honorary_title, new R_ObjectDTO());
+		List<Random_Interface> list = ideaService.generate(1000, REG_Entity.honorary_title, new R_ObjectDTO());
+		assertThat(list).hasSize(1000);
 	}
 
 	@Test
 	public void createRandomLocation() {
-		ideaService.generate(1000, REG_Entity.location, new R_LocationDTO());
+		List<Random_Interface> list = ideaService.generate(1000, REG_Entity.location, new R_LocationDTO());
+		assertThat(list).hasSize(1000);
 	}
 
 	@Test
 	public void createRandomObject() {
-		ideaService.generate(1000, REG_Entity.object, new R_ObjectDTO());
+		List<Random_Interface> list = ideaService.generate(1000, REG_Entity.object, new R_ObjectDTO());
+		assertThat(list).hasSize(1000);
 	}
 
 	@Test
 	public void createRandomWritingOption() {
-		ideaService.generate(1000, REG_Entity.writing_option, new R_WritingOptionDTO());
+		List<Random_Interface> list = ideaService.generate(1000, REG_Entity.writing_option, new R_WritingOptionDTO());
+		assertThat(list).hasSize(1000);
 	}
 
 	@Test
 	public void createRandomCreature() {
-		ideaService.generate(1000, REG_Entity.creature, new R_CreatureDTO());
+		List<Random_Interface> list = ideaService.generate(1000, REG_Entity.creature, new R_CreatureDTO());
+		assertThat(list).hasSize(1000);
 	}
 }

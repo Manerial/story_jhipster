@@ -12,7 +12,7 @@ public class ConverterEPUB implements ConverterInterface {
 	@Override
 	public String[] getCommand(String bookName) {
 		String inputfilepath = ExportDocx.getObjectFilePath(bookName);
-		String outputfilepath = ExportDocx.getObjectFilePath(bookName, FILE_FORMAT.epub);
+		String outputfilepath = ExportDocx.getObjectFilePath(bookName, FILE_FORMAT.EPUB);
 		String[] cmd = { "ebook-convert", inputfilepath, outputfilepath, "--docx-inline-subsup", "--epub-inline-toc" };
 		LOGGER.info(String.join(" ", cmd));
 		return cmd;

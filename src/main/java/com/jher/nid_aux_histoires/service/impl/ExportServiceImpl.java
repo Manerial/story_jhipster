@@ -72,12 +72,12 @@ public class ExportServiceImpl implements ExportService {
 		}
 
 		try {
-			exportDocx.convertWordToFormat(book, ExportDocx.FILE_FORMAT.pdf);
+			exportDocx.convertWordToFormat(book, ExportDocx.FILE_FORMAT.PDF);
 		} catch (Exception e) {
 		}
 
 		try {
-			exportDocx.convertWordToFormat(book, ExportDocx.FILE_FORMAT.epub);
+			exportDocx.convertWordToFormat(book, ExportDocx.FILE_FORMAT.EPUB);
 		} catch (Exception e) {
 		}
 	}
@@ -85,17 +85,17 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public MediaType getMediaType(FILE_FORMAT format) {
 		switch (format) {
-		case docx:
+		case DOCX:
 			return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-		case epub:
+		case EPUB:
 			return new MediaType("application", "epub+zip");
-		case pdf:
+		case PDF:
 			return MediaType.APPLICATION_PDF;
-		case jpg:
+		case JPG:
 			return new MediaType("image", "jpg");
-		case jpeg:
+		case JPEG:
 			return MediaType.IMAGE_JPEG;
-		case png:
+		case PNG:
 			return MediaType.IMAGE_PNG;
 		default:
 			return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");

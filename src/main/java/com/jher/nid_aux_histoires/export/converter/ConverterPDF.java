@@ -12,7 +12,7 @@ public class ConverterPDF implements ConverterInterface {
 	@Override
 	public String[] getCommand(String bookName) {
 		String inputfilepath = ExportDocx.getObjectFilePath(bookName);
-		String outputfilepath = ExportDocx.getObjectFilePath(bookName, FILE_FORMAT.pdf);
+		String outputfilepath = ExportDocx.getObjectFilePath(bookName, FILE_FORMAT.PDF);
 		String[] cmd = { "ebook-convert", inputfilepath, outputfilepath, "--docx-inline-subsup", "--pdf-add-toc" };
 		LOGGER.info(String.join(" ", cmd));
 		return cmd;

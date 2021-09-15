@@ -62,13 +62,13 @@ public class CoverServiceImpl implements CoverService {
 	@Override
 	@Transactional(readOnly = true)
 	public Page<CoverDTO> findAllByOwnerId(Pageable pageable, Long id) {
-		log.debug("Request to get all Covers");
+		log.debug("Request to get all Covers by Owner id");
 		return coverRepository.findAllByOwnerId(pageable, id).map(coverMapperLight::toDto);
 	}
 
 	@Override
 	public Page<CoverDTO> findAllByOwnerLogin(Pageable pageable, String login) {
-		log.debug("Request to get all Covers");
+		log.debug("Request to get all Covers by Owner login");
 		return coverRepository.findAllByOwnerLogin(pageable, login).map(coverMapperLight::toDto);
 	}
 
