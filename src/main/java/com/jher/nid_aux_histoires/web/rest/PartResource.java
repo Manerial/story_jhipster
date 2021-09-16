@@ -161,9 +161,9 @@ public class PartResource {
 		}
 
 		Long bookId = partDTO.getBookId();
-		Optional<BookDTO> O_book = bookService.findOne(bookId);
-		if (O_book.isPresent()) {
-			String login = O_book.get().getAuthorLogin();
+		Optional<BookDTO> optBook = bookService.findOne(bookId);
+		if (optBook.isPresent()) {
+			String login = optBook.get().getAuthorLogin();
 			if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
 				throw new Exception("You have no access to this resource (Book : " + bookId + ")");
 			}

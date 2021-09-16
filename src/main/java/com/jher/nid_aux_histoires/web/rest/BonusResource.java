@@ -161,9 +161,9 @@ public class BonusResource {
 	@DeleteMapping("/bonuses/{id}")
 	public ResponseEntity<Void> deleteBonus(@PathVariable Long id) throws Exception {
 		log.debug("REST request to delete Bonus : {}", id);
-		Optional<BonusDTO> O_bonus = bonusService.findOne(id);
-		if (O_bonus.isPresent()) {
-			SecurityConfiguration.CheckLoggedUser(O_bonus.get().getOwnerLogin());
+		Optional<BonusDTO> optBonus = bonusService.findOne(id);
+		if (optBonus.isPresent()) {
+			SecurityConfiguration.CheckLoggedUser(optBonus.get().getOwnerLogin());
 			bonusService.delete(id);
 			return ResponseEntity.noContent()
 					.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
@@ -183,9 +183,9 @@ public class BonusResource {
 
 		// Avoid link with other resources
 		Long bookId = bonusDTO.getBookId();
-		Optional<BookDTO> O_book = bookService.findOneLight(bookId);
-		if (O_book.isPresent()) {
-			String login = O_book.get().getAuthorLogin();
+		Optional<BookDTO> optBook = bookService.findOneLight(bookId);
+		if (optBook.isPresent()) {
+			String login = optBook.get().getAuthorLogin();
 			if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
 				throw new Exception("You have no access to this resource (Book : " + bookId + ")");
 			}
