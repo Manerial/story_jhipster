@@ -30,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Book;
 import com.jher.nid_aux_histoires.repository.BookRepository;
+import com.jher.nid_aux_histoires.repository.CoverRepository;
 import com.jher.nid_aux_histoires.repository.UserRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.BookService;
@@ -58,6 +59,9 @@ public class BookResourceIT {
 	private UserRepository userRepository;
 
 	@Autowired
+	private CoverRepository coverRepository;
+
+	@Autowired
 	private BookMapper bookMapper;
 
 	@Mock
@@ -81,6 +85,7 @@ public class BookResourceIT {
 		Book book = new Book().name(DEFAULT_NAME);
 		book.setVisibility(true);
 		book.setAuthor(userRepository.getOne(1L));
+		book.setCover(coverRepository.getOne(1L));
 		return book;
 	}
 
