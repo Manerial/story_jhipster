@@ -3,41 +3,46 @@ package com.jher.nid_aux_histoires.service.tool;
 // @formatter:off
 public enum REG_Element {
 	// Persona
-	eyes_color,
-	face_shape,
-	hair_color,
-	hair_style,
-	morphology,
-	role,
-	gender,
-	bad_trait,
-	hobby,
-	good_trait,
-	handicap,
-	job,
-	race,
+	EYES_COLOR,
+	FACE_SHAPE,
+	HAIR_COLOR,
+	HAIR_STYLE,
+	MORPHOLOGY,
+	ROLE,
+	GENDER,
+	BAD_TRAIT,
+	HOBBY,
+	GOOD_TRAIT,
+	HANDICAP,
+	JOB,
+	RACE,
 	
 	// Creature
-	move,
-	skin,
-	diet,
-	attribute,
-	skill,
+	MOVE,
+	SKIN,
+	DIET,
+	ATTRIBUTE,
+	SKILL,
 	
 	// Writing Option
-	style,
-	theme,
+	STYLE,
+	THEME,
 	
 	// Location
-	place,
-	landscape,
+	PLACE,
+	LANDSCAPE,
 	
 	// Object
-	object,
-	material,
+	OBJECT,
+	MATERIAL,
 	
 	// Global
-	common_name,
-	adjective
+	COMMON_NAME,
+	ADJECTIVE;
+	
+	@Override
+	public String toString() {
+		return this.name().toLowerCase();
+	}
 }
 // @formatter:on

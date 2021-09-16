@@ -20,11 +20,11 @@ public class CreatureGenerator extends RandomEntityGenerator {
 		R_CreatureDTO randomCreature = new R_CreatureDTO((R_CreatureDTO) constraint);
 
 		String name = getRandomName(randomCreature.getName());
-		String skin = getDefaultOrRandom(randomCreature.getSkin(), REG_Element.skin);
-		Set<String> locations = getDefaultOrRandom(randomCreature.getLocations(), REG_Element.landscape, 1, 5);
-		Set<String> diets = getDefaultOrRandom(randomCreature.getDiets(), REG_Element.diet, 1, 3);
-		Set<String> attributes = getDefaultOrRandom(randomCreature.getAttributes(), REG_Element.attribute, 2, 7);
-		Set<String> skills = getDefaultOrRandom(randomCreature.getSkills(), REG_Element.skill, 1, 4);
+		String skin = getDefaultOrRandom(randomCreature.getSkin(), REG_Element.SKIN);
+		Set<String> locations = getDefaultOrRandom(randomCreature.getLocations(), REG_Element.LANDSCAPE, 1, 5);
+		Set<String> diets = getDefaultOrRandom(randomCreature.getDiets(), REG_Element.DIET, 1, 3);
+		Set<String> attributes = getDefaultOrRandom(randomCreature.getAttributes(), REG_Element.ATTRIBUTE, 2, 7);
+		Set<String> skills = getDefaultOrRandom(randomCreature.getSkills(), REG_Element.SKILL, 1, 4);
 		double height = getHeight(randomCreature.getHeight());
 		double weight = getWeight(randomCreature.getWeight(), height);
 		int nbMoveMembers = randomCreature.getNbMoveMembers();

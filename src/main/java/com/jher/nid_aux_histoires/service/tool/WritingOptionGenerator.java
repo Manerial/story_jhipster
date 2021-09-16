@@ -12,8 +12,8 @@ public class WritingOptionGenerator extends RandomEntityGenerator {
 	@Override
 	public R_WritingOptionDTO generate(Random_Interface constraint) {
 		R_WritingOptionDTO randomWritingOption = new R_WritingOptionDTO((R_WritingOptionDTO) constraint);
-		String style = getDefaultOrRandom(randomWritingOption.getStyle(), REG_Element.style);
-		String theme = getDefaultOrRandom(randomWritingOption.getTheme(), REG_Element.theme);
+		String style = getDefaultOrRandom(randomWritingOption.getStyle(), REG_Element.STYLE);
+		String theme = getDefaultOrRandom(randomWritingOption.getTheme(), REG_Element.THEME);
 		randomWritingOption.setStyle(style);
 		randomWritingOption.setTheme(theme);
 		return randomWritingOption;

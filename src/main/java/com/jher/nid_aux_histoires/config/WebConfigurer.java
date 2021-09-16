@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -118,7 +119,8 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
 	public CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = jHipsterProperties.getCors();
-		if (config.getAllowedOrigins() != null && !config.getAllowedOrigins().isEmpty()) {
+		List<String> allowedOrigins = config.getAllowedOrigins();
+		if (allowedOrigins != null && !allowedOrigins.isEmpty()) {
 			log.debug("Registering CORS filter");
 			source.registerCorsConfiguration("/api/**", config);
 			source.registerCorsConfiguration("/management/**", config);

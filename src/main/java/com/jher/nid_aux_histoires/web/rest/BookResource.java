@@ -187,7 +187,7 @@ public class BookResource {
 	@GetMapping("/books/favorits")
 	public ResponseEntity<List<BookDTO>> getAllBooksFavorits(
 			@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable) {
-		log.debug("REST request to get a page of Books");
+		log.debug("REST request to get a page of favorites Books");
 		Page<BookDTO> page = bookService.findAllFavoritsVisible(pageable, SecurityConfiguration.getUserLogin());
 
 		HttpHeaders headers = PaginationUtil
@@ -206,7 +206,7 @@ public class BookResource {
 	@GetMapping("/books/author/{login}")
 	public ResponseEntity<List<BookDTO>> getBooksByAuthor(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
 			@PathVariable String login) {
-		log.debug("REST request to get a page of Books");
+		log.debug("REST request to get a page of Books by authors");
 		Page<BookDTO> page = null;
 		try {
 			SecurityConfiguration.CheckLoggedUser(login);
