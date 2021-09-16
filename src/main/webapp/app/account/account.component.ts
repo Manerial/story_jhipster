@@ -19,6 +19,4 @@ export class AccountComponent implements OnInit {
       }
     });
   }
-
-  login(): void {}
 }

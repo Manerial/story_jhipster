@@ -21,7 +21,7 @@ export class AlertErrorComponent implements OnDestroy {
   errorListener: Subscription;
   httpErrorListener: Subscription;
 
-  constructor(private alertService: JhiAlertService, private eventManager: JhiEventManager, translateService: TranslateService) {
+  constructor(private alertService: JhiAlertService, private eventManager: JhiEventManager, private translateService: TranslateService) {
     this.errorListener = eventManager.subscribe('nidAuxHistoiresApp.error', (response: JhiEventWithContent<AlertError>) => {
       const errorResponse = response.content;
       this.addErrorAlert(errorResponse.message, errorResponse.key, errorResponse.params);
@@ -35,39 +35,9 @@ export class AlertErrorComponent implements OnDestroy {
           this.addErrorAlert('Server not reachable', 'error.server.not.reachable');
           break;
 
-        case 400: {
-          const arr = httpErrorResponse.headers.keys();
-          let errorHeader = null;
-          let entityKey = null;
-          arr.forEach(entry => {
-            if (entry.toLowerCase().endsWith('app-error')) {
-              errorHeader = httpErrorResponse.headers.get(entry);
-            } else if (entry.toLowerCase().endsWith('app-params')) {
-              entityKey = httpErrorResponse.headers.get(entry);
-            }
-          });
-          if (errorHeader) {
-            const entityName = translateService.instant('global.menu.entities.' + entityKey);
-            this.addErrorAlert(errorHeader, errorHeader, { entityName });
-          } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.fieldErrors) {
-            const fieldErrors = httpErrorResponse.error.fieldErrors;
-            for (const fieldError of fieldErrors) {
-              if (['Min', 'Max', 'DecimalMin', 'DecimalMax'].includes(fieldError.message)) {
-                fieldError.message = 'Size';
-              }
-              // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
-              const convertedField = fieldError.field.replace(/\[\d*\]/g, '[]');
-              const fieldName = translateService.instant('nidAuxHistoiresApp.' + fieldError.objectName + '.' + convertedField);
-              this.addErrorAlert('Error on field "' + fieldName + '"', 'error.' + fieldError.message, { fieldName });
-            }
-          } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.message) {
-            this.addErrorAlert(httpErrorResponse.error.message, httpErrorResponse.error.message, httpErrorResponse.error.params);
-          } else {
-            this.addErrorAlert(httpErrorResponse.error);
-          }
+        case 400:
+          this.manageError400(httpErrorResponse);
           break;
-        }
-
         case 404:
           this.addErrorAlert('Not found', 'error.url.not.found');
           break;
@@ -80,6 +50,38 @@ export class AlertErrorComponent implements OnDestroy {
           }
       }
     });
+  }
+
+  manageError400(httpErrorResponse: HttpErrorResponse): void {
+    const arr = httpErrorResponse.headers.keys();
+    let errorHeader = null;
+    let entityKey = null;
+    arr.forEach(entry => {
+      if (entry.toLowerCase().endsWith('app-error')) {
+        errorHeader = httpErrorResponse.headers.get(entry);
+      } else if (entry.toLowerCase().endsWith('app-params')) {
+        entityKey = httpErrorResponse.headers.get(entry);
+      }
+    });
+    if (errorHeader) {
+      const entityName = this.translateService.instant('global.menu.entities.' + entityKey);
+      this.addErrorAlert(errorHeader, errorHeader, { entityName });
+    } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.fieldErrors) {
+      const fieldErrors = httpErrorResponse.error.fieldErrors;
+      for (const fieldError of fieldErrors) {
+        if (['Min', 'Max', 'DecimalMin', 'DecimalMax'].includes(fieldError.message)) {
+          fieldError.message = 'Size';
+        }
+        // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
+        const convertedField = fieldError.field.replace(/\[\d*\]/g, '[]');
+        const fieldName = this.translateService.instant('nidAuxHistoiresApp.' + fieldError.objectName + '.' + convertedField);
+        this.addErrorAlert('Error on field "' + fieldName + '"', 'error.' + fieldError.message, { fieldName });
+      }
+    } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.message) {
+      this.addErrorAlert(httpErrorResponse.error.message, httpErrorResponse.error.message, httpErrorResponse.error.params);
+    } else {
+      this.addErrorAlert(httpErrorResponse.error);
+    }
   }
 
   setClasses(alert: JhiAlert): { [key: string]: boolean } {
