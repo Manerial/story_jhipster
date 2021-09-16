@@ -84,7 +84,7 @@ public class CoverServiceImpl implements CoverService {
 		log.debug("Request to delete Cover : {}", id);
 		Optional<Cover> O_cover = coverRepository.findById(id);
 		if (O_cover.isPresent()) {
-			Cover cover = coverRepository.findById(id).get();
+			Cover cover = O_cover.get();
 			for (Book book : cover.getBookToCovers()) {
 				book.setCover(null);
 			}

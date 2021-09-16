@@ -143,11 +143,15 @@ public class CoverResource {
 	@DeleteMapping("/covers/{id}")
 	public ResponseEntity<Void> deleteCover(@PathVariable Long id) throws Exception {
 		log.debug("REST request to delete Cover : {}", id);
-		CoverDTO coverDTO = coverService.findOne(id).get();
-		SecurityConfiguration.CheckLoggedUser(coverDTO.getOwnerLogin());
-		coverService.delete(id);
-		return ResponseEntity.noContent()
-				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-				.build();
+		Optional<CoverDTO> O_cover = coverService.findOne(id);
+		if (O_cover.isPresent()) {
+			CoverDTO coverDTO = O_cover.get();
+			SecurityConfiguration.CheckLoggedUser(coverDTO.getOwnerLogin());
+			coverService.delete(id);
+			return ResponseEntity.noContent()
+					.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+					.build();
+		}
+		throw new BadRequestAlertException("The entity cover does not exist", ENTITY_NAME, "donotexist");
 	}
 }

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.PartService;
+import com.jher.nid_aux_histoires.service.dto.BookDTO;
 import com.jher.nid_aux_histoires.service.dto.PartDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
@@ -160,9 +161,12 @@ public class PartResource {
 		}
 
 		Long bookId = partDTO.getBookId();
-		String login = bookService.findOne(bookId).get().getAuthorLogin();
-		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
-			throw new Exception("You have no access to this resource (Book : " + bookId + ")");
+		Optional<BookDTO> O_book = bookService.findOne(bookId);
+		if (O_book.isPresent()) {
+			String login = O_book.get().getAuthorLogin();
+			if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
+				throw new Exception("You have no access to this resource (Book : " + bookId + ")");
+			}
 		}
 	}
 }

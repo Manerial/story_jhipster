@@ -157,13 +157,17 @@ public class CommentResource {
 	 */
 	@DeleteMapping("/comments/{id}")
 	public ResponseEntity<Void> deleteComment(@PathVariable Long id) throws Exception {
-		CommentDTO commentDTO = commentService.findOne(id).get();
-		SecurityConfiguration.CheckLoggedUser(commentDTO.getUserLogin());
 		log.debug("REST request to delete Comment : {}", id);
-		commentService.delete(id);
-		return ResponseEntity.noContent()
-				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-				.build();
+		Optional<CommentDTO> O_comment = commentService.findOne(id);
+		if (O_comment.isPresent()) {
+			CommentDTO commentDTO = O_comment.get();
+			SecurityConfiguration.CheckLoggedUser(commentDTO.getUserLogin());
+			commentService.delete(id);
+			return ResponseEntity.noContent()
+					.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+					.build();
+		}
+		throw new BadRequestAlertException("The entity comment does not exist", ENTITY_NAME, "donotexist");
 	}
 
 	private void setUserLogin(CommentDTO commentDTO) {

@@ -25,6 +25,7 @@ import com.jher.nid_aux_histoires.export.ExportDocx.AVAILABLE_FILE_FORMAT;
 import com.jher.nid_aux_histoires.service.BonusService;
 import com.jher.nid_aux_histoires.service.ExportService;
 import com.jher.nid_aux_histoires.service.dto.BonusDTO;
+import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
 @RestController
 @RequestMapping("/api")
@@ -85,6 +86,10 @@ public class ExportController {
 			log.warn(error, e);
 		}
 
+		if (path == null) {
+			throw new BadRequestAlertException("The entity book does not exist", "book", "donotexist");
+		}
+
 		byte[] data;
 		try {
 			data = Files.readAllBytes(path);
@@ -110,12 +115,12 @@ public class ExportController {
 	@GetMapping("/download/bonus/{id}")
 	public ResponseEntity<byte[]> getBonus(@PathVariable Long id) {
 		log.debug("REST request to get Bonus : {}", id);
-		Optional<BonusDTO> opt = bonusService.findOne(id);
-		if (!opt.isPresent()) {
+		Optional<BonusDTO> O_bonus = bonusService.findOne(id);
+		if (!O_bonus.isPresent()) {
 			String error = "Error during the reading of the document. Document not found";
 			return ResponseEntity.badRequest().body(error.getBytes());
 		}
-		BonusDTO bonusDTO = bonusService.findOne(id).get();
+		BonusDTO bonusDTO = O_bonus.get();
 		MediaType MT = MediaType.parseMediaType(bonusDTO.getDataContentType());
 		String fileName = bonusDTO.getName() + "." + bonusDTO.getDataContentType();
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"" + fileName + "\"")

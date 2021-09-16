@@ -167,7 +167,7 @@ public class UserService {
 		}
 		userRepository.save(user);
 		this.clearUserCaches(user);
-		log.debug("Created Information for User: {}", user);
+		log.debug("Created Information for User");
 		return user;
 	}
 

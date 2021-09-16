@@ -72,7 +72,7 @@ public class ExportServiceImpl implements ExportService {
 	private void export(long id) {
 		Optional<BookDTO> O_book = bookService.findOne(id);
 		if (O_book.isPresent()) {
-			BookDTO book = bookService.findOne(id).get();
+			BookDTO book = O_book.get();
 
 			try {
 				exportDocx.launchGeneration(book);

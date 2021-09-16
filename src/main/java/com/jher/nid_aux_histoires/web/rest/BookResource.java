@@ -230,11 +230,11 @@ public class BookResource {
 	@GetMapping("/books/{id}")
 	public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Book : {}", id);
-		Optional<BookDTO> bookDTO = bookService.findOne(id);
-		if (!bookDTO.get().getVisibility()) {
-			SecurityConfiguration.CheckLoggedUser(bookDTO.get().getAuthorLogin());
+		Optional<BookDTO> O_book = bookService.findOne(id);
+		if (O_book.isPresent() && !O_book.get().getVisibility()) {
+			SecurityConfiguration.CheckLoggedUser(O_book.get().getAuthorLogin());
 		}
-		return ResponseUtil.wrapOrNotFound(bookDTO);
+		return ResponseUtil.wrapOrNotFound(O_book);
 	}
 
 	/**
