@@ -25,6 +25,7 @@ import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.BonusService;
 import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.dto.BonusDTO;
+import com.jher.nid_aux_histoires.service.dto.BookDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -160,12 +161,16 @@ public class BonusResource {
 	@DeleteMapping("/bonuses/{id}")
 	public ResponseEntity<Void> deleteBonus(@PathVariable Long id) throws Exception {
 		log.debug("REST request to delete Bonus : {}", id);
-		BonusDTO bonusDTO = bonusService.findOne(id).get();
-		SecurityConfiguration.CheckLoggedUser(bonusDTO.getOwnerLogin());
-		bonusService.delete(id);
-		return ResponseEntity.noContent()
-				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-				.build();
+		Optional<BonusDTO> O_bonus = bonusService.findOne(id);
+		if (O_bonus.isPresent()) {
+			BonusDTO bonusDTO = O_bonus.get();
+			SecurityConfiguration.CheckLoggedUser(bonusDTO.getOwnerLogin());
+			bonusService.delete(id);
+			return ResponseEntity.noContent()
+					.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+					.build();
+		}
+		throw new BadRequestAlertException("The entity bonus does not exist", ENTITY_NAME, "donotexist");
 	}
 
 	/**
@@ -178,9 +183,12 @@ public class BonusResource {
 		SecurityConfiguration.CheckLoggedUser(bonusDTO.getOwnerLogin());
 
 		Long bookId = bonusDTO.getBookId();
-		String login = bookService.findOneLight(bookId).get().getAuthorLogin();
-		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
-			throw new Exception("You have no access to this resource (Book : " + bookId + ")");
+		Optional<BookDTO> O_book = bookService.findOneLight(bookId);
+		if (O_book.isPresent()) {
+			String login = O_book.get().getAuthorLogin();
+			if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
+				throw new Exception("You have no access to this resource (Book : " + bookId + ")");
+			}
 		}
 	}
 }

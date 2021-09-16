@@ -81,7 +81,9 @@ public class PersonaGenerator extends RandomEntityGenerator {
 		}
 		double height;
 		if (age < 18) {
-			height = RNG.getRandomIntoInterval(40 + age * 5, 100 + age * 5);
+			int min = 40 + age * 5;
+			int max = 100 + age * 5;
+			height = RNG.getRandomIntoInterval(min, max);
 		} else if (gender.equals("Homme")) {
 			height = RNG.getRandomIntoInterval(150, 230);
 		} else {

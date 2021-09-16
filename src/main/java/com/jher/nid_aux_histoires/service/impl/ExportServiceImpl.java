@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +37,13 @@ public class ExportServiceImpl implements ExportService {
 
 	@Override
 	public Path getPathOfExportedBook(long id, ExportDocx.FILE_FORMAT format) throws Exception {
-		BookDTO book = bookService.findOne(id).get();
-		String bookPathString = ExportDocx.getObjectFilePath(book.getName(), format);
-		return Paths.get(bookPathString);
+		Optional<BookDTO> O_book = bookService.findOne(id);
+		if (O_book.isPresent()) {
+			BookDTO book = O_book.get();
+			String bookPathString = ExportDocx.getObjectFilePath(book.getName(), format);
+			return Paths.get(bookPathString);
+		}
+		return null;
 	}
 
 	@Override
@@ -65,20 +70,24 @@ public class ExportServiceImpl implements ExportService {
 	}
 
 	private void export(long id) {
-		BookDTO book = bookService.findOne(id).get();
-		try {
-			exportDocx.launchGeneration(book);
-		} catch (Exception e) {
-		}
+		Optional<BookDTO> O_book = bookService.findOne(id);
+		if (O_book.isPresent()) {
+			BookDTO book = bookService.findOne(id).get();
 
-		try {
-			exportDocx.convertWordToFormat(book, ExportDocx.FILE_FORMAT.PDF);
-		} catch (Exception e) {
-		}
+			try {
+				exportDocx.launchGeneration(book);
+			} catch (Exception e) {
+			}
 
-		try {
-			exportDocx.convertWordToFormat(book, ExportDocx.FILE_FORMAT.EPUB);
-		} catch (Exception e) {
+			try {
+				exportDocx.convertWordToFormat(book, ExportDocx.FILE_FORMAT.PDF);
+			} catch (Exception e) {
+			}
+
+			try {
+				exportDocx.convertWordToFormat(book, ExportDocx.FILE_FORMAT.EPUB);
+			} catch (Exception e) {
+			}
 		}
 	}
 
