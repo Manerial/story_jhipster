@@ -149,6 +149,7 @@
     "emailexists": "Email is already in use!",
     "idexists": "A new {{ entityName }} cannot already have an ID",
     "idnull": "Invalid ID",
+    "donotexist": "The entity {{entityName}} does not exist",
     "file": {
       "could.not.extract": "Could not extract file",
       "not.cover": "File was expected to be a cover but was found to be \"{{ fileType }}\""
