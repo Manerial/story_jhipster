@@ -38,9 +38,9 @@ jobs:
             - name: Install node.js packages
               run: npm install
             - name: Create BooksExports
-              run: mkdir -m 777 /home/runner/BooksExports
-            - name: LS Runner
-              run: ls -l /home/runner
+              run: mkdir /home/runner/BooksExports
+            - name: Change rights BooksExports
+              run: chmod 777 -R /home/runner/BooksExports
             - name: Run backend test
               run: |
                 chmod +x mvnw
