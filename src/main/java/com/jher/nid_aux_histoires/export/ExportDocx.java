@@ -55,7 +55,7 @@ public class ExportDocx {
 		PDF, EPUB
 	};
 
-	public static final String TEMP_DIR = System.getProperty("user.home") + "\\BooksExports\\";
+	public static final String TEMP_DIR = System.getProperty("user.home") + "/BooksExports/";
 	public static final String LINE_BREAK_PLACEHOLDER = "§";
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExportDocx.class);
 
