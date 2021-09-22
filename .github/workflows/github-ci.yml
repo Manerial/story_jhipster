@@ -37,6 +37,8 @@ jobs:
                 restore-keys: ${{ runner.os }}-m2
             - name: Install node.js packages
               run: npm install
+            - name: Install calibre
+              run: sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
             - name: Create BooksExports
               run: mkdir /home/runner/BooksExports
             - name: Change rights BooksExports
