@@ -158,6 +158,28 @@ public class BookResourceIT {
 
 	@Test
 	@Transactional
+	public void getAllFavorits() throws Exception {
+		// Initialize the database
+		bookRepository.saveAndFlush(book);
+
+		// Get all the bookList
+		restBookMockMvc.perform(get("/api/favorits")).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
+	}
+
+	@Test
+	@Transactional
+	public void getBooksByAuthor() throws Exception {
+		// Initialize the database
+		bookRepository.saveAndFlush(book);
+
+		// Get all the bookList
+		restBookMockMvc.perform(get("/api/author/{login}", book.getAuthor().getLogin())).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
+	}
+
+	@Test
+	@Transactional
 	public void getBook() throws Exception {
 		// Initialize the database
 		bookRepository.saveAndFlush(book);
@@ -202,6 +224,33 @@ public class BookResourceIT {
 		assertThat(bookList).hasSize(databaseSizeBeforeUpdate);
 		Book testBook = bookList.get(bookList.size() - 1);
 		assertThat(testBook.getName()).isEqualTo(UPDATED_NAME);
+	}
+
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void updateBookVisibility() throws Exception {
+		// Initialize the database
+		bookRepository.saveAndFlush(book);
+
+		int databaseSizeBeforeUpdate = bookRepository.findAll().size();
+
+		// Update the book
+		Book updatedBook = bookRepository.findById(book.getId()).get();
+		// Disconnect from session so that the updates on updatedBook are not directly
+		// saved in db
+		em.detach(updatedBook);
+		updatedBook.name(UPDATED_NAME);
+		BookDTO bookDTO = bookMapper.toDto(updatedBook);
+
+		restBookMockMvc.perform(put("/api/books/visibility/{id}", book.getId()).contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.convertObjectToJsonBytes(bookDTO))).andExpect(status().isOk());
+
+		// Validate the Book in the database
+		List<Book> bookList = bookRepository.findAll();
+		assertThat(bookList).hasSize(databaseSizeBeforeUpdate);
+		Book testBook = bookList.get(bookList.size() - 1);
+		assertThat(testBook.getVisibility()).isEqualTo(false);
 	}
 
 	@Test
