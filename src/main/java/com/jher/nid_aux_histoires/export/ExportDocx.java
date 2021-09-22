@@ -1,11 +1,9 @@
 package com.jher.nid_aux_histoires.export;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -96,15 +94,7 @@ public class ExportDocx {
 		default:
 			throw new Exception("Converter not found");
 		}
-		String[] cmd = CI.getCommand(bookName);
-		Runtime run = Runtime.getRuntime();
-		Process pr = run.exec(cmd);
-		// pr.waitFor();
-		BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-		String line = "";
-		while ((line = buf.readLine()) != null) {
-			LOGGER.info(line);
-		}
+		CI.startConvertion(bookName);
 		LOGGER.info("Fin de la génération du livre {}", format);
 	}
 

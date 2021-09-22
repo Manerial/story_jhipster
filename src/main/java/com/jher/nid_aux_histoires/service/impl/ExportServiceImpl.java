@@ -36,14 +36,14 @@ public class ExportServiceImpl implements ExportService {
 	private final Logger log = LoggerFactory.getLogger(ExportController.class);
 
 	@Override
-	public Path getPathOfExportedBook(long id, ExportDocx.FILE_FORMAT format) throws Exception {
+	public Path getPathOfExportedBook(long id, ExportDocx.FILE_FORMAT format) {
 		Optional<BookDTO> optBook = bookService.findOne(id);
 		if (optBook.isPresent()) {
 			BookDTO book = optBook.get();
 			String bookPathString = ExportDocx.getObjectFilePath(book.getName(), format);
 			return Paths.get(bookPathString);
 		}
-		return null;
+		return Path.of("do_not_exist");
 	}
 
 	@Override

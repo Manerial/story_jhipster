@@ -77,16 +77,10 @@ public class ExportController {
 	@GetMapping("/download/book/{id}")
 	public ResponseEntity<ByteArrayResource> getBook(@Valid @PathVariable int id,
 			@Valid @RequestParam ExportDocx.FILE_FORMAT format) {
-		Path path = null;
-		try {
-			path = exportService.getPathOfExportedBook(id, format);
-			log.info(path.toString());
-		} catch (Exception e) {
-			String error = "Error during the reading of the document :" + e.getMessage();
-			log.warn(error, e);
-		}
+		Path path = exportService.getPathOfExportedBook(id, format);
+		log.info(path.toString());
 
-		if (path == null) {
+		if (!path.toFile().exists()) {
 			throw new BadRequestAlertException("The entity book does not exist", "book", "donotexist");
 		}
 

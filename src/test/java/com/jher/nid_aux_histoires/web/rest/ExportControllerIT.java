@@ -19,7 +19,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
-import com.jher.nid_aux_histoires.export.ExportDocx.FILE_FORMAT;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.ExportService;
 
@@ -66,16 +65,6 @@ public class ExportControllerIT {
 			continue;
 		}
 
-		FILE_FORMAT format = FILE_FORMAT.PDF;
-		restExportMockMvc.perform(get("/api/download/book/{id}?format=" + format, 1l)).andExpect(status().isOk())
-				.andExpect(content().contentType(exportService.getMediaType(format)));
-
-		format = FILE_FORMAT.DOCX;
-		restExportMockMvc.perform(get("/api/download/book/{id}?format=" + format, 1l)).andExpect(status().isOk())
-				.andExpect(content().contentType(exportService.getMediaType(format)));
-
-		exportService.getPathOfExportedBook(1l, FILE_FORMAT.PDF).toFile().delete();
-		exportService.getPathOfExportedBook(1l, FILE_FORMAT.DOCX).toFile().delete();
-		exportService.getPathOfExportedBook(1l, FILE_FORMAT.EPUB).toFile().delete();
+		assertEquals(exportService.isLockedBook(1l), false);
 	}
 }
