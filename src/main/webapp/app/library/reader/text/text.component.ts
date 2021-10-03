@@ -28,7 +28,7 @@ export class TextComponent implements OnInit, OnDestroy {
         if (chapterId !== '') {
           // Si on est en train de lire
           this.loadChapter();
-        } else if (this.chapter.id === 0) {
+        } else {
           this.bookStatusService.findByBook(this.book.id!).subscribe(
             bookStatus => {
               if (bookStatus.body) {
