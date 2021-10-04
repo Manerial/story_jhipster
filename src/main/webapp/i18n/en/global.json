@@ -5,23 +5,31 @@
     "menu": {
       "home": "Home",
       "library": "Library",
+      "authors": "Authors",
       "tools": "Tools",
-      "images": "Images",
+      "covers": "Covers",
       "book": "Book",
+      "books": "Books",
+      "favorits": "Favorits",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "main2": "Management",
         "book": "Book",
         "part": "Part",
         "chapter": "Chapter",
         "scene": "Scene",
-        "image": "Image",
+        "cover": "Cover",
         "idea": "Idea",
         "wordAnalysis": "Word Analysis",
+        "comment": "Comment",
+        "bonus": "Bonus",
+        "bookStatus": "Book Status",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
         "main": "Account",
+        "profile": "My profile",
         "settings": "Settings",
         "password": "Password",
         "sessions": "Sessions",
@@ -92,12 +100,16 @@
     "ribbon": {
       "dev": "Development"
     },
-    "item-count": "Showing {{first}} - {{second}} of {{total}} items."
+    "item-count": "Showing {{first}} - {{second}} of {{total}} items.",
+    "secret": {
+      "1": "You triggered the first code…",
+      "2": "You triggered the second code…"
+    }
   },
   "entity": {
     "action": {
       "addblob": "Add blob",
-      "addimage": "Add image",
+      "addcover": "Add cover",
       "back": "Back",
       "cancel": "Cancel",
       "delete": "Delete",
@@ -137,9 +149,10 @@
     "emailexists": "Email is already in use!",
     "idexists": "A new {{ entityName }} cannot already have an ID",
     "idnull": "Invalid ID",
+    "donotexist": "The entity {{entityName}} does not exist",
     "file": {
       "could.not.extract": "Could not extract file",
-      "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
+      "not.cover": "File was expected to be a cover but was found to be \"{{ fileType }}\""
     }
   }
 }

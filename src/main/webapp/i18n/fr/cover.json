@@ -1,0 +1,32 @@
+{
+  "nidAuxHistoiresApp": {
+    "cover": {
+      "home": {
+        "title": "Couvertures",
+        "createLabel": "Créer une nouvelle Couverture",
+        "createOrEditLabel": "Créer ou éditer une Couverture",
+        "notFound": "Aucune Couverture trouvé"
+      },
+      "created": "Une nouvelle Couverture a été créé avec l'identifiant {{ param }}",
+      "updated": "L'Couverture avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'Couverture avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer la Couverture {{ id }}\u00A0?"
+      },
+      "detail": {
+        "title": "Couverture"
+      },
+      "name": "Nom",
+      "picture": "Photo",
+      "preview": "Aperçu",
+      "bookToCover": "Livre à couvrir",
+      "book": "Livre",
+      "part": "Partie",
+      "chapter": "Chapitre",
+      "scene": "Scène",
+      "required": {
+        "name": "Le champ Nom est requis"
+      }
+    }
+  }
+}

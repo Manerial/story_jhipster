@@ -6,7 +6,7 @@
             <div>
                 <jhi-alert-error></jhi-alert-error>
 
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                <div class="form-group" [hidden]="true">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
@@ -15,32 +15,39 @@
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.book.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
+                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)" >
+                        <small class="form-text text-danger"
+                                jhiTranslate="nidAuxHistoiresApp.book.required.name">
+                            Name field is required
+                        </small>
+                    </div>
                 </div>
 
                 <div class="form-group">
+                    <div (click)="visible = !visible" class="btn btn-info btn-sm">
+                        <span class="d-none d-md-inline" jhiTranslate="nidAuxHistoiresApp.book.visibility">Visibility :</span>
+                        <fa-icon icon="eye" *ngIf="visible"></fa-icon>
+                        <fa-icon icon="eye-slash" *ngIf="!visible"></fa-icon>
+                    </div>
+                </div>
+
+                <div class="form-group" *jhiHasAnyAuthority="'ROLE_ADMIN'">
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.book.author" for="field_author">Author</label>
                     <input type="text" class="form-control" name="author" id="field_author"
-                           formControlName="author"/>
+                           formControlName="authorId"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.book.description" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
-                           formControlName="description"/>
-                </div>
-
-                <div class="form-group">
-                    <label jhiTranslate="nidAuxHistoiresApp.book.image" for="field_images">Image</label>
-                    <select class="form-control" id="field_images" multiple name="images" formControlName="images">
-                        <option [ngValue]="getSelected(editForm.get('images')!.value, imageOption)" *ngFor="let imageOption of images; trackBy: trackById">{{ imageOption.id }}</option>
-                    </select>
+                    <textarea type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.book.cover" for="field_cover">Cover</label>
                     <select class="form-control" id="field_cover" name="cover" formControlName="coverId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="imageOption.id" *ngFor="let imageOption of images; trackBy: trackById">{{ imageOption.name }}</option>
+                        <option [ngValue]="coverOption.id" *ngFor="let coverOption of covers; trackBy: trackById">{{ coverOption.name }}</option>
                     </select>
                 </div>
             </div>

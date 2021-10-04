@@ -1,12 +1,14 @@
 {
   "settings": {
-    "title": "Profil de l'utilisateur [<strong>{{username}}</strong>]",
+    "title": "Profil de l'utilisateur <strong>{{username}}</strong>",
     "form": {
       "firstname": "Prénom",
       "firstname.placeholder": "Votre prénom",
       "lastname": "Nom",
       "lastname.placeholder": "Votre nom",
       "language": "Langue",
+      "introduction": "Présentation",
+      "introduction.placeholder": "Votre présentation",
       "button": "Sauvegarder"
     },
     "messages": {

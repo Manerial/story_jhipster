@@ -1,0 +1,9 @@
+{
+  "authors": {
+    "title": "List of authors",
+    "filter": {
+      "author": "Author",
+      "books": "Books"
+    }
+  }
+}

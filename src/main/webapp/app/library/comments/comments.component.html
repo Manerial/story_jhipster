@@ -1,0 +1,21 @@
+<div class="content">
+    <h2 jhiTranslate="nidAuxHistoiresApp.comment.list.title" [translateValues]="{ bookName: book.name }" *ngIf="book">List of comments for {{ book.name }}</h2>
+    <div class="container">
+        <a routerLink="/reader/book/{{ book?.id }}" class="btn bkg-gold mt-2 ml-2">
+            <p jhiTranslate="nidAuxHistoiresApp.comment.add.read">Read</p>
+    	</a>
+        <a (click)="addComment()" class="btn bkg-gold mt-2 ml-2">
+            <p jhiTranslate="nidAuxHistoiresApp.comment.add.button">Add a comment</p>
+    	</a>
+        <div *ngIf="comments && comments.length > 0">
+            <div class="comment mt-2" *ngFor="let comment of comments">
+                <h5 class="m-0 p-2">{{ comment.userLogin }}, le {{ comment.createdDate | date:'short'}}</h5>
+                <p class="m-0 p-2">{{ comment.text }}</p>
+            </div>
+        </div>
+        <div *ngIf="!comments || comments.length == 0">
+            <p jhiTranslate="nidAuxHistoiresApp.comment.empty">No comments for this book</p>
+        </div>
+    </div>
+</div>
+

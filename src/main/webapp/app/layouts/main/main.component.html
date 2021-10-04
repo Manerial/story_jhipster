@@ -4,7 +4,7 @@
     <router-outlet name="navbar"></router-outlet>
 </div>
 
-<div class="container-limit">
+<div (jhiSecretCode)="triggerSecret($event)" class="container-limit" id="main-container">
     <div class="card jh-card">
         <router-outlet></router-outlet>
     </div>

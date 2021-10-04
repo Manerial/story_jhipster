@@ -14,18 +14,33 @@
                 </dd>
                 <dt><span jhiTranslate="nidAuxHistoiresApp.book.author">Author</span></dt>
                 <dd>
-                    <span>{{ book.author }}</span>
-                </dd>
-                <dt><span jhiTranslate="nidAuxHistoiresApp.book.image">Image</span></dt>
-                <dd>
-                    <span *ngFor="let image of book.images; let last = last">
-                        <a [routerLink]="['/entities/image', image?.id, 'view']">{{ image.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
+                    <div *ngIf="book.authorLogin">
+                        <a *jhiHasAnyAuthority="['ROLE_ADMIN']" [routerLink]="['/admin/user-management', book.authorLogin, 'view']">{{ book.authorLogin }}</a>
+                        <a *jhiHasNoAuthority="['ROLE_ADMIN']" [routerLink]="['/authors/', book.authorLogin, 'visit']">{{ book.authorLogin }}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="nidAuxHistoiresApp.book.cover">Cover</span></dt>
                 <dd>
                     <div *ngIf="book.coverId">
-                        <a [routerLink]="['/entities/image', book.coverId, 'view']">{{ book.coverId }}</a>
+                        <a [routerLink]="['/entities/cover', book.coverId, 'view']">{{ book.coverId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.book.visibility">Visibility :</span></dt>
+                <dd>
+                    <div *ngIf="book.coverId">
+                        <fa-icon icon="eye" *ngIf="book.visibility"></fa-icon>
+                        <fa-icon icon="eye-slash" *ngIf="!book.visibility"></fa-icon>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.book.parts">Parts</span></dt>
+                <dd>
+                    <div *ngFor="let part of book.parts">
+                        <a [routerLink]="['/entities/part', part.id, 'view']">{{ part.id }} - {{ part.name }}</a>
+                    </div>
+                    <div>
+                        <a [routerLink]="['/entities/part/new']" [queryParams]="{bookId: book.id}">
+                            <fa-icon icon="plus"></fa-icon>
+                        </a>
                     </div>
                 </dd>
             </dl>

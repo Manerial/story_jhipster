@@ -1,4 +1,7 @@
 @import 'src/main/webapp/content/scss/variables';
+.bk-info .btn {
+  padding: 0.75rem 1.28rem;
+}
 
 .bk-book h1,
 .bk-book h2 {
@@ -30,13 +33,13 @@
 
 .bk-info {
   position: relative;
-  margin-top: 430px;
+  margin-top: calc(#{$book_height} + 2px);
 }
 
 .bk-list li .bk-book {
   position: absolute;
   width: 100%;
-  height: 400px;
+  height: $book_height;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-transition: -webkit-transform 0.5s;
@@ -49,8 +52,13 @@
 }
 
 .bk-list li .bk-book.bk-bookdefault:hover {
-  -webkit-transform: rotate3d(0, 1, 0, 35deg);
-  transform: rotate3d(0, 1, 0, 35deg);
+  -webkit-transform: rotate3d(0, 1, 0, 30deg);
+  transform: rotate3d(0, 1, 0, 30deg);
+}
+
+.bk-list li .bk-book.bk-viewback:hover {
+  -webkit-transform: rotate3d(0, 1, 0, 15deg);
+  transform: rotate3d(0, 1, 0, 150deg);
 }
 
 .bk-list li .bk-book > div,
@@ -84,7 +92,7 @@
 .bk-list li .bk-back,
 .bk-list li .bk-front > div {
   width: 300px;
-  height: 400px;
+  height: $book_height;
 }
 
 .bk-list li .bk-left,
@@ -100,13 +108,13 @@
 }
 
 .bk-list li .bk-left {
-  height: 400px;
+  height: $book_height;
   -webkit-transform: rotate3d(0, 1, 0, -90deg);
   transform: rotate3d(0, 1, 0, -90deg);
 }
 
 .bk-list li .bk-right {
-  height: 400px;
+  height: $book_height;
   -webkit-transform-origin: 50% 0%;
   transform-origin: 50% 0%;
   -webkit-transform: rotate3d(0, 1, 0, 90deg) translate3d(0px, 0px, 290px);
@@ -118,43 +126,6 @@
 .bk-list li .bk-book.bk-viewback {
   -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
   transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
-}
-
-@-webkit-keyframes rotating {
-  from {
-    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-  }
-  to {
-    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-  }
-}
-@keyframes rotating {
-  from {
-    -ms-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
-    -moz-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
-    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-  }
-  to {
-    -ms-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    -moz-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-  }
-}
-
-.rotating {
-  -webkit-animation: rotating 5s linear infinite;
-  -moz-animation: rotating 5s linear infinite;
-  -ms-animation: rotating 5s linear infinite;
-  -o-animation: rotating 5s linear infinite;
-  animation: rotating 5s linear infinite;
 }
 
 /* Main colors and content */
@@ -257,7 +228,7 @@
 
 .bk-book .bk-back p {
   color: $black;
-  font-size: 18px;
+  font-size: 15px;
   padding: 40px;
   text-align: center;
   font-weight: 700;

@@ -10,9 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,12 +19,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
 /**
  * A Book.
  */
 @Entity
 @Table(name = "book")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Data
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,75 +39,49 @@ public class Book implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "author")
-	private String author;
-
 	@Column(name = "description")
 	private String description;
+
+	@Column(name = "visibility")
+	private Boolean visibility;
 
 	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Part> parts = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	@JoinTable(name = "book_image", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id"))
-	private Set<Image> images = new HashSet<>();
+	private Set<Comment> comments = new HashSet<>();
+
+	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private Set<Bonus> bonuses = new HashSet<>();
+
+	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private Set<BookStatus> bookStatuses = new HashSet<>();
 
 	@ManyToOne
 	@JsonIgnoreProperties(value = "picture", allowSetters = true)
-	private Image cover;
+	private Cover cover;
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
+	@ManyToOne
+	@JsonIgnoreProperties(value = "books", allowSetters = true)
+	private User author;
 
 	public Book name(String name) {
 		this.name = name;
 		return this;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public Book author(String author) {
+	public Book author(User author) {
 		this.author = author;
 		return this;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public Book description(String description) {
 		this.description = description;
 		return this;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Set<Part> getParts() {
-		return parts;
 	}
 
 	public Book parts(Set<Part> parts) {
@@ -127,49 +101,44 @@ public class Book implements Serializable {
 		return this;
 	}
 
-	public void setParts(Set<Part> parts) {
-		this.parts = parts;
-	}
-
-	public Set<Image> getImages() {
-		return images;
-	}
-
-	public Book images(Set<Image> images) {
-		this.images = images;
+	public Book cover(Cover cover) {
+		this.cover = cover;
 		return this;
 	}
 
-	public Book addImage(Image image) {
-		this.images.add(image);
-		image.getBooks().add(this);
+	public Book comments(Set<Comment> comments) {
+		this.comments = comments;
 		return this;
 	}
 
-	public Book removeImage(Image image) {
-		this.images.remove(image);
-		image.getBooks().remove(this);
+	public Book addComment(Comment comment) {
+		this.comments.add(comment);
+		comment.setBook(this);
 		return this;
 	}
 
-	public void setImages(Set<Image> images) {
-		this.images = images;
-	}
-
-	public Image getCover() {
-		return cover;
-	}
-
-	public Book cover(Image image) {
-		this.cover = image;
+	public Book removeComment(Comment comment) {
+		this.comments.remove(comment);
+		comment.setBook(null);
 		return this;
 	}
 
-	public void setCover(Image image) {
-		this.cover = image;
+	public Book bonuses(Set<Bonus> bonuses) {
+		this.bonuses = bonuses;
+		return this;
 	}
-	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-	// setters here
+
+	public Book addBonus(Bonus comment) {
+		this.bonuses.add(comment);
+		comment.setBook(this);
+		return this;
+	}
+
+	public Book removeBonus(Bonus comment) {
+		this.bonuses.remove(comment);
+		comment.setBook(null);
+		return this;
+	}
 
 	@Override
 	public boolean equals(Object o) {

@@ -14,6 +14,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<SettingsComponent>;
     let mockAuth: MockAccountService;
     const accountValues: Account = {
+      id: 0,
       firstName: 'John',
       lastName: 'Doe',
       activated: true,
@@ -22,6 +23,7 @@ describe('Component Tests', () => {
       login: 'john',
       authorities: [],
       imageUrl: '',
+      introduction: '',
     };
 
     beforeEach(async(() => {
@@ -49,6 +51,7 @@ describe('Component Tests', () => {
         lastName: 'Doe',
         email: 'john.doe@mail.com',
         langKey: 'fr',
+        introduction: '',
       };
 
       // WHEN

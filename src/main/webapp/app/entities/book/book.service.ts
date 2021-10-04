@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
@@ -9,11 +9,12 @@ import { IBook } from 'app/shared/model/book.model';
 type EntityResponseType = HttpResponse<IBook>;
 type BookResponseType = HttpResponse<Blob>;
 type EntityArrayResponseType = HttpResponse<IBook[]>;
+type StringArrayResponseType = HttpResponse<string[]>;
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
   public resourceUrl = SERVER_API_URL + 'api/books';
-  public exportUrl = SERVER_API_URL + 'api/export/book/';
+  public downloadUrl = SERVER_API_URL + 'api/download';
 
   constructor(protected http: HttpClient) {}
 
@@ -25,8 +26,24 @@ export class BookService {
     return this.http.put<IBook>(this.resourceUrl, book, { observe: 'response' });
   }
 
+  updateVisibility(id: number): Observable<EntityResponseType> {
+    return this.http.put<IBook>(`${this.resourceUrl}/visibility/${id}`, null, { observe: 'response' });
+  }
+
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IBook>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findLight(id: number): Observable<EntityResponseType> {
+    return this.http.get<IBook>(`${this.resourceUrl}/light/${id}`, { observe: 'response' });
+  }
+
+  findAllByAuthor(login: string): Observable<EntityArrayResponseType> {
+    return this.http.get<IBook[]>(`${this.resourceUrl}/author/${login}`, { observe: 'response' });
+  }
+
+  findAllFavorits(): Observable<EntityArrayResponseType> {
+    return this.http.get<IBook[]>(`${this.resourceUrl}/favorits`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
@@ -38,7 +55,13 @@ export class BookService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  download(id: number): Observable<BookResponseType> {
-    return this.http.get(`${this.exportUrl}/${id}`, { observe: 'response', responseType: 'blob' });
+  download(id: number, format: string): Observable<BookResponseType> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('format', format);
+    return this.http.get(`${this.downloadUrl}/book/${id}`, { observe: 'response', responseType: 'blob', params: httpParams });
+  }
+
+  getFormats(): Observable<StringArrayResponseType> {
+    return this.http.get<string[]>(`${this.downloadUrl}/formats`, { observe: 'response' });
   }
 }

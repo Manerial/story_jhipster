@@ -2,10 +2,6 @@ package com.jher.nid_aux_histoires.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -14,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -27,7 +22,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -35,7 +29,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Part;
+import com.jher.nid_aux_histoires.repository.BookRepository;
 import com.jher.nid_aux_histoires.repository.PartRepository;
+import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.PartService;
 import com.jher.nid_aux_histoires.service.dto.PartDTO;
 import com.jher.nid_aux_histoires.service.mapper.PartMapper;
@@ -65,13 +61,13 @@ public class PartResourceIT {
 	private PartRepository partRepositoryMock;
 
 	@Autowired
+	private BookRepository bookRepository;
+
+	@Autowired
 	private PartMapper partMapper;
 
 	@Mock
 	private PartService partServiceMock;
-
-	@Autowired
-	private PartService partService;
 
 	@Autowired
 	private EntityManager em;
@@ -87,8 +83,9 @@ public class PartResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Part createEntity(EntityManager em) {
+	public Part createEntity(EntityManager em) {
 		Part part = new Part().name(DEFAULT_NAME).description(DEFAULT_DESCRIPTION).number(DEFAULT_NUMBER);
+		part.setBook(bookRepository.getOne(1L));
 		return part;
 	}
 
@@ -98,8 +95,9 @@ public class PartResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Part createUpdatedEntity(EntityManager em) {
+	public Part createUpdatedEntity(EntityManager em) {
 		Part part = new Part().name(UPDATED_NAME).description(UPDATED_DESCRIPTION).number(UPDATED_NUMBER);
+		part.setBook(bookRepository.getOne(1L));
 		return part;
 	}
 
@@ -110,10 +108,13 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createPart() throws Exception {
 		int databaseSizeBeforeCreate = partRepository.findAll().size();
 		// Create the Part
+
 		PartDTO partDTO = partMapper.toDto(part);
+
 		restPartMockMvc.perform(post("/api/parts").contentType(MediaType.APPLICATION_JSON)
 				.content(TestUtil.convertObjectToJsonBytes(partDTO))).andExpect(status().isCreated());
 
@@ -128,6 +129,7 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createPartWithExistingId() throws Exception {
 		int databaseSizeBeforeCreate = partRepository.findAll().size();
 
@@ -146,8 +148,10 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getAllParts() throws Exception {
 		// Initialize the database
+
 		partRepository.saveAndFlush(part);
 
 		// Get all the partList
@@ -159,28 +163,12 @@ public class PartResourceIT {
 				.andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)));
 	}
 
-	@SuppressWarnings({ "unchecked" })
-	public void getAllPartsWithEagerRelationshipsIsEnabled() throws Exception {
-		when(partServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-		restPartMockMvc.perform(get("/api/parts?eagerload=true")).andExpect(status().isOk());
-
-		verify(partServiceMock, times(1)).findAllWithEagerRelationships(any());
-	}
-
-	@SuppressWarnings({ "unchecked" })
-	public void getAllPartsWithEagerRelationshipsIsNotEnabled() throws Exception {
-		when(partServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-		restPartMockMvc.perform(get("/api/parts?eagerload=true")).andExpect(status().isOk());
-
-		verify(partServiceMock, times(1)).findAllWithEagerRelationships(any());
-	}
-
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getPart() throws Exception {
 		// Initialize the database
+
 		partRepository.saveAndFlush(part);
 
 		// Get the part
@@ -194,6 +182,7 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getNonExistingPart() throws Exception {
 		// Get the part
 		restPartMockMvc.perform(get("/api/parts/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
@@ -201,8 +190,10 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updatePart() throws Exception {
 		// Initialize the database
+
 		partRepository.saveAndFlush(part);
 
 		int databaseSizeBeforeUpdate = partRepository.findAll().size();
@@ -229,6 +220,7 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateNonExistingPart() throws Exception {
 		int databaseSizeBeforeUpdate = partRepository.findAll().size();
 
@@ -246,8 +238,10 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void deletePart() throws Exception {
 		// Initialize the database
+
 		partRepository.saveAndFlush(part);
 
 		int databaseSizeBeforeDelete = partRepository.findAll().size();

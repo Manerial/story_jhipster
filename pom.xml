@@ -23,7 +23,7 @@
 	<properties>
 		<!-- Build properties -->
 		<maven.version>3.3.9</maven.version>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		<node.version>v12.16.1</node.version>
 		<npm.version>6.14.5</npm.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -56,10 +56,11 @@
 		<jaxb-runtime.version>2.3.3</jaxb-runtime.version>
 		<archunit-junit5.version>0.14.1</archunit-junit5.version>
 		<mapstruct.version>1.3.1.Final</mapstruct.version>
+		<lombok.version>1.18.20</lombok.version>
 		<!-- Plugin versions -->
 		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+		<maven-javadoc-plugin.version>3.3.0</maven-javadoc-plugin.version>
 		<maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
 		<maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
 		<maven-failsafe-plugin.version>3.0.0-M4</maven-failsafe-plugin.version>
@@ -84,6 +85,8 @@
 		<junit.utReportFolder>${project.testresult.directory}/test</junit.utReportFolder>
 		<junit.itReportFolder>${project.testresult.directory}/integrationTest</junit.itReportFolder>
 		<!-- jhipster-needle-maven-property -->
+		<sonar.organization>manerial</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<dependencyManagement>
@@ -98,6 +101,8 @@
 			<!-- jhipster-needle-maven-add-dependency-management -->
 		</dependencies>
 	</dependencyManagement>
+
+
 
 	<dependencies>
 		<dependency>
@@ -132,7 +137,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>test</scope>
+			<scope>test, runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -184,7 +189,6 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 			<!-- Inherited version from Spring Boot can't be used because of regressions -->
-			<version>${liquibase.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.logstash.logback</groupId>
@@ -321,13 +325,8 @@
 		<!-- Export -->
 		<dependency>
 			<groupId>org.docx4j</groupId>
-			<artifactId>docx4j-JAXB-MOXy</artifactId>
-			<version>11.1.8</version>
-		</dependency>
-		<dependency>
-			<groupId>org.docx4j</groupId>
-		    <artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
-		    <version>11.1.8</version>
+			<artifactId>docx4j</artifactId>
+			<version>6.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.wickedsource.docx-stamper</groupId>
@@ -338,6 +337,27 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>4.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.opensagres.xdocreport</groupId>
+			<artifactId>org.apache.poi.xwpf.converter.pdf</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+			<version>${lombok.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -355,6 +375,30 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+						<dependency>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>0.2.0</version>
+						</dependency>
+					</annotationProcessorPaths>
+					<compilerArgs>
+						<compilerArg>
+							-Amapstruct.defaultComponentModel=spring
+						</compilerArg>
+					</compilerArgs>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -413,6 +457,20 @@
 				<artifactId>properties-maven-plugin</artifactId>
 			</plugin>
 			<!-- jhipster-needle-maven-add-plugin -->
+
+			<!-- CHECK DEPENDENCIES -->
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>5.2.4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -977,10 +1035,10 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-undertow</artifactId>
 				</dependency>
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                </dependency>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+				</dependency>
 			</dependencies>
 			<build>
 				<plugins>
@@ -1086,6 +1144,7 @@
 				<dependency>
 					<groupId>org.mapstruct</groupId>
 					<artifactId>mapstruct-processor</artifactId>
+					<version>${mapstruct.version}</version>
 				</dependency>
 				<dependency>
 					<groupId>org.hibernate</groupId>

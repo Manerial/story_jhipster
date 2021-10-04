@@ -16,7 +16,7 @@
 #Export
 export:
   model:
-    path: src/main/resources/templates/export/
+    path: resources/templates/export/
     book:
       name: template_book.docx
     part:

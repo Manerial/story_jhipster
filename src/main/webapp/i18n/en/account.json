@@ -1,0 +1,9 @@
+{
+  "account": {
+    "title": "Account of <strong>{{username}}</strong>",
+    "lastName": "Last name: {{lastName}}",
+    "firstName": "First name: {{firstName}}",
+    "email": "E-mail: {{email}}",
+    "introduction": "Introduction: {{introduction}}"
+  }
+}

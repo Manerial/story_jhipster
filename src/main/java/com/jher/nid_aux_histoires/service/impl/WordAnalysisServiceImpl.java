@@ -82,7 +82,7 @@ public class WordAnalysisServiceImpl implements WordAnalysisService {
 	}
 
 	@Transactional
-	public List<String> generateWords(int numberOfWords, int fixLength, String type) {
+	public List<String> generate(int numberOfWords, int fixLength, String type) {
 		WordAnalysis wordAnalysis = wordAnalysisRepository.findByType(type);
 		WordGenerator wordGenerator;
 		try {
@@ -94,8 +94,8 @@ public class WordAnalysisServiceImpl implements WordAnalysisService {
 		}
 	}
 
-	@Override
-	public String generateWord(String type) {
+	@Transactional
+	public String generate(String type) {
 		WordAnalysis wordAnalysis = wordAnalysisRepository.findByType(type);
 		WordGenerator wordGenerator;
 		try {

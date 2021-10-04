@@ -2,77 +2,44 @@ package com.jher.nid_aux_histoires.service.dto;
 
 import java.io.Serializable;
 
+import lombok.Data;
+
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.WordAnalysis} entity.
  */
+@Data
 public class WordAnalysisDTO implements Serializable {
-    
-    private Long id;
+	private static final long serialVersionUID = 1L;
 
-    private String type;
+	private Long id;
 
-    private String name;
+	private String type;
 
-    private String analysis;
+	private String name;
 
-    
-    public Long getId() {
-        return id;
-    }
+	private String analysis;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof WordAnalysisDTO)) {
+			return false;
+		}
 
-    public String getType() {
-        return type;
-    }
+		return id != null && id.equals(((WordAnalysisDTO) o).id);
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	@Override
+	public int hashCode() {
+		return 31;
+	}
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAnalysis() {
-        return analysis;
-    }
-
-    public void setAnalysis(String analysis) {
-        this.analysis = analysis;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof WordAnalysisDTO)) {
-            return false;
-        }
-
-        return id != null && id.equals(((WordAnalysisDTO) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 31;
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "WordAnalysisDTO{" +
-            "id=" + getId() +
-            ", type='" + getType() + "'" +
-            ", name='" + getName() + "'" +
-            ", analysis='" + getAnalysis() + "'" +
-            "}";
-    }
+	// prettier-ignore
+	@Override
+	public String toString() {
+		return "WordAnalysisDTO{" + "id=" + getId() + ", type='" + getType() + "'" + ", name='" + getName() + "'"
+				+ ", analysis='" + getAnalysis() + "'" + "}";
+	}
 }

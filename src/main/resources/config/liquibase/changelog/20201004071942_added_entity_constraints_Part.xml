@@ -7,24 +7,10 @@
         Added the constraints for entity Part.
     -->
     <changeSet id="20201004071942-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="part_id"
-                                 baseTableName="part_image"
-                                 constraintName="fk_part_image_part_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="part"/>
-
-        <addForeignKeyConstraint baseColumnNames="image_id"
-                                 baseTableName="part_image"
-                                 constraintName="fk_part_image_image_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="image"/>
-        
         <addForeignKeyConstraint baseColumnNames="book_id"
                                  baseTableName="part"
                                  constraintName="fk_part_book_id"
                                  referencedColumnNames="id"
                                  referencedTableName="book"/>
-
     </changeSet>
 </databaseChangeLog>

@@ -1,5 +1,9 @@
 @import '../../../content/scss/variables.scss';
 
+dd {
+  width: 50%;
+}
+
 dd::first-letter {
   text-transform: capitalize;
 }

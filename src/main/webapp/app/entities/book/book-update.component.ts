@@ -7,8 +7,10 @@ import { Observable } from 'rxjs';
 
 import { IBook, Book } from 'app/shared/model/book.model';
 import { BookService } from './book.service';
-import { IImage } from 'app/shared/model/image.model';
-import { ImageService } from 'app/entities/image/image.service';
+import { ICover } from 'app/shared/model/cover.model';
+import { CoverService } from 'app/entities/cover/cover.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'jhi-book-update',
@@ -16,44 +18,47 @@ import { ImageService } from 'app/entities/image/image.service';
 })
 export class BookUpdateComponent implements OnInit {
   isSaving = false;
-  images: IImage[] = [];
+  covers: ICover[] = [];
+  visible = true;
+  account!: Account;
 
   editForm = this.fb.group({
     id: [],
-    name: [],
-    author: [],
+    name: [null, [Validators.required]],
+    authorId: [null, [Validators.required]],
+    authorLogin: [null, [Validators.required]],
     description: [],
-    images: [],
     coverId: [],
   });
 
   constructor(
     protected bookService: BookService,
-    protected imageService: ImageService,
+    protected coverService: CoverService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ book }) => {
-      this.updateForm(book);
-
-      this.imageService.query().subscribe((res: HttpResponse<IImage[]>) => (this.images = res.body || []));
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        this.account = account;
+        this.activatedRoute.data.subscribe(({ book }) => {
+          this.updateForm(book);
+          this.visible = book.visibility;
+          this.coverService.query().subscribe((res: HttpResponse<ICover[]>) => (this.covers = res.body || []));
+        });
+      }
     });
   }
 
   updateForm(book: IBook): void {
-    book.images.forEach(image => {
-      image.picture = null;
-      image.preview = null;
-    });
-
     this.editForm.patchValue({
       id: book.id,
       name: book.name,
-      author: book.author,
+      authorId: book.authorId !== 0 ? book.authorId : this.account.id,
+      authorLogin: book.authorLogin !== '' ? book.authorLogin : this.account.login,
       description: book.description,
-      images: book.images,
       coverId: book.coverId,
     });
   }
@@ -72,15 +77,16 @@ export class BookUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): IBook {
+  private createFromForm(): any {
     return {
       ...new Book(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
-      author: this.editForm.get(['author'])!.value,
+      authorId: this.editForm.get(['authorId'])!.value,
+      authorLogin: this.editForm.get(['authorLogin'])!.value,
       description: this.editForm.get(['description'])!.value,
-      images: this.editForm.get(['images'])!.value,
       coverId: this.editForm.get(['coverId'])!.value,
+      visibility: this.visible,
     };
   }
 
@@ -100,11 +106,11 @@ export class BookUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IImage): any {
+  trackById(index: number, item: ICover): any {
     return item.id;
   }
 
-  getSelected(selectedVals: IImage[], option: IImage): IImage {
+  getSelected(selectedVals: ICover[], option: ICover): ICover {
     if (selectedVals) {
       for (let i = 0; i < selectedVals.length; i++) {
         if (option.id === selectedVals[i].id) {

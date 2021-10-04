@@ -3,24 +3,23 @@
     "title": "Help",
     "accessibility": {
       "title": "Accessible to all",
-      "body": "This site is designed to be accessible to the widest possible public (contrasts, choice of colors) while maintaining its visual identity. However, it is possible that some points escaped us during its design, so any constructive comments will be welcome on the <a href=\"{{discordUrl}}\">Discord</a> of the community, in the section dedicated to accessibility to all."
+      "body": "This site is designed to be accessible to the widest possible public (contrasts, choice of colors) while maintaining its visual identity. However, it is possible that some points escaped us during its design, so any constructive comments will be welcome on the <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> of the community, in the section dedicated to accessibility to all."
     },
     "download": {
-      "title": "Download in Word format",
-      "body1": "To download the work of your choice, click on this icon\u00A0:",
-      "body2": "The book will be downloaded in .docx (word) format."
+      "title": "Download",
+      "body": "You can download the book of your choice in PDF or EPUB format by clicking on the download icon placed below each book."
     },
-    "convert": {
-      "title": "Convert to epub format",
-      "body": "To easily convert your downloads to epub format, you can use Word or LibreOffice through the export tool\u00A0: <b>file -> export to -> export to EPUB</b> (computer only). For better reading comfort, select the option \"Cission method\u00A0: page skipping\""
+    "B_Reading": {
+      "title": "Beta-reading service",
+      "body": "We can provide a paid Beta-Reading service to anyone who wants it. For more information, please contact us on the <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a>of the community, in the section dedicated to Beta-Reading."
     },
     "generators": {
       "title": "Using generators",
-      "body": "The generators are made available to you as fun tools to allow you to create freely. They will be completed and fleshed out over the life cycle of the site. However, if you would like to help with the development of new dictionaries, you can go to the <a href=\"{{discordUrl}}\">Discord</a> community, in the section dedicated to sharing and improved content."
+      "body": "The generators are made available to you as fun tools to allow you to create freely. They will be completed and fleshed out over the life cycle of the site. However, if you would like to help with the development of new dictionaries or adding new content, you can go to the <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> community, in the section dedicated to sharing and improved content."
     },
     "sharing": {
       "title": "Share your works",
-      "body": "You do want to add your work to this site\u00A0? No problem\u00A0! Get in touch with us on the <a href=\"{{discordUrl}}\">Discord</a> community, in the section dedicated to new authors."
+      "body": "You do want to add your work to this site\u00A0? No problem\u00A0! Get in touch with us on the <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> community, in the section dedicated to new authors."
     }
   }
 }

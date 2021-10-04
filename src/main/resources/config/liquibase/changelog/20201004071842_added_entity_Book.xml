@@ -17,10 +17,10 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
-            <column name="author" type="varchar(255)">
-                <constraints nullable="true" />
+            <column name="author_id" type="bigint">
+                <constraints nullable="false" />
             </column>
             <column name="description" type="varchar(500)">
                 <constraints nullable="true" />
@@ -28,22 +28,14 @@
             <column name="cover_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="visibility" type="boolean" defaultValue="true">
+                <constraints nullable="false" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
 
     <changeSet id="20201004071842-1-relations" author="jhipster">
-
-        <createTable tableName="book_image">
-            <column name="image_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="book_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="book_id, image_id" tableName="book_image"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

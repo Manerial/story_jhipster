@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
 
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit {
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
     public router: Router,
+    private location: Location,
     private navbarService: NavbarService
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
@@ -81,8 +83,18 @@ export class NavbarComponent implements OnInit {
     this.navbarService.changeSearch(this.searchText);
   }
 
-  toggleBookImage(): void {
-    this.isViewBook = !this.isViewBook;
-    this.navbarService.changeIsViewBook(this.isViewBook);
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEventUp(event: any): void {
+    switch (event.key) {
+      case 'Backspace':
+        if (event.target.localName === 'input' || event.target.localName === 'textarea') {
+          return;
+        }
+        this.location.back();
+        event.preventDefault();
+        break;
+      default:
+        break;
+    }
   }
 }

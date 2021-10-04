@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet author="jhipster" id="00000000000003_test">
+		<loadData file="config/liquibase/fake-data/book.csv" separator=";"
+			tableName="book">
+			<column name="activated" type="boolean" />
+			<column name="created_date" type="timestamp" />
+		</loadData>
+
+		<loadData file="config/liquibase/fake-data/part.csv" separator=";"
+			tableName="part">
+			<column name="activated" type="boolean" />
+			<column name="created_date" type="timestamp" />
+		</loadData>
+
+		<loadData file="config/liquibase/fake-data/chapter.csv" separator=";"
+			tableName="chapter">
+			<column name="activated" type="boolean" />
+			<column name="created_date" type="timestamp" />
+		</loadData>
+
+		<loadData file="config/liquibase/fake-data/scene.csv" separator=";"
+			tableName="scene">
+			<column name="activated" type="boolean" />
+			<column name="created_date" type="timestamp" />
+		</loadData>
+	</changeSet>
+</databaseChangeLog>

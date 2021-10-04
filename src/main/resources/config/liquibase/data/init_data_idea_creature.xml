@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="JHER" id="insertData_idea_move">
+		<insert tableName="idea">
+			<column name="type" value="move" />
+			<column name="value" value="Nager" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="move" />
+			<column name="value" value="Marcher" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="move" />
+			<column name="value" value="Voler" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="move" />
+			<column name="value" value="Ramper" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="move" />
+			<column name="value" value="Sauter" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="move" />
+			<column name="value" value="Flotter" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="move" />
+			<column name="value" value="Creuser" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_skin">
+		<insert tableName="idea">
+			<column name="type" value="skin" />
+			<column name="value" value="Fourrure" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skin" />
+			<column name="value" value="Ecailles" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skin" />
+			<column name="value" value="Plumes" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skin" />
+			<column name="value" value="Peau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skin" />
+			<column name="value" value="Carapace" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skin" />
+			<column name="value" value="Chitine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skin" />
+			<column name="value" value="Pierre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skin" />
+			<column name="value" value="Coquille" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_diet">
+		<insert tableName="idea">
+			<column name="type" value="diet" />
+			<column name="value" value="Herbivore" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="diet" />
+			<column name="value" value="Carnivore" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="diet" />
+			<column name="value" value="Omnivore" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="diet" />
+			<column name="value" value="Xylophage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="diet" />
+			<column name="value" value="Piscivore" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="diet" />
+			<column name="value" value="Frugivore" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="diet" />
+			<column name="value" value="Granivore" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="diet" />
+			<column name="value" value="Insectivore" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="diet" />
+			<column name="value" value="Hématophage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="diet" />
+			<column name="value" value="Détritivore" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="diet" />
+			<column name="value" value="Coprophage" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_attribute">
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Trompe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Main" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Griffe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Croc" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Antenne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Oreille" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Bec" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Dard" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Mandibule" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Vibrisse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Corne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Pince" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Tentacule" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Branchie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Queue" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Ongle" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Langue" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Œil" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Dent" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="attribute" />
+			<column name="value" value="Doigt" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_skill">
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Régénération" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Digestion" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Reproduction" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Thermodiffusion" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Cryodiffusion" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Electrodiffusion" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Communication" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Télépathie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Empathie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Poison" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Infection" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Magie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Guérison" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Ododiffusion" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Acide" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="skill" />
+			<column name="value" value="Venim" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

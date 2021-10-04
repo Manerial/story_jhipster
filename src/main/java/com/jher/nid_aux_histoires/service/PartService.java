@@ -38,11 +38,13 @@ public interface PartService {
 	Page<PartDTO> findAll(Pageable pageable);
 
 	/**
-	 * Get all the parts with eager load of many-to-many relationships.
+	 * Get all the parts related to an author.
 	 *
+	 * @param pageable the pagination information.
+	 * @param login    the author login.
 	 * @return the list of entities.
 	 */
-	Page<PartDTO> findAllWithEagerRelationships(Pageable pageable);
+	Page<PartDTO> findAllByAuthorLogin(Pageable pageable, String login);
 
 	/**
 	 * Get the "id" part.
@@ -51,6 +53,14 @@ public interface PartService {
 	 * @return the entity.
 	 */
 	Optional<PartDTO> findOne(Long id);
+
+	/**
+	 * Get the author of the "id" part.
+	 *
+	 * @param id the id of the entity.
+	 * @return the entity.
+	 */
+	String findAuthorLoginByPartId(Long id);
 
 	/**
 	 * Delete the "id" part.

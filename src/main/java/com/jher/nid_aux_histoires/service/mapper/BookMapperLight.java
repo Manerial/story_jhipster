@@ -9,18 +9,23 @@ import com.jher.nid_aux_histoires.service.dto.BookDTO;
 /**
  * Mapper for the entity {@link Book} and its DTO {@link BookDTO}.
  */
-@Mapper(componentModel = "spring", uses = { ImageMapper.class })
+@Mapper(componentModel = "spring", uses = { CoverMapper.class, UserMapper.class })
 public interface BookMapperLight extends EntityMapper<BookDTO, Book> {
+	@Mapping(source = "author.id", target = "authorId")
+	@Mapping(source = "author.login", target = "authorLogin")
 	@Mapping(source = "cover.id", target = "coverId")
 	@Mapping(source = "cover.preview", target = "coverPreview")
+	@Mapping(target = "bonuses", expression = "java(book.getBonuses().size() > 0)")
 	@Mapping(target = "parts", ignore = true)
-	@Mapping(target = "images", ignore = true)
+	@Mapping(target = "comments", ignore = true)
 	BookDTO toDto(Book book);
 
 	@Mapping(target = "parts", ignore = true)
 	@Mapping(target = "removePart", ignore = true)
-	@Mapping(target = "removeImage", ignore = true)
+	@Mapping(target = "comments", ignore = true)
+	@Mapping(target = "bonuses", ignore = true)
 	@Mapping(source = "coverId", target = "cover")
+	@Mapping(source = "authorId", target = "author")
 	Book toEntity(BookDTO bookDTO);
 
 	default Book fromId(Long id) {

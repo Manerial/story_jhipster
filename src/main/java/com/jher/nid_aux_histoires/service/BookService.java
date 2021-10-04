@@ -30,6 +30,14 @@ public interface BookService {
 	BookDTO saveBash(BookDTO bookDTO);
 
 	/**
+	 * Switch visibility of book.
+	 *
+	 * @param bookId the id of the entity.
+	 * @return the updated book
+	 */
+	BookDTO changeVisibility(Long bookId);
+
+	/**
 	 * Get all the books.
 	 *
 	 * @param pageable the pagination information.
@@ -38,11 +46,39 @@ public interface BookService {
 	Page<BookDTO> findAll(Pageable pageable);
 
 	/**
-	 * Get all the books with eager load of many-to-many relationships.
+	 * Get all the books tagged as Visible.
 	 *
+	 * @param pageable the pagination information.
 	 * @return the list of entities.
 	 */
-	Page<BookDTO> findAllWithEagerRelationships(Pageable pageable);
+	Page<BookDTO> findAllVisible(Pageable pageable);
+
+	/**
+	 * Get all the books by Author.
+	 *
+	 * @param pageable the pagination information.
+	 * @param login    the author login
+	 * @return the list of entities.
+	 */
+	Page<BookDTO> findAllByAuthorId(Pageable pageable, String login);
+
+	/**
+	 * Get all the books tagged as Visible by Author.
+	 *
+	 * @param pageable the pagination information.
+	 * @param login    the author login
+	 * @return the list of entities.
+	 */
+	Page<BookDTO> findAllVisibleByAuthorId(Pageable pageable, String login);
+
+	/**
+	 * Get all the books tagged as Visible and Favorits by Author.
+	 *
+	 * @param pageable the pagination information.
+	 * @param login    the author login
+	 * @return the list of entities.
+	 */
+	Page<BookDTO> findAllFavoritsVisible(Pageable pageable, String login);
 
 	/**
 	 * Get the "id" book.
@@ -51,6 +87,14 @@ public interface BookService {
 	 * @return the entity.
 	 */
 	Optional<BookDTO> findOne(Long id);
+
+	/**
+	 * Get the "id" book light version.
+	 *
+	 * @param id the id of the entity.
+	 * @return the entity.
+	 */
+	Optional<BookDTO> findOneLight(Long id);
 
 	/**
 	 * Delete the "id" book.

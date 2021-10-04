@@ -3,7 +3,6 @@ package com.jher.nid_aux_histoires.service.tool;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -11,7 +10,6 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import com.jher.nid_aux_histoires.domain.WordAnalysis;
 
 public class WordGenerator {
-	private static Random random = new Random();
 	private JSONObject wordAnalysis;
 
 	public WordGenerator(WordAnalysis wordAnalysis) throws JSONException {
@@ -23,8 +21,10 @@ public class WordGenerator {
 	 * list of words
 	 * 
 	 * @param numberOfWords : Number of word to generate
-	 * @param wordLength    : The length of the generated words. If <= 0, random
-	 * @throws JSONException
+	 * @param fixLength     : The length of the generated words. If lesser or equals
+	 *                      2, random
+	 * @return a list of generated words
+	 * @throws JSONException : All the JSON exceptions
 	 */
 	public List<String> generateWords(int numberOfWords, int fixLength) throws JSONException {
 		List<String> generatedWords = new ArrayList<>();
@@ -42,15 +42,11 @@ public class WordGenerator {
 		return generatedWords;
 	}
 
-	private boolean checkWordLength(int fixLength, String word) {
-		return fixLength <= 1 || word.length() == fixLength;
-	}
-
 	/**
 	 * Create a new word using the parameters of the analyzer
 	 * 
 	 * @return a new word
-	 * @throws JSONException
+	 * @throws JSONException : All the JSON exceptions
 	 */
 	public String generateWord() throws JSONException {
 		String newWord = getRandomWordBeginning();
@@ -67,6 +63,10 @@ public class WordGenerator {
 			}
 		}
 		return newWord;
+	}
+
+	private boolean checkWordLength(int fixLength, String word) {
+		return fixLength < 2 || word.length() == fixLength;
 	}
 
 	private String getNextChar(String newWord) throws JSONException {
@@ -97,7 +97,7 @@ public class WordGenerator {
 	 */
 	private int getRandomCharRank(JSONObject possibilities) throws JSONException {
 		int sumOfTrigramsFrequency = getSumOfPossibilitiesFrequency(possibilities);
-		return random.nextInt(sumOfTrigramsFrequency) + 1;
+		return RNG.getRandBelow(sumOfTrigramsFrequency) + 1;
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class WordGenerator {
 		JSONObject wordBeginnings = getWordBeginnings();
 
 		// Get first letter
-		int rankToFind = random.nextInt(getSumOfAllTrigramsFrequencies(wordBeginnings)) + 1;
+		int rankToFind = RNG.getRandBelow(getSumOfAllTrigramsFrequencies(wordBeginnings)) + 1;
 		String beginning = "";
 
 		int sumOfPreviousTrigramsFrequency = 0;

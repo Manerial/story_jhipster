@@ -3,90 +3,42 @@ package com.jher.nid_aux_histoires.service.dto;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
+
+import lombok.Data;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Book} entity.
  */
+@Data
 public class BookDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
 	private String name;
 
-	private String author;
+	private Long authorId;
+
+	private String authorLogin;
 
 	private String description;
 
-	private Set<ImageDTO> images = new HashSet<>();
+	private Boolean visibility;
 
 	private Set<PartDTO> parts = new HashSet<>();
+
+	private Set<CommentDTO> comments = new HashSet<>();
 
 	private byte[] coverPreview;
 
 	private Long coverId;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Set<ImageDTO> getImages() {
-		return images;
-	}
-
-	public void setImages(Set<ImageDTO> images) {
-		this.images = images;
-	}
-
-	public Long getCoverId() {
-		return coverId;
-	}
-
-	public void setCoverId(Long imageId) {
-		this.coverId = imageId;
-	}
-
-	public byte[] getCoverPreview() {
-		return coverPreview;
-	}
-
-	public void setCoverPreview(byte[] coverPreview) {
-		this.coverPreview = coverPreview;
-	}
-
-	public Set<PartDTO> getParts() {
-		return parts;
-	}
+	private boolean bonuses = false;
 
 	public void setParts(Set<PartDTO> parts) {
-		this.parts = parts;
+		this.parts = new TreeSet<PartDTO>();
+		this.parts.addAll(parts);
 	}
 
 	@Override
@@ -109,7 +61,7 @@ public class BookDTO implements Serializable {
 	// prettier-ignore
 	@Override
 	public String toString() {
-		return "BookDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", author='" + getAuthor() + "'"
-				+ ", images='" + getImages() + "'" + ", coverId=" + getCoverId() + "}";
+		return "BookDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", author='" + getAuthorLogin() + "'"
+				+ ", coverId=" + getCoverId() + "}";
 	}
 }

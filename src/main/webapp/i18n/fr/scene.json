@@ -18,9 +18,9 @@
       },
       "name": "Nom",
       "number": "Numéro",
+      "numberAuto": "(si < 1, sera renseigné automatiquement)",
       "text": "Texte",
       "timestampStart": "Date / Heure",
-      "image": "Image",
       "chapter": "Chapitre",
       "required": {
         "name": "Le champ Nom est requis",
