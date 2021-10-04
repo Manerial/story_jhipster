@@ -1,10 +1,9 @@
 last_updated_at=""
 process_id=""
-java_win="/c/Program Files/Java/jdk-11.0.2/bin/java"
 
 get_artifact() {
 	echo "Start get artifact"
-	artifact_infos=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/Manerial/story_jhipster/actions/artifacts)
+	artifact_infos=$(curl https://api.github.com/repos/Manerial/story_jhipster/actions/artifacts?per_page=1)
 	
 	updated_at=$(get_artifact_info "$artifact_infos" "updated_at")
 	archive_download_url=$(get_artifact_info "$artifact_infos" "archive_download_url")
@@ -30,14 +29,16 @@ update_server() {
 	fi
 	
 	file_name="website_jar.zip"
+	token=$(printenv GITHUB_TOKEN)
 
-	until $(curl -H "Accept: application/vnd.github.v3+json" --netrc-file C:\Users\Steven\_netrc -L -o $file_name $1 -u Manerial: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); do
+	until $(curl -H "Accept: application/vnd.github.v3+json" -o $file_name $1 -u Manerial:$token); do
 		sleep 5
 	done
 
 	unzip "$file_name"
 	rm "$file_name"
-	"$java_win" -jar nid-aux-histoires-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod,swagger &
+	
+	java -jar nid-aux-histoires-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod,swagger &
 	process_id=$!
 }
 
