@@ -30,8 +30,12 @@ update_server() {
 	
 	file_name="website_jar.zip"
 	token=$(printenv GITHUB_TOKEN)
+	
+	echo "$token"
+	echo "$file_name"
+	echo "$1"
 
-	until $(curl -H "Accept: application/vnd.github.v3+json" -o $file_name $1 -u Manerial:$token); do
+	until $(curl -H "Accept: application/vnd.github.v3+json" $1 -L -o $file_name -u Manerial:$token); do
 		sleep 5
 	done
 
