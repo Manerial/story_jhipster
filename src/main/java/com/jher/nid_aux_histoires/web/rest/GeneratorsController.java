@@ -23,6 +23,7 @@ import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.Random_Interface;
 import com.jher.nid_aux_histoires.service.tool.REG_Entity;
+import com.jher.nid_aux_histoires.service.tool.REG_WordAnalysis;
 
 /**
  * REST controller for managing
@@ -137,7 +138,7 @@ public class GeneratorsController {
 	 */
 	@GetMapping("/generate/words")
 	public ResponseEntity<List<String>> generateWords(@RequestParam int number, @RequestParam int fixLength,
-			@RequestParam String type) {
+			@RequestParam REG_WordAnalysis type) {
 		List<String> generatedWords = wordAnalysisService.generate(number, fixLength, type);
 		return ResponseEntity.ok().body(generatedWords);
 	}
