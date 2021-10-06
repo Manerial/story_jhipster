@@ -1,7 +1,7 @@
 Analytics ?
 
 Bugs :
-	reprise de la lecture
+	Supression chapitre / partie / livre
 
 GUI :
 	- Générateur de QR_Code
