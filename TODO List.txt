@@ -2,6 +2,7 @@ Analytics ?
 
 Bugs :
 	Supression chapitre / partie / livre
+	Discord
 
 GUI :
 	- Générateur de QR_Code

@@ -7,10 +7,10 @@
       "library": "Bibliothèque",
       "authors": "Auteurs",
       "tools": "Outils",
-      "covers": "Covers",
+      "covers": "Couvertures",
       "book": "Livre",
       "books": "Livres",
-      "favorits": "Favorits",
+      "favorits": "Favoris",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entités",
