@@ -288,18 +288,18 @@
 		</insert>
 		<insert tableName="idea">
 			<column name="type" value="role" />
-			<column name="value" value="petit(e) ami(e)" />
+			<column name="value" value="Inconnu" />
+			<column name="complement" value="ALL" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Petit(e) ami(e)" />
 			<column name="complement" value="5+" />
 		</insert>
 		<insert tableName="idea">
 			<column name="type" value="role" />
 			<column name="value" value="Fillancé(e)" />
 			<column name="complement" value="5+" />
-		</insert>
-		<insert tableName="idea">
-			<column name="type" value="role" />
-			<column name="value" value="Stalker" />
-			<column name="complement" value="16+" />
 		</insert>
 		<insert tableName="idea">
 			<column name="type" value="role" />

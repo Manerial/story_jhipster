@@ -39,6 +39,7 @@
 							<option value="object">Objet</option>
 							<option value="honorary_title">Titre honorifique</option>
 							<option value="creature">Creature</option>
+							<option value="quest">Quête</option>
 						</select>
 					</div>
 					<div class="col-sm">
@@ -334,6 +335,51 @@
 								</dl>
 							</div>
 						</div>
+						<div class="card col col-lg-5" *ngIf="ideaForm.get('generationTool')!.value=='quest'">
+							<div class="card-body">
+								<dl>
+									<dt><u>Général:</u></dt>
+									<dd></dd>
+									<dl class="pl-2">
+										<dl>
+											<dt>Ordonnateur:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="questConstraint.giver">
+											</dd>
+										</dl>
+										<dl>
+											<dt>Receveur:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="questConstraint.receiver">
+											</dd>
+										</dl>
+										<dl>
+											<dt>Objectif:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="questConstraint.objective">
+											</dd>
+										</dl>
+										<dl>
+											<dt>Danger:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="questConstraint.hazard">
+											</dd>
+										</dl>
+										<dl>
+											<dt>Conséquence:</dt>
+											<dd>
+												<input class="form-control" type="text"
+													[(ngModel)]="questConstraint.consequence">
+											</dd>
+										</dl>
+									</dl>
+								</dl>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -562,7 +608,7 @@
 								</dl>
 								<dl>
 									<dt>Proposition:</dt>
-									<dd>{{location.place}} dans {{location.landscape | lowercase}} {{location.material | lowercase}}</dd>
+									<dd>{{location.place}} dans/sur {{location.landscape | lowercase}} {{location.material | lowercase}}</dd>
 								</dl>
 							</dl>
 						</dl>
@@ -591,6 +637,38 @@
 								<dl>
 									<dt>Proposition:</dt>
 									<dd>{{object.object}} {{object.suffix | lowercase}} {{object.adjective | lowercase}}</dd>
+								</dl>
+							</dl>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="ideaForm.get('generationTool')!.value=='quest'" class="row" style="margin:0px">
+				<div class="card col-sm-4 col-md-4 col-lg-4 bkg-gray-2" *ngFor="let quest of questList">
+					<div class="card-body">
+						<dl>
+							<dt><u>Général:</u></dt>
+							<dd></dd>
+							<dl class="pl-2">
+								<dl>
+									<dt>Ordonnateur:</dt>
+									<dd>{{quest.giver}}</dd>
+								</dl>
+								<dl>
+									<dt>Receveur:</dt>
+									<dd>{{quest.receiver}}</dd>
+								</dl>
+								<dl>
+									<dt>Objectif:</dt>
+									<dd>{{quest.objective}}</dd>
+								</dl>
+								<dl>
+									<dt>Danger:</dt>
+									<dd>{{quest.hazard}}</dd>
+								</dl>
+								<dl>
+									<dt>Conséquence:</dt>
+									<dd>{{quest.consequence}}</dd>
 								</dl>
 							</dl>
 						</dl>

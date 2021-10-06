@@ -34,6 +34,7 @@ import com.jher.nid_aux_histoires.service.dto.idea_generator.R_CreatureDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_QuestDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.Random_Interface;
 import com.jher.nid_aux_histoires.service.mapper.IdeaMapper;
@@ -278,6 +279,12 @@ public class IdeaResourceIT {
 	@Test
 	public void createRandomCreature() {
 		List<Random_Interface> list = ideaService.generate(GENERATIONS, REG_Entity.CREATURE, new R_CreatureDTO());
+		assertThat(list).hasSize(GENERATIONS);
+	}
+
+	@Test
+	public void createRandomQuest() {
+		List<Random_Interface> list = ideaService.generate(GENERATIONS, REG_Entity.QUEST, new R_QuestDTO());
 		assertThat(list).hasSize(GENERATIONS);
 	}
 }

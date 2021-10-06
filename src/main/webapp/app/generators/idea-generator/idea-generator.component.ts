@@ -8,6 +8,7 @@ import { ILocation, Location } from 'app/shared/model/idea-generator/location.mo
 import { IObject, Object } from 'app/shared/model/idea-generator/object.model';
 import { IHonoraryTitle } from 'app/shared/model/idea-generator/honorary-title.model';
 import { ICreature, Creature } from 'app/shared/model/idea-generator/creature.model';
+import { IQuest, Quest } from 'app/shared/model/idea-generator/quest.model';
 
 @Component({
   selector: 'jhi-idea-generator',
@@ -31,6 +32,7 @@ export class IdeaGeneratorComponent implements OnInit {
   public writingOptionConstraint: IWritingOption = new WritingOption();
   public locationConstraint: ILocation = new Location();
   public objectConstraint: IObject = new Object();
+  public questConstraint: IQuest = new Quest();
 
   public writingOptionList: IWritingOption[] = [];
   public personaList: IPersona[] = [];
@@ -38,6 +40,7 @@ export class IdeaGeneratorComponent implements OnInit {
   public objectList: IObject[] = [];
   public honoraryTitleList: IHonoraryTitle[] = [];
   public creatureList: ICreature[] = [];
+  public questList: IQuest[] = [];
 
   public hideConstraint = true;
   ideaForm = this.fb.group({
@@ -84,6 +87,10 @@ export class IdeaGeneratorComponent implements OnInit {
       this.turnConstraintCreatureToList();
       this.generatorService.generateCreature(number, this.creatureConstraint).subscribe(response => {
         this.creatureList = response;
+      });
+    } else if (type === 'quest') {
+      this.generatorService.generateQuest(number, this.questConstraint).subscribe(response => {
+        this.questList = response;
       });
     }
   }

@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="JHER" id="insertData_idea_verb">
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Abandonner" />
+			<column name="complement" value="0110" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Adopter" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Affronter" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Améliorer" />
+			<column name="complement" value="1111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Aménager" />
+			<column name="complement" value="1000" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Analyser" />
+			<column name="complement" value="0111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Assassiner" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Attaquer" />
+			<column name="complement" value="1100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Bâtir" />
+			<column name="complement" value="1000" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Brûler" />
+			<column name="complement" value="1110" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Cacher" />
+			<column name="complement" value="1111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Céder" />
+			<column name="complement" value="1010" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Concevoir" />
+			<column name="complement" value="0111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Confier" />
+			<column name="complement" value="1110" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Conquérir" />
+			<column name="complement" value="1100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Créer" />
+			<column name="complement" value="1111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Découvrir" />
+			<column name="complement" value="1011" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Défendre" />
+			<column name="complement" value="1111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Détruire" />
+			<column name="complement" value="0010" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Donner" />
+			<column name="complement" value="0010" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Enquêter sur" />
+			<column name="complement" value="1101" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Enseigner à" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Escorter" />
+			<column name="complement" value="0110" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Etudier" />
+			<column name="complement" value="1111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Examiner" />
+			<column name="complement" value="0110" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Explorer" />
+			<column name="complement" value="1000" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Fuir" />
+			<column name="complement" value="1101" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Gagner" />
+			<column name="complement" value="0011" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Garder" />
+			<column name="complement" value="1111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Lâcher" />
+			<column name="complement" value="0010" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Manipuler" />
+			<column name="complement" value="0111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Mentir à" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Modifier" />
+			<column name="complement" value="1010" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Observer" />
+			<column name="complement" value="1101" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Prendre" />
+			<column name="complement" value="0010" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Protéger" />
+			<column name="complement" value="1111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Punir" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Ravager" />
+			<column name="complement" value="1001" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Récolter" />
+			<column name="complement" value="0110" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Récupérer" />
+			<column name="complement" value="1110" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Rembourser" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Rencontrer" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Réparer" />
+			<column name="complement" value="0010" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Retrouver" />
+			<column name="complement" value="0110" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Ruiner" />
+			<column name="complement" value="1111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Saboter" />
+			<column name="complement" value="1011" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Soigner" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Trahir" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Transformer" />
+			<column name="complement" value="1111" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Traquer" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Trouver" />
+			<column name="complement" value="0110" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Tuer" />
+			<column name="complement" value="0100" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Voler" />
+			<column name="complement" value="0110" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="verb" />
+			<column name="value" value="Voyager vers" />
+			<column name="complement" value="1000" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_event">
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Activité en famille" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Anniversaire" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Bain" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Bal costumé" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Bal interracial" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Bataille" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Beuverie" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Cambriolage" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Carnaval" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Chevauchée" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Concert" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Concours" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Conflit" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Conseil" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Construction" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Course" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Criée" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Dîner" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Domptage" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Entretien royal" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Equinoxe" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Exploration" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Festival" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Fête" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Fuite" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Gay pride" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Guerre" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Halloween" />
+			<column name="complement" value="N" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Journée de travail" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Lancement de sortilège" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Marché" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Mariage" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Meurtre" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Moisson" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Mousson" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Noël" />
+			<column name="complement" value="N" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Nouvel an" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Orgie" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Pâques" />
+			<column name="complement" value="N" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Parade" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Partie de chasse" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Pillage" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Pluie d'étoiles filantes" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Randonnée" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Rassemblement" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Repas de famille" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Rituel" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Saccage" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Sacrifice" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Soirée jeux" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Solstice" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Souper" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Spectacle" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Suicide collectif" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Transit" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Urbex" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Vendanges" />
+			<column name="complement" value="P" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Vide-grenier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="event" />
+			<column name="value" value="Voyage" />
+			<column name="complement" value="M" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_hazard">
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="D'autres personnes tentent de compléter la quête" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Il est impossible de s'en aller tant que la quête n'est pas finie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Il est impossible d'utiliser d'objet ou de magie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value" value="Il fait tout noir" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Il faut traverser un champ de bataille" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Il ne faut pas réveiller la créature qui dort" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Il ne faut pas se faire repérer ou laisser de traces" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value" value="Il n'y a pas assez de nourriture" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Il n'y a pas l'équipement nécessaire" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value" value="Il y a un dilemme moral" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value" value="La foudre tombe tout près" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="La quête doit être complétée dans un certain délais" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value" value="La quête est un piège" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="L'accès est bloqué par un ennemi puissant" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="L'accès est bloqué par un obstacle infranchissable" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value" value="Le lieu est détruit" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value" value="Le lieu est empli de gaz mortel" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Le lieu est infesté de petites créatures" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Le lieu est très difficile d'accès" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Les moyens de transports sont inutilisables" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="L'information primordiale était fausse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value" value="Le sujet de la quête a disparu" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Le sujet de la quête n'a jamais existé" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Personne (d'autre) ne doit être tué" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hazard" />
+			<column name="value"
+				value="Un ancien allié est devenu un ennemi" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_consequence">
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le lieu devient infertile" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le lieu est détruit" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le lieu est envahi" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le lieu est libérée" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le lieu est reconstruit" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Le lieu obtient un nouveau bâtiment" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le lieu redevient fertile" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le monde change radicalement" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le monde échappe au chaos" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le monde est détruit" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le monde est en proie au chaos" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le monde est innondé" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Le monde est ravagé" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Perte de terres et de titres immobiliers" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Perte d'un titre de noblesse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Perte d'une relique" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Perte monétaire" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Quelqu'un retourne chez lui" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Récompense de terres et de titres immobiliers" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Récompense d'experience" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Récompense d'un titre de noblesse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Récompense d'un objet / d'une relique" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Récompense monétaire" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value" value="Rien ne change" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Une ou plusieurs personnes deviennent folles" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Une ou plusieurs personnes font une grande fête" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Une ou plusieurs personnes retrouvent leurs esprits" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Une ou plusieurs personnes révèlent une information importante" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Une ou plusieurs personnes se réconcilient avec leur(s) ami(s)" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Une ou plusieurs personnes sont châtiées" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Une ou plusieurs personnes sont envoyées en prison" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Une ou plusieurs personnes sont libérées de prison" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Une ou plusieurs personnes sont ressuscitées" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Une ou plusieurs personnes sont soignées" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="consequence" />
+			<column name="value"
+				value="Une ou plusieurs personnes sont tuées" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

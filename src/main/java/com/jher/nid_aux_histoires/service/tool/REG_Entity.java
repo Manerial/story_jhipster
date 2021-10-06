@@ -8,7 +8,8 @@ public enum REG_Entity {
 	LOCATION,
 	WORD,
 	HONORARY_TITLE,
-	CREATURE;
+	CREATURE,
+	QUEST;
 	
 	@Override
 	public String toString() {

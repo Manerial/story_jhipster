@@ -36,9 +36,9 @@ export class WordGeneratorComponent implements OnInit {
 
     const numberOfWords = this.wordForm.get('numberOfWords')!.value;
     const fixLength = this.wordForm.get('fixLength')!.value;
-    const type = this.wordForm.get('type')!.value;
+    const type: string = this.wordForm.get('type')!.value;
 
-    this.generatorService.generateWords(numberOfWords, fixLength, type).subscribe(words => {
+    this.generatorService.generateWords(numberOfWords, fixLength, type.toUpperCase()).subscribe(words => {
       this.words = [];
       words.forEach(word => {
         this.words.push(word);

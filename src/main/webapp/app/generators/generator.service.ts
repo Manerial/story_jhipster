@@ -10,6 +10,7 @@ import { IObject } from 'app/shared/model/idea-generator/object.model';
 import { IType } from 'app/shared/model/type.model';
 import { IHonoraryTitle } from 'app/shared/model/idea-generator/honorary-title.model';
 import { ICreature } from 'app/shared/model/idea-generator/creature.model';
+import { IQuest } from 'app/shared/model/idea-generator/quest.model';
 
 type ITypeArrayResponseType = HttpResponse<IType[]>;
 
@@ -53,6 +54,12 @@ export class GeneratorService {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('number', number.toString());
     return this.http.post<IObject[]>(`${this.resourceUrl}/objects`, constraint, { params: httpParams });
+  }
+
+  generateQuest(number: any, constraint: IQuest): Observable<IQuest[]> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('number', number.toString());
+    return this.http.post<IQuest[]>(`${this.resourceUrl}/quests`, constraint, { params: httpParams });
   }
 
   getTypes(): Observable<ITypeArrayResponseType> {

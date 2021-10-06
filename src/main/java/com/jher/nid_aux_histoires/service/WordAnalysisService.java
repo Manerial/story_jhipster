@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.jher.nid_aux_histoires.service.dto.WordAnalysisDTO;
+import com.jher.nid_aux_histoires.service.tool.REG_WordAnalysis;
 
 /**
  * Service Interface for managing
@@ -61,7 +62,7 @@ public interface WordAnalysisService {
 	 * @param type          : type de mots à générer
 	 * @return la liste des mots générés
 	 */
-	public List<String> generate(int numberOfWords, int fixLength, String type);
+	public List<String> generate(int numberOfWords, int fixLength, REG_WordAnalysis type);
 
 	/**
 	 * Génère un mot en fonction d'un type
@@ -69,5 +70,5 @@ public interface WordAnalysisService {
 	 * @param type : type de mot à générer
 	 * @return le mot généré
 	 */
-	public String generate(String type);
+	public String generate(REG_WordAnalysis type);
 }
