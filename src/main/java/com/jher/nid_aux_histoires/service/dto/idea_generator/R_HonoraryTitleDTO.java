@@ -7,6 +7,6 @@ public class R_HonoraryTitleDTO implements Random_Interface {
 	private String title;
 
 	public R_HonoraryTitleDTO(String title) {
-		this.setTitle(title);
+		setTitle(title);
 	}
 }

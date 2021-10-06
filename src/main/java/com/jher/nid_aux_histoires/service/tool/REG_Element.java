@@ -36,6 +36,12 @@ public enum REG_Element {
 	OBJECT,
 	MATERIAL,
 	
+	// Quest
+	EVENT,
+	VERB,
+	HAZARD,
+	CONSEQUENCE,
+	
 	// Global
 	COMMON_NAME,
 	ADJECTIVE;

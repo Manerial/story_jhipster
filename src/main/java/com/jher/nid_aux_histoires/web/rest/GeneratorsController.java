@@ -20,6 +20,7 @@ import com.jher.nid_aux_histoires.service.dto.idea_generator.R_CreatureDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_QuestDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.Random_Interface;
 import com.jher.nid_aux_histoires.service.tool.REG_Entity;
@@ -126,6 +127,20 @@ public class GeneratorsController {
 		List<Random_Interface> generatedWritingOptions = ideaService.generate(number, REG_Entity.WRITING_OPTION,
 				constraint);
 		return ResponseEntity.ok().body(generatedWritingOptions);
+	}
+
+	/**
+	 * Génère une liste de quêtes en fonction de contraintes
+	 * 
+	 * @param number     : nombre d'entités à créer
+	 * @param constraint : entité contenant des contraintes à respecter
+	 * @return une réponse contenant la liste des entités
+	 */
+	@PostMapping("/generate/quests")
+	public ResponseEntity<List<Random_Interface>> generateQuests(@RequestParam int number,
+			@Valid @RequestBody R_QuestDTO constraint) {
+		List<Random_Interface> generatedQuests = ideaService.generate(number, REG_Entity.QUEST, constraint);
+		return ResponseEntity.ok().body(generatedQuests);
 	}
 
 	/**

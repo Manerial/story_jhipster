@@ -43,6 +43,7 @@
 	<include file="config/liquibase/data/init_data_idea_location.xml" relativeToChangelogFile="false" />
 	<include file="config/liquibase/data/init_data_idea_object.xml" relativeToChangelogFile="false" />
 	<include file="config/liquibase/data/init_data_idea_persona.xml" relativeToChangelogFile="false" />
+	<include file="config/liquibase/data/init_data_idea_quest.xml" relativeToChangelogFile="false" />
 	<include file="config/liquibase/data/init_data_idea_writing.xml" relativeToChangelogFile="false" />
 	
 	<include file="config/liquibase/changelog/00000000000000_fake_data_for_test.xml" relativeToChangelogFile="false" context="test"/>

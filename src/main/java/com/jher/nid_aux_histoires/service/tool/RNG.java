@@ -7,7 +7,7 @@ public class RNG {
 	private static final Random random = new SecureRandom();
 
 	/**
-	 * Get a random number between 0 and max
+	 * Get a random number between 0 (included) and max (excluded)
 	 *
 	 * @param max : the maximum value the random number can take
 	 * @return a random number

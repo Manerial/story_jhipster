@@ -23,6 +23,7 @@ import com.jher.nid_aux_histoires.service.tool.HonoraryTitleGenerator;
 import com.jher.nid_aux_histoires.service.tool.LocationGenerator;
 import com.jher.nid_aux_histoires.service.tool.ObjectGenerator;
 import com.jher.nid_aux_histoires.service.tool.PersonaGenerator;
+import com.jher.nid_aux_histoires.service.tool.QuestGenerator;
 import com.jher.nid_aux_histoires.service.tool.REG_Entity;
 import com.jher.nid_aux_histoires.service.tool.RandomEntityGenerator;
 import com.jher.nid_aux_histoires.service.tool.WritingOptionGenerator;
@@ -97,6 +98,9 @@ public class IdeaServiceImpl implements IdeaService {
 			break;
 		case CREATURE:
 			ideaGenerator = new CreatureGenerator(ideaRepository, wordAnalysisService);
+			break;
+		case QUEST:
+			ideaGenerator = new QuestGenerator(ideaRepository);
 			break;
 		default:
 			return objects;
