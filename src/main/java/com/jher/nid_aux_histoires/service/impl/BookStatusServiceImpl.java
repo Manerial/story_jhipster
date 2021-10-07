@@ -102,5 +102,6 @@ public class BookStatusServiceImpl implements BookStatusService {
 	public void delete(Long id) {
 		log.debug("Request to delete BookStatus : {}", id);
 		bookStatusRepository.deleteById(id);
+		bookStatusRepository.flush();
 	}
 }
