@@ -1,8 +1,9 @@
 Analytics ?
 
 Bugs :
-	Supression chapitre / partie / livre
 	Discord
+	Téléchargement impossible sur le serveur
+	Sommaire ne va pas jusqu'en bas sur téléphone
 
 GUI :
 	- Générateur de QR_Code

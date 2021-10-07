@@ -90,6 +90,7 @@ public class CoverServiceImpl implements CoverService {
 			}
 			bookRepository.saveAll(cover.getBookToCovers());
 			coverRepository.deleteById(id);
+			coverRepository.flush();
 		}
 
 	}
