@@ -2,7 +2,6 @@ Analytics ?
 
 Bugs :
 	Discord
-	Téléchargement impossible sur le serveur
 	Sommaire ne va pas jusqu'en bas sur téléphone
 
 GUI :

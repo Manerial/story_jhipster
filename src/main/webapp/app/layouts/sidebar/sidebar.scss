@@ -46,7 +46,7 @@ h4 {
 }
 
 .menu-button {
-  color: $gold;
+  color: $gold_transparent;
   position: fixed;
   cursor: pointer;
   z-index: 2;
@@ -58,7 +58,7 @@ h4 {
 }
 
 .menu-bkg {
-  color: $white;
+  color: $white_transparent;
   z-index: 1;
 }
 
@@ -73,4 +73,8 @@ a.bkg-white:hover,
 button.bkg-white:hover {
   background-color: $gray !important;
   cursor: pointer;
+}
+
+.selected {
+  background-color: $pale_gold !important;
 }

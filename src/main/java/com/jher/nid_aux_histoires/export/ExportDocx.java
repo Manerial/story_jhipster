@@ -116,7 +116,7 @@ public class ExportDocx {
 
 	private File buildWordFile(String modelFileName, String objectName, Object object)
 			throws IOException, FileNotFoundException, Docx4JException {
-		LOGGER.info("Chargement du fichier model : " + modelFileName);
+		LOGGER.info("Chargement du fichier model : " + modelFilePath + modelFileName);
 		WordprocessingMLPackage wordMLPackage = Docx4J.load(new java.io.File(modelFilePath + modelFileName));
 		String outputFilePath = getObjectFilePath(objectName);
 		LOGGER.info("Chargement du fichier de sortie : " + outputFilePath);
