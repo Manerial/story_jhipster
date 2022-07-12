@@ -1,8 +1,6 @@
 import { ActivatedRouteSnapshot, Resolve, Route } from '@angular/router';
 
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { VisitComponent } from './visit.component';
-import { Authority } from 'app/shared/constants/authority.constants';
 import { Injectable } from '@angular/core';
 import { IUser, User } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
@@ -28,8 +26,6 @@ export const visitRoute: Route = {
     user: UserManagementResolve,
   },
   data: {
-    authorities: [Authority.USER],
     pageTitle: 'visit.main',
   },
-  canActivate: [UserRouteAccessService],
 };
