@@ -2,6 +2,8 @@ Accès en lecture à tous, même non inscrit
 sitemap.xml à rendre visible
 Mots clés recherche Google
 
+Pagination pour les livres
+
 Bugs :
 	Discord
 	Sommaire ne va pas jusqu'en bas sur téléphone
