@@ -25,7 +25,7 @@
                     </span>
                 </a>
             </li>
-            <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *jhiHasAnyAuthority="'ROLE_USER'">
+            <li ngbDropdown class="nav-item dropdown pointer" display="dynamic">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
                     id="navBarDropdown">
                     <span>
@@ -46,12 +46,12 @@
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="/favorits" (click)="collapseNavbar()"
-                        jhiTranslate="global.menu.favorits">
+                        jhiTranslate="global.menu.favorits" *jhiHasAnyAuthority="'ROLE_USER'">
                         </a>
                     </li>
                 </ul>
             </li>
-            <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *jhiHasAnyAuthority="'ROLE_USER'">
+            <li ngbDropdown class="nav-item dropdown pointer" display="dynamic">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
                     id="generatorsnavBarDropdown">
                     <span>
