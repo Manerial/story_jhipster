@@ -12,18 +12,16 @@ export const LIBRARY_ROUTE: Route = {
   path: 'library',
   component: LibraryComponent,
   data: {
-    authorities: [Authority.USER],
     pageTitle: 'library.title',
   },
-  canActivate: [UserRouteAccessService],
 };
 
 export const FAVORITS_ROUTE: Route = {
   path: 'favorits',
   component: LibraryComponent,
   data: {
+    pageTitle: 'favorits.title',
     authorities: [Authority.USER],
-    pageTitle: 'library.favorits.title',
   },
   canActivate: [UserRouteAccessService],
 };
@@ -31,26 +29,14 @@ export const FAVORITS_ROUTE: Route = {
 export const READER_ROUTE: Route = {
   path: 'reader/book/:bookId',
   component: ReaderComponent,
-  data: {
-    authorities: [Authority.USER],
-  },
-  canActivate: [UserRouteAccessService],
 };
 
 export const BONUSES_ROUTE: Route = {
   path: 'bonus/book/:bookId',
   component: BonusListComponent,
-  data: {
-    authorities: [Authority.USER],
-  },
-  canActivate: [UserRouteAccessService],
 };
 
 export const COMMENTS_ROUTE: Route = {
   path: 'comments/book/:bookId',
   component: CommentsComponent,
-  data: {
-    authorities: [Authority.USER],
-  },
-  canActivate: [UserRouteAccessService],
 };

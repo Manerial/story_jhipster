@@ -37,6 +37,12 @@
   },
   "bonus": {
     "title": "Bonus pour \"{{ entityName }}\"",
-    "no_bonus": "Pas de bonus pour \"{{ entityName }}\""
+    "empty": "Pas de bonus pour \"{{ entityName }}\""
+  },
+  "comments": {
+    "title": "Commentaires pour \"{{ entityName }}\"",
+    "read": "Lire",
+    "add_comment": "Commenter",
+    "empty": "Pas de commentaire pour \"{{ entityName }}\""
   }
 }

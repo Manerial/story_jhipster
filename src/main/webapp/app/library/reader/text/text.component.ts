@@ -1,4 +1,5 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AccountService } from 'app/core/auth/account.service';
 import { BookStatusService } from 'app/entities/bookStatus/bookStatus.service';
 import { Book, IBook } from 'app/shared/model/book.model';
 import { Chapter, IChapter } from 'app/shared/model/chapter.model';
@@ -19,7 +20,12 @@ export class TextComponent implements OnInit, OnDestroy {
   private isArrowDown = false;
   private isArrowUp = false;
 
-  constructor(public readerService: ReaderService, public utilService: UtilService, public bookStatusService: BookStatusService) {}
+  constructor(
+    public readerService: ReaderService,
+    public utilService: UtilService,
+    private accountService: AccountService,
+    public bookStatusService: BookStatusService
+  ) {}
 
   ngOnInit(): void {
     this.readerService.book.subscribe(book => {
@@ -28,7 +34,7 @@ export class TextComponent implements OnInit, OnDestroy {
         if (chapterId !== '') {
           // Si on est en train de lire
           this.loadChapter();
-        } else {
+        } else if (this.accountService.isAuthenticated()) {
           this.bookStatusService.findByBook(this.book.id!).subscribe(
             bookStatus => {
               if (bookStatus.body) {
@@ -41,6 +47,8 @@ export class TextComponent implements OnInit, OnDestroy {
               this.readerService.changeChapter(this.book.parts![0].chapters![0].id!);
             }
           );
+        } else {
+          this.readerService.changeChapter(this.book.parts![0].chapters![0].id!);
         }
       });
     });

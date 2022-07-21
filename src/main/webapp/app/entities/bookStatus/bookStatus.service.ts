@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IBookStatus } from 'app/shared/model/bookStatus.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 type EntityResponseType = HttpResponse<IBookStatus>;
 type EntityArrayResponseType = HttpResponse<IBookStatus[]>;
@@ -13,7 +14,7 @@ type EntityArrayResponseType = HttpResponse<IBookStatus[]>;
 export class BookStatusService {
   public resourceUrl = SERVER_API_URL + 'api/bookStatuses';
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient, private accountService: AccountService) {}
 
   create(bookStatus: IBookStatus): Observable<EntityResponseType> {
     return this.http.post<IBookStatus>(this.resourceUrl, bookStatus, { observe: 'response' });
@@ -24,6 +25,9 @@ export class BookStatusService {
   }
 
   upsert(bookId: number, chapterId: number): Observable<EntityResponseType> {
+    if (!this.accountService.isAuthenticated()) {
+      throw new Error('Authentication required');
+    }
     let httpParams = new HttpParams();
     httpParams = httpParams.append('bookId', bookId.toString());
     httpParams = httpParams.append('chapterId', chapterId.toString());
@@ -35,6 +39,9 @@ export class BookStatusService {
   }
 
   findByBook(bookId: number): Observable<EntityResponseType> {
+    if (!this.accountService.isAuthenticated()) {
+      throw new Error('Authentication required');
+    }
     return this.http.get<IBookStatus>(`${this.resourceUrl}/book/${bookId}`, { observe: 'response' });
   }
 

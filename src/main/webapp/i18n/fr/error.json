@@ -3,6 +3,7 @@
     "title": "Page d'erreur\u00A0!",
     "http": {
       "400": "Mauvaise requête.",
+      "401": "Vous n'êtes pas authentifié.",
       "403": "Vous n'avez pas les droits pour accéder à cette page.",
       "404": "La page n'existe pas.",
       "405": "Le verbe HTTP que vous avez utilisé n'est pas reconnu par cet URL.",

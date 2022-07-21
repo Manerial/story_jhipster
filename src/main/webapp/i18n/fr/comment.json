@@ -19,9 +19,6 @@
       "text": "Text",
       "book": "Livre",
       "user": "Utilisateur",
-      "list": {
-        "title": "Commentaires pour {{ bookName }}"
-      },
       "add": {
         "title": "Ajouter un commentaire",
         "button": "Commenter",
@@ -29,8 +26,7 @@
         "validate": "Valider",
         "cancel": "Fermer",
         "read": "Lire"
-      },
-      "empty": "Pas de commentaires pour ce livre"
+      }
     }
   }
 }

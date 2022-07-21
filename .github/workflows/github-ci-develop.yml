@@ -43,6 +43,10 @@ jobs:
                 restore-keys: ${{ runner.os }}-m2
             - name: Install node.js packages
               run: npm install
+            - name: Install libegl1
+              run: sudo apt install libegl1-mesa
+            - name: Install libopengl0
+              run: sudo apt install libopengl0
             - name: Install calibre
               run: sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
             - name: Create BooksExports

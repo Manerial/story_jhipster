@@ -2,6 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { BookStatusService } from 'app/entities/bookStatus/bookStatus.service';
 import { IBookStatus, BookStatus } from 'app/shared/model/bookStatus.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 describe('Service Tests', () => {
   describe('BookStatus Service', () => {
@@ -14,6 +15,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
+        providers: [BookStatusService, { provide: AccountService }],
       });
       expectedResult = null;
       injector = getTestBed();
