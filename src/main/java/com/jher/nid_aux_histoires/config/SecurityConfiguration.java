@@ -99,7 +99,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/chapters/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
             .antMatchers("/api/scenes/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
             .antMatchers("/api/covers/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
-            .antMatchers("/api/bonus/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
+            .antMatchers("/api/bonus/<**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
+
+            .antMatchers(HttpMethod.POST, "/api/comments/**").authenticated()
+            .antMatchers(HttpMethod.PUT, "/api/comments/**").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/api/comments/**").authenticated()
+            .antMatchers("/api/bookStatuses/**").authenticated()
             
             .antMatchers("/api/**").permitAll()
             .antMatchers("/management/health").permitAll()

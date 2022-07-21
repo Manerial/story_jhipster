@@ -40,15 +40,12 @@ export class BookUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.accountService.identity().subscribe(account => {
-      if (account) {
-        this.account = account;
-        this.activatedRoute.data.subscribe(({ book }) => {
-          this.updateForm(book);
-          this.visible = book.visibility;
-          this.coverService.query().subscribe((res: HttpResponse<ICover[]>) => (this.covers = res.body || []));
-        });
-      }
+    this.account = this.accountService.getUserIdentity();
+
+    this.activatedRoute.data.subscribe(({ book }) => {
+      this.updateForm(book);
+      this.visible = book.visibility;
+      this.coverService.query().subscribe((res: HttpResponse<ICover[]>) => (this.covers = res.body || []));
     });
   }
 

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BonusService } from 'app/entities/bonus/bonus.service';
 import { BookService } from 'app/entities/book/book.service';
 import { IBonus } from 'app/shared/model/bonus.model';
+import { TitleService } from 'app/shared/util/title.service';
 
 @Component({
   selector: 'jhi-bonus-list',
@@ -15,7 +16,12 @@ export class BonusListComponent implements OnInit {
   public entityName = '';
   public showDescription: boolean[] = [];
 
-  constructor(public acRoute: ActivatedRoute, private bookService: BookService, private bonusService: BonusService) {}
+  constructor(
+    public acRoute: ActivatedRoute,
+    private bookService: BookService,
+    private bonusService: BonusService,
+    private titleService: TitleService
+  ) {}
 
   ngOnInit(): void {
     this.acRoute.paramMap.subscribe(params => {
@@ -23,7 +29,9 @@ export class BonusListComponent implements OnInit {
       this.bookService.findLight(bookIdStr).subscribe(entity => {
         if (entity.body) {
           this.entityName = entity.body.name!;
+          this.titleService.replaceTitle('bonus.title', { entityName: this.entityName });
         }
+
         this.getAllBonusByBookId(bookIdStr);
       });
     });

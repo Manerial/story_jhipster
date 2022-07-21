@@ -37,6 +37,9 @@ export class BookComponent implements OnInit, OnDestroy {
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
+    if (!this.accountService.isAuthenticated()) {
+      return;
+    }
     this.accountService.identity().subscribe(account => {
       if (account) {
         const pageToLoad: number = page || this.page || 1;
