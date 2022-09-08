@@ -39,11 +39,11 @@ public class BookStatus implements Serializable {
 	private Boolean favorit;
 
 	@ManyToOne
-	@JsonIgnoreProperties(value = "bookStatus", allowSetters = true)
+	@JsonIgnoreProperties(value = "bookStatuses", allowSetters = true)
 	private Book book;
 
 	@ManyToOne
-	@JsonIgnoreProperties(value = "bookStatus", allowSetters = true)
+	@JsonIgnoreProperties(value = "bookStatuses", allowSetters = true)
 	private Chapter curentChapter;
 
 	@ManyToOne
