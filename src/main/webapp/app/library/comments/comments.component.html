@@ -1,5 +1,7 @@
 <div class="content">
-    <h2 jhiTranslate="comments.title" [translateValues]="{ entityName: book.name }" *ngIf="book">List of comments for {{ book.name }}</h2>
+    <h2 jhiTranslate="comments.title"
+        [translateValues]="{ entityName: book.name }"
+        *ngIf="book">List of comments for {{ book.name }}</h2>
     <div class="container">
         <a routerLink="/reader/book/{{ book?.id }}" class="btn bkg-gold mt-2 ml-2">
             <p jhiTranslate="comments.read">Read</p>
@@ -15,7 +17,9 @@
             </div>
         </div>
         <div *ngIf="!comments || comments.length == 0">
-            <p jhiTranslate="comments.empty">No comments for this book</p>
+            <p jhiTranslate="comments.empty"
+                [translateValues]="{ entityName: book.name }"
+                *ngIf="book">No comments for {{ book.name }}</p>
         </div>
     </div>
 </div>
