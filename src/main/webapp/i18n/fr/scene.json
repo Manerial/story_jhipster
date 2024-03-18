@@ -3,6 +3,7 @@
     "scene": {
       "home": {
         "title": "Scenes",
+        "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Scene",
         "createOrEditLabel": "Créer ou éditer un Scene",
         "notFound": "Aucun Scene trouvé"
@@ -11,11 +12,12 @@
       "updated": "Le Scene avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Scene avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Scene {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Scene {{ id }} ?"
       },
       "detail": {
         "title": "Scene"
       },
+      "id": "ID",
       "name": "Name",
       "number": "Number",
       "text": "Text",

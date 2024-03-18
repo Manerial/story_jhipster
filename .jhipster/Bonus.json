@@ -1,5 +1,13 @@
 {
-  "name": "Bonus",
+  "annotations": {
+    "changelogDate": "20210603133447"
+  },
+  "applications": "*",
+  "changelogDate": "20210603133447",
+  "clientRootFolder": "",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "bonus",
   "fields": [
     {
       "fieldName": "name",
@@ -10,16 +18,12 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
-  "changelogDate": "20210603133447",
-  "entityTableName": "bonus",
-  "dto": "mapstruct",
-  "pagination": "pagination",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
   "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Bonus",
+  "pagination": "pagination",
   "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*"
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

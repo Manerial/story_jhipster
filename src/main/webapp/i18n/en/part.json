@@ -3,6 +3,7 @@
     "part": {
       "home": {
         "title": "Parts",
+        "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Part",
         "createOrEditLabel": "Create or edit a Part",
         "notFound": "No Parts found"
@@ -16,6 +17,7 @@
       "detail": {
         "title": "Part"
       },
+      "id": "ID",
       "name": "Name",
       "description": "Description",
       "number": "Number",

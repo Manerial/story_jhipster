@@ -1,13 +1,14 @@
 package com.jher.nid_aux_histoires.service.dto;
 
-import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
-import com.jher.nid_aux_histoires.web.rest.TestUtil;
 
-public class BonusDTOTest {
+import com.jher.nid_aux_histoires.web.rest.TestUtil;
+import org.junit.jupiter.api.Test;
+
+class BonusDTOTest {
 
     @Test
-    public void dtoEqualsVerifier() throws Exception {
+    void dtoEqualsVerifier() throws Exception {
         TestUtil.equalsVerifier(BonusDTO.class);
         BonusDTO bonusDTO1 = new BonusDTO();
         bonusDTO1.setId(1L);

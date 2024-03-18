@@ -1,11 +1,9 @@
 package com.jher.nid_aux_histoires.domain;
 
+import jakarta.persistence.*;
+import java.io.Serializable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import java.io.Serializable;
 
 /**
  * A WordAnalysis.
@@ -13,12 +11,15 @@ import java.io.Serializable;
 @Entity
 @Table(name = "word_analysis")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class WordAnalysis implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "type")
@@ -31,8 +32,14 @@ public class WordAnalysis implements Serializable {
     private String analysis;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public WordAnalysis id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
@@ -40,11 +47,11 @@ public class WordAnalysis implements Serializable {
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
     public WordAnalysis type(String type) {
-        this.type = type;
+        this.setType(type);
         return this;
     }
 
@@ -53,11 +60,11 @@ public class WordAnalysis implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public WordAnalysis name(String name) {
-        this.name = name;
+        this.setName(name);
         return this;
     }
 
@@ -66,17 +73,18 @@ public class WordAnalysis implements Serializable {
     }
 
     public String getAnalysis() {
-        return analysis;
+        return this.analysis;
     }
 
     public WordAnalysis analysis(String analysis) {
-        this.analysis = analysis;
+        this.setAnalysis(analysis);
         return this;
     }
 
     public void setAnalysis(String analysis) {
         this.analysis = analysis;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -87,12 +95,13 @@ public class WordAnalysis implements Serializable {
         if (!(o instanceof WordAnalysis)) {
             return false;
         }
-        return id != null && id.equals(((WordAnalysis) o).id);
+        return getId() != null && getId().equals(((WordAnalysis) o).getId());
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        return getClass().hashCode();
     }
 
     // prettier-ignore

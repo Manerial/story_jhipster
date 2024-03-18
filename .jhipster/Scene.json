@@ -1,5 +1,13 @@
 {
-  "name": "Scene",
+  "annotations": {
+    "changelogDate": "20201004072142"
+  },
+  "applications": "*",
+  "changelogDate": "20201004072142",
+  "clientRootFolder": "",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "scene",
   "fields": [
     {
       "fieldName": "name",
@@ -19,6 +27,11 @@
       "fieldType": "LocalDate"
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Scene",
+  "pagination": "pagination",
+  "readOnly": false,
   "relationships": [
     {
       "relationshipType": "many-to-many",
@@ -26,25 +39,18 @@
       "otherEntityRelationshipName": "scene",
       "relationshipName": "image",
       "otherEntityField": "id",
-      "ownerSide": true
+      "ownerSide": true,
+      "relationshipSide": "left"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "chapter",
       "otherEntityRelationshipName": "scene",
       "relationshipName": "chapter",
-      "otherEntityField": "id"
+      "otherEntityField": "id",
+      "relationshipSide": "right"
     }
   ],
-  "changelogDate": "20201004072142",
-  "entityTableName": "scene",
-  "dto": "mapstruct",
-  "pagination": "pagination",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*"
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

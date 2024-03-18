@@ -3,17 +3,15 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-
-        <property name="autoIncrement" value="true"/>
 
     <!--
         Added the entity Scene.
     -->
     <changeSet id="20201004072142-1" author="jhipster">
         <createTable tableName="scene">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
@@ -37,7 +35,7 @@
 
     <changeSet id="20201004072142-1-relations" author="jhipster">
 
-        <createTable tableName="scene_image">
+        <createTable tableName="rel_scene__image">
             <column name="image_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
@@ -46,9 +44,9 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="scene_id, image_id" tableName="scene_image"/>
-        
+        <addPrimaryKey columnNames="scene_id, image_id" tableName="rel_scene__image"/>
     </changeSet>
+
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--
@@ -63,7 +61,8 @@
         <loadData
                   file="config/liquibase/fake-data/scene.csv"
                   separator=";"
-                  tableName="scene">
+                  tableName="scene"
+                  usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
             <column name="number" type="numeric"/>
@@ -72,5 +71,4 @@
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>
-
 </databaseChangeLog>

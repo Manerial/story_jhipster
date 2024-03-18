@@ -2,29 +2,31 @@
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <!--
         Added the constraints for entity Scene.
     -->
     <changeSet id="20201004072142-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="scene_id"
-                                 baseTableName="scene_image"
-                                 constraintName="fk_scene_image_scene_id"
+                                 baseTableName="rel_scene__image"
+                                 constraintName="fk_rel_scene__image__scene_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="scene"/>
+                                 referencedTableName="scene"
+                                 />
 
         <addForeignKeyConstraint baseColumnNames="image_id"
-                                 baseTableName="scene_image"
-                                 constraintName="fk_scene_image_image_id"
+                                 baseTableName="rel_scene__image"
+                                 constraintName="fk_rel_scene__image__image_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="image"/>
-        
+                                 referencedTableName="image"
+                                 />
+
         <addForeignKeyConstraint baseColumnNames="chapter_id"
                                  baseTableName="scene"
-                                 constraintName="fk_scene_chapter_id"
+                                 constraintName="fk_scene__chapter_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="chapter"/>
-
+                                 referencedTableName="chapter"
+                                 />
     </changeSet>
 </databaseChangeLog>

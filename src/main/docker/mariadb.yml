@@ -1,13 +1,22 @@
-version: '2'
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+name: nid_aux_histoires
 services:
-  nid_aux_histoires-mariadb:
-    image: mariadb:10.5.3
+  mariadb:
+    image: mariadb:11.2.2
+    volumes:
+      - ./config/mariadb:/etc/mariadb/conf.d
     # volumes:
-    #     - ~/volumes/jhipster/nid_aux_histoires/mysql/:/var/lib/mysql/
+    #   - ~/volumes/jhipster/nid_aux_histoires/mariadb/:/var/lib/mariadb/
     environment:
-      - MYSQL_USER=root
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=nid_aux_histoires
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
+      - MARIADB_DATABASE=nid_aux_histoires
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
     ports:
-      - 3306:3306
-    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+      - 127.0.0.1:3306:3306
+    command: mariadbd --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+    healthcheck:
+      test: ['CMD', '/usr/local/bin/healthcheck.sh', '--connect', '--innodb_initialized']
+      interval: 5s
+      timeout: 5s
+      retries: 10

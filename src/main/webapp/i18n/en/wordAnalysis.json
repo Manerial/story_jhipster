@@ -3,6 +3,7 @@
     "wordAnalysis": {
       "home": {
         "title": "Word Analyses",
+        "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Word Analysis",
         "createOrEditLabel": "Create or edit a Word Analysis",
         "notFound": "No Word Analyses found"
@@ -16,6 +17,7 @@
       "detail": {
         "title": "Word Analysis"
       },
+      "id": "ID",
       "type": "Type",
       "name": "Name",
       "analysis": "Analysis"

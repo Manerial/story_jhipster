@@ -1,15 +1,13 @@
 package com.jher.nid_aux_histoires.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Scene.
@@ -17,12 +15,15 @@ import java.util.Set;
 @Entity
 @Table(name = "scene")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class Scene implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "name")
@@ -38,20 +39,25 @@ public class Scene implements Serializable {
     @Column(name = "timestamp_start")
     private LocalDate timestampStart;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "rel_scene__image", joinColumns = @JoinColumn(name = "scene_id"), inverseJoinColumns = @JoinColumn(name = "image_id"))
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(name = "scene_image",
-               joinColumns = @JoinColumn(name = "scene_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties(value = { "bookToCovers", "books", "parts", "chapters", "scenes" }, allowSetters = true)
     private Set<Image> images = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = "scenes", allowSetters = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "scenes", "images", "part", "bookStatuses" }, allowSetters = true)
     private Chapter chapter;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Scene id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
@@ -59,11 +65,11 @@ public class Scene implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public Scene name(String name) {
-        this.name = name;
+        this.setName(name);
         return this;
     }
 
@@ -72,11 +78,11 @@ public class Scene implements Serializable {
     }
 
     public Integer getNumber() {
-        return number;
+        return this.number;
     }
 
     public Scene number(Integer number) {
-        this.number = number;
+        this.setNumber(number);
         return this;
     }
 
@@ -85,11 +91,11 @@ public class Scene implements Serializable {
     }
 
     public String getText() {
-        return text;
+        return this.text;
     }
 
     public Scene text(String text) {
-        this.text = text;
+        this.setText(text);
         return this;
     }
 
@@ -98,11 +104,11 @@ public class Scene implements Serializable {
     }
 
     public LocalDate getTimestampStart() {
-        return timestampStart;
+        return this.timestampStart;
     }
 
     public Scene timestampStart(LocalDate timestampStart) {
-        this.timestampStart = timestampStart;
+        this.setTimestampStart(timestampStart);
         return this;
     }
 
@@ -111,42 +117,41 @@ public class Scene implements Serializable {
     }
 
     public Set<Image> getImages() {
-        return images;
-    }
-
-    public Scene images(Set<Image> images) {
-        this.images = images;
-        return this;
-    }
-
-    public Scene addImage(Image image) {
-        this.images.add(image);
-        image.getScenes().add(this);
-        return this;
-    }
-
-    public Scene removeImage(Image image) {
-        this.images.remove(image);
-        image.getScenes().remove(this);
-        return this;
+        return this.images;
     }
 
     public void setImages(Set<Image> images) {
         this.images = images;
     }
 
-    public Chapter getChapter() {
-        return chapter;
+    public Scene images(Set<Image> images) {
+        this.setImages(images);
+        return this;
     }
 
-    public Scene chapter(Chapter chapter) {
-        this.chapter = chapter;
+    public Scene addImage(Image image) {
+        this.images.add(image);
         return this;
+    }
+
+    public Scene removeImage(Image image) {
+        this.images.remove(image);
+        return this;
+    }
+
+    public Chapter getChapter() {
+        return this.chapter;
     }
 
     public void setChapter(Chapter chapter) {
         this.chapter = chapter;
     }
+
+    public Scene chapter(Chapter chapter) {
+        this.setChapter(chapter);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -157,12 +162,13 @@ public class Scene implements Serializable {
         if (!(o instanceof Scene)) {
             return false;
         }
-        return id != null && id.equals(((Scene) o).id);
+        return getId() != null && getId().equals(((Scene) o).getId());
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        return getClass().hashCode();
     }
 
     // prettier-ignore

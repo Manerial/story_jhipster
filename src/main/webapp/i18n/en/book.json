@@ -3,6 +3,7 @@
     "book": {
       "home": {
         "title": "Books",
+        "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Book",
         "createOrEditLabel": "Create or edit a Book",
         "notFound": "No Books found"
@@ -16,11 +17,13 @@
       "detail": {
         "title": "Book"
       },
+      "id": "ID",
       "name": "Name",
       "author": "Author",
       "part": "Part",
       "image": "Image",
-      "cover": "Cover"
+      "cover": "Cover",
+      "bookStatus": "Book Status"
     }
   }
 }

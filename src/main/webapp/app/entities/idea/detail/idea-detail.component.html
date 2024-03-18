@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (idea) {
+      <div>
+        <h2 data-cy="ideaDetailsHeading"><span jhiTranslate="nidAuxHistoiresApp.idea.detail.title">Idea</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ idea.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="nidAuxHistoiresApp.idea.type">Type</span></dt>
+          <dd>
+            <span>{{ idea.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="nidAuxHistoiresApp.idea.value">Value</span></dt>
+          <dd>
+            <span>{{ idea.value }}</span>
+          </dd>
+          <dt><span jhiTranslate="nidAuxHistoiresApp.idea.complement">Complement</span></dt>
+          <dd>
+            <span>{{ idea.complement }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/idea', idea.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

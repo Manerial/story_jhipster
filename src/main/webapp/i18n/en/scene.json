@@ -3,6 +3,7 @@
     "scene": {
       "home": {
         "title": "Scenes",
+        "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Scene",
         "createOrEditLabel": "Create or edit a Scene",
         "notFound": "No Scenes found"
@@ -16,6 +17,7 @@
       "detail": {
         "title": "Scene"
       },
+      "id": "ID",
       "name": "Name",
       "number": "Number",
       "text": "Text",

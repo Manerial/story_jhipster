@@ -2,29 +2,31 @@
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <!--
         Added the constraints for entity Book.
     -->
     <changeSet id="20201004071842-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="book_id"
-                                 baseTableName="book_image"
-                                 constraintName="fk_book_image_book_id"
+                                 baseTableName="rel_book__image"
+                                 constraintName="fk_rel_book__image__book_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="book"/>
+                                 referencedTableName="book"
+                                 />
 
         <addForeignKeyConstraint baseColumnNames="image_id"
-                                 baseTableName="book_image"
-                                 constraintName="fk_book_image_image_id"
+                                 baseTableName="rel_book__image"
+                                 constraintName="fk_rel_book__image__image_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="image"/>
-        
+                                 referencedTableName="image"
+                                 />
+
         <addForeignKeyConstraint baseColumnNames="cover_id"
                                  baseTableName="book"
-                                 constraintName="fk_book_cover_id"
+                                 constraintName="fk_book__cover_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="image"/>
-
+                                 referencedTableName="image"
+                                 />
     </changeSet>
 </databaseChangeLog>

@@ -3,6 +3,7 @@
     "book": {
       "home": {
         "title": "Books",
+        "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Book",
         "createOrEditLabel": "Créer ou éditer un Book",
         "notFound": "Aucun Book trouvé"
@@ -11,16 +12,18 @@
       "updated": "Le Book avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Book avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Book {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Book {{ id }} ?"
       },
       "detail": {
         "title": "Book"
       },
+      "id": "ID",
       "name": "Name",
       "author": "Author",
       "part": "Part",
       "image": "Image",
-      "cover": "Cover"
+      "cover": "Cover",
+      "bookStatus": "Book Status"
     }
   }
 }

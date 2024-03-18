@@ -1,5 +1,13 @@
 {
-  "name": "Chapter",
+  "annotations": {
+    "changelogDate": "20201004072042"
+  },
+  "applications": "*",
+  "changelogDate": "20201004072042",
+  "clientRootFolder": "",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "chapter",
   "fields": [
     {
       "fieldName": "name",
@@ -14,12 +22,18 @@
       "fieldType": "Integer"
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Chapter",
+  "pagination": "pagination",
+  "readOnly": false,
   "relationships": [
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "scene",
       "otherEntityRelationshipName": "chapter",
-      "relationshipName": "scene"
+      "relationshipName": "scene",
+      "relationshipSide": "left"
     },
     {
       "relationshipType": "many-to-many",
@@ -27,25 +41,18 @@
       "otherEntityRelationshipName": "chapter",
       "relationshipName": "image",
       "otherEntityField": "id",
-      "ownerSide": true
+      "ownerSide": true,
+      "relationshipSide": "left"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "part",
       "otherEntityRelationshipName": "chapter",
       "relationshipName": "part",
-      "otherEntityField": "id"
+      "otherEntityField": "id",
+      "relationshipSide": "right"
     }
   ],
-  "changelogDate": "20201004072042",
-  "entityTableName": "chapter",
-  "dto": "mapstruct",
-  "pagination": "pagination",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*"
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

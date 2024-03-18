@@ -3,6 +3,7 @@
     "idea": {
       "home": {
         "title": "Ideas",
+        "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Idea",
         "createOrEditLabel": "Create or edit a Idea",
         "notFound": "No Ideas found"
@@ -16,6 +17,7 @@
       "detail": {
         "title": "Idea"
       },
+      "id": "ID",
       "type": "Type",
       "value": "Value",
       "complement": "Complement"

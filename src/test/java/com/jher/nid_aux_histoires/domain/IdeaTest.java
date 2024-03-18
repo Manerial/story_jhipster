@@ -1,22 +1,24 @@
 package com.jher.nid_aux_histoires.domain;
 
-import org.junit.jupiter.api.Test;
+import static com.jher.nid_aux_histoires.domain.IdeaTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import com.jher.nid_aux_histoires.web.rest.TestUtil;
 
-public class IdeaTest {
+import com.jher.nid_aux_histoires.web.rest.TestUtil;
+import org.junit.jupiter.api.Test;
+
+class IdeaTest {
 
     @Test
-    public void equalsVerifier() throws Exception {
+    void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Idea.class);
-        Idea idea1 = new Idea();
-        idea1.setId(1L);
+        Idea idea1 = getIdeaSample1();
         Idea idea2 = new Idea();
+        assertThat(idea1).isNotEqualTo(idea2);
+
         idea2.setId(idea1.getId());
         assertThat(idea1).isEqualTo(idea2);
-        idea2.setId(2L);
-        assertThat(idea1).isNotEqualTo(idea2);
-        idea1.setId(null);
+
+        idea2 = getIdeaSample2();
         assertThat(idea1).isNotEqualTo(idea2);
     }
 }

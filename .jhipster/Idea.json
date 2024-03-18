@@ -1,5 +1,13 @@
 {
-  "name": "Idea",
+  "annotations": {
+    "changelogDate": "20201013112919"
+  },
+  "applications": "*",
+  "changelogDate": "20201013112919",
+  "clientRootFolder": "",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "idea",
   "fields": [
     {
       "fieldName": "type",
@@ -14,16 +22,12 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
-  "changelogDate": "20201013112919",
-  "entityTableName": "idea",
-  "dto": "mapstruct",
-  "pagination": "pagination",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
   "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Idea",
+  "pagination": "pagination",
   "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*"
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

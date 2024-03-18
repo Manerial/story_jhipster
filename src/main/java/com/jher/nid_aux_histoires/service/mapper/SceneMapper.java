@@ -1,30 +1,39 @@
 package com.jher.nid_aux_histoires.service.mapper;
 
-
-import com.jher.nid_aux_histoires.domain.*;
+import com.jher.nid_aux_histoires.domain.Chapter;
+import com.jher.nid_aux_histoires.domain.Image;
+import com.jher.nid_aux_histoires.domain.Scene;
+import com.jher.nid_aux_histoires.service.dto.ChapterDTO;
+import com.jher.nid_aux_histoires.service.dto.ImageDTO;
 import com.jher.nid_aux_histoires.service.dto.SceneDTO;
-
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.mapstruct.*;
 
 /**
  * Mapper for the entity {@link Scene} and its DTO {@link SceneDTO}.
  */
-@Mapper(componentModel = "spring", uses = {ImageMapper.class, ChapterMapper.class})
+@Mapper(componentModel = "spring")
 public interface SceneMapper extends EntityMapper<SceneDTO, Scene> {
-
-    @Mapping(source = "chapter.id", target = "chapterId")
-    SceneDTO toDto(Scene scene);
+    @Mapping(target = "images", source = "images", qualifiedByName = "imageIdSet")
+    @Mapping(target = "chapter", source = "chapter", qualifiedByName = "chapterId")
+    SceneDTO toDto(Scene s);
 
     @Mapping(target = "removeImage", ignore = true)
-    @Mapping(source = "chapterId", target = "chapter")
     Scene toEntity(SceneDTO sceneDTO);
 
-    default Scene fromId(Long id) {
-        if (id == null) {
-            return null;
-        }
-        Scene scene = new Scene();
-        scene.setId(id);
-        return scene;
+    @Named("imageId")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    ImageDTO toDtoImageId(Image image);
+
+    @Named("imageIdSet")
+    default Set<ImageDTO> toDtoImageIdSet(Set<Image> image) {
+        return image.stream().map(this::toDtoImageId).collect(Collectors.toSet());
     }
+
+    @Named("chapterId")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    ChapterDTO toDtoChapterId(Chapter chapter);
 }

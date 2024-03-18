@@ -1,5 +1,13 @@
 {
-  "name": "Image",
+  "annotations": {
+    "changelogDate": "20201004072242"
+  },
+  "applications": "*",
+  "changelogDate": "20201004072242",
+  "clientRootFolder": "",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "image",
   "fields": [
     {
       "fieldName": "name",
@@ -16,12 +24,18 @@
       "fieldTypeBlobContent": "image"
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Image",
+  "pagination": "pagination",
+  "readOnly": false,
   "relationships": [
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "book",
       "otherEntityRelationshipName": "cover",
-      "relationshipName": "bookToCover"
+      "relationshipName": "bookToCover",
+      "relationshipSide": "left"
     },
     {
       "relationshipType": "many-to-many",
@@ -29,7 +43,8 @@
       "otherEntityRelationshipName": "image",
       "relationshipName": "book",
       "otherEntityField": "id",
-      "ownerSide": false
+      "ownerSide": false,
+      "relationshipSide": "right"
     },
     {
       "relationshipType": "many-to-many",
@@ -37,7 +52,8 @@
       "otherEntityRelationshipName": "image",
       "relationshipName": "part",
       "otherEntityField": "id",
-      "ownerSide": false
+      "ownerSide": false,
+      "relationshipSide": "right"
     },
     {
       "relationshipType": "many-to-many",
@@ -45,7 +61,8 @@
       "otherEntityRelationshipName": "image",
       "relationshipName": "chapter",
       "otherEntityField": "id",
-      "ownerSide": false
+      "ownerSide": false,
+      "relationshipSide": "right"
     },
     {
       "relationshipType": "many-to-many",
@@ -53,18 +70,10 @@
       "otherEntityRelationshipName": "image",
       "relationshipName": "scene",
       "otherEntityField": "id",
-      "ownerSide": false
+      "ownerSide": false,
+      "relationshipSide": "right"
     }
   ],
-  "changelogDate": "20201004072242",
-  "entityTableName": "image",
-  "dto": "mapstruct",
-  "pagination": "pagination",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*"
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

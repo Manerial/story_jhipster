@@ -1,17 +1,14 @@
 package com.jher.nid_aux_histoires.service;
 
 import com.jher.nid_aux_histoires.service.dto.ChapterDTO;
-
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.Optional;
 
 /**
  * Service Interface for managing {@link com.jher.nid_aux_histoires.domain.Chapter}.
  */
 public interface ChapterService {
-
     /**
      * Save a chapter.
      *
@@ -19,6 +16,22 @@ public interface ChapterService {
      * @return the persisted entity.
      */
     ChapterDTO save(ChapterDTO chapterDTO);
+
+    /**
+     * Updates a chapter.
+     *
+     * @param chapterDTO the entity to update.
+     * @return the persisted entity.
+     */
+    ChapterDTO update(ChapterDTO chapterDTO);
+
+    /**
+     * Partially updates a chapter.
+     *
+     * @param chapterDTO the entity to update partially.
+     * @return the persisted entity.
+     */
+    Optional<ChapterDTO> partialUpdate(ChapterDTO chapterDTO);
 
     /**
      * Get all the chapters.
@@ -31,10 +44,10 @@ public interface ChapterService {
     /**
      * Get all the chapters with eager load of many-to-many relationships.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     Page<ChapterDTO> findAllWithEagerRelationships(Pageable pageable);
-
 
     /**
      * Get the "id" chapter.

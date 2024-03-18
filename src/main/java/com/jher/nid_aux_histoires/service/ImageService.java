@@ -1,17 +1,14 @@
 package com.jher.nid_aux_histoires.service;
 
 import com.jher.nid_aux_histoires.service.dto.ImageDTO;
-
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.Optional;
 
 /**
  * Service Interface for managing {@link com.jher.nid_aux_histoires.domain.Image}.
  */
 public interface ImageService {
-
     /**
      * Save a image.
      *
@@ -21,13 +18,28 @@ public interface ImageService {
     ImageDTO save(ImageDTO imageDTO);
 
     /**
+     * Updates a image.
+     *
+     * @param imageDTO the entity to update.
+     * @return the persisted entity.
+     */
+    ImageDTO update(ImageDTO imageDTO);
+
+    /**
+     * Partially updates a image.
+     *
+     * @param imageDTO the entity to update partially.
+     * @return the persisted entity.
+     */
+    Optional<ImageDTO> partialUpdate(ImageDTO imageDTO);
+
+    /**
      * Get all the images.
      *
      * @param pageable the pagination information.
      * @return the list of entities.
      */
     Page<ImageDTO> findAll(Pageable pageable);
-
 
     /**
      * Get the "id" image.

@@ -1,14 +1,12 @@
 package com.jher.nid_aux_histoires.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Chapter.
@@ -16,12 +14,15 @@ import java.util.Set;
 @Entity
 @Table(name = "chapter")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class Chapter implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "name")
@@ -33,24 +34,39 @@ public class Chapter implements Serializable {
     @Column(name = "number")
     private Integer number;
 
-    @OneToMany(mappedBy = "chapter")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "chapter")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "images", "chapter" }, allowSetters = true)
     private Set<Scene> scenes = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_chapter__image",
+        joinColumns = @JoinColumn(name = "chapter_id"),
+        inverseJoinColumns = @JoinColumn(name = "image_id")
+    )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(name = "chapter_image",
-               joinColumns = @JoinColumn(name = "chapter_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties(value = { "bookToCovers", "books", "parts", "chapters", "scenes" }, allowSetters = true)
     private Set<Image> images = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = "chapters", allowSetters = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "chapters", "images", "book" }, allowSetters = true)
     private Part part;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "curentChapter")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "book", "curentChapter" }, allowSetters = true)
+    private Set<BookStatus> bookStatuses = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Chapter id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
@@ -58,11 +74,11 @@ public class Chapter implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public Chapter name(String name) {
-        this.name = name;
+        this.setName(name);
         return this;
     }
 
@@ -71,11 +87,11 @@ public class Chapter implements Serializable {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public Chapter description(String description) {
-        this.description = description;
+        this.setDescription(description);
         return this;
     }
 
@@ -84,11 +100,11 @@ public class Chapter implements Serializable {
     }
 
     public Integer getNumber() {
-        return number;
+        return this.number;
     }
 
     public Chapter number(Integer number) {
-        this.number = number;
+        this.setNumber(number);
         return this;
     }
 
@@ -97,11 +113,21 @@ public class Chapter implements Serializable {
     }
 
     public Set<Scene> getScenes() {
-        return scenes;
+        return this.scenes;
+    }
+
+    public void setScenes(Set<Scene> scenes) {
+        if (this.scenes != null) {
+            this.scenes.forEach(i -> i.setChapter(null));
+        }
+        if (scenes != null) {
+            scenes.forEach(i -> i.setChapter(this));
+        }
+        this.scenes = scenes;
     }
 
     public Chapter scenes(Set<Scene> scenes) {
-        this.scenes = scenes;
+        this.setScenes(scenes);
         return this;
     }
 
@@ -117,47 +143,73 @@ public class Chapter implements Serializable {
         return this;
     }
 
-    public void setScenes(Set<Scene> scenes) {
-        this.scenes = scenes;
-    }
-
     public Set<Image> getImages() {
-        return images;
-    }
-
-    public Chapter images(Set<Image> images) {
-        this.images = images;
-        return this;
-    }
-
-    public Chapter addImage(Image image) {
-        this.images.add(image);
-        image.getChapters().add(this);
-        return this;
-    }
-
-    public Chapter removeImage(Image image) {
-        this.images.remove(image);
-        image.getChapters().remove(this);
-        return this;
+        return this.images;
     }
 
     public void setImages(Set<Image> images) {
         this.images = images;
     }
 
-    public Part getPart() {
-        return part;
+    public Chapter images(Set<Image> images) {
+        this.setImages(images);
+        return this;
     }
 
-    public Chapter part(Part part) {
-        this.part = part;
+    public Chapter addImage(Image image) {
+        this.images.add(image);
         return this;
+    }
+
+    public Chapter removeImage(Image image) {
+        this.images.remove(image);
+        return this;
+    }
+
+    public Part getPart() {
+        return this.part;
     }
 
     public void setPart(Part part) {
         this.part = part;
     }
+
+    public Chapter part(Part part) {
+        this.setPart(part);
+        return this;
+    }
+
+    public Set<BookStatus> getBookStatuses() {
+        return this.bookStatuses;
+    }
+
+    public void setBookStatuses(Set<BookStatus> bookStatuses) {
+        if (this.bookStatuses != null) {
+            this.bookStatuses.forEach(i -> i.setCurentChapter(null));
+        }
+        if (bookStatuses != null) {
+            bookStatuses.forEach(i -> i.setCurentChapter(this));
+        }
+        this.bookStatuses = bookStatuses;
+    }
+
+    public Chapter bookStatuses(Set<BookStatus> bookStatuses) {
+        this.setBookStatuses(bookStatuses);
+        return this;
+    }
+
+    public Chapter addBookStatus(BookStatus bookStatus) {
+        this.bookStatuses.add(bookStatus);
+        bookStatus.setCurentChapter(this);
+        return this;
+    }
+
+    public Chapter removeBookStatus(BookStatus bookStatus) {
+        this.bookStatuses.remove(bookStatus);
+        bookStatus.setCurentChapter(null);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -168,12 +220,13 @@ public class Chapter implements Serializable {
         if (!(o instanceof Chapter)) {
             return false;
         }
-        return id != null && id.equals(((Chapter) o).id);
+        return getId() != null && getId().equals(((Chapter) o).getId());
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        return getClass().hashCode();
     }
 
     // prettier-ignore

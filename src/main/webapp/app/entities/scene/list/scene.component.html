@@ -1,0 +1,142 @@
+<div>
+  <h2 id="page-heading" data-cy="SceneHeading">
+    <span jhiTranslate="nidAuxHistoiresApp.scene.home.title">Scenes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="nidAuxHistoiresApp.scene.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-scene"
+        [routerLink]="['/scene/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="nidAuxHistoiresApp.scene.home.createLabel">Créer un nouveau Scene</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (scenes?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="nidAuxHistoiresApp.scene.home.notFound">Aucun Scene trouvé</span>
+    </div>
+  }
+
+  @if (scenes && scenes.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="nidAuxHistoiresApp.scene.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="number">
+              <div class="d-flex">
+                <span jhiTranslate="nidAuxHistoiresApp.scene.number">Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="text">
+              <div class="d-flex">
+                <span jhiTranslate="nidAuxHistoiresApp.scene.text">Text</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="timestampStart">
+              <div class="d-flex">
+                <span jhiTranslate="nidAuxHistoiresApp.scene.timestampStart">Timestamp Start</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="chapter.id">
+              <div class="d-flex">
+                <span jhiTranslate="nidAuxHistoiresApp.scene.chapter">Chapter</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (scene of scenes; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/scene', scene.id, 'view']">{{ scene.id }}</a>
+              </td>
+              <td>{{ scene.name }}</td>
+              <td>{{ scene.number }}</td>
+              <td>{{ scene.text }}</td>
+              <td>{{ scene.timestampStart | formatMediumDate }}</td>
+              <td>
+                @if (scene.chapter) {
+                  <div>
+                    <a [routerLink]="['/chapter', scene.chapter.id, 'view']">{{ scene.chapter.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/scene', scene.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/scene', scene.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(scene)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (scenes && scenes.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

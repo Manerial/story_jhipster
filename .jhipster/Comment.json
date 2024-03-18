@@ -1,21 +1,25 @@
 {
-  "name": "Comment",
+  "annotations": {
+    "changelogDate": "20210506085457"
+  },
+  "applications": "*",
+  "changelogDate": "20210506085457",
+  "clientRootFolder": "",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "comment",
   "fields": [
     {
       "fieldName": "text",
       "fieldType": "String"
     }
   ],
-  "relationships": [],
-  "changelogDate": "20210506085457",
-  "entityTableName": "comment",
-  "dto": "mapstruct",
-  "pagination": "pagination",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
   "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Comment",
+  "pagination": "pagination",
   "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*"
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

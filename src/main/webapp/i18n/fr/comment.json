@@ -3,6 +3,7 @@
     "comment": {
       "home": {
         "title": "Comments",
+        "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Comment",
         "createOrEditLabel": "Créer ou éditer un Comment",
         "notFound": "Aucun Comment trouvé"
@@ -11,11 +12,12 @@
       "updated": "Le Comment avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Comment avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Comment {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Comment {{ id }} ?"
       },
       "detail": {
         "title": "Comment"
       },
+      "id": "ID",
       "text": "Text"
     }
   }

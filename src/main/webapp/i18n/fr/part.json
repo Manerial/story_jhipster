@@ -3,6 +3,7 @@
     "part": {
       "home": {
         "title": "Parts",
+        "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Part",
         "createOrEditLabel": "Créer ou éditer un Part",
         "notFound": "Aucun Part trouvé"
@@ -11,11 +12,12 @@
       "updated": "Le Part avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Part avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Part {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Part {{ id }} ?"
       },
       "detail": {
         "title": "Part"
       },
+      "id": "ID",
       "name": "Name",
       "description": "Description",
       "number": "Number",

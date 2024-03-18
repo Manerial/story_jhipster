@@ -1,5 +1,13 @@
 {
-  "name": "WordAnalysis",
+  "annotations": {
+    "changelogDate": "20201013113019"
+  },
+  "applications": "*",
+  "changelogDate": "20201013113019",
+  "clientRootFolder": "",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "word_analysis",
   "fields": [
     {
       "fieldName": "type",
@@ -14,16 +22,12 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
-  "changelogDate": "20201013113019",
-  "entityTableName": "word_analysis",
-  "dto": "mapstruct",
-  "pagination": "pagination",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
   "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "WordAnalysis",
+  "pagination": "pagination",
   "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*"
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

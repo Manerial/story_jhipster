@@ -1,0 +1,127 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-image-heading" data-cy="ImageCreateUpdateHeading" jhiTranslate="nidAuxHistoiresApp.image.home.createOrEditLabel">
+        Créer ou éditer un Image
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="nidAuxHistoiresApp.image.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="nidAuxHistoiresApp.image.picture" for="field_picture">Picture</label>
+          <div>
+            @if (editForm.get('picture')!.value) {
+              <img
+                [src]="'data:' + editForm.get('pictureContentType')!.value + ';base64,' + editForm.get('picture')!.value"
+                style="max-height: 100px"
+                alt="image image"
+              />
+            }
+            @if (editForm.get('picture')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start"
+                  >{{ editForm.get('pictureContentType')!.value }}, {{ byteSize(editForm.get('picture')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="clearInputImage('picture', 'pictureContentType', 'file_picture')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_picture"
+              data-cy="picture"
+              (change)="setFileData($event, 'picture', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="picture" id="field_picture" data-cy="picture" formControlName="picture" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="pictureContentType"
+            id="field_pictureContentType"
+            formControlName="pictureContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="nidAuxHistoiresApp.image.preview" for="field_preview">Preview</label>
+          <div>
+            @if (editForm.get('preview')!.value) {
+              <img
+                [src]="'data:' + editForm.get('previewContentType')!.value + ';base64,' + editForm.get('preview')!.value"
+                style="max-height: 100px"
+                alt="image image"
+              />
+            }
+            @if (editForm.get('preview')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start"
+                  >{{ editForm.get('previewContentType')!.value }}, {{ byteSize(editForm.get('preview')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="clearInputImage('preview', 'previewContentType', 'file_preview')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_preview"
+              data-cy="preview"
+              (change)="setFileData($event, 'preview', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="preview" id="field_preview" data-cy="preview" formControlName="preview" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="previewContentType"
+            id="field_previewContentType"
+            formControlName="previewContentType"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

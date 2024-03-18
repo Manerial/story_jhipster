@@ -1,13 +1,8 @@
 package com.jher.nid_aux_histoires.cucumber;
 
-import org.junit.runner.RunWith;
+import com.jher.nid_aux_histoires.IntegrationTest;
+import io.cucumber.junit.platform.engine.Cucumber;
 
-import io.cucumber.junit.CucumberOptions;
-import io.cucumber.junit.Cucumber;
-
-@RunWith(Cucumber.class)
-@CucumberOptions(plugin = "pretty", features = "src/test/features")
-
-public class CucumberIT  {
-
-}
+@Cucumber
+@IntegrationTest
+class CucumberIT {}

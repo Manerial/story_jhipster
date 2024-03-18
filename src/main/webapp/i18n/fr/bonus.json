@@ -3,6 +3,7 @@
     "bonus": {
       "home": {
         "title": "Bonuses",
+        "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Bonus",
         "createOrEditLabel": "Créer ou éditer un Bonus",
         "notFound": "Aucun Bonus trouvé"
@@ -11,11 +12,12 @@
       "updated": "Le Bonus avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Bonus avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Bonus {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Bonus {{ id }} ?"
       },
       "detail": {
         "title": "Bonus"
       },
+      "id": "ID",
       "name": "Name",
       "extension": "Extension"
     }

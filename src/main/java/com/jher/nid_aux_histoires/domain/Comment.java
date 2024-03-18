@@ -1,11 +1,9 @@
 package com.jher.nid_aux_histoires.domain;
 
+import jakarta.persistence.*;
+import java.io.Serializable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import java.io.Serializable;
 
 /**
  * A Comment.
@@ -13,20 +11,29 @@ import java.io.Serializable;
 @Entity
 @Table(name = "comment")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "text")
     private String text;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Comment id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
@@ -34,17 +41,18 @@ public class Comment implements Serializable {
     }
 
     public String getText() {
-        return text;
+        return this.text;
     }
 
     public Comment text(String text) {
-        this.text = text;
+        this.setText(text);
         return this;
     }
 
     public void setText(String text) {
         this.text = text;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -55,12 +63,13 @@ public class Comment implements Serializable {
         if (!(o instanceof Comment)) {
             return false;
         }
-        return id != null && id.equals(((Comment) o).id);
+        return getId() != null && getId().equals(((Comment) o).getId());
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        return getClass().hashCode();
     }
 
     // prettier-ignore

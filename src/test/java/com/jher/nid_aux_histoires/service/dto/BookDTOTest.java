@@ -1,13 +1,14 @@
 package com.jher.nid_aux_histoires.service.dto;
 
-import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
-import com.jher.nid_aux_histoires.web.rest.TestUtil;
 
-public class BookDTOTest {
+import com.jher.nid_aux_histoires.web.rest.TestUtil;
+import org.junit.jupiter.api.Test;
+
+class BookDTOTest {
 
     @Test
-    public void dtoEqualsVerifier() throws Exception {
+    void dtoEqualsVerifier() throws Exception {
         TestUtil.equalsVerifier(BookDTO.class);
         BookDTO bookDTO1 = new BookDTO();
         bookDTO1.setId(1L);

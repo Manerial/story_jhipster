@@ -1,12 +1,14 @@
 package com.jher.nid_aux_histoires.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.WordAnalysis} entity.
  */
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class WordAnalysisDTO implements Serializable {
-    
+
     private Long id;
 
     private String type;
@@ -15,7 +17,6 @@ public class WordAnalysisDTO implements Serializable {
 
     private String analysis;
 
-    
     public Long getId() {
         return id;
     }
@@ -57,12 +58,16 @@ public class WordAnalysisDTO implements Serializable {
             return false;
         }
 
-        return id != null && id.equals(((WordAnalysisDTO) o).id);
+        WordAnalysisDTO wordAnalysisDTO = (WordAnalysisDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, wordAnalysisDTO.id);
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        return Objects.hash(this.id);
     }
 
     // prettier-ignore

@@ -3,6 +3,7 @@
     "chapter": {
       "home": {
         "title": "Chapters",
+        "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Chapter",
         "createOrEditLabel": "Créer ou éditer un Chapter",
         "notFound": "Aucun Chapter trouvé"
@@ -11,17 +12,19 @@
       "updated": "Le Chapter avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Chapter avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Chapter {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Chapter {{ id }} ?"
       },
       "detail": {
         "title": "Chapter"
       },
+      "id": "ID",
       "name": "Name",
       "description": "Description",
       "number": "Number",
       "scene": "Scene",
       "image": "Image",
-      "part": "Part"
+      "part": "Part",
+      "bookStatus": "Book Status"
     }
   }
 }

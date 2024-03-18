@@ -3,6 +3,7 @@
     "wordAnalysis": {
       "home": {
         "title": "WordAnalyses",
+        "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Word Analysis",
         "createOrEditLabel": "Créer ou éditer un Word Analysis",
         "notFound": "Aucun Word Analysis trouvé"
@@ -11,11 +12,12 @@
       "updated": "Le Word Analysis avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Word Analysis avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Word Analysis {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Word Analysis {{ id }} ?"
       },
       "detail": {
         "title": "Word Analysis"
       },
+      "id": "ID",
       "type": "Type",
       "name": "Name",
       "analysis": "Analysis"

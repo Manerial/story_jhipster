@@ -1,29 +1,30 @@
 package com.jher.nid_aux_histoires.repository;
 
 import com.jher.nid_aux_histoires.domain.Scene;
-
+import java.util.List;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
-
 /**
- * Spring Data  repository for the Scene entity.
+ * Spring Data JPA repository for the Scene entity.
+ *
+ * When extending this class, extend SceneRepositoryWithBagRelationships too.
+ * For more information refer to https://github.com/jhipster/generator-jhipster/issues/17990.
  */
 @Repository
-public interface SceneRepository extends JpaRepository<Scene, Long> {
+public interface SceneRepository extends SceneRepositoryWithBagRelationships, JpaRepository<Scene, Long> {
+    default Optional<Scene> findOneWithEagerRelationships(Long id) {
+        return this.fetchBagRelationships(this.findById(id));
+    }
 
-    @Query(value = "select distinct scene from Scene scene left join fetch scene.images",
-        countQuery = "select count(distinct scene) from Scene scene")
-    Page<Scene> findAllWithEagerRelationships(Pageable pageable);
+    default List<Scene> findAllWithEagerRelationships() {
+        return this.fetchBagRelationships(this.findAll());
+    }
 
-    @Query("select distinct scene from Scene scene left join fetch scene.images")
-    List<Scene> findAllWithEagerRelationships();
-
-    @Query("select scene from Scene scene left join fetch scene.images where scene.id =:id")
-    Optional<Scene> findOneWithEagerRelationships(@Param("id") Long id);
+    default Page<Scene> findAllWithEagerRelationships(Pageable pageable) {
+        return this.fetchBagRelationships(this.findAll(pageable));
+    }
 }

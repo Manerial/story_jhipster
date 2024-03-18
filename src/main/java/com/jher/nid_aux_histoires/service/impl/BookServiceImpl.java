@@ -1,22 +1,20 @@
 package com.jher.nid_aux_histoires.service.impl;
 
-import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.domain.Book;
 import com.jher.nid_aux_histoires.repository.BookRepository;
+import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
 import com.jher.nid_aux_histoires.service.mapper.BookMapper;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 /**
- * Service Implementation for managing {@link Book}.
+ * Service Implementation for managing {@link com.jher.nid_aux_histoires.domain.Book}.
  */
 @Service
 @Transactional
@@ -42,13 +40,34 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Page<BookDTO> findAll(Pageable pageable) {
-        log.debug("Request to get all Books");
-        return bookRepository.findAll(pageable)
+    public BookDTO update(BookDTO bookDTO) {
+        log.debug("Request to update Book : {}", bookDTO);
+        Book book = bookMapper.toEntity(bookDTO);
+        book = bookRepository.save(book);
+        return bookMapper.toDto(book);
+    }
+
+    @Override
+    public Optional<BookDTO> partialUpdate(BookDTO bookDTO) {
+        log.debug("Request to partially update Book : {}", bookDTO);
+
+        return bookRepository
+            .findById(bookDTO.getId())
+            .map(existingBook -> {
+                bookMapper.partialUpdate(existingBook, bookDTO);
+
+                return existingBook;
+            })
+            .map(bookRepository::save)
             .map(bookMapper::toDto);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<BookDTO> findAll(Pageable pageable) {
+        log.debug("Request to get all Books");
+        return bookRepository.findAll(pageable).map(bookMapper::toDto);
+    }
 
     public Page<BookDTO> findAllWithEagerRelationships(Pageable pageable) {
         return bookRepository.findAllWithEagerRelationships(pageable).map(bookMapper::toDto);
@@ -58,8 +77,7 @@ public class BookServiceImpl implements BookService {
     @Transactional(readOnly = true)
     public Optional<BookDTO> findOne(Long id) {
         log.debug("Request to get Book : {}", id);
-        return bookRepository.findOneWithEagerRelationships(id)
-            .map(bookMapper::toDto);
+        return bookRepository.findOneWithEagerRelationships(id).map(bookMapper::toDto);
     }
 
     @Override

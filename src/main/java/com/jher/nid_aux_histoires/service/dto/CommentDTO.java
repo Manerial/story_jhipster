@@ -1,17 +1,18 @@
 package com.jher.nid_aux_histoires.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Comment} entity.
  */
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class CommentDTO implements Serializable {
-    
+
     private Long id;
 
     private String text;
 
-    
     public Long getId() {
         return id;
     }
@@ -37,12 +38,16 @@ public class CommentDTO implements Serializable {
             return false;
         }
 
-        return id != null && id.equals(((CommentDTO) o).id);
+        CommentDTO commentDTO = (CommentDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, commentDTO.id);
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        return Objects.hash(this.id);
     }
 
     // prettier-ignore

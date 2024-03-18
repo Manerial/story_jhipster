@@ -3,6 +3,7 @@
     "bonus": {
       "home": {
         "title": "Bonuses",
+        "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Bonus",
         "createOrEditLabel": "Create or edit a Bonus",
         "notFound": "No Bonuses found"
@@ -16,6 +17,7 @@
       "detail": {
         "title": "Bonus"
       },
+      "id": "ID",
       "name": "Name",
       "extension": "Extension"
     }

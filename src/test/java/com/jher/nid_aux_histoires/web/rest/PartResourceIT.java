@@ -1,44 +1,44 @@
 package com.jher.nid_aux_histoires.web.rest;
 
-import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
-import com.jher.nid_aux_histoires.domain.Part;
-import com.jher.nid_aux_histoires.repository.PartRepository;
-import com.jher.nid_aux_histoires.service.PartService;
-import com.jher.nid_aux_histoires.service.dto.PartDTO;
-import com.jher.nid_aux_histoires.service.mapper.PartMapper;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.jher.nid_aux_histoires.IntegrationTest;
+import com.jher.nid_aux_histoires.domain.Part;
+import com.jher.nid_aux_histoires.repository.PartRepository;
+import com.jher.nid_aux_histoires.service.PartService;
+import com.jher.nid_aux_histoires.service.dto.PartDTO;
+import com.jher.nid_aux_histoires.service.mapper.PartMapper;
+import jakarta.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  * Integration tests for the {@link PartResource} REST controller.
  */
-@SpringBootTest(classes = NidAuxHistoiresApp.class)
+@IntegrationTest
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
-public class PartResourceIT {
+class PartResourceIT {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
@@ -48,6 +48,12 @@ public class PartResourceIT {
 
     private static final Integer DEFAULT_NUMBER = 1;
     private static final Integer UPDATED_NUMBER = 2;
+
+    private static final String ENTITY_API_URL = "/api/parts";
+    private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
+
+    private static Random random = new Random();
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private PartRepository partRepository;
@@ -60,9 +66,6 @@ public class PartResourceIT {
 
     @Mock
     private PartService partServiceMock;
-
-    @Autowired
-    private PartService partService;
 
     @Autowired
     private EntityManager em;
@@ -79,12 +82,10 @@ public class PartResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Part createEntity(EntityManager em) {
-        Part part = new Part()
-            .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION)
-            .number(DEFAULT_NUMBER);
+        Part part = new Part().name(DEFAULT_NAME).description(DEFAULT_DESCRIPTION).number(DEFAULT_NUMBER);
         return part;
     }
+
     /**
      * Create an updated entity for this test.
      *
@@ -92,10 +93,7 @@ public class PartResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Part createUpdatedEntity(EntityManager em) {
-        Part part = new Part()
-            .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION)
-            .number(UPDATED_NUMBER);
+        Part part = new Part().name(UPDATED_NAME).description(UPDATED_DESCRIPTION).number(UPDATED_NUMBER);
         return part;
     }
 
@@ -106,13 +104,12 @@ public class PartResourceIT {
 
     @Test
     @Transactional
-    public void createPart() throws Exception {
+    void createPart() throws Exception {
         int databaseSizeBeforeCreate = partRepository.findAll().size();
         // Create the Part
         PartDTO partDTO = partMapper.toDto(part);
-        restPartMockMvc.perform(post("/api/parts")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(partDTO)))
+        restPartMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(partDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Part in the database
@@ -126,17 +123,16 @@ public class PartResourceIT {
 
     @Test
     @Transactional
-    public void createPartWithExistingId() throws Exception {
-        int databaseSizeBeforeCreate = partRepository.findAll().size();
-
+    void createPartWithExistingId() throws Exception {
         // Create the Part with an existing ID
         part.setId(1L);
         PartDTO partDTO = partMapper.toDto(part);
 
+        int databaseSizeBeforeCreate = partRepository.findAll().size();
+
         // An entity with an existing ID cannot be created, so this API call must fail
-        restPartMockMvc.perform(post("/api/parts")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(partDTO)))
+        restPartMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(partDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Part in the database
@@ -144,15 +140,15 @@ public class PartResourceIT {
         assertThat(partList).hasSize(databaseSizeBeforeCreate);
     }
 
-
     @Test
     @Transactional
-    public void getAllParts() throws Exception {
+    void getAllParts() throws Exception {
         // Initialize the database
         partRepository.saveAndFlush(part);
 
         // Get all the partList
-        restPartMockMvc.perform(get("/api/parts?sort=id,desc"))
+        restPartMockMvc
+            .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(part.getId().intValue())))
@@ -160,35 +156,33 @@ public class PartResourceIT {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)));
     }
-    
-    @SuppressWarnings({"unchecked"})
-    public void getAllPartsWithEagerRelationshipsIsEnabled() throws Exception {
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllPartsWithEagerRelationshipsIsEnabled() throws Exception {
         when(partServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
-        restPartMockMvc.perform(get("/api/parts?eagerload=true"))
-            .andExpect(status().isOk());
+        restPartMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
 
         verify(partServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
-    @SuppressWarnings({"unchecked"})
-    public void getAllPartsWithEagerRelationshipsIsNotEnabled() throws Exception {
+    @SuppressWarnings({ "unchecked" })
+    void getAllPartsWithEagerRelationshipsIsNotEnabled() throws Exception {
         when(partServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
-        restPartMockMvc.perform(get("/api/parts?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(partServiceMock, times(1)).findAllWithEagerRelationships(any());
+        restPartMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(partRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
     @Transactional
-    public void getPart() throws Exception {
+    void getPart() throws Exception {
         // Initialize the database
         partRepository.saveAndFlush(part);
 
         // Get the part
-        restPartMockMvc.perform(get("/api/parts/{id}", part.getId()))
+        restPartMockMvc
+            .perform(get(ENTITY_API_URL_ID, part.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(part.getId().intValue()))
@@ -196,35 +190,35 @@ public class PartResourceIT {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER));
     }
+
     @Test
     @Transactional
-    public void getNonExistingPart() throws Exception {
+    void getNonExistingPart() throws Exception {
         // Get the part
-        restPartMockMvc.perform(get("/api/parts/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+        restPartMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
     @Transactional
-    public void updatePart() throws Exception {
+    void putExistingPart() throws Exception {
         // Initialize the database
         partRepository.saveAndFlush(part);
 
         int databaseSizeBeforeUpdate = partRepository.findAll().size();
 
         // Update the part
-        Part updatedPart = partRepository.findById(part.getId()).get();
+        Part updatedPart = partRepository.findById(part.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedPart are not directly saved in db
         em.detach(updatedPart);
-        updatedPart
-            .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION)
-            .number(UPDATED_NUMBER);
+        updatedPart.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).number(UPDATED_NUMBER);
         PartDTO partDTO = partMapper.toDto(updatedPart);
 
-        restPartMockMvc.perform(put("/api/parts")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(partDTO)))
+        restPartMockMvc
+            .perform(
+                put(ENTITY_API_URL_ID, partDTO.getId())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(partDTO))
+            )
             .andExpect(status().isOk());
 
         // Validate the Part in the database
@@ -238,16 +232,20 @@ public class PartResourceIT {
 
     @Test
     @Transactional
-    public void updateNonExistingPart() throws Exception {
+    void putNonExistingPart() throws Exception {
         int databaseSizeBeforeUpdate = partRepository.findAll().size();
+        part.setId(longCount.incrementAndGet());
 
         // Create the Part
         PartDTO partDTO = partMapper.toDto(part);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restPartMockMvc.perform(put("/api/parts")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(partDTO)))
+        restPartMockMvc
+            .perform(
+                put(ENTITY_API_URL_ID, partDTO.getId())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(partDTO))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the Part in the database
@@ -257,15 +255,184 @@ public class PartResourceIT {
 
     @Test
     @Transactional
-    public void deletePart() throws Exception {
+    void putWithIdMismatchPart() throws Exception {
+        int databaseSizeBeforeUpdate = partRepository.findAll().size();
+        part.setId(longCount.incrementAndGet());
+
+        // Create the Part
+        PartDTO partDTO = partMapper.toDto(part);
+
+        // If url ID doesn't match entity ID, it will throw BadRequestAlertException
+        restPartMockMvc
+            .perform(
+                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(partDTO))
+            )
+            .andExpect(status().isBadRequest());
+
+        // Validate the Part in the database
+        List<Part> partList = partRepository.findAll();
+        assertThat(partList).hasSize(databaseSizeBeforeUpdate);
+    }
+
+    @Test
+    @Transactional
+    void putWithMissingIdPathParamPart() throws Exception {
+        int databaseSizeBeforeUpdate = partRepository.findAll().size();
+        part.setId(longCount.incrementAndGet());
+
+        // Create the Part
+        PartDTO partDTO = partMapper.toDto(part);
+
+        // If url ID doesn't match entity ID, it will throw BadRequestAlertException
+        restPartMockMvc
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(partDTO)))
+            .andExpect(status().isMethodNotAllowed());
+
+        // Validate the Part in the database
+        List<Part> partList = partRepository.findAll();
+        assertThat(partList).hasSize(databaseSizeBeforeUpdate);
+    }
+
+    @Test
+    @Transactional
+    void partialUpdatePartWithPatch() throws Exception {
+        // Initialize the database
+        partRepository.saveAndFlush(part);
+
+        int databaseSizeBeforeUpdate = partRepository.findAll().size();
+
+        // Update the part using partial update
+        Part partialUpdatedPart = new Part();
+        partialUpdatedPart.setId(part.getId());
+
+        partialUpdatedPart.name(UPDATED_NAME).number(UPDATED_NUMBER);
+
+        restPartMockMvc
+            .perform(
+                patch(ENTITY_API_URL_ID, partialUpdatedPart.getId())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(partialUpdatedPart))
+            )
+            .andExpect(status().isOk());
+
+        // Validate the Part in the database
+        List<Part> partList = partRepository.findAll();
+        assertThat(partList).hasSize(databaseSizeBeforeUpdate);
+        Part testPart = partList.get(partList.size() - 1);
+        assertThat(testPart.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testPart.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testPart.getNumber()).isEqualTo(UPDATED_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    void fullUpdatePartWithPatch() throws Exception {
+        // Initialize the database
+        partRepository.saveAndFlush(part);
+
+        int databaseSizeBeforeUpdate = partRepository.findAll().size();
+
+        // Update the part using partial update
+        Part partialUpdatedPart = new Part();
+        partialUpdatedPart.setId(part.getId());
+
+        partialUpdatedPart.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).number(UPDATED_NUMBER);
+
+        restPartMockMvc
+            .perform(
+                patch(ENTITY_API_URL_ID, partialUpdatedPart.getId())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(partialUpdatedPart))
+            )
+            .andExpect(status().isOk());
+
+        // Validate the Part in the database
+        List<Part> partList = partRepository.findAll();
+        assertThat(partList).hasSize(databaseSizeBeforeUpdate);
+        Part testPart = partList.get(partList.size() - 1);
+        assertThat(testPart.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testPart.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testPart.getNumber()).isEqualTo(UPDATED_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    void patchNonExistingPart() throws Exception {
+        int databaseSizeBeforeUpdate = partRepository.findAll().size();
+        part.setId(longCount.incrementAndGet());
+
+        // Create the Part
+        PartDTO partDTO = partMapper.toDto(part);
+
+        // If the entity doesn't have an ID, it will throw BadRequestAlertException
+        restPartMockMvc
+            .perform(
+                patch(ENTITY_API_URL_ID, partDTO.getId())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(partDTO))
+            )
+            .andExpect(status().isBadRequest());
+
+        // Validate the Part in the database
+        List<Part> partList = partRepository.findAll();
+        assertThat(partList).hasSize(databaseSizeBeforeUpdate);
+    }
+
+    @Test
+    @Transactional
+    void patchWithIdMismatchPart() throws Exception {
+        int databaseSizeBeforeUpdate = partRepository.findAll().size();
+        part.setId(longCount.incrementAndGet());
+
+        // Create the Part
+        PartDTO partDTO = partMapper.toDto(part);
+
+        // If url ID doesn't match entity ID, it will throw BadRequestAlertException
+        restPartMockMvc
+            .perform(
+                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(partDTO))
+            )
+            .andExpect(status().isBadRequest());
+
+        // Validate the Part in the database
+        List<Part> partList = partRepository.findAll();
+        assertThat(partList).hasSize(databaseSizeBeforeUpdate);
+    }
+
+    @Test
+    @Transactional
+    void patchWithMissingIdPathParamPart() throws Exception {
+        int databaseSizeBeforeUpdate = partRepository.findAll().size();
+        part.setId(longCount.incrementAndGet());
+
+        // Create the Part
+        PartDTO partDTO = partMapper.toDto(part);
+
+        // If url ID doesn't match entity ID, it will throw BadRequestAlertException
+        restPartMockMvc
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(partDTO)))
+            .andExpect(status().isMethodNotAllowed());
+
+        // Validate the Part in the database
+        List<Part> partList = partRepository.findAll();
+        assertThat(partList).hasSize(databaseSizeBeforeUpdate);
+    }
+
+    @Test
+    @Transactional
+    void deletePart() throws Exception {
         // Initialize the database
         partRepository.saveAndFlush(part);
 
         int databaseSizeBeforeDelete = partRepository.findAll().size();
 
         // Delete the part
-        restPartMockMvc.perform(delete("/api/parts/{id}", part.getId())
-            .accept(MediaType.APPLICATION_JSON))
+        restPartMockMvc
+            .perform(delete(ENTITY_API_URL_ID, part.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

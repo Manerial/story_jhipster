@@ -1,5 +1,13 @@
 {
-  "name": "BookStatus",
+  "annotations": {
+    "changelogDate": "20210629121130"
+  },
+  "applications": "*",
+  "changelogDate": "20210629121130",
+  "clientRootFolder": "",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "bookStatus",
   "fields": [
     {
       "fieldName": "finished",
@@ -10,31 +18,29 @@
       "fieldType": "Boolean"
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "BookStatus",
+  "pagination": "pagination",
+  "readOnly": false,
   "relationships": [
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "book",
       "otherEntityRelationshipName": "bookStatus",
       "relationshipName": "book",
-      "otherEntityField": "id"
+      "otherEntityField": "id",
+      "relationshipSide": "right"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "chapter",
       "otherEntityRelationshipName": "bookStatus",
       "relationshipName": "curentChapter",
-      "otherEntityField": "id"
+      "otherEntityField": "id",
+      "relationshipSide": "right"
     }
   ],
-  "changelogDate": "20210629121130",
-  "entityTableName": "bookStatus",
-  "dto": "mapstruct",
-  "pagination": "pagination",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*"
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

@@ -1,17 +1,14 @@
 package com.jher.nid_aux_histoires.service;
 
 import com.jher.nid_aux_histoires.service.dto.CommentDTO;
-
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.Optional;
 
 /**
  * Service Interface for managing {@link com.jher.nid_aux_histoires.domain.Comment}.
  */
 public interface CommentService {
-
     /**
      * Save a comment.
      *
@@ -21,13 +18,28 @@ public interface CommentService {
     CommentDTO save(CommentDTO commentDTO);
 
     /**
+     * Updates a comment.
+     *
+     * @param commentDTO the entity to update.
+     * @return the persisted entity.
+     */
+    CommentDTO update(CommentDTO commentDTO);
+
+    /**
+     * Partially updates a comment.
+     *
+     * @param commentDTO the entity to update partially.
+     * @return the persisted entity.
+     */
+    Optional<CommentDTO> partialUpdate(CommentDTO commentDTO);
+
+    /**
      * Get all the comments.
      *
      * @param pageable the pagination information.
      * @return the list of entities.
      */
     Page<CommentDTO> findAll(Pageable pageable);
-
 
     /**
      * Get the "id" comment.

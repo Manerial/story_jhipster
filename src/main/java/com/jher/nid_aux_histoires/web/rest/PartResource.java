@@ -1,33 +1,32 @@
 package com.jher.nid_aux_histoires.web.rest;
 
+import com.jher.nid_aux_histoires.repository.PartRepository;
 import com.jher.nid_aux_histoires.service.PartService;
-import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 import com.jher.nid_aux_histoires.service.dto.PartDTO;
-
-import io.github.jhipster.web.util.HeaderUtil;
-import io.github.jhipster.web.util.PaginationUtil;
-import io.github.jhipster.web.util.ResponseUtil;
+import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
+import tech.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing {@link com.jher.nid_aux_histoires.domain.Part}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/parts")
 public class PartResource {
 
     private final Logger log = LoggerFactory.getLogger(PartResource.class);
@@ -39,8 +38,11 @@ public class PartResource {
 
     private final PartService partService;
 
-    public PartResource(PartService partService) {
+    private final PartRepository partRepository;
+
+    public PartResource(PartService partService, PartRepository partRepository) {
         this.partService = partService;
+        this.partRepository = partRepository;
     }
 
     /**
@@ -50,37 +52,85 @@ public class PartResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new partDTO, or with status {@code 400 (Bad Request)} if the part has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/parts")
+    @PostMapping("")
     public ResponseEntity<PartDTO> createPart(@RequestBody PartDTO partDTO) throws URISyntaxException {
         log.debug("REST request to save Part : {}", partDTO);
         if (partDTO.getId() != null) {
             throw new BadRequestAlertException("A new part cannot already have an ID", ENTITY_NAME, "idexists");
         }
         PartDTO result = partService.save(partDTO);
-        return ResponseEntity.created(new URI("/api/parts/" + result.getId()))
+        return ResponseEntity
+            .created(new URI("/api/parts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * {@code PUT  /parts} : Updates an existing part.
+     * {@code PUT  /parts/:id} : Updates an existing part.
      *
+     * @param id the id of the partDTO to save.
      * @param partDTO the partDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated partDTO,
      * or with status {@code 400 (Bad Request)} if the partDTO is not valid,
      * or with status {@code 500 (Internal Server Error)} if the partDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PutMapping("/parts")
-    public ResponseEntity<PartDTO> updatePart(@RequestBody PartDTO partDTO) throws URISyntaxException {
-        log.debug("REST request to update Part : {}", partDTO);
+    @PutMapping("/{id}")
+    public ResponseEntity<PartDTO> updatePart(@PathVariable(value = "id", required = false) final Long id, @RequestBody PartDTO partDTO)
+        throws URISyntaxException {
+        log.debug("REST request to update Part : {}, {}", id, partDTO);
         if (partDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        PartDTO result = partService.save(partDTO);
-        return ResponseEntity.ok()
+        if (!Objects.equals(id, partDTO.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!partRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        PartDTO result = partService.update(partDTO);
+        return ResponseEntity
+            .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, partDTO.getId().toString()))
             .body(result);
+    }
+
+    /**
+     * {@code PATCH  /parts/:id} : Partial updates given fields of an existing part, field will ignore if it is null
+     *
+     * @param id the id of the partDTO to save.
+     * @param partDTO the partDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated partDTO,
+     * or with status {@code 400 (Bad Request)} if the partDTO is not valid,
+     * or with status {@code 404 (Not Found)} if the partDTO is not found,
+     * or with status {@code 500 (Internal Server Error)} if the partDTO couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    public ResponseEntity<PartDTO> partialUpdatePart(
+        @PathVariable(value = "id", required = false) final Long id,
+        @RequestBody PartDTO partDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to partial update Part partially : {}, {}", id, partDTO);
+        if (partDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, partDTO.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!partRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        Optional<PartDTO> result = partService.partialUpdate(partDTO);
+
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, partDTO.getId().toString())
+        );
     }
 
     /**
@@ -90,8 +140,11 @@ public class PartResource {
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of parts in body.
      */
-    @GetMapping("/parts")
-    public ResponseEntity<List<PartDTO>> getAllParts(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    @GetMapping("")
+    public ResponseEntity<List<PartDTO>> getAllParts(
+        @org.springdoc.core.annotations.ParameterObject Pageable pageable,
+        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
+    ) {
         log.debug("REST request to get a page of Parts");
         Page<PartDTO> page;
         if (eagerload) {
@@ -109,8 +162,8 @@ public class PartResource {
      * @param id the id of the partDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the partDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/parts/{id}")
-    public ResponseEntity<PartDTO> getPart(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<PartDTO> getPart(@PathVariable("id") Long id) {
         log.debug("REST request to get Part : {}", id);
         Optional<PartDTO> partDTO = partService.findOne(id);
         return ResponseUtil.wrapOrNotFound(partDTO);
@@ -122,10 +175,13 @@ public class PartResource {
      * @param id the id of the partDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/parts/{id}")
-    public ResponseEntity<Void> deletePart(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePart(@PathVariable("id") Long id) {
         log.debug("REST request to delete Part : {}", id);
         partService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

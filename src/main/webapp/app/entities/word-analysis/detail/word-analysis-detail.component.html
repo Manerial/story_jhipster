@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (wordAnalysis) {
+      <div>
+        <h2 data-cy="wordAnalysisDetailsHeading"><span jhiTranslate="nidAuxHistoiresApp.wordAnalysis.detail.title">Word Analysis</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ wordAnalysis.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="nidAuxHistoiresApp.wordAnalysis.type">Type</span></dt>
+          <dd>
+            <span>{{ wordAnalysis.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="nidAuxHistoiresApp.wordAnalysis.name">Name</span></dt>
+          <dd>
+            <span>{{ wordAnalysis.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="nidAuxHistoiresApp.wordAnalysis.analysis">Analysis</span></dt>
+          <dd>
+            <span>{{ wordAnalysis.analysis }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/word-analysis', wordAnalysis.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

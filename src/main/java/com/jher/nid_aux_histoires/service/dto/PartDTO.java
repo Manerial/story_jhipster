@@ -2,13 +2,15 @@ package com.jher.nid_aux_histoires.service.dto;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Part} entity.
  */
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class PartDTO implements Serializable {
-    
+
     private Long id;
 
     private String name;
@@ -19,8 +21,8 @@ public class PartDTO implements Serializable {
 
     private Set<ImageDTO> images = new HashSet<>();
 
-    private Long bookId;
-    
+    private BookDTO book;
+
     public Long getId() {
         return id;
     }
@@ -61,12 +63,12 @@ public class PartDTO implements Serializable {
         this.images = images;
     }
 
-    public Long getBookId() {
-        return bookId;
+    public BookDTO getBook() {
+        return book;
     }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public void setBook(BookDTO book) {
+        this.book = book;
     }
 
     @Override
@@ -78,12 +80,16 @@ public class PartDTO implements Serializable {
             return false;
         }
 
-        return id != null && id.equals(((PartDTO) o).id);
+        PartDTO partDTO = (PartDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, partDTO.id);
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        return Objects.hash(this.id);
     }
 
     // prettier-ignore
@@ -94,8 +100,8 @@ public class PartDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
             ", number=" + getNumber() +
-            ", images='" + getImages() + "'" +
-            ", bookId=" + getBookId() +
+            ", images=" + getImages() +
+            ", book=" + getBook() +
             "}";
     }
 }

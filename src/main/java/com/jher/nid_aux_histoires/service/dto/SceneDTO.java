@@ -1,16 +1,18 @@
 package com.jher.nid_aux_histoires.service.dto;
 
-import java.time.LocalDate;
+import jakarta.persistence.Lob;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
-import javax.persistence.Lob;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Scene} entity.
  */
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class SceneDTO implements Serializable {
-    
+
     private Long id;
 
     private String name;
@@ -24,8 +26,8 @@ public class SceneDTO implements Serializable {
 
     private Set<ImageDTO> images = new HashSet<>();
 
-    private Long chapterId;
-    
+    private ChapterDTO chapter;
+
     public Long getId() {
         return id;
     }
@@ -74,12 +76,12 @@ public class SceneDTO implements Serializable {
         this.images = images;
     }
 
-    public Long getChapterId() {
-        return chapterId;
+    public ChapterDTO getChapter() {
+        return chapter;
     }
 
-    public void setChapterId(Long chapterId) {
-        this.chapterId = chapterId;
+    public void setChapter(ChapterDTO chapter) {
+        this.chapter = chapter;
     }
 
     @Override
@@ -91,12 +93,16 @@ public class SceneDTO implements Serializable {
             return false;
         }
 
-        return id != null && id.equals(((SceneDTO) o).id);
+        SceneDTO sceneDTO = (SceneDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, sceneDTO.id);
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        return Objects.hash(this.id);
     }
 
     // prettier-ignore
@@ -108,8 +114,8 @@ public class SceneDTO implements Serializable {
             ", number=" + getNumber() +
             ", text='" + getText() + "'" +
             ", timestampStart='" + getTimestampStart() + "'" +
-            ", images='" + getImages() + "'" +
-            ", chapterId=" + getChapterId() +
+            ", images=" + getImages() +
+            ", chapter=" + getChapter() +
             "}";
     }
 }

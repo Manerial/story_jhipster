@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (book) {
+      <div>
+        <h2 data-cy="bookDetailsHeading"><span jhiTranslate="nidAuxHistoiresApp.book.detail.title">Book</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ book.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="nidAuxHistoiresApp.book.name">Name</span></dt>
+          <dd>
+            <span>{{ book.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="nidAuxHistoiresApp.book.author">Author</span></dt>
+          <dd>
+            <span>{{ book.author }}</span>
+          </dd>
+          <dt><span jhiTranslate="nidAuxHistoiresApp.book.image">Image</span></dt>
+          <dd>
+            @for (image of book.images; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/image', image.id, 'view']">{{ image.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="nidAuxHistoiresApp.book.cover">Cover</span></dt>
+          <dd>
+            @if (book.cover) {
+              <div>
+                <a [routerLink]="['/image', book.cover.id, 'view']">{{ book.cover.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/book', book.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

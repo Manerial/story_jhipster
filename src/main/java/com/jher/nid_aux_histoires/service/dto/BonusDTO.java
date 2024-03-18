@@ -1,19 +1,20 @@
 package com.jher.nid_aux_histoires.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Bonus} entity.
  */
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class BonusDTO implements Serializable {
-    
+
     private Long id;
 
     private String name;
 
     private String extension;
 
-    
     public Long getId() {
         return id;
     }
@@ -47,12 +48,16 @@ public class BonusDTO implements Serializable {
             return false;
         }
 
-        return id != null && id.equals(((BonusDTO) o).id);
+        BonusDTO bonusDTO = (BonusDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, bonusDTO.id);
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        return Objects.hash(this.id);
     }
 
     // prettier-ignore

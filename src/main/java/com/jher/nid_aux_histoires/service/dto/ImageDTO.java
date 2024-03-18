@@ -1,13 +1,15 @@
 package com.jher.nid_aux_histoires.service.dto;
 
+import jakarta.persistence.Lob;
 import java.io.Serializable;
-import javax.persistence.Lob;
+import java.util.Objects;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Image} entity.
  */
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class ImageDTO implements Serializable {
-    
+
     private Long id;
 
     private String name;
@@ -16,11 +18,12 @@ public class ImageDTO implements Serializable {
     private byte[] picture;
 
     private String pictureContentType;
+
     @Lob
     private byte[] preview;
 
     private String previewContentType;
-    
+
     public Long getId() {
         return id;
     }
@@ -78,12 +81,16 @@ public class ImageDTO implements Serializable {
             return false;
         }
 
-        return id != null && id.equals(((ImageDTO) o).id);
+        ImageDTO imageDTO = (ImageDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, imageDTO.id);
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        return Objects.hash(this.id);
     }
 
     // prettier-ignore
