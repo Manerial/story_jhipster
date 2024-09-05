@@ -4,9 +4,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class SearchService {
+export class NavbarService {
   private search = new BehaviorSubject('');
   public currentSearch = this.search.asObservable();
+
+  private isViewBook = new BehaviorSubject(true);
+  public currentIsViewBook = this.isViewBook.asObservable();
 
   constructor() {}
 
@@ -16,5 +19,13 @@ export class SearchService {
 
   getCurrentSearch(): Observable<string> {
     return this.currentSearch;
+  }
+
+  changeIsViewBook(isViewBook: boolean): void {
+    this.isViewBook.next(isViewBook);
+  }
+
+  getCurrentIsViewBook(): Observable<boolean> {
+    return this.currentIsViewBook;
   }
 }

@@ -35,22 +35,28 @@ export class ReaderService {
   }
 
   changeBook(bookId: number): void {
-    if (this.currentBookId !== bookId) {
-      this.currentBookId = bookId;
-      this.bookSource.next(bookId.toString());
-      this.partSource.next('');
-      this.chapterSource.next('');
-    } else {
-      this.bookSource.next(bookId.toString());
-    }
+    // eslint-disable-next-line no-console
+    console.log('entity : book, id : ' + bookId);
+    this.partSource.next('');
+    this.chapterSource.next('');
+    this.currentBookId = bookId;
+    this.bookSource.next(bookId.toString());
   }
 
   changePart(partId: number): void {
+    // eslint-disable-next-line no-console
+    console.log('entity : part, id : ' + partId);
+    this.bookSource.next('');
+    this.chapterSource.next('');
     this.currentPartId = partId;
     this.partSource.next(partId.toString());
   }
 
   changeChapter(chapterId: number): void {
+    // eslint-disable-next-line no-console
+    console.log('entity : chapter, id : ' + chapterId);
+    this.bookSource.next('');
+    this.partSource.next('');
     this.currentChapterId = chapterId;
     this.chapterSource.next(chapterId.toString());
   }

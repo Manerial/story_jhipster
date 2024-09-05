@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Book, IBook } from 'app/shared/model/book.model';
 import { Chapter, IChapter } from 'app/shared/model/chapter.model';
 import { IScene } from 'app/shared/model/scene.model';
+import { Subscription } from 'rxjs';
 import { ReaderService } from '../reader.service';
 
 @Component({
@@ -9,23 +10,29 @@ import { ReaderService } from '../reader.service';
   templateUrl: './text.component.html',
   styleUrls: ['./text.scss'],
 })
-export class TextComponent implements OnInit {
+export class TextComponent implements OnInit, OnDestroy {
   public book: IBook = new Book();
   public chapter: IChapter = new Chapter();
+  private chapterSubscriber: Subscription = new Subscription();
 
   constructor(public readerService: ReaderService) {}
 
   ngOnInit(): void {
     this.readerService.book.subscribe(book => {
       this.book = book;
-      this.readerService.currentChapterIdObs.subscribe(chapterId => {
+      this.chapterSubscriber = this.readerService.currentChapterIdObs.subscribe(chapterId => {
         if (chapterId !== '') {
           this.loadChapter();
-        } else {
-          this.readerService.changeChapter(1);
+        } else if (this.chapter.id === 0) {
+          this.readerService.changeChapter(book.parts[0].chapters[0].id);
         }
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.readerService.changeChapter(this.chapter.id);
+    this.chapterSubscriber.unsubscribe();
   }
 
   loadChapter(): void {

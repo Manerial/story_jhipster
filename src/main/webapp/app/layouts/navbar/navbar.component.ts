@@ -9,7 +9,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
-import { SearchService } from 'app/shared/util/search.service';
+import { NavbarService } from 'app/shared/util/search.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -19,6 +19,7 @@ import { SearchService } from 'app/shared/util/search.service';
 export class NavbarComponent implements OnInit {
   inProduction?: boolean;
   isNavbarCollapsed = true;
+  isViewBook = true;
   languages = LANGUAGES;
   swaggerEnabled?: boolean;
   version: string;
@@ -32,7 +33,7 @@ export class NavbarComponent implements OnInit {
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
     public router: Router,
-    private navbarService: SearchService
+    private navbarService: NavbarService
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
   }
@@ -77,5 +78,10 @@ export class NavbarComponent implements OnInit {
 
   search(): void {
     this.navbarService.changeSearch(this.searchText);
+  }
+
+  toggleBookImage(): void {
+    this.isViewBook = !this.isViewBook;
+    this.navbarService.changeIsViewBook(this.isViewBook);
   }
 }

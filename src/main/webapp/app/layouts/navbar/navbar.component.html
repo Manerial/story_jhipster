@@ -13,10 +13,25 @@
         <div class="ml-auto"></div>
         <form *ngIf="router.url === '/library'">
             <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-                placeholder="Rechercher..." (ngModelChange)="search()" aria-controls="search"
-                aria-expanded="false" aria-label="Rechercher">
+                placeholder="Rechercher..." (ngModelChange)="search()" aria-controls="search" aria-expanded="false"
+                aria-label="Rechercher">
         </form>
         <ul class="navbar-nav">
+            <div *ngIf="router.url.includes('/reader/book/')">
+                <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    <a class="nav-link" (click)="toggleBookImage();collapseNavbar()">
+                        <span *ngIf='isViewBook'>
+                            <fa-icon icon="image"></fa-icon>
+                            <span jhiTranslate="global.menu.images">Images</span>
+                        </span>
+                        <span *ngIf='!isViewBook'>
+                            <fa-icon icon="book"></fa-icon>
+                            <span jhiTranslate="global.menu.book">Book</span>
+                        </span>
+                    </a>
+                </li>
+            </div>
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
@@ -29,7 +44,7 @@
                 [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/library" (click)="collapseNavbar()">
                     <span>
-                        <fa-icon icon="book"></fa-icon>
+                        <fa-icon icon="align-justify" class="fa-rotate-90"></fa-icon>
                         <span jhiTranslate="global.menu.library">Library</span>
                     </span>
                 </a>

@@ -11,6 +11,10 @@ Navbar
   color: $navbar-dark-color;
 }
 
+.fa-rotate-90 {
+  display: inline-block;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -31,6 +35,7 @@ Navbar
   ul.navbar-nav {
     .nav-item {
       margin-left: 0.5em;
+      margin-right: 1em;
     }
   }
 

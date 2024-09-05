@@ -14,10 +14,12 @@
 				{{book.name}}
 			</h2>
 			<div *ngFor="let part of book.parts">
-				<h3 (click)="collapseParts[part.id] = !collapseParts[part.id]; changePart(part.id)">
+				<h3 (click)="toggleCollapsePart(part.id); changePart(part.id)">
 					{{part.name}}
-					<span *ngIf="!forceOpenAll" class="fa"
-						[ngClass]="(collapseParts[part.id])?'fa-angle-down':'fa-angle-up'"></span>
+					<span *ngIf="!forceOpenAll()">
+						<fa-icon icon="angle-up" *ngIf="!collapseParts[part.id]"></fa-icon>
+						<fa-icon icon="angle-down" *ngIf="collapseParts[part.id]"></fa-icon>
+					</span>
 				</h3>
 				<div [ngbCollapse]="isPartCollapse(part.id)">
 					<div *ngFor="let chapter of part.chapters">
