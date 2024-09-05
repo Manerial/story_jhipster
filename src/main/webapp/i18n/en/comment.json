@@ -16,7 +16,9 @@
       "detail": {
         "title": "Comment"
       },
-      "text": "Text"
+      "text": "Text",
+      "book": "Book",
+      "user": "User"
     }
   }
 }

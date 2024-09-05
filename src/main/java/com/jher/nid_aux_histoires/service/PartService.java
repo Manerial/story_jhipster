@@ -1,5 +1,6 @@
 package com.jher.nid_aux_histoires.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -43,6 +44,20 @@ public interface PartService {
 	 * @return the list of entities.
 	 */
 	Page<PartDTO> findAllWithEagerRelationships(Pageable pageable);
+
+	/**
+	 * Get all the parts with eager load of many-to-many relationships.
+	 *
+	 * @return the list of entities.
+	 */
+	List<PartDTO> findAllWithEagerRelationships();
+
+	/**
+	 * Get all the parts related to a book.
+	 *
+	 * @return the list of entities.
+	 */
+	List<PartDTO> findAllByBookId(Long bookId);
 
 	/**
 	 * Get the "id" part.

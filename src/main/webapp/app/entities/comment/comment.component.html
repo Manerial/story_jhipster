@@ -2,7 +2,7 @@
     <h2 id="page-heading">
         <span jhiTranslate="nidAuxHistoiresApp.comment.home.title">Comments</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-comment" [routerLink]="['/comment/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-comment" [routerLink]="['/entities/comment/new']">
             <fa-icon icon="plus"></fa-icon>
             <span  jhiTranslate="nidAuxHistoiresApp.comment.home.createLabel">
             Create a new Comment
@@ -29,19 +29,20 @@
             </thead>
             <tbody>
                 <tr *ngFor="let comment of comments ;trackBy: trackId">
-                    <td><a [routerLink]="['/comment', comment.id, 'view']">{{ comment.id }}</a></td>
+                    <td><a [routerLink]="['/entities/comment', comment.id, 'view']">{{ comment.id }}</a></td>
                     <td>{{ comment.text }}</td>
+                    <td><a [routerLink]="['/entities/book', comment.bookId, 'view']">{{ comment.bookId }}</a></td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
-                                    [routerLink]="['/comment', comment.id, 'view']"
+                                    [routerLink]="['/entities/comment', comment.id, 'view']"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
                             <button type="submit"
-                                    [routerLink]="['/comment', comment.id, 'edit']"
+                                    [routerLink]="['/entities/comment', comment.id, 'edit']"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>

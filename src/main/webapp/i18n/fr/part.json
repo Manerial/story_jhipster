@@ -4,7 +4,7 @@
       "home": {
         "title": "Parties",
         "createLabel": "Créer une nouvelle Partie",
-        "createOrEditLabel": "Créer ou éditer un Partie",
+        "createOrEditLabel": "Créer ou éditer une Partie",
         "notFound": "Aucun Partie trouvé"
       },
       "created": "Une nouveau Partie a été créé avec l'identifiant {{ param }}",

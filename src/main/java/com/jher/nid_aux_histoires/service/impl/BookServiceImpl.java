@@ -1,5 +1,6 @@
 package com.jher.nid_aux_histoires.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -73,6 +74,10 @@ public class BookServiceImpl implements BookService {
 
 	public Page<BookDTO> findAllWithEagerRelationships(Pageable pageable) {
 		return bookRepository.findAllWithEagerRelationships(pageable).map(bookMapper::toDto);
+	}
+
+	public List<BookDTO> findAllWithEagerRelationships() {
+		return bookMapper.toDto(bookRepository.findAllWithEagerRelationships());
 	}
 
 	@Override

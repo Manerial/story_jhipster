@@ -9,7 +9,7 @@ import { IChapter, Chapter } from 'app/shared/model/chapter.model';
 import { ChapterService } from './chapter.service';
 import { IImage } from 'app/shared/model/image.model';
 import { ImageService } from 'app/entities/image/image.service';
-import { IPart } from 'app/shared/model/part.model';
+import { IPart, Part } from 'app/shared/model/part.model';
 import { PartService } from 'app/entities/part/part.service';
 
 type SelectableEntity = IImage | IPart;
@@ -44,9 +44,16 @@ export class ChapterUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ chapter }) => {
       this.updateForm(chapter);
 
-      this.imageService.query().subscribe((res: HttpResponse<IImage[]>) => (this.images = res.body || []));
+      this.imageService.query().subscribe((dataImage: HttpResponse<IImage[]>) => (this.images = dataImage.body || []));
 
-      this.partService.query().subscribe((res: HttpResponse<IPart[]>) => (this.parts = res.body || []));
+      if (chapter.partId !== undefined && chapter.partId !== null && chapter.partId !== 0) {
+        this.partService.find(chapter.partId).subscribe((dataPart: HttpResponse<IPart>) => {
+          const part = dataPart.body || new Part();
+          this.partService.query({ bookId: part.bookId }).subscribe((res: HttpResponse<IPart[]>) => (this.parts = res.body || []));
+        });
+      } else {
+        this.partService.query().subscribe((res: HttpResponse<IPart[]>) => (this.parts = res.body || []));
+      }
     });
   }
 

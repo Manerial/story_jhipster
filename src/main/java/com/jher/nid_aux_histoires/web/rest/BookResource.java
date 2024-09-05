@@ -136,15 +136,15 @@ public class BookResource {
 	public ResponseEntity<List<BookDTO>> getAllBooks(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
 			@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
 		log.debug("REST request to get a page of Books");
-		Page<BookDTO> page;
 		if (eagerload) {
-			page = bookService.findAllWithEagerRelationships(pageable);
+			List<BookDTO> books = bookService.findAllWithEagerRelationships();
+			return ResponseEntity.ok().body(books);
 		} else {
-			page = bookService.findAll(pageable);
+			Page<BookDTO> page = bookService.findAll(pageable);
+			HttpHeaders headers = PaginationUtil
+					.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+			return ResponseEntity.ok().headers(headers).body(page.getContent());
 		}
-		HttpHeaders headers = PaginationUtil
-				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-		return ResponseEntity.ok().headers(headers).body(page.getContent());
 	}
 
 	/**

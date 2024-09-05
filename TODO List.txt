@@ -1,8 +1,12 @@
 OBLIGATOIRE
 
-Lier Auteur et User
+Get Part / Chapter / Scene by parent id
 
 Commentaires (pas de notes)
+	Interface d'entité admin
+	Interface utilisateur GUI (bouton commenter + page / popup commentaire)
+
+Lier Auteur et User
 
 Tri/sélection
 	Nouveau

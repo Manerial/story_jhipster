@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -108,17 +110,22 @@ public class PartResource {
 	 */
 	@GetMapping("/parts")
 	public ResponseEntity<List<PartDTO>> getAllParts(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
-			@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+			@RequestParam(required = false, defaultValue = "false") boolean eagerload,
+			@RequestParam(required = false) @Valid Long bookId) {
 		log.debug("REST request to get a page of Parts");
-		Page<PartDTO> page;
-		if (eagerload) {
-			page = partService.findAllWithEagerRelationships(pageable);
-		} else {
-			page = partService.findAll(pageable);
+		if (bookId != null) {
+			List<PartDTO> parts = partService.findAllByBookId(bookId);
+			return ResponseEntity.ok().body(parts);
 		}
-		HttpHeaders headers = PaginationUtil
-				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-		return ResponseEntity.ok().headers(headers).body(page.getContent());
+		if (eagerload) {
+			List<PartDTO> parts = partService.findAllWithEagerRelationships();
+			return ResponseEntity.ok().body(parts);
+		} else {
+			Page<PartDTO> page = partService.findAll(pageable);
+			HttpHeaders headers = PaginationUtil
+					.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+			return ResponseEntity.ok().headers(headers).body(page.getContent());
+		}
 	}
 
 	/**
