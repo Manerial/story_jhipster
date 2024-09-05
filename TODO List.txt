@@ -1,17 +1,18 @@
-Analytics ?
+Accès en lecture à tous, même non inscrit
+sitemap.xml à rendre visible
+Mots clés recherche Google
 
 Bugs :
 	Discord
+	Sommaire ne va pas jusqu'en bas sur téléphone
 
 GUI :
-	- Générateur de QR_Code
+	- Générateur de QR_Code (?)
 
 Section Contact
 	"Vous pouvez nous contacter via le formulaire proposé ou sur le Discord de la communauté"
-
-Mots clés recherche Google
 	
-Traduire générateurs (contenu cartes)
+Traduire générateurs (contenu des cartes)
 
 Page Accueil :
 	- Nouvelles sorties
