@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.LocationDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.PersonaDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.WritingOptionDTO;
 
@@ -57,9 +58,18 @@ public interface IdeaService {
 	public List<PersonaDTO> generatePersonas(int numberOfPersona, PersonaDTO constraint);
 
 	/**
+	 * Génère une liste de lieux en fonction de contraintes
+	 * 
+	 * @param numberOfLocations : Nombre de lieux à générer
+	 * @param constraint        : Liste des contraintes à respecter
+	 * @return la liste des lieux générés
+	 */
+	public List<LocationDTO> generateLocations(int numberOfLocations, LocationDTO constraint);
+
+	/**
 	 * Génère une liste d'options d'écriture en fonction de contraintes
 	 * 
-	 * @param numberOfWritingOption : Nombre de mots à générer
+	 * @param numberOfWritingOption : Nombre d'options d'écriture à générer
 	 * @param constraint            : Liste des contraintes à respecter
 	 * @return la liste des d'options d'écriture générés
 	 */

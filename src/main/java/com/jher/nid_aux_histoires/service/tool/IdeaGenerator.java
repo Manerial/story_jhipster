@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.jher.nid_aux_histoires.domain.Idea;
 import com.jher.nid_aux_histoires.repository.IdeaRepository;
 import com.jher.nid_aux_histoires.service.WordAnalysisService;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.LocationDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.PersonaDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.PhysicalDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.TraitsDTO;
@@ -31,7 +32,7 @@ public class IdeaGenerator {
 	}
 
 	private List<String> getDefaultOrRandom(List<String> defaultValues, String type, int defaultMin, int defaultMax) {
-		if (defaultValues.size() > 0) {
+		if (defaultValues != null && defaultValues.size() > 0) {
 			return defaultValues;
 		}
 		List<String> ideas = new ArrayList<String>();
@@ -67,6 +68,17 @@ public class IdeaGenerator {
 		writingOption.setStyle(style);
 		writingOption.setTheme(theme);
 		return writingOption;
+	}
+
+	public LocationDTO generateLocation(LocationDTO constraint) {
+		LocationDTO location = new LocationDTO(constraint);
+		String place = getDefaultOrRandom(location.getPlace(), IdeaTypes.place.toString());
+		String landscape = getDefaultOrRandom(location.getLandscape(), IdeaTypes.landscape.toString());
+		String material = getDefaultOrRandom(location.getMaterial(), IdeaTypes.material.toString());
+		location.setPlace(place);
+		location.setLandscape(landscape);
+		location.setMaterial(material);
+		return location;
 	}
 
 	public PersonaDTO generatePersona(PersonaDTO constraint) {

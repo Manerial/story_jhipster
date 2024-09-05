@@ -3185,4 +3185,530 @@
 			<column name="complement" />
 		</insert>
 	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_place">
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un barrage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une route" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un chemin" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un passage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un gué" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un pont" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une cité" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une ville" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un village" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un campement" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une colonie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un temple" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un château" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un palais" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un donjon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une tour" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une ruine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un domaine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une cabanne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une maison" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un manoir" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un jardin" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un égoût" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un dédale" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une décharge" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un terrain vague" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un haut quartier" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un bas quartier" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un cimetière" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un tombeau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une cave" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une forge" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une usine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un abatoire" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un musée" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un hôpital" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un laboratoire" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un restaurant" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une auberge" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une ferme" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un champ" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un bateau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un vaisseau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Une base stellaire" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Un nid" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_landscape">
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un désert" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une forêt" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une jungle" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une rivière" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un fleuve" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un lagon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une cascade" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une mer" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un océan" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un abysse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un lac" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une île" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un archipel" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une plage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un marécage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une grotte" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une caverne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un volcan" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une montagne" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un pic" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un plateau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une plaine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une valée" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un canyon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un geyser" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un ciel" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une galaxie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un vide spatial" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Un astéroïde" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Une lune" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_material">
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De vide" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De chair" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De sang" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="D'os" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De peau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De bois" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De mousse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De champignon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De fleur" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De feuille" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="D'arbre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="D'eau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De neige" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De glace" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De brume" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De nuage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De terre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De pierre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De cristal" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De verre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De metal" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De céramique" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="D'air" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De vent" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De foudre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De feu" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De lave" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De cendres" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="material" />
+			<column name="value" value="De nuée ardente" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
 </databaseChangeLog>

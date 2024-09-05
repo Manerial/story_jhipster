@@ -10,6 +10,8 @@ public class PersonaDTO {
 	private TraitsDTO traits;
 
 	public PersonaDTO() {
+		this.physical = new PhysicalDTO();
+		this.traits = new TraitsDTO();
 	}
 
 	public PersonaDTO(PersonaDTO persona) {
