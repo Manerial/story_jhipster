@@ -1,6 +1,7 @@
 package com.jher.nid_aux_histoires.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +33,9 @@ public class Comment implements Serializable {
 	@Column(name = "text")
 	private String text;
 
+	@Column(name = "created_date")
+	private Date createdDate;
+
 	@ManyToOne
 	@JsonIgnoreProperties(value = "comments", allowSetters = true)
 	private Book book;
@@ -39,6 +43,10 @@ public class Comment implements Serializable {
 	@ManyToOne
 	@JsonIgnoreProperties(value = "comments", allowSetters = true)
 	private User user;
+
+	public Comment() {
+		this.createdDate = new Date();
+	}
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here
 	public Long getId() {
@@ -60,6 +68,14 @@ public class Comment implements Serializable {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	public Book getBook() {

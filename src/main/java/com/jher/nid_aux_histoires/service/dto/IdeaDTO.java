@@ -6,73 +6,69 @@ import java.io.Serializable;
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Idea} entity.
  */
 public class IdeaDTO implements Serializable {
-    
-    private Long id;
+	private static final long serialVersionUID = 1L;
 
-    private String type;
+	private Long id;
 
-    private String value;
+	private String type;
 
-    private String complement;
+	private String value;
 
-    
-    public Long getId() {
-        return id;
-    }
+	private String complement;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public String getValue() {
-        return value;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+	public String getValue() {
+		return value;
+	}
 
-    public String getComplement() {
-        return complement;
-    }
+	public void setValue(String value) {
+		this.value = value;
+	}
 
-    public void setComplement(String complement) {
-        this.complement = complement;
-    }
+	public String getComplement() {
+		return complement;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof IdeaDTO)) {
-            return false;
-        }
+	public void setComplement(String complement) {
+		this.complement = complement;
+	}
 
-        return id != null && id.equals(((IdeaDTO) o).id);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof IdeaDTO)) {
+			return false;
+		}
 
-    @Override
-    public int hashCode() {
-        return 31;
-    }
+		return id != null && id.equals(((IdeaDTO) o).id);
+	}
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "IdeaDTO{" +
-            "id=" + getId() +
-            ", type='" + getType() + "'" +
-            ", value='" + getValue() + "'" +
-            ", complement='" + getComplement() + "'" +
-            "}";
-    }
+	@Override
+	public int hashCode() {
+		return 31;
+	}
+
+	// prettier-ignore
+	@Override
+	public String toString() {
+		return "IdeaDTO{" + "id=" + getId() + ", type='" + getType() + "'" + ", value='" + getValue() + "'"
+				+ ", complement='" + getComplement() + "'" + "}";
+	}
 }

@@ -9,6 +9,7 @@ import java.util.TreeSet;
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Book} entity.
  */
 public class BookDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 

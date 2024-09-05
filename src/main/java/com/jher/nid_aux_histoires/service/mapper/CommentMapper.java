@@ -19,6 +19,7 @@ public interface CommentMapper extends EntityMapper<CommentDTO, Comment> {
 
 	@Mapping(source = "bookId", target = "book")
 	@Mapping(source = "userId", target = "user")
+	@Mapping(target = "createdDate", ignore = true)
 	Comment toEntity(CommentDTO commentDTO);
 
 	default Comment fromId(Long id) {

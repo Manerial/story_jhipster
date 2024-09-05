@@ -6,73 +6,69 @@ import java.io.Serializable;
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.WordAnalysis} entity.
  */
 public class WordAnalysisDTO implements Serializable {
-    
-    private Long id;
+	private static final long serialVersionUID = 1L;
 
-    private String type;
+	private Long id;
 
-    private String name;
+	private String type;
 
-    private String analysis;
+	private String name;
 
-    
-    public Long getId() {
-        return id;
-    }
+	private String analysis;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getAnalysis() {
-        return analysis;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setAnalysis(String analysis) {
-        this.analysis = analysis;
-    }
+	public String getAnalysis() {
+		return analysis;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof WordAnalysisDTO)) {
-            return false;
-        }
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
+	}
 
-        return id != null && id.equals(((WordAnalysisDTO) o).id);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof WordAnalysisDTO)) {
+			return false;
+		}
 
-    @Override
-    public int hashCode() {
-        return 31;
-    }
+		return id != null && id.equals(((WordAnalysisDTO) o).id);
+	}
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "WordAnalysisDTO{" +
-            "id=" + getId() +
-            ", type='" + getType() + "'" +
-            ", name='" + getName() + "'" +
-            ", analysis='" + getAnalysis() + "'" +
-            "}";
-    }
+	@Override
+	public int hashCode() {
+		return 31;
+	}
+
+	// prettier-ignore
+	@Override
+	public String toString() {
+		return "WordAnalysisDTO{" + "id=" + getId() + ", type='" + getType() + "'" + ", name='" + getName() + "'"
+				+ ", analysis='" + getAnalysis() + "'" + "}";
+	}
 }

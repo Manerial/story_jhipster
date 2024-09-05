@@ -28,7 +28,7 @@ export class CommentService {
   }
 
   findByBookId(id: number): Observable<EntityArrayResponseType> {
-    throw this.http.get<IComment[]>(`${this.resourceUrl}/book/${id}`, { observe: 'response' });
+    return this.http.get<IComment[]>(`${this.resourceUrl}/book/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
