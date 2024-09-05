@@ -4,7 +4,8 @@ import { IImage } from 'app/shared/model/image.model';
 export interface IBook {
   id: number;
   name: string;
-  author: string;
+  authorId: number;
+  authorLogin: string;
   description: string;
   parts: IPart[];
   images: IImage[];
@@ -15,7 +16,8 @@ export interface IBook {
 export class Book implements IBook {
   public id: number;
   public name: string;
-  public author: string;
+  public authorId: number;
+  public authorLogin: string;
   public description: string;
   public parts: IPart[];
   public images: IImage[];
@@ -26,7 +28,8 @@ export class Book implements IBook {
   constructor(
     id?: number,
     name?: string,
-    author?: string,
+    authorId?: number,
+    authorLogin?: string,
     description?: string,
     parts?: IPart[],
     images?: IImage[],
@@ -37,7 +40,8 @@ export class Book implements IBook {
   constructor(
     id?: number,
     name?: string,
-    author?: string,
+    authorId?: number,
+    authorLogin?: string,
     description?: string,
     parts?: IPart[],
     images?: IImage[],
@@ -46,7 +50,8 @@ export class Book implements IBook {
   ) {
     this.id = id || 0;
     this.name = name || '';
-    this.author = author || '';
+    this.authorId = authorId || 0;
+    this.authorLogin = authorLogin || '';
     this.description = description || '';
     this.parts = parts || [];
     this.images = images || [];

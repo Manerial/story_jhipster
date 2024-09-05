@@ -39,9 +39,6 @@ public class Book implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "author")
-	private String author;
-
 	@Column(name = "description")
 	private String description;
 
@@ -61,6 +58,10 @@ public class Book implements Serializable {
 	@ManyToOne
 	@JsonIgnoreProperties(value = "picture", allowSetters = true)
 	private Image cover;
+
+	@ManyToOne
+	@JsonIgnoreProperties(value = "books", allowSetters = true)
+	private User author;
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here
 	public Long getId() {
@@ -84,16 +85,16 @@ public class Book implements Serializable {
 		this.name = name;
 	}
 
-	public String getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public Book author(String author) {
+	public Book author(User author) {
 		this.author = author;
 		return this;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 

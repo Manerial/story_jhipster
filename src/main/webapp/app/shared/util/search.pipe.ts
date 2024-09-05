@@ -12,7 +12,7 @@ export class BookFilterPipe implements PipeTransform {
 
     return books.filter(book => {
       const search = args.toLowerCase();
-      return this.searchField(book.name, search) || this.searchField(book.author, search);
+      return this.searchField(book.name, search) || this.searchField(book.authorLogin, search);
     });
   }
 

@@ -3,10 +3,10 @@ OBLIGATOIRE
 Get Part / Chapter / Scene by parent id (pas sûr)
 
 Commentaires (pas de notes)
-	Interface d'entité admin
 	Interface utilisateur GUI (bouton commenter + page / popup commentaire)
 
 Lier Auteur et User
+	Lier les auteurs sur interface Admin
 
 Tri/sélection
 	Nouveau

@@ -74,7 +74,7 @@ public class ExportDocx {
 		appendFileList(cvJobs);
 		mainDoc.save(outputFile);
 
-		setProperties(outputFile.getPath(), book.getAuthor(), book.getName());
+		setProperties(outputFile.getPath(), book.getAuthorLogin(), book.getName());
 
 		LOGGER.info("Fin de la génération du livre WORD");
 		return new File(outputFile.getPath()).toPath();

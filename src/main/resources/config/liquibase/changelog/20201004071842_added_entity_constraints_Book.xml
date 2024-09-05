@@ -20,6 +20,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="image"/>
         
+        <addForeignKeyConstraint baseColumnNames="author_id"
+                                 baseTableName="book"
+                                 constraintName="fk_book_author_book_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        
         <addForeignKeyConstraint baseColumnNames="cover_id"
                                  baseTableName="book"
                                  constraintName="fk_book_cover_id"

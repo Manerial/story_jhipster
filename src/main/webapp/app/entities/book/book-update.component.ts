@@ -21,7 +21,7 @@ export class BookUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [],
-    author: [],
+    authorId: [],
     description: [],
     images: [],
     coverId: [],
@@ -51,7 +51,7 @@ export class BookUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: book.id,
       name: book.name,
-      author: book.author,
+      authorId: book.authorId,
       description: book.description,
       images: book.images,
       coverId: book.coverId,
@@ -77,7 +77,7 @@ export class BookUpdateComponent implements OnInit {
       ...new Book(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
-      author: this.editForm.get(['author'])!.value,
+      authorId: this.editForm.get(['authorId'])!.value,
       description: this.editForm.get(['description'])!.value,
       images: this.editForm.get(['images'])!.value,
       coverId: this.editForm.get(['coverId'])!.value,
