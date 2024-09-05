@@ -100,7 +100,7 @@ export class WordAnalysisComponent implements OnInit, OnDestroy {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
-      this.router.navigate(['/word-analysis'], {
+      this.router.navigate(['/entities/word-analysis'], {
         queryParams: {
           page: this.page,
           size: this.itemsPerPage,

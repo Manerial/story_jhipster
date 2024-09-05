@@ -48,16 +48,20 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
         loadChildren: () => import('./image/image.module').then(m => m.NidAuxHistoiresImageModule),
       },
       {
-        path: 'idea',
+        path: 'entities/idea',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         loadChildren: () => import('./idea/idea.module').then(m => m.NidAuxHistoiresIdeaModule),
       },
       {
-        path: 'word-analysis',
+        path: 'entities/word-analysis',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         loadChildren: () => import('./word-analysis/word-analysis.module').then(m => m.NidAuxHistoiresWordAnalysisModule),
-      },
-      {
-        path: 'scene',
-        loadChildren: () => import('./scene/scene.module').then(m => m.NidAuxHistoiresSceneModule),
       },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
