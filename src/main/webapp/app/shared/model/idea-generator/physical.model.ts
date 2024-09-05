@@ -1,23 +1,43 @@
 export interface IPhysical {
-  hair_color?: string;
-  hair_style?: string;
-  eyes_color?: string;
-  face_shape?: string;
-  gender?: string;
-  height?: number;
-  weight?: number;
-  morphology?: string;
+  hairColor: string;
+  hairStyle: string;
+  eyesColor: string;
+  faceShape: string;
+  gender: string;
+  height: number;
+  weight: number;
+  morphology: string;
 }
 
 export class Physical implements IPhysical {
+  public hairColor: string;
+  public hairStyle: string;
+  public eyesColor: string;
+  public faceShape: string;
+  public gender: string;
+  public height: number;
+  public weight: number;
+  public morphology: string;
+
+  constructor();
+
   constructor(
-    public hair_color?: string,
-    public hair_style?: string,
-    public eyes_color?: string,
-    public face_shape?: string,
-    public gender?: string,
-    public height?: number,
-    public weight?: number,
-    public morphology?: string
-  ) {}
+    hairColor?: string,
+    hairStyle?: string,
+    eyesColor?: string,
+    faceShape?: string,
+    gender?: string,
+    height?: number,
+    weight?: number,
+    morphology?: string
+  ) {
+    this.hairColor = hairColor || '';
+    this.hairStyle = hairStyle || '';
+    this.eyesColor = eyesColor || '';
+    this.faceShape = faceShape || '';
+    this.gender = gender || '';
+    this.height = height || 0;
+    this.weight = weight || 0;
+    this.morphology = morphology || '';
+  }
 }

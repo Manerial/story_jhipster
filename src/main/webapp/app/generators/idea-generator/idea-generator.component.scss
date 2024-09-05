@@ -1,0 +1,33 @@
+@import '../../../content/scss/variables.scss';
+
+dd::first-letter {
+  text-transform: capitalize;
+}
+
+.bkg-gray-2:nth-child(2n) {
+  color: #fff !important;
+  background-color: $black !important;
+}
+
+.card-body {
+  padding: 0.25rem;
+}
+
+.card dt {
+  min-width: 140px;
+}
+
+dl dl dl {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px;
+}
+
+dt {
+  min-width: 50px;
+  margin-right: 10px;
+}
+
+dd {
+  margin: 0px;
+}

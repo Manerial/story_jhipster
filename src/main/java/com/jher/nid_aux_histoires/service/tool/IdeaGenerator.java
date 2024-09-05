@@ -27,7 +27,7 @@ public class IdeaGenerator {
 	}
 
 	private String getDefaultOrRandom(String defaultValue, String type) {
-		return (defaultValue != null) ? defaultValue : getRandomIdeaByType(type).getValue();
+		return (!stringEmpty(defaultValue)) ? defaultValue : getRandomIdeaByType(type).getValue();
 	}
 
 	private List<String> getDefaultOrRandom(List<String> defaultValues, String type, int defaultMin, int defaultMax) {
@@ -89,21 +89,21 @@ public class IdeaGenerator {
 	}
 
 	private String getRandomName(String defaultName) {
-		if (defaultName != null) {
+		if (!stringEmpty(defaultName)) {
 			return defaultName;
 		}
 		return wordAnalysisService.generateWord(IdeaTypes.name.toString());
 	}
 
 	private String getRandomJob(String defaultJob, int age) {
-		if (defaultJob != null) {
+		if (!stringEmpty(defaultJob)) {
 			return defaultJob;
 		}
 		return (age > 16) ? getRandomIdeaByType(IdeaTypes.job.toString()).getValue() : "Aucun";
 	}
 
 	private String getRandomTitle(String defaultTitle) {
-		if (defaultTitle != null) {
+		if (!stringEmpty(defaultTitle)) {
 			return defaultTitle;
 		}
 		String prefix = getRandomIdeaByType(IdeaTypes.prefix.toString()).getValue();
@@ -113,19 +113,19 @@ public class IdeaGenerator {
 	}
 
 	private PhysicalDTO generatePhysical(PhysicalDTO physical, int age) {
-		String eyes_color = getDefaultOrRandom(physical.getEyes_color(), IdeaTypes.eyes_color.toString());
-		String face_shape = getDefaultOrRandom(physical.getFace_shape(), IdeaTypes.face_shape.toString());
+		String eyesColor = getDefaultOrRandom(physical.getEyesColor(), IdeaTypes.eyes_color.toString());
+		String faceShape = getDefaultOrRandom(physical.getFaceShape(), IdeaTypes.face_shape.toString());
 		String gender = getDefaultOrRandom(physical.getGender(), IdeaTypes.gender.toString());
-		String hair_color = getDefaultOrRandom(physical.getHair_color(), IdeaTypes.hair_color.toString());
-		String hair_style = getDefaultOrRandom(physical.getHair_style(), IdeaTypes.hair_style.toString());
+		String hairColor = getDefaultOrRandom(physical.getHairColor(), IdeaTypes.hair_color.toString());
+		String hairStyle = getDefaultOrRandom(physical.getHairStyle(), IdeaTypes.hair_style.toString());
 		double height = getHeight(physical.getHeight(), age, gender);
 		double weight = getWeight(physical.getWeight(), height);
 		String morphology = getMorphology(physical.getMorphology(), height, weight);
-		physical.setEyes_color(eyes_color);
-		physical.setFace_shape(face_shape);
+		physical.setEyesColor(eyesColor);
+		physical.setFaceShape(faceShape);
 		physical.setGender(gender);
-		physical.setHair_color(hair_color);
-		physical.setHair_style(hair_style);
+		physical.setHairColor(hairColor);
+		physical.setHairStyle(hairStyle);
 		physical.setHeight(height);
 		physical.setWeight(weight);
 		physical.setMorphology(morphology);
@@ -157,7 +157,7 @@ public class IdeaGenerator {
 	}
 
 	private String getMorphology(String morphology, double height, double weight) {
-		if (morphology != null) {
+		if (!stringEmpty(morphology)) {
 			return morphology;
 		}
 		int BMI = getBMI(weight, height);
@@ -200,14 +200,18 @@ public class IdeaGenerator {
 		return false;
 	}
 
+	private boolean stringEmpty(String value) {
+		return value == null || value.equals("");
+	}
+
 	private TraitsDTO generateTraits(TraitsDTO traits) {
-		List<String> bad_traits = getDefaultOrRandom(traits.getBad_traits(), IdeaTypes.bad_trait.toString(), 1, 3);
+		List<String> badTraits = getDefaultOrRandom(traits.getBadTraits(), IdeaTypes.bad_trait.toString(), 1, 3);
 		List<String> carac = getDefaultOrRandom(traits.getCaracteristics(), IdeaTypes.caracteristic.toString(), 2, 5);
-		List<String> good_traits = getDefaultOrRandom(traits.getGood_traits(), IdeaTypes.good_trait.toString(), 2, 5);
+		List<String> goodTraits = getDefaultOrRandom(traits.getGoodTraits(), IdeaTypes.good_trait.toString(), 2, 5);
 		List<String> handicaps = getDefaultOrRandom(traits.getHandicaps(), IdeaTypes.handicap.toString(), 0, 3);
-		traits.setBad_traits(bad_traits);
+		traits.setBadTraits(badTraits);
 		traits.setCaracteristics(carac);
-		traits.setGood_traits(good_traits);
+		traits.setGoodTraits(goodTraits);
 		traits.setHandicaps(handicaps);
 		return traits;
 	}

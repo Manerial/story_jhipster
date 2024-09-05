@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IWordAnalysis } from 'app/shared/model/word-analysis.model';
-import { map } from 'rxjs/operators';
-import { IType } from 'selenium-webdriver/lib/logging';
+import { IType } from 'app/shared/model/type.model';
 
 type EntityResponseType = HttpResponse<IWordAnalysis>;
 type EntityArrayResponseType = HttpResponse<IWordAnalysis[]>;
+type ITypeArrayResponseType = HttpResponse<IType[]>;
 
 @Injectable({ providedIn: 'root' })
 export class WordAnalysisService {
@@ -38,8 +38,8 @@ export class WordAnalysisService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getTypes(): Observable<IType[]> {
-    return this.http.get<IType[]>(`${this.resourceUrl}/words/types`).pipe(map(response => [...response].sort()));
+  getTypes(): Observable<ITypeArrayResponseType> {
+    return this.http.get<IType[]>(`${this.resourceUrl}/types`, { observe: 'response' });
   }
 
   generateWords(number: number, fixLength: number, type: string): Observable<string[]> {
@@ -48,8 +48,6 @@ export class WordAnalysisService {
     httpParams = httpParams.append('fixLength', fixLength.toString());
     httpParams = httpParams.append('type', type);
 
-    return this.http
-      .get<string[]>(`${this.resourceUrl}/words`, { params: httpParams })
-      .pipe(map(response => [...response].sort()));
+    return this.http.get<string[]>(`${this.resourceUrl}/words`, { params: httpParams });
   }
 }

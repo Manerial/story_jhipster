@@ -3,27 +3,27 @@ package com.jher.nid_aux_histoires.service.dto.idea_generator;
 import java.util.List;
 
 public class TraitsDTO {
-	private List<String> bad_traits;
+	private List<String> badTraits;
 	private List<String> caracteristics;
-	private List<String> good_traits;
+	private List<String> goodTraits;
 	private List<String> handicaps;
 
 	public TraitsDTO() {
 	}
 
 	public TraitsDTO(TraitsDTO traits) {
-		setBad_traits(traits.getBad_traits());
-		setGood_traits(traits.getGood_traits());
+		setBadTraits(traits.getBadTraits());
+		setGoodTraits(traits.getGoodTraits());
 		setCaracteristics(traits.getCaracteristics());
 		setHandicaps(traits.getHandicaps());
 	}
 
-	public List<String> getBad_traits() {
-		return bad_traits;
+	public List<String> getBadTraits() {
+		return badTraits;
 	}
 
-	public void setBad_traits(List<String> bad_traits) {
-		this.bad_traits = bad_traits;
+	public void setBadTraits(List<String> badTraits) {
+		this.badTraits = badTraits;
 	}
 
 	public List<String> getCaracteristics() {
@@ -34,12 +34,12 @@ public class TraitsDTO {
 		this.caracteristics = caracteristics;
 	}
 
-	public List<String> getGood_traits() {
-		return good_traits;
+	public List<String> getGoodTraits() {
+		return goodTraits;
 	}
 
-	public void setGood_traits(List<String> good_traits) {
-		this.good_traits = good_traits;
+	public void setGoodTraits(List<String> goodTraits) {
+		this.goodTraits = goodTraits;
 	}
 
 	public List<String> getHandicaps() {
