@@ -9,9 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jher.nid_aux_histoires.domain.BookStatus;
 import com.jher.nid_aux_histoires.domain.Chapter;
 import com.jher.nid_aux_histoires.domain.Scene;
 import com.jher.nid_aux_histoires.repository.ChapterRepository;
+import com.jher.nid_aux_histoires.service.BookStatusService;
 import com.jher.nid_aux_histoires.service.ChapterService;
 import com.jher.nid_aux_histoires.service.SceneService;
 import com.jher.nid_aux_histoires.service.dto.ChapterDTO;
@@ -29,13 +31,16 @@ public class ChapterServiceImpl implements ChapterService {
 
 	private final SceneService sceneService;
 
+	private final BookStatusService bookStatusService;
+
 	private final ChapterRepository chapterRepository;
 
 	private final ChapterMapper chapterMapper;
 
 	public ChapterServiceImpl(ChapterRepository chapterRepository, ChapterMapper chapterMapper,
-			SceneService sceneService) {
+			SceneService sceneService, BookStatusService bookStatusService) {
 		this.sceneService = sceneService;
+		this.bookStatusService = bookStatusService;
 		this.chapterRepository = chapterRepository;
 		this.chapterMapper = chapterMapper;
 	}
@@ -100,7 +105,11 @@ public class ChapterServiceImpl implements ChapterService {
 			for (Scene scene : chapter.getScenes()) {
 				sceneService.delete(scene.getId());
 			}
+			for (BookStatus bookStatus : chapter.getBookStatuses()) {
+				bookStatusService.delete(bookStatus.getId());
+			}
 			chapterRepository.deleteById(id);
+			chapterRepository.flush();
 		}
 	}
 

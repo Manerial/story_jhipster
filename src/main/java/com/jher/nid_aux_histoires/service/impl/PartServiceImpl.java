@@ -98,6 +98,7 @@ public class PartServiceImpl implements PartService {
 				chapterService.delete(chapter.getId());
 			}
 			partRepository.deleteById(id);
+			partRepository.flush();
 		}
 	}
 

@@ -67,6 +67,7 @@ public class WordAnalysisServiceImpl implements WordAnalysisService {
 	public void delete(Long id) {
 		log.debug("Request to delete WordAnalysis : {}", id);
 		wordAnalysisRepository.deleteById(id);
+		wordAnalysisRepository.flush();
 	}
 
 	@Transactional

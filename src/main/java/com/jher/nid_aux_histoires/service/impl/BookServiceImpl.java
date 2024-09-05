@@ -148,6 +148,7 @@ public class BookServiceImpl implements BookService {
 				bonusService.delete(bonus.getId());
 			}
 			bookRepository.deleteById(id);
+			bookRepository.flush();
 		}
 	}
 }
