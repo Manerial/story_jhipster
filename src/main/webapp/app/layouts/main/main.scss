@@ -1,0 +1,13 @@
+@import '~bootstrap/scss/functions';
+@import '~bootswatch/dist/lux/variables';
+@import '~bootstrap/scss/variables';
+
+/* ==========================================================================
+Main
+========================================================================== */
+
+.navbar-container {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
