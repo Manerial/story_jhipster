@@ -23,13 +23,13 @@ public class HonoraryTitleGenerator extends RandomEntityGenerator {
 	private String getPart1() {
 		switch (RNG.getRandBelow(3)) {
 		case 0:
-			return generateElement(REG_Element.job, REG_Article.article_defini) + " "
-					+ getPart2(REG_Element.race).toLowerCase();
+			return generateElement(REG_Element.JOB, REG_Article.ARTICLE_DEFINI) + " "
+					+ getPart2(REG_Element.RACE).toLowerCase();
 		case 1:
-			return generateElement(REG_Element.race, REG_Article.article_defini) + " "
-					+ getPart2(REG_Element.job).toLowerCase();
+			return generateElement(REG_Element.RACE, REG_Article.ARTICLE_DEFINI) + " "
+					+ getPart2(REG_Element.JOB).toLowerCase();
 		case 2:
-			return generateElement(REG_Element.adjective, REG_Article.article_defini);
+			return generateElement(REG_Element.ADJECTIVE, REG_Article.ARTICLE_DEFINI);
 		default:
 			break;
 		}
@@ -41,7 +41,7 @@ public class HonoraryTitleGenerator extends RandomEntityGenerator {
 		case 0:
 			return generateElement(element1, null);
 		case 1:
-			return generateElement(REG_Element.adjective, null);
+			return generateElement(REG_Element.ADJECTIVE, null);
 		case 2:
 			return "";
 		default:
@@ -53,12 +53,12 @@ public class HonoraryTitleGenerator extends RandomEntityGenerator {
 	private String getPart3() {
 		switch (RNG.getRandBelow(3)) {
 		case 0:
-			return generateElement(REG_Element.object, REG_Article.article_contractif) + " "
+			return generateElement(REG_Element.OBJECT, REG_Article.ARTICLE_CONTRACTIF) + " "
 					+ ((RNG.getRandBelow(2) == 0)
-							? generateElement(REG_Element.material, REG_Article.article_partitif_second)
-							: generateElement(REG_Element.adjective, null));
+							? generateElement(REG_Element.MATERIAL, REG_Article.ARTICLE_PARTITIF_SECOND)
+							: generateElement(REG_Element.ADJECTIVE, null));
 		case 1:
-			return generateElement(REG_Element.adjective, null);
+			return generateElement(REG_Element.ADJECTIVE, null);
 		case 2:
 			return "";
 		default:

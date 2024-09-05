@@ -26,9 +26,9 @@ public class PersonaGenerator extends RandomEntityGenerator {
 		int age = getDefaultOrRandom(randomPersona.getAge(), 100);
 		String job = getRandomJob(randomPersona.getJob(), age);
 		String name = getRandomName(randomPersona.getName());
-		String race = getDefaultOrRandom(randomPersona.getRace(), REG_Element.race);
+		String race = getDefaultOrRandom(randomPersona.getRace(), REG_Element.RACE);
 		R_PhysicalDTO physical = generatePhysical(randomPersona.getPhysical(), age);
-		String role = getDefaultOrRandom(randomPersona.getRole(), REG_Element.role);
+		String role = getDefaultOrRandom(randomPersona.getRole(), REG_Element.ROLE);
 		R_TraitsDTO traits = generateTraits(randomPersona.getTraits());
 
 		randomPersona.setAge(age);
@@ -52,15 +52,15 @@ public class PersonaGenerator extends RandomEntityGenerator {
 		if (!stringEmpty(defaultJob)) {
 			return defaultJob;
 		}
-		return (age > 16) ? getRandomIdeaByType(REG_Element.job).getValue() : "Aucun";
+		return (age > 16) ? getRandomIdeaByType(REG_Element.JOB).getValue() : "Aucun";
 	}
 
 	private R_PhysicalDTO generatePhysical(R_PhysicalDTO physical, int age) {
-		String eyesColor = getDefaultOrRandom(physical.getEyesColor(), REG_Element.eyes_color);
-		String faceShape = getDefaultOrRandom(physical.getFaceShape(), REG_Element.face_shape);
-		String gender = getDefaultOrRandom(physical.getGender(), REG_Element.gender);
-		String hairColor = getDefaultOrRandom(physical.getHairColor(), REG_Element.hair_color);
-		String hairStyle = getDefaultOrRandom(physical.getHairStyle(), REG_Element.hair_style);
+		String eyesColor = getDefaultOrRandom(physical.getEyesColor(), REG_Element.EYES_COLOR);
+		String faceShape = getDefaultOrRandom(physical.getFaceShape(), REG_Element.FACE_SHAPE);
+		String gender = getDefaultOrRandom(physical.getGender(), REG_Element.GENDER);
+		String hairColor = getDefaultOrRandom(physical.getHairColor(), REG_Element.HAIR_COLOR);
+		String hairStyle = getDefaultOrRandom(physical.getHairStyle(), REG_Element.HAIR_STYLE);
 		double height = getHeight(physical.getHeight(), age, gender);
 		double weight = getWeight(physical.getWeight(), height);
 		String morphology = getMorphology(physical.getMorphology(), height, weight);
@@ -106,7 +106,7 @@ public class PersonaGenerator extends RandomEntityGenerator {
 			return morphology;
 		}
 		int BMI = getBMI(weight, height);
-		List<Idea> morphologies = ideaRepository.findByType(REG_Element.morphology.toString());
+		List<Idea> morphologies = ideaRepository.findByType(REG_Element.MORPHOLOGY.toString());
 		int index = 0;
 		do {
 			index = RNG.getRandBelow(morphologies.size());
@@ -146,12 +146,12 @@ public class PersonaGenerator extends RandomEntityGenerator {
 	}
 
 	private R_TraitsDTO generateTraits(R_TraitsDTO traits) {
-		Set<String> badTraits = getDefaultOrRandom(traits.getBadTraits(), REG_Element.bad_trait, 1, 3);
-		Set<String> carac = getDefaultOrRandom(traits.getCaracteristics(), REG_Element.hobby, 2, 5);
-		Set<String> goodTraits = getDefaultOrRandom(traits.getGoodTraits(), REG_Element.good_trait, 2, 5);
+		Set<String> badTraits = getDefaultOrRandom(traits.getBadTraits(), REG_Element.BAD_TRAIT, 1, 3);
+		Set<String> carac = getDefaultOrRandom(traits.getCaracteristics(), REG_Element.HOBBY, 2, 5);
+		Set<String> goodTraits = getDefaultOrRandom(traits.getGoodTraits(), REG_Element.GOOD_TRAIT, 2, 5);
 		Set<String> handicaps;
 		if (RNG.getRandBelow(100) < 40) {
-			handicaps = getDefaultOrRandom(traits.getHandicaps(), REG_Element.handicap, 1, 3);
+			handicaps = getDefaultOrRandom(traits.getHandicaps(), REG_Element.HANDICAP, 1, 3);
 		} else {
 			handicaps = new TreeSet<String>();
 			handicaps.add("Aucun");

@@ -13,11 +13,11 @@ public class ObjectGenerator extends RandomEntityGenerator {
 	@Override
 	public R_ObjectDTO generate(Random_Interface constraint) {
 		R_ObjectDTO randomObject = new R_ObjectDTO((R_ObjectDTO) constraint);
-		String object = getDefaultOrRandomWithArticle(randomObject.getObject(), REG_Element.object,
-				REG_Article.article_defini);
-		String adjective = getDefaultOrRandom(randomObject.getAdjective(), REG_Element.adjective);
-		String suffix = getDefaultOrRandomWithArticle(randomObject.getSuffix(), REG_Element.material,
-				REG_Article.article_partitif_second);
+		String object = getDefaultOrRandomWithArticle(randomObject.getObject(), REG_Element.OBJECT,
+				REG_Article.ARTICLE_DEFINI);
+		String adjective = getDefaultOrRandom(randomObject.getAdjective(), REG_Element.ADJECTIVE);
+		String suffix = getDefaultOrRandomWithArticle(randomObject.getSuffix(), REG_Element.MATERIAL,
+				REG_Article.ARTICLE_PARTITIF_SECOND);
 
 		randomObject.setAdjective(adjective);
 		randomObject.setObject(object);

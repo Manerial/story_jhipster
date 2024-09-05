@@ -54,7 +54,7 @@ public class GeneratorsController {
 	@PostMapping("/generate/personas")
 	public ResponseEntity<List<Random_Interface>> generatePersonas(@RequestParam int number,
 			@Valid @RequestBody R_PersonaDTO constraint) {
-		List<Random_Interface> generatedPersonas = ideaService.generate(number, REG_Entity.persona, constraint);
+		List<Random_Interface> generatedPersonas = ideaService.generate(number, REG_Entity.PERSONA, constraint);
 		return ResponseEntity.ok().body(generatedPersonas);
 	}
 
@@ -68,7 +68,7 @@ public class GeneratorsController {
 	@PostMapping("/generate/creatures")
 	public ResponseEntity<List<Random_Interface>> generateCreatures(@RequestParam int number,
 			@Valid @RequestBody R_CreatureDTO constraint) {
-		List<Random_Interface> generatedCreatures = ideaService.generate(number, REG_Entity.creature, constraint);
+		List<Random_Interface> generatedCreatures = ideaService.generate(number, REG_Entity.CREATURE, constraint);
 		return ResponseEntity.ok().body(generatedCreatures);
 	}
 
@@ -80,7 +80,7 @@ public class GeneratorsController {
 	 */
 	@PostMapping("/generate/honorary_titles")
 	public ResponseEntity<List<Random_Interface>> generateHonoraryTitles(@RequestParam int number) {
-		List<Random_Interface> generatedHonoraryTitles = ideaService.generate(number, REG_Entity.honorary_title, null);
+		List<Random_Interface> generatedHonoraryTitles = ideaService.generate(number, REG_Entity.HONORARY_TITLE, null);
 		return ResponseEntity.ok().body(generatedHonoraryTitles);
 	}
 
@@ -94,7 +94,7 @@ public class GeneratorsController {
 	@PostMapping("/generate/locations")
 	public ResponseEntity<List<Random_Interface>> generateLocations(@RequestParam int number,
 			@Valid @RequestBody R_LocationDTO constraint) {
-		List<Random_Interface> generatedLocations = ideaService.generate(number, REG_Entity.location, constraint);
+		List<Random_Interface> generatedLocations = ideaService.generate(number, REG_Entity.LOCATION, constraint);
 		return ResponseEntity.ok().body(generatedLocations);
 	}
 
@@ -108,7 +108,7 @@ public class GeneratorsController {
 	@PostMapping("/generate/objects")
 	public ResponseEntity<List<Random_Interface>> generateObject(@RequestParam int number,
 			@Valid @RequestBody R_ObjectDTO constraint) {
-		List<Random_Interface> generatedObjects = ideaService.generate(number, REG_Entity.object, constraint);
+		List<Random_Interface> generatedObjects = ideaService.generate(number, REG_Entity.OBJECT, constraint);
 		return ResponseEntity.ok().body(generatedObjects);
 	}
 
@@ -122,7 +122,7 @@ public class GeneratorsController {
 	@PostMapping("/generate/writing_options")
 	public ResponseEntity<List<Random_Interface>> generateWritingOptions(@RequestParam int number,
 			@Valid @RequestBody R_WritingOptionDTO constraint) {
-		List<Random_Interface> generatedWritingOptions = ideaService.generate(number, REG_Entity.writing_option,
+		List<Random_Interface> generatedWritingOptions = ideaService.generate(number, REG_Entity.WRITING_OPTION,
 				constraint);
 		return ResponseEntity.ok().body(generatedWritingOptions);
 	}

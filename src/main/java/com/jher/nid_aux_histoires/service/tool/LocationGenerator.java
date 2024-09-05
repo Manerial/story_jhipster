@@ -12,12 +12,12 @@ public class LocationGenerator extends RandomEntityGenerator {
 	@Override
 	public R_LocationDTO generate(Random_Interface constraint) {
 		R_LocationDTO randomLocation = new R_LocationDTO((R_LocationDTO) constraint);
-		String place = getDefaultOrRandomWithArticle(randomLocation.getPlace(), REG_Element.place,
-				REG_Article.article_indefini);
-		String landscape = getDefaultOrRandomWithArticle(randomLocation.getLandscape(), REG_Element.landscape,
-				REG_Article.article_indefini);
-		String material = getDefaultOrRandomWithArticle(randomLocation.getMaterial(), REG_Element.material,
-				REG_Article.article_partitif_second);
+		String place = getDefaultOrRandomWithArticle(randomLocation.getPlace(), REG_Element.PLACE,
+				REG_Article.ARTICLE_INDEFINI);
+		String landscape = getDefaultOrRandomWithArticle(randomLocation.getLandscape(), REG_Element.LANDSCAPE,
+				REG_Article.ARTICLE_INDEFINI);
+		String material = getDefaultOrRandomWithArticle(randomLocation.getMaterial(), REG_Element.MATERIAL,
+				REG_Article.ARTICLE_PARTITIF_SECOND);
 		randomLocation.setPlace(place);
 		randomLocation.setLandscape(landscape);
 		randomLocation.setMaterial(material);

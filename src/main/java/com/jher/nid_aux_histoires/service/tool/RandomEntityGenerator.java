@@ -63,7 +63,7 @@ public abstract class RandomEntityGenerator {
 			return idea.getValue().toLowerCase();
 		}
 
-		if (!complement.equals("P") && articleType != REG_Article.article_indefini && startWithVowel(idea.getValue())) {
+		if (!complement.equals("P") && articleType != REG_Article.ARTICLE_INDEFINI && startWithVowel(idea.getValue())) {
 			complement = "A";
 		}
 

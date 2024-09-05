@@ -30,12 +30,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jher.nid_aux_histoires.config.Constants;
 
+import lombok.Data;
+
 /**
  * A user.
  */
 @Entity
 @Table(name = "jhi_user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Data
 public class User extends AbstractAuditingEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -127,121 +130,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Bonus> bonuses = new HashSet<>();
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
 	// Lowercase the login before saving it in database
 	public void setLogin(String login) {
 		this.login = StringUtils.lowerCase(login, Locale.ENGLISH);
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
 	public boolean getActivated() {
-		return activated;
-	}
-
-	public void setActivated(boolean activated) {
-		this.activated = activated;
-	}
-
-	public String getActivationKey() {
-		return activationKey;
-	}
-
-	public void setActivationKey(String activationKey) {
-		this.activationKey = activationKey;
-	}
-
-	public String getResetKey() {
-		return resetKey;
-	}
-
-	public void setResetKey(String resetKey) {
-		this.resetKey = resetKey;
-	}
-
-	public Instant getResetDate() {
-		return resetDate;
-	}
-
-	public void setResetDate(Instant resetDate) {
-		this.resetDate = resetDate;
-	}
-
-	public String getLangKey() {
-		return langKey;
-	}
-
-	public void setLangKey(String langKey) {
-		this.langKey = langKey;
-	}
-
-	public Set<Authority> getAuthorities() {
-		return authorities;
-	}
-
-	public void setAuthorities(Set<Authority> authorities) {
-		this.authorities = authorities;
-	}
-
-	public String getIntroduction() {
-		return introduction;
-	}
-
-	public void setIntroduction(String introduction) {
-		this.introduction = introduction;
-	}
-
-	public Set<Comment> getComments() {
-		return comments;
+		return this.activated;
 	}
 
 	public User comments(Set<Comment> comments) {
@@ -261,14 +156,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		return this;
 	}
 
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
-	}
-
-	public Set<Book> getBooks() {
-		return books;
-	}
-
 	public User books(Set<Book> books) {
 		this.books = books;
 		return this;
@@ -284,14 +171,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		this.books.remove(book);
 		book.setAuthor(null);
 		return this;
-	}
-
-	public void setBooks(Set<Book> books) {
-		this.books = books;
-	}
-
-	public Set<Cover> getCovers() {
-		return covers;
 	}
 
 	public User covers(Set<Cover> covers) {
@@ -311,14 +190,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		return this;
 	}
 
-	public void setCovers(Set<Cover> covers) {
-		this.covers = covers;
-	}
-
-	public Set<Bonus> getBonuses() {
-		return bonuses;
-	}
-
 	public User bonuss(Set<Bonus> bonuss) {
 		this.bonuses = bonuss;
 		return this;
@@ -334,10 +205,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		this.bonuses.remove(bonus);
 		bonus.setOwner(null);
 		return this;
-	}
-
-	public void setBonuss(Set<Bonus> bonuss) {
-		this.bonuses = bonuss;
 	}
 
 	@Override

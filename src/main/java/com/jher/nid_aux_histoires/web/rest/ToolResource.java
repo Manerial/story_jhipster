@@ -61,9 +61,6 @@ public class ToolResource {
 		QRCODE, DATAMATRIX,
 	}
 
-	public ToolResource() {
-	}
-
 	/**
 	 * {@code GET  /encode_text} : Get the QR_Code of a text.
 	 *

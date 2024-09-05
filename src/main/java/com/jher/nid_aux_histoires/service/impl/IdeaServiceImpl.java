@@ -80,22 +80,22 @@ public class IdeaServiceImpl implements IdeaService {
 		List<Random_Interface> objects = new ArrayList<>();
 		RandomEntityGenerator ideaGenerator;
 		switch (type) {
-		case location:
+		case LOCATION:
 			ideaGenerator = new LocationGenerator(ideaRepository);
 			break;
-		case object:
+		case OBJECT:
 			ideaGenerator = new ObjectGenerator(ideaRepository);
 			break;
-		case persona:
+		case PERSONA:
 			ideaGenerator = new PersonaGenerator(ideaRepository, wordAnalysisService);
 			break;
-		case writing_option:
+		case WRITING_OPTION:
 			ideaGenerator = new WritingOptionGenerator(ideaRepository);
 			break;
-		case honorary_title:
+		case HONORARY_TITLE:
 			ideaGenerator = new HonoraryTitleGenerator(ideaRepository);
 			break;
-		case creature:
+		case CREATURE:
 			ideaGenerator = new CreatureGenerator(ideaRepository, wordAnalysisService);
 			break;
 		default:
