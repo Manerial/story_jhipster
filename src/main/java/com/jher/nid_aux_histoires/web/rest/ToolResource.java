@@ -45,6 +45,7 @@ import com.google.zxing.oned.UPCAWriter;
 import com.google.zxing.oned.UPCEWriter;
 import com.google.zxing.pdf417.PDF417Writer;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
 /**
  * REST controller for managing {@link com.jher.nid_aux_histoires.domain.Cover}.
@@ -120,7 +121,7 @@ public class ToolResource {
 			generatedImage = createImage(text, size, new UPCEWriter(), barcodeFormat);
 			break;
 		default:
-			break;
+			throw new BadRequestAlertException("The BarcodeFormat does not exist", "BarcodeFormat", "donotexist");
 		}
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"CodeImage.png\"")
 				.contentType(MediaType.IMAGE_PNG).contentLength(generatedImage.length).body(generatedImage);
