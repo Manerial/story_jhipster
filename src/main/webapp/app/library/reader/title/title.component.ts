@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { Book, IBook } from 'app/shared/model/book.model';
 import { ReaderService } from '../reader.service';
 
@@ -10,15 +9,12 @@ import { ReaderService } from '../reader.service';
 })
 export class TitleComponent implements OnInit {
   public book: IBook = new Book();
-  public isLoading = true;
 
-  constructor(public readerService: ReaderService, private titleService: Title) {}
+  constructor(public readerService: ReaderService) {}
 
   ngOnInit(): void {
     this.readerService.book.subscribe(book => {
       this.book = book;
-      this.isLoading = false;
-      this.titleService.setTitle(this.book.name);
     });
   }
 }
