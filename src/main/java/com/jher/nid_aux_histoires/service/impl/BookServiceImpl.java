@@ -76,9 +76,12 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public BookDTO changeVisibility(Long bookId) {
-		Book book = bookRepository.findById(bookId).get();
-		book.setVisibility(!book.getVisibility());
-		bookRepository.save(book);
+		Optional<Book> O_book = bookRepository.findById(bookId);
+		if (O_book.isPresent()) {
+			Book book = O_book.get();
+			book.setVisibility(!book.getVisibility());
+			bookRepository.save(book);
+		}
 		return null;
 	}
 
@@ -131,16 +134,20 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Book : {}", id);
-		Book book = bookRepository.findById(id).get();
-		for (Comment comment : book.getComments()) {
-			commentService.delete(comment.getId());
+		Optional<Book> O_book = bookRepository.findById(id);
+		if (O_book.isPresent()) {
+			Book book = bookRepository.findById(id).get();
+
+			for (Comment comment : book.getComments()) {
+				commentService.delete(comment.getId());
+			}
+			for (Part part : book.getParts()) {
+				partService.delete(part.getId());
+			}
+			for (Bonus bonus : book.getBonuses()) {
+				bonusService.delete(bonus.getId());
+			}
+			bookRepository.deleteById(id);
 		}
-		for (Part part : book.getParts()) {
-			partService.delete(part.getId());
-		}
-		for (Bonus bonus : book.getBonuses()) {
-			bonusService.delete(bonus.getId());
-		}
-		bookRepository.deleteById(id);
 	}
 }

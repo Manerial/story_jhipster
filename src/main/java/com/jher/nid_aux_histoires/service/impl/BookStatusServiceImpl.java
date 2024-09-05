@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jher.nid_aux_histoires.domain.BookStatus;
+import com.jher.nid_aux_histoires.domain.User;
 import com.jher.nid_aux_histoires.repository.BookStatusRepository;
 import com.jher.nid_aux_histoires.repository.UserRepository;
 import com.jher.nid_aux_histoires.service.BookStatusService;
@@ -59,10 +60,13 @@ public class BookStatusServiceImpl implements BookStatusService {
 		} else {
 			bookStatusDTO = new BookStatusDTO();
 			bookStatusDTO.setBookId(bookId);
-			bookStatusDTO.setUserId(userRepository.findOneByLogin(login).get().getId());
 			bookStatusDTO.setFavorit(false);
 			bookStatusDTO.setFinished(false);
 			bookStatusDTO.setCurentChapterId(chapterId);
+			Optional<User> O_user = userRepository.findOneByLogin(login);
+			if (O_user.isPresent()) {
+				bookStatusDTO.setUserId(O_user.get().getId());
+			}
 		}
 		return save(bookStatusDTO);
 	}

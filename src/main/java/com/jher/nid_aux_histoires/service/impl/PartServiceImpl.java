@@ -98,7 +98,6 @@ public class PartServiceImpl implements PartService {
 		partRepository.deleteById(id);
 	}
 
-	@Transactional(readOnly = true)
 	private int findNextNumberForBookId(Long bookId) {
 		log.debug("Request to get all Parts");
 		int bigest = 1;

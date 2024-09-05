@@ -76,7 +76,6 @@ public class SceneServiceImpl implements SceneService {
 		sceneRepository.deleteById(id);
 	}
 
-	@Transactional(readOnly = true)
 	private int findNextNumberForBookId(Long chapterId) {
 		log.debug("Request to get all Parts");
 		int bigest = 1;
