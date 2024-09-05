@@ -54,6 +54,8 @@ public class UserDTO {
 
 	private String introduction;
 
+	private int books;
+
 	private Set<String> authorities;
 
 	private Set<CommentDTO> comments = new HashSet<>();
@@ -197,6 +199,14 @@ public class UserDTO {
 
 	public void setComments(Set<CommentDTO> comments) {
 		this.comments = comments;
+	}
+
+	public int getBooks() {
+		return books;
+	}
+
+	public void setBooks(int books) {
+		this.books = books;
 	}
 
 	// prettier-ignore

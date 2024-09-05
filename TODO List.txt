@@ -1,7 +1,10 @@
 OBLIGATOIRE
 
 Routes vers visit page perso
-	Get user by authority
+
+Page recherche auteur
+	Similaire à Librairie
+	Lien vers page de présentation Auteur
 
 Interface Compte
 	Gestion des livres (ajouter - supprimer - activer - désactiver)
@@ -23,10 +26,6 @@ Mots clés recherche Google
 Page Accueil :
 	- Nouvelles sorties
 	- News du moment
-
-Page recherche auteur
-	Similaire à Librairie
-	Lien vers page de présentation Auteur
 
 Tri/sélection
 	Nouveau

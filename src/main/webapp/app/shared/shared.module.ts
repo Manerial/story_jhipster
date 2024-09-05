@@ -5,13 +5,14 @@ import { AlertComponent } from './alert/alert.component';
 import { AlertErrorComponent } from './alert/alert-error.component';
 import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
-import { BookFilterPipe } from './util/search.pipe';
+import { BookFilterPipe, AuthorFilterPipe } from './util/search.pipe';
 
 @NgModule({
   imports: [NidAuxHistoiresSharedLibsModule],
   declarations: [
     FindLanguageFromKeyPipe,
     BookFilterPipe,
+    AuthorFilterPipe,
     AlertComponent,
     AlertErrorComponent,
     LoginModalComponent,
@@ -22,6 +23,7 @@ import { BookFilterPipe } from './util/search.pipe';
     NidAuxHistoiresSharedLibsModule,
     FindLanguageFromKeyPipe,
     BookFilterPipe,
+    AuthorFilterPipe,
     AlertComponent,
     AlertErrorComponent,
     LoginModalComponent,

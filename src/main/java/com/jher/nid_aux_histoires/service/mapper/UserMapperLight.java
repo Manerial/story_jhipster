@@ -28,6 +28,11 @@ public class UserMapperLight {
 		userDTO.setLogin(user.getLogin());
 		userDTO.setImageUrl(user.getImageUrl());
 		userDTO.setIntroduction(user.getIntroduction());
+		try {
+			userDTO.setBooks((user.getBooks() != null) ? user.getBooks().size() : 0);
+		} catch (Exception e) {
+
+		}
 		return userDTO;
 	}
 
