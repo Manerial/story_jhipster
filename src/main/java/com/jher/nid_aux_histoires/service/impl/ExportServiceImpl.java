@@ -48,18 +48,17 @@ public class ExportServiceImpl implements ExportService {
 
 	@Override
 	public boolean exportBook(long id) {
-		String idBook = "ID_" + id;
-		if (lockedBooks.contains(idBook)) {
+		if (isLockedBook(id)) {
 			log.warn("Le livre est déjà en cours d'export");
 			return false;
 		} else {
-			lockedBooks.add(idBook);
+			lockBook(id);
 		}
 
 		Thread exportThread = new Thread(() -> {
 			try {
 				export(id);
-				lockedBooks.remove(idBook);
+				unlockBook(id);
 			} catch (Exception e) {
 				String error = "Error during the generation of the document : " + e.getMessage();
 				log.warn(error, e);
@@ -69,7 +68,19 @@ public class ExportServiceImpl implements ExportService {
 		return true;
 	}
 
-	private void export(long id) {
+	public boolean isLockedBook(long id) {
+		return lockedBooks.contains("ID_" + id);
+	}
+
+	private boolean lockBook(long id) {
+		return lockedBooks.add("ID_" + id);
+	}
+
+	private boolean unlockBook(long id) {
+		return lockedBooks.remove("ID_" + id);
+	}
+
+	private boolean export(long id) {
 		Optional<BookDTO> optBook = bookService.findOne(id);
 		if (optBook.isPresent()) {
 			BookDTO book = optBook.get();
@@ -88,7 +99,9 @@ public class ExportServiceImpl implements ExportService {
 				exportDocx.convertWordToFormat(book, ExportDocx.FILE_FORMAT.EPUB);
 			} catch (Exception e) {
 			}
+			return true;
 		}
+		return false;
 	}
 
 	@Override

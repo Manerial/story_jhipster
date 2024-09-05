@@ -12,4 +12,6 @@ public interface ExportService {
 	boolean exportBook(long id);
 
 	MediaType getMediaType(ExportDocx.FILE_FORMAT format);
+
+	boolean isLockedBook(long idBook);
 }
