@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(BonusService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Bonus(0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Bonus(0, 'AAAAAAA', 0, '', 'AAAAAAA');
     });
 
     describe('Service methods', () => {

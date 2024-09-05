@@ -4,26 +4,26 @@ import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 
 import { NidAuxHistoiresTestModule } from '../../../test.module';
-import { ImageUpdateComponent } from 'app/entities/cover/cover-update.component';
+import { CoverUpdateComponent } from 'app/entities/cover/cover-update.component';
 import { CoverService } from 'app/entities/cover/cover.service';
 import { Cover } from 'app/shared/model/cover.model';
 
 describe('Component Tests', () => {
   describe('Image Management Update Component', () => {
-    let comp: ImageUpdateComponent;
-    let fixture: ComponentFixture<ImageUpdateComponent>;
+    let comp: CoverUpdateComponent;
+    let fixture: ComponentFixture<CoverUpdateComponent>;
     let service: CoverService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [NidAuxHistoiresTestModule],
-        declarations: [ImageUpdateComponent],
+        declarations: [CoverUpdateComponent],
         providers: [FormBuilder],
       })
-        .overrideTemplate(ImageUpdateComponent, '')
+        .overrideTemplate(CoverUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(ImageUpdateComponent);
+      fixture = TestBed.createComponent(CoverUpdateComponent);
       comp = fixture.componentInstance;
       service = fixture.debugElement.injector.get(CoverService);
     });
