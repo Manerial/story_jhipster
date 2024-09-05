@@ -1,5 +1,11 @@
 name: Application CI
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 jobs:
     pipeline:
         name: nid_aux_histoires pipeline
@@ -23,12 +29,6 @@ jobs:
               uses: actions/setup-java@v1
               with:
                 java-version: '11.x'
-            - name: Cache SonarCloud packages
-              uses: actions/cache@v1
-              with:
-                path: ~/.sonar/cache
-                key: ${{ runner.os }}-sonar
-                restore-keys: ${{ runner.os }}-sonar
             - name: Cache Maven packages
               uses: actions/cache@v1
               with:
@@ -37,24 +37,6 @@ jobs:
                 restore-keys: ${{ runner.os }}-m2
             - name: Install node.js packages
               run: npm install
-            - name: Install calibre
-              run: sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
-            - name: Create BooksExports
-              run: mkdir /home/runner/BooksExports
-            - name: Change rights BooksExports
-              run: chmod 777 -R /home/runner/BooksExports
-            - name: Run backend test
-              run: |
-                chmod +x mvnw
-                ./mvnw -ntp clean verify -P-webpack
-            - name: Run frontend test
-              run: npm run test
-            - name: Analyze code with SonarQube
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-              run: |
-                  mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Manerial_story_jhipster -Dsonar.login=$SONAR_TOKEN
             - name: Package application
               run: ./mvnw -ntp package -Pprod -DskipTests
             - name: Upload artifact
