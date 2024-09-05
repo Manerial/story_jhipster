@@ -9,9 +9,9 @@
     "display": "Voir",
     "bonus": "Bonus",
     "favorits": {
-      "title": "Favorits",
-      "add": "Ajouter aux favorits",
-      "remove": "Retirer des favorits"
+      "title": "Favoris",
+      "add": "Ajouter aux favoris",
+      "remove": "Retirer des favoris"
     },
     "flip": "Cliquer pour lire le résumé",
     "downloading": "En cours",
