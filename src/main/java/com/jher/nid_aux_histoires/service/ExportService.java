@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import com.jher.nid_aux_histoires.export.ExportDocx;
 
 public interface ExportService {
-	Path getPathOfExportedBook(long id, ExportDocx.FILE_FORMAT format) throws Exception;
+	Path getPathOfExportedBook(long id, ExportDocx.FILE_FORMAT format);
 
 	boolean exportBook(long id);
 

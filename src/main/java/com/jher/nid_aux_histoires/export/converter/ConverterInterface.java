@@ -1,5 +1,7 @@
 package com.jher.nid_aux_histoires.export.converter;
 
+import java.io.IOException;
+
 public interface ConverterInterface {
-	public String[] getCommand(String bookName);
+	public void startConvertion(String bookName) throws IOException;
 }
