@@ -1,18 +1,27 @@
 Accès en lecture à tous, même non inscrit
-sitemap.xml à rendre visible
-Mots clés recherche Google
+Indexation :
+    sitemap.xml à rendre visible
+        https://www.bing.com/webmasters/home?siteUrl=https://lenidauxhistoires.fr/
+        https://search.google.com/search-console?resource_id=sc-domain:lenidauxhistoires.fr
+    Mots clés recherche Google
 
 Pagination pour les livres
 
+Mettre en place le HTTPS :
+    https://fedingo.com/how-to-install-ssl-certificate-raspberry-pi/
+
+Mettre en place serveur mail
+    https://raspberrytips.com/mail-server-raspberry-pi/
+
 Bugs :
-	Discord
+	Discord : créer le Discord
 	Sommaire ne va pas jusqu'en bas sur téléphone
 
 GUI :
 	- Générateur de QR_Code (?)
 
-Section Contact
-	"Vous pouvez nous contacter via le formulaire proposé ou sur le Discord de la communauté"
+Créer une Section Contact
+	"Vous pouvez nous contacter via le formulaire proposé ou sur le Discord de la communauté [ou par mail]"
 	
 Traduire générateurs (contenu des cartes)
 
