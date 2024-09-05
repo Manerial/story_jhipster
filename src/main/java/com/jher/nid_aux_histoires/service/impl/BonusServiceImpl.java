@@ -15,6 +15,7 @@ import com.jher.nid_aux_histoires.repository.BonusRepository;
 import com.jher.nid_aux_histoires.service.BonusService;
 import com.jher.nid_aux_histoires.service.dto.BonusDTO;
 import com.jher.nid_aux_histoires.service.mapper.BonusMapper;
+import com.jher.nid_aux_histoires.service.mapper.BonusMapperLight;
 
 /**
  * Service Implementation for managing {@link Bonus}.
@@ -29,9 +30,13 @@ public class BonusServiceImpl implements BonusService {
 
 	private final BonusMapper bonusMapper;
 
-	public BonusServiceImpl(BonusRepository bonusRepository, BonusMapper bonusMapper) {
+	private final BonusMapperLight bonusMapperLight;
+
+	public BonusServiceImpl(BonusRepository bonusRepository, BonusMapper bonusMapper,
+			BonusMapperLight bonusMapperLight) {
 		this.bonusRepository = bonusRepository;
 		this.bonusMapper = bonusMapper;
+		this.bonusMapperLight = bonusMapperLight;
 	}
 
 	@Override
@@ -52,7 +57,7 @@ public class BonusServiceImpl implements BonusService {
 	@Override
 	public List<BonusDTO> findAllByBookId(Long id) {
 		log.debug("Request to get all Bonuses by Book");
-		return bonusMapper.toDto(bonusRepository.findAllByBookId(id));
+		return bonusMapperLight.toDto(bonusRepository.findAllByBookId(id));
 	}
 
 	@Override

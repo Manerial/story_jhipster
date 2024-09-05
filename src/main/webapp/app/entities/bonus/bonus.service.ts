@@ -8,10 +8,12 @@ import { IBonus } from 'app/shared/model/bonus.model';
 
 type EntityResponseType = HttpResponse<IBonus>;
 type EntityArrayResponseType = HttpResponse<IBonus[]>;
+type BonusResponseType = HttpResponse<Blob>;
 
 @Injectable({ providedIn: 'root' })
 export class BonusService {
   public resourceUrl = SERVER_API_URL + 'api/bonuses';
+  public downloadUrl = SERVER_API_URL + 'api/download';
 
   constructor(protected http: HttpClient) {}
 
@@ -34,5 +36,13 @@ export class BonusService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  getAllBonusByBookId(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IBonus[]>(`${this.resourceUrl}/book/${id}`, { observe: 'response' });
+  }
+
+  download(id: number): Observable<BonusResponseType> {
+    return this.http.get(`${this.downloadUrl}/bonus/${id}`, { observe: 'response', responseType: 'blob' });
   }
 }

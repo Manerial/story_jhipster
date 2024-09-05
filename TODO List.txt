@@ -1,12 +1,6 @@
 OBLIGATOIRE
 
 GUI :
-	- List / Download bonus
-		- Page livre : si bonus présents, alors bouton bonus (+)
-		- Page download bonus 
-			- reprendre page images
-				- Virer lien images / part / chapter / scene
-				- Virer sidepanel
 	- Générateur de QR_Code
 
 Section Contact
