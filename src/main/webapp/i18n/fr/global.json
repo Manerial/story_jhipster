@@ -69,6 +69,9 @@
         "register": {
           "noaccount": "Vous n'avez pas encore de compte\u00A0?",
           "link": "Créer un compte"
+        },
+        "authenticated": {
+          "link": "authentifier"
         }
       },
       "error": {
