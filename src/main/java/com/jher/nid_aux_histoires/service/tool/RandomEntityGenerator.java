@@ -49,6 +49,11 @@ public abstract class RandomEntityGenerator {
 		return (defaultValue > 0) ? defaultValue : RNG.getRandBelow(defaultMax);
 	}
 
+	protected String getDefaultOrRandom(String defaultValue, REG_Element... elements) {
+		int randomElement = RNG.getRandBelow(elements.length);
+		return (!stringEmpty(defaultValue)) ? defaultValue : getRandomIdeaByType(elements[randomElement]).getValue();
+	}
+
 	protected Idea getRandomIdeaByType(REG_Element type) {
 		List<Idea> resources = ideaRepository.findByType(type.toString());
 		int index = RNG.getRandBelow(resources.size());

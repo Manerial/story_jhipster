@@ -20,14 +20,14 @@ public class R_CreatureDTO implements Random_Interface {
 	}
 
 	public R_CreatureDTO(R_CreatureDTO creature) {
-		this.name = creature.name;
-		this.skin = creature.skin;
-		this.locations = creature.locations;
-		this.diets = creature.diets;
-		this.attributes = creature.attributes;
-		this.skills = creature.skills;
-		this.height = creature.height;
-		this.weight = creature.weight;
-		this.nbMoveMembers = creature.nbMoveMembers;
+		setName(creature.getName());
+		setSkin(creature.getSkin());
+		setLocations(creature.getLocations());
+		setDiets(creature.getDiets());
+		setAttributes(creature.getAttributes());
+		setSkills(creature.getSkills());
+		setHeight(creature.getHeight());
+		setWeight(creature.getWeight());
+		setNbMoveMembers(creature.getNbMoveMembers());
 	}
 }
