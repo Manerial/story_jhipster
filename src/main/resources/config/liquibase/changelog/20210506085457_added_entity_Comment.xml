@@ -15,7 +15,7 @@
 				autoIncrement="${autoIncrement}">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			<column name="text" type="varchar(50000)">
+			<column name="text" type="${clobType}">
 				<constraints nullable="true" />
 			</column>
             <column name="book_id" type="bigint">
