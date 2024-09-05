@@ -33,14 +33,10 @@
 								<span jhiTranslate="library.read">Read</span>
 							</span>
 						</a>
-						<a (click)="downloadBook(book.id, book.name)" class="btn bkg-gold ml-2">
-							<span [ngClass]="isDownloading[book.id] ? 'hide-element' : ''">
+						<a (click)="downloadBook(book)" class="btn bkg-gold ml-2">
+							<span >
 								<fa-icon icon="download"></fa-icon>
 								<span jhiTranslate="library.download">Download</span>
-							</span>
-							<span [ngClass]="isDownloading[book.id] ? '' : 'hide-element'">
-								<fa-icon icon="spinner"></fa-icon>
-								<span jhiTranslate="library.downloading">Downloading</span>
 							</span>
 						</a>
 					</div>
@@ -54,14 +50,10 @@
 			<div class="card">
 				<div class="card-body">
 					<h2 class="card-title">{{ book.name }}</h2>
-					<a (click)="downloadBook(book.id, book.name)" class="btn bkg-gold ml-2 mb-2">
-						<span [ngClass]="isDownloading[book.id] ? 'hide-element' : ''">
+					<a (click)="downloadBook(book)" class="btn bkg-gold ml-2 mb-2">
+						<span >
 							<fa-icon icon="download"></fa-icon>
 							<span jhiTranslate="library.download">Download</span>
-						</span>
-						<span [ngClass]="isDownloading[book.id] ? '' : 'hide-element'">
-							<fa-icon icon="spinner"></fa-icon>
-							<span jhiTranslate="library.downloading">Downloading</span>
 						</span>
 					</a>
 					<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold ml-2 mb-2">

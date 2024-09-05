@@ -10,6 +10,7 @@ import { TitleComponent } from './reader/title/title.component';
 import { SidebarComponent } from '../layouts/sidebar/sidebar.component';
 import { ImageViewerComponent } from './images/image-viewer/image-viewer.component';
 import { ImageListComponent } from './images/image-list/image-list.component';
+import { DownloadBookDialogComponent } from './download-book-dialog.component';
 
 @NgModule({
   imports: [NidAuxHistoiresSharedModule, RouterModule.forChild([LIBRARY_ROUTE, READER_ROUTE, IMAGE_VIEW_ROUTE])],
@@ -21,6 +22,8 @@ import { ImageListComponent } from './images/image-list/image-list.component';
     SidebarComponent,
     ImageListComponent,
     ImageViewerComponent,
+    DownloadBookDialogComponent,
   ],
+  entryComponents: [DownloadBookDialogComponent],
 })
 export class NidAuxHistoiresLibraryModule {}
