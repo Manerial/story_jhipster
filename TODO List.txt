@@ -1,6 +1,7 @@
 OBLIGATOIRE
 
 Routes vers visit page perso
+	Get user by authority
 
 Interface Compte
 	Gestion des livres (ajouter - supprimer - activer - désactiver)

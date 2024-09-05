@@ -12,7 +12,6 @@ import { PasswordResetFinishComponent } from './password-reset/finish/password-r
 import { SettingsComponent } from './settings/settings.component';
 import { AccountComponent } from './account.component';
 import { accountState } from './account.route';
-import { VisitComponent } from './visit/visit.component';
 
 @NgModule({
   imports: [NidAuxHistoiresSharedModule, RouterModule.forChild(accountState)],
@@ -25,7 +24,6 @@ import { VisitComponent } from './visit/visit.component';
     PasswordResetFinishComponent,
     SettingsComponent,
     AccountComponent,
-    VisitComponent,
   ],
 })
 export class AccountModule {}

@@ -191,16 +191,29 @@ public class UserResource {
 	}
 
 	/**
+	 * {@code GET /users/:login} : get the "login" user (light version).
+	 *
+	 * @param login the login of the user to find.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+	 *         the "login" user, or with status {@code 404 (Not Found)}.
+	 */
+	@GetMapping("/user_light/login/{login:" + Constants.LOGIN_REGEX + "}")
+	public ResponseEntity<UserDTO> getUserLight(@PathVariable String login) {
+		log.debug("REST request to get User : {}", login);
+		return ResponseEntity.ok(userService.getUserLightByLogin(login));
+	}
+
+	/**
 	 * {@code GET /users/:login} : get the "login" user.
 	 *
 	 * @param login the login of the user to find.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the "login" user, or with status {@code 404 (Not Found)}.
 	 */
-	@GetMapping("/user_light/{login:" + Constants.LOGIN_REGEX + "}")
-	public ResponseEntity<UserDTO> getUserLight(@PathVariable String login) {
-		log.debug("REST request to get User : {}", login);
-		return ResponseEntity.ok(userService.getUserLightByLogin(login));
+	@GetMapping("/user_light/authors")
+	public ResponseEntity<List<UserDTO>> getAuthorsLight() {
+		log.debug("REST request to get Authors");
+		return ResponseEntity.ok(userService.getAuthorsLight());
 	}
 
 	/**

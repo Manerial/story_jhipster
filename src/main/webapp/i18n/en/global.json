@@ -5,6 +5,7 @@
     "menu": {
       "home": "Home",
       "library": "Library",
+      "authors": "Authors",
       "tools": "Tools",
       "images": "Images",
       "book": "Book",
@@ -23,7 +24,7 @@
       },
       "account": {
         "main": "Account",
-        "profile": "Profile",
+        "profile": "My profile",
         "settings": "Settings",
         "password": "Password",
         "sessions": "Sessions",

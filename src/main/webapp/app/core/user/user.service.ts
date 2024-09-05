@@ -26,7 +26,11 @@ export class UserService {
   }
 
   findLight(login: string): Observable<IUser> {
-    return this.http.get<IUser>(`${this.resourceUrlLight}/${login}`);
+    return this.http.get<IUser>(`${this.resourceUrlLight}/login/${login}`);
+  }
+
+  findAuthors(): Observable<IUser[]> {
+    return this.http.get<IUser[]>(`${this.resourceUrlLight}/authors`);
   }
 
   query(req?: Pagination): Observable<HttpResponse<IUser[]>> {

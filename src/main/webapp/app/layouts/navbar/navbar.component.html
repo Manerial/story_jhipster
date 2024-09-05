@@ -49,11 +49,20 @@
                     </span>
                 </a>
             </li>
+            <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="/authors" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="users"></fa-icon>
+                        <span jhiTranslate="global.menu.authors">Authors</span>
+                    </span>
+                </a>
+            </li>
             <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *jhiHasAnyAuthority="'ROLE_USER'">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
                     id="generatorsnavBarDropdown">
                     <span>
-                        <fa-icon icon="flag"></fa-icon>
+                        <fa-icon icon="toolbox"></fa-icon>
                         <span jhiTranslate="global.menu.tools">Generator</span>
                     </span>
                 </a>

@@ -29,7 +29,7 @@ export const visitRoute: Route = {
   },
   data: {
     authorities: [Authority.USER],
-    pageTitle: 'global.menu.account.visit',
+    pageTitle: 'visit.main',
   },
   canActivate: [UserRouteAccessService],
 };
