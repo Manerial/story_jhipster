@@ -1,5 +1,6 @@
 <div class="content">
-	<h1 jhiTranslate="global.menu.library">Library</h1>
+	<h1 *ngIf="!favorits" jhiTranslate="global.menu.library">Library</h1>
+	<h1 *ngIf="favorits" jhiTranslate="global.menu.favorits">Favorits</h1>
 	<div *ngIf="responsiveService.isBigScreen" class="row m-2">
 		<div class="main">
 			<ul id="bk-list" class="bk-list clearfix">
@@ -43,7 +44,7 @@
 						title="{{ 'library.bonus' | translate }}">
 							<fa-icon icon="plus"></fa-icon>
 						</a><!--
-						--><a (click)="favorits(book.id)" class="btn bkg-gold mt-2 ml-2"
+						--><a (click)="toggleFavorits(book.id)" class="btn bkg-gold mt-2 ml-2"
 						title="{{ !findBookStatusByBookId(book.id).favorit ? ('library.favorits.add' | translate) : ('library.favorits.remove' | translate) }}">
 							<fa-icon *ngIf="!findBookStatusByBookId(book.id).favorit" [icon]="['far', 'star']"></fa-icon>
 							<fa-icon *ngIf="findBookStatusByBookId(book.id).favorit" [icon]="['fas', 'star']"></fa-icon>
@@ -83,7 +84,7 @@
 							<span jhiTranslate="library.bonus">Bonus</span>
 						</span>
 					</a><!--
-					--><a (click)="favorits(book.id)" class="btn bkg-gold ml-2 mb-2">
+					--><a (click)="toggleFavorits(book.id)" class="btn bkg-gold ml-2 mb-2">
 						<span *ngIf="!findBookStatusByBookId(book.id).favorit">
 							<fa-icon [icon]="['far', 'star']"></fa-icon>
 							<span jhiTranslate="library.favorits.add">Ajouter aux favorits</span>

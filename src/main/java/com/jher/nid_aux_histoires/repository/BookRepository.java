@@ -28,6 +28,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 	@Query("select book from Book book where book.author.login =:login and book.visibility = true")
 	Page<Book> findAllVisibleByAuthorLogin(Pageable pageable, @Param("login") String login);
 
+	@Query(value = "SELECT book FROM Book book WHERE book.visibility = true AND book.id IN (SELECT bookStatus.book.id FROM BookStatus bookStatus WHERE bookStatus.user.login =:login AND bookStatus.favorit = true)")
+	Page<Book> findAllFavoritsVisible(Pageable pageable, @Param("login") String login);
+
 	@Query("select book from Book book where book.id =:id")
 	Optional<Book> findOne(@Param("id") Long id);
 }

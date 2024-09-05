@@ -1,8 +1,6 @@
 Analytics ?
 
 GUI :
-	- Page favorits
-
 	- Quand lecture, récupérer chapitre en cours
 	- Si bonus => preview
 	- Taille bonus

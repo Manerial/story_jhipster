@@ -25,30 +25,38 @@
                     </span>
                 </a>
             </li>
-            <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" routerLink="/library" (click)="collapseNavbar()">
+            <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *jhiHasAnyAuthority="'ROLE_USER'">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
+                    id="navBarDropdown">
                     <span>
                         <fa-icon icon="align-justify" class="fa-rotate-90"></fa-icon>
-                        <span jhiTranslate="global.menu.library">Library</span>
+                        <span jhiTranslate="global.menu.books">Books</span>
                     </span>
                 </a>
-            </li>
-            <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" routerLink="/authors" (click)="collapseNavbar()">
-                    <span>
-                        <fa-icon icon="users"></fa-icon>
-                        <span jhiTranslate="global.menu.authors">Authors</span>
-                    </span>
-                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navBarDropdown">
+                    <li>
+                        <a class="dropdown-item" routerLink="/library" (click)="collapseNavbar()"
+                        jhiTranslate="global.menu.library">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="/authors" (click)="collapseNavbar()"
+                        jhiTranslate="global.menu.authors">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="/favorits" (click)="collapseNavbar()"
+                        jhiTranslate="global.menu.favorits">
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *jhiHasAnyAuthority="'ROLE_USER'">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
                     id="generatorsnavBarDropdown">
                     <span>
                         <fa-icon icon="toolbox"></fa-icon>
-                        <span jhiTranslate="global.menu.tools">Generator</span>
+                        <span jhiTranslate="global.menu.tools">Tools</span>
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="generatorsnavBarDropdown">

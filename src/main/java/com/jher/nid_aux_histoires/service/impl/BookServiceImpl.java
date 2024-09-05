@@ -110,6 +110,12 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	@Transactional(readOnly = true)
+	public Page<BookDTO> findAllFavoritsVisible(Pageable pageable, String login) {
+		return bookRepository.findAllFavoritsVisible(pageable, login).map(bookMapperLight::toDto);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
 	public Optional<BookDTO> findOne(Long id) {
 		log.debug("Request to get Book : {}", id);
 		return bookRepository.findOne(id).map(bookMapper::toDto);
