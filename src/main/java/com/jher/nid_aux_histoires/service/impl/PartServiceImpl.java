@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jher.nid_aux_histoires.domain.Chapter;
 import com.jher.nid_aux_histoires.domain.Part;
 import com.jher.nid_aux_histoires.repository.PartRepository;
 import com.jher.nid_aux_histoires.service.ChapterService;
@@ -79,6 +80,10 @@ public class PartServiceImpl implements PartService {
 	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Part : {}", id);
+		Part part = partRepository.findById(id).get();
+		for (Chapter chapter : part.getChapters()) {
+			chapterService.delete(chapter.getId());
+		}
 		partRepository.deleteById(id);
 	}
 }

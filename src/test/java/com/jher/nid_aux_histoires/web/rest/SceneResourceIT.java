@@ -42,6 +42,7 @@ import com.jher.nid_aux_histoires.repository.SceneRepository;
 import com.jher.nid_aux_histoires.service.SceneService;
 import com.jher.nid_aux_histoires.service.dto.SceneDTO;
 import com.jher.nid_aux_histoires.service.mapper.SceneMapper;
+import com.jher.nid_aux_histoires.web.rest.library.SceneResource;
 
 /**
  * Integration tests for the {@link SceneResource} REST controller.

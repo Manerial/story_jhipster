@@ -48,10 +48,11 @@ spring:
       enabled: false
   jpa:
     database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-    show-sql: true
+    # change to true if you want to see the SQL / hibernate logs
+    show-sql: false
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
-    contexts: dev, faker
+    contexts: dev
   mail:
     host: localhost
     port: 25

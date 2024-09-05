@@ -6,6 +6,7 @@ import com.jher.nid_aux_histoires.repository.ChapterRepository;
 import com.jher.nid_aux_histoires.service.ChapterService;
 import com.jher.nid_aux_histoires.service.dto.ChapterDTO;
 import com.jher.nid_aux_histoires.service.mapper.ChapterMapper;
+import com.jher.nid_aux_histoires.web.rest.library.ChapterResource;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

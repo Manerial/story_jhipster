@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jher.nid_aux_histoires.domain.Chapter;
+import com.jher.nid_aux_histoires.domain.Scene;
 import com.jher.nid_aux_histoires.repository.ChapterRepository;
 import com.jher.nid_aux_histoires.service.ChapterService;
 import com.jher.nid_aux_histoires.service.SceneService;
@@ -81,6 +82,10 @@ public class ChapterServiceImpl implements ChapterService {
 	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Chapter : {}", id);
+		Chapter chapter = chapterRepository.findById(id).get();
+		for (Scene scene : chapter.getScenes()) {
+			sceneService.delete(scene.getId());
+		}
 		chapterRepository.deleteById(id);
 	}
 }

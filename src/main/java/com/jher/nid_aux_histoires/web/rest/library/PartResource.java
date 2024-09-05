@@ -1,4 +1,4 @@
-package com.jher.nid_aux_histoires.web.rest;
+package com.jher.nid_aux_histoires.web.rest.library;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.jher.nid_aux_histoires.service.SceneService;
-import com.jher.nid_aux_histoires.service.dto.SceneDTO;
+import com.jher.nid_aux_histoires.service.PartService;
+import com.jher.nid_aux_histoires.service.dto.PartDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -33,88 +33,88 @@ import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 
 /**
- * REST controller for managing {@link com.jher.nid_aux_histoires.domain.Scene}.
+ * REST controller for managing {@link com.jher.nid_aux_histoires.domain.Part}.
  */
 @RestController
 @RequestMapping("/api")
-public class SceneResource {
+public class PartResource {
 
-	private final Logger log = LoggerFactory.getLogger(SceneResource.class);
+	private final Logger log = LoggerFactory.getLogger(PartResource.class);
 
-	private static final String ENTITY_NAME = "scene";
+	private static final String ENTITY_NAME = "part";
 
 	@Value("${jhipster.clientApp.name}")
 	private String applicationName;
 
-	private final SceneService sceneService;
+	private final PartService partService;
 
-	public SceneResource(SceneService sceneService) {
-		this.sceneService = sceneService;
+	public PartResource(PartService partService) {
+		this.partService = partService;
 	}
 
 	/**
-	 * {@code POST  /scenes} : Create a new scene.
+	 * {@code POST  /parts} : Create a new part.
 	 *
-	 * @param sceneDTO the sceneDTO to create.
+	 * @param partDTO the partDTO to create.
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
-	 *         body the new sceneDTO, or with status {@code 400 (Bad Request)} if
-	 *         the scene has already an ID.
+	 *         body the new partDTO, or with status {@code 400 (Bad Request)} if the
+	 *         part has already an ID.
 	 * @throws URISyntaxException if the Location URI syntax is incorrect.
 	 */
-	@PostMapping("/scenes")
-	public ResponseEntity<SceneDTO> createScene(@RequestBody SceneDTO sceneDTO) throws URISyntaxException {
-		log.debug("REST request to save Scene : {}", sceneDTO);
-		if (sceneDTO.getId() != null) {
-			throw new BadRequestAlertException("A new scene cannot already have an ID", ENTITY_NAME, "idexists");
+	@PostMapping("/parts")
+	public ResponseEntity<PartDTO> createPart(@RequestBody PartDTO partDTO) throws URISyntaxException {
+		log.debug("REST request to save Part : {}", partDTO);
+		if (partDTO.getId() != null) {
+			throw new BadRequestAlertException("A new part cannot already have an ID", ENTITY_NAME, "idexists");
 		}
-		SceneDTO result = sceneService.save(sceneDTO);
+		PartDTO result = partService.save(partDTO);
 		return ResponseEntity
-				.created(new URI("/api/scenes/" + result.getId())).headers(HeaderUtil
+				.created(new URI("/api/parts/" + result.getId())).headers(HeaderUtil
 						.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
 				.body(result);
 	}
 
 	/**
-	 * {@code PUT  /scenes} : Updates an existing scene.
+	 * {@code PUT  /parts} : Updates an existing part.
 	 *
-	 * @param sceneDTO the sceneDTO to update.
+	 * @param partDTO the partDTO to update.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
-	 *         the updated sceneDTO, or with status {@code 400 (Bad Request)} if the
-	 *         sceneDTO is not valid, or with status
-	 *         {@code 500 (Internal Server Error)} if the sceneDTO couldn't be
+	 *         the updated partDTO, or with status {@code 400 (Bad Request)} if the
+	 *         partDTO is not valid, or with status
+	 *         {@code 500 (Internal Server Error)} if the partDTO couldn't be
 	 *         updated.
 	 * @throws URISyntaxException if the Location URI syntax is incorrect.
 	 */
-	@PutMapping("/scenes")
-	public ResponseEntity<SceneDTO> updateScene(@RequestBody SceneDTO sceneDTO) throws URISyntaxException {
-		log.debug("REST request to update Scene : {}", sceneDTO);
-		if (sceneDTO.getId() == null) {
+	@PutMapping("/parts")
+	public ResponseEntity<PartDTO> updatePart(@RequestBody PartDTO partDTO) throws URISyntaxException {
+		log.debug("REST request to update Part : {}", partDTO);
+		if (partDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
-		SceneDTO result = sceneService.save(sceneDTO);
+		PartDTO result = partService.save(partDTO);
 		return ResponseEntity.ok().headers(
-				HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, sceneDTO.getId().toString()))
+				HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, partDTO.getId().toString()))
 				.body(result);
 	}
 
 	/**
-	 * {@code GET  /scenes} : get all the scenes.
+	 * {@code GET  /parts} : get all the parts.
 	 *
 	 * @param pageable  the pagination information.
 	 * @param eagerload flag to eager load entities from relationships (This is
 	 *                  applicable for many-to-many).
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
-	 *         of scenes in body.
+	 *         of parts in body.
 	 */
-	@GetMapping("/scenes")
-	public ResponseEntity<List<SceneDTO>> getAllScenes(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
+	@GetMapping("/parts")
+	public ResponseEntity<List<PartDTO>> getAllParts(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
 			@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
-		log.debug("REST request to get a page of Scenes");
-		Page<SceneDTO> page;
+		log.debug("REST request to get a page of Parts");
+		Page<PartDTO> page;
 		if (eagerload) {
-			page = sceneService.findAllWithEagerRelationships(pageable);
+			page = partService.findAllWithEagerRelationships(pageable);
 		} else {
-			page = sceneService.findAll(pageable);
+			page = partService.findAll(pageable);
 		}
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -122,29 +122,29 @@ public class SceneResource {
 	}
 
 	/**
-	 * {@code GET  /scenes/:id} : get the "id" scene.
+	 * {@code GET  /parts/:id} : get the "id" part.
 	 *
-	 * @param id the id of the sceneDTO to retrieve.
+	 * @param id the id of the partDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
-	 *         the sceneDTO, or with status {@code 404 (Not Found)}.
+	 *         the partDTO, or with status {@code 404 (Not Found)}.
 	 */
-	@GetMapping("/scenes/{id}")
-	public ResponseEntity<SceneDTO> getScene(@PathVariable Long id) {
-		log.debug("REST request to get Scene : {}", id);
-		Optional<SceneDTO> sceneDTO = sceneService.findOne(id);
-		return ResponseUtil.wrapOrNotFound(sceneDTO);
+	@GetMapping("/parts/{id}")
+	public ResponseEntity<PartDTO> getPart(@PathVariable Long id) {
+		log.debug("REST request to get Part : {}", id);
+		Optional<PartDTO> partDTO = partService.findOne(id);
+		return ResponseUtil.wrapOrNotFound(partDTO);
 	}
 
 	/**
-	 * {@code DELETE  /scenes/:id} : delete the "id" scene.
+	 * {@code DELETE  /parts/:id} : delete the "id" part.
 	 *
-	 * @param id the id of the sceneDTO to delete.
+	 * @param id the id of the partDTO to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
 	 */
-	@DeleteMapping("/scenes/{id}")
-	public ResponseEntity<Void> deleteScene(@PathVariable Long id) {
-		log.debug("REST request to delete Scene : {}", id);
-		sceneService.delete(id);
+	@DeleteMapping("/parts/{id}")
+	public ResponseEntity<Void> deletePart(@PathVariable Long id) {
+		log.debug("REST request to delete Part : {}", id);
+		partService.delete(id);
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();

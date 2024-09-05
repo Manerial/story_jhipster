@@ -1,4 +1,4 @@
-package com.jher.nid_aux_histoires.web.rest;
+package com.jher.nid_aux_histoires.web.rest.library;
 
 import java.net.URI;
 import java.net.URISyntaxException;
