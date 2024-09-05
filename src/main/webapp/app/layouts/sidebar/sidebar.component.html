@@ -23,7 +23,8 @@
 				</h3>
 				<div [ngbCollapse]="isPartCollapse(part.id!)">
 					<div *ngFor="let chapter of part.chapters">
-						<h4 (click)="changeChapter(chapter.id!, chapter.name!)">{{ chapter.number! }} {{ chapter.name! }}</h4>
+						<h4 (click)="changeChapter(chapter.id!, chapter.name!)"
+						[ngClass]="{'selected': readerService.currentChapterId === chapter.id}">{{ chapter.number! }} {{ chapter.name! }}</h4>
 					</div>
 				</div>
 			</div>

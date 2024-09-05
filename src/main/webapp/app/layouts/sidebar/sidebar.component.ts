@@ -2,7 +2,6 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { ReaderService } from 'app/library/reader/reader.service';
 import { Book, IBook } from 'app/shared/model/book.model';
 import { ResponsiveService } from 'app/shared/util/responsive.service';
-import { NavbarService } from 'app/shared/util/search.service';
 import { UtilService } from 'app/shared/util/util.service';
 
 @Component({
@@ -19,12 +18,7 @@ export class SidebarComponent implements OnInit {
   public innerWidth: number = window.innerWidth;
   private saveScroll = 0;
 
-  constructor(
-    public readerService: ReaderService,
-    private navbarService: NavbarService,
-    private utilService: UtilService,
-    private responsiveService: ResponsiveService
-  ) {}
+  constructor(public readerService: ReaderService, private utilService: UtilService, private responsiveService: ResponsiveService) {}
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
