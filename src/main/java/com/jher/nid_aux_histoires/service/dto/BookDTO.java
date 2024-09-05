@@ -22,6 +22,8 @@ public class BookDTO implements Serializable {
 
 	private Set<PartDTO> parts = new HashSet<>();
 
+	private Set<CommentDTO> comments = new HashSet<>();
+
 	private byte[] coverPreview;
 
 	private Long coverId;
@@ -89,6 +91,14 @@ public class BookDTO implements Serializable {
 	public void setParts(Set<PartDTO> parts) {
 		this.parts = new TreeSet<PartDTO>();
 		this.parts.addAll(parts);
+	}
+
+	public Set<CommentDTO> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentDTO> comments) {
+		this.comments = comments;
 	}
 
 	@Override

@@ -54,6 +54,10 @@ public class Book implements Serializable {
 	@JoinTable(name = "book_image", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id"))
 	private Set<Image> images = new HashSet<>();
 
+	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private Set<Comment> comments = new HashSet<>();
+
 	@ManyToOne
 	@JsonIgnoreProperties(value = "picture", allowSetters = true)
 	private Image cover;
@@ -167,6 +171,31 @@ public class Book implements Serializable {
 
 	public void setCover(Image image) {
 		this.cover = image;
+	}
+
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public Book comments(Set<Comment> comments) {
+		this.comments = comments;
+		return this;
+	}
+
+	public Book addComment(Comment comment) {
+		this.comments.add(comment);
+		comment.setBook(this);
+		return this;
+	}
+
+	public Book removeComment(Comment comment) {
+		this.comments.remove(comment);
+		comment.setBook(null);
+		return this;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
 	// setters here
