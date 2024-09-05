@@ -280,11 +280,13 @@ public class BookResource {
 		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
 
 		// Avoid link with other resources
-		Optional<CoverDTO> O_cover = coverService.findOne(bookDTO.getCoverId());
-		if (O_cover.isPresent()) {
-			String login = O_cover.get().getOwnerLogin();
-			if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
-				throw new Exception("You have no access to this resource (Cover : " + bookDTO.getCoverId() + ")");
+		if (bookDTO.getCoverId() != null) {
+			Optional<CoverDTO> O_cover = coverService.findOne(bookDTO.getCoverId());
+			if (O_cover.isPresent()) {
+				String login = O_cover.get().getOwnerLogin();
+				if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
+					throw new Exception("You have no access to this resource (Cover : " + bookDTO.getCoverId() + ")");
+				}
 			}
 		}
 	}
