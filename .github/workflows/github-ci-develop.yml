@@ -55,13 +55,9 @@ jobs:
                 ./mvnw -ntp clean verify -P-webpack
             - name: Run frontend test
               run: npm run test
-            - name: List test results
-              run: |
-                ls -la target/test-results/
-                ls -la target/test-results/jest/
             - name: Analyze code with SonarQube
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
               run: |
-                mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Manerial_story_jhipster -Dsonar.login=$SONAR_TOKEN
+                ./mvnw -ntp org.sonarsource.scanner.maven:sonar-maven-plugin:sonar initialize sonar:sonar -Dsonar.projectKey=Manerial_story_jhipster -Dsonar.login=$SONAR_TOKEN
