@@ -49,7 +49,7 @@ public class CreatureGenerator extends RandomEntityGenerator {
 		if (!stringEmpty(defaultName)) {
 			return defaultName;
 		}
-		return wordAnalysisService.generate("name");
+		return wordAnalysisService.generate("animal");
 	}
 
 	private double getHeight(double defaultHeight) {
