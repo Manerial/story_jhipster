@@ -28,6 +28,9 @@
             <column name="cover_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="visibility" type="boolean" defaultValue="true">
+                <constraints nullable="false" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

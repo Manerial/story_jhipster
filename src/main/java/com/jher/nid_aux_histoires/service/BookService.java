@@ -31,6 +31,13 @@ public interface BookService {
 	BookDTO saveBash(BookDTO bookDTO);
 
 	/**
+	 * Switch visibility of book.
+	 *
+	 * @param id the id of the entity.
+	 */
+	BookDTO changeVisibility(Long bookId);
+
+	/**
 	 * Get all the books.
 	 *
 	 * @param pageable the pagination information.
@@ -44,7 +51,7 @@ public interface BookService {
 	 * @param pageable the pagination information.
 	 * @return the list of entities.
 	 */
-	List<BookDTO> findAllByAuthorId(String login);
+	List<BookDTO> findAllByAuthorId(String login, boolean filterVisible);
 
 	/**
 	 * Get all the books with eager load of many-to-many relationships.

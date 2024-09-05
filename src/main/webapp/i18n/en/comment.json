@@ -27,7 +27,8 @@
         "button": "Comment",
         "question": "Your comment",
         "validate": "Validate",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "read": "Read"
       }
     }
   }

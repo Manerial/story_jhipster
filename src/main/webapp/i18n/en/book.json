@@ -11,7 +11,7 @@
       "updated": "A Book is updated with identifier {{ param }}",
       "deleted": "A Book is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Book {{ id }}?"
+        "question": "Are you sure you want to delete the Book \"{{ name }}\"? (Irreversible)"
       },
       "detail": {
         "title": "Book"

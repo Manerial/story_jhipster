@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.domain.User;
 import com.jher.nid_aux_histoires.service.dto.UserDTO;
 
@@ -32,7 +33,16 @@ public class UserMapperLight {
 		userDTO.setImageUrl(user.getImageUrl());
 		userDTO.setIntroduction(user.getIntroduction());
 		try {
-			userDTO.setBooks((user.getBooks() != null) ? user.getBooks().size() : 0);
+			try {
+				SecurityConfiguration.CheckLoggedUser(userDTO.getLogin());
+				userDTO.setBooks((user.getBooks() != null) ? user.getBooks().size() : 0);
+			} catch (Exception e) {
+				userDTO.setBooks(
+						(user.getBooks() != null)
+								? user.getBooks().stream().filter(book -> book.getVisibility())
+										.collect(Collectors.toList()).size()
+								: 0);
+			}
 		} catch (Exception e) {
 			log.warn(e.getMessage());
 		}

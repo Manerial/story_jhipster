@@ -7,7 +7,7 @@
     },
     "download": {
       "title": "Téléchargement légal",
-      "body": "Vous pouvez télécharger les livres que vous voulez au format docx (word). Les téléchargements sont totalement gratuits, mais le contenu des oeuvres est protégé par le droit d'auteur.<br/>Cette ensemble de lois se nomme <a href=\"{{PILegifranceUrl}}\">Code de la propriété intélectuelle</a>."
+      "body": "Vous pouvez télécharger les livres que vous voulez au format PDF et EPUB. Les téléchargements sont totalement gratuits, mais le contenu des oeuvres est protégé par le droit d'auteur.<br/>Cette ensemble de lois se nomme <a style=\"color: blue\" href=\"{{PILegifranceUrl}}\">Code de la propriété intélectuelle</a>."
     },
     "distribution": {
       "title": "Distribution légale",

@@ -27,6 +27,10 @@ export class BookService {
     return this.http.put<IBook>(this.resourceUrl, book, { observe: 'response' });
   }
 
+  updateVisibility(id: number): Observable<EntityResponseType> {
+    return this.http.get<IBook>(`${this.resourceUrl}/visibility/${id}`, { observe: 'response' });
+  }
+
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IBook>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

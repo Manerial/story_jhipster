@@ -7,7 +7,7 @@
     },
     "download": {
       "title": "Legal download",
-      "body": "You can download the books you want in docx (word) format. Downloads are completely free, but the content of the works is protected by copyright. <br/> This set of laws is called <a href=\"{{PILegifranceUrl}}\">Code de la propriété intélectuelle</a>"
+      "body": "You can download the books you want in PDF and EPUB format. Downloads are completely free, but the content of the works is protected by copyright. <br/> This set of laws is called <a style=\"color: blue\" href=\"{{PILegifranceUrl}}\">Code de la propriété intélectuelle</a>"
     },
     "distribution": {
       "title": "Legal distribution",

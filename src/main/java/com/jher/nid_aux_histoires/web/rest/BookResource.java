@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.ExportService;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
@@ -109,15 +110,30 @@ public class BookResource {
 	 *         bookDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the bookDTO couldn't be
 	 *         updated.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception
 	 */
 	@PutMapping("/books")
-	public ResponseEntity<BookDTO> updateBook(@RequestBody BookDTO bookDTO) throws URISyntaxException {
+	public ResponseEntity<BookDTO> updateBook(@RequestBody BookDTO bookDTO) throws Exception {
+		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
 		log.debug("REST request to update Book : {}", bookDTO);
 		if (bookDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
 		BookDTO result = bookService.save(bookDTO);
+		return ResponseEntity.ok().headers(
+				HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, bookDTO.getId().toString()))
+				.body(result);
+	}
+
+	@GetMapping("/books/visibility/{id}")
+	public ResponseEntity<BookDTO> updateBookVisibility(@PathVariable Long id) throws Exception {
+		BookDTO bookDTO = bookService.findOne(id).get();
+		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
+		log.debug("REST request to update Book : {}", bookDTO);
+		if (bookDTO.getId() == null) {
+			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+		}
+		BookDTO result = bookService.changeVisibility(id);
 		return ResponseEntity.ok().headers(
 				HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, bookDTO.getId().toString()))
 				.body(result);
@@ -159,7 +175,13 @@ public class BookResource {
 	@GetMapping("/books/author/{login}")
 	public ResponseEntity<List<BookDTO>> getBooksByAuthor(@PathVariable String login) {
 		log.debug("REST request to get a page of Books");
-		List<BookDTO> books = bookService.findAllByAuthorId(login);
+		List<BookDTO> books = null;
+		try {
+			SecurityConfiguration.CheckLoggedUser(login);
+			books = bookService.findAllByAuthorId(login, false);
+		} catch (Exception e) {
+			books = bookService.findAllByAuthorId(login, true);
+		}
 		return ResponseEntity.ok().body(books);
 	}
 
@@ -174,6 +196,9 @@ public class BookResource {
 	public ResponseEntity<BookDTO> getBook(@PathVariable Long id) {
 		log.debug("REST request to get Book : {}", id);
 		Optional<BookDTO> bookDTO = bookService.findOne(id);
+		if (!bookDTO.get().getVisibility()) {
+			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+		}
 		return ResponseUtil.wrapOrNotFound(bookDTO);
 	}
 
@@ -188,6 +213,9 @@ public class BookResource {
 	public ResponseEntity<BookDTO> getBookLight(@PathVariable Long id) {
 		log.debug("REST request to get Book : {}", id);
 		Optional<BookDTO> bookDTO = bookService.findOneLight(id);
+		if (!bookDTO.get().getVisibility()) {
+			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+		}
 		return ResponseUtil.wrapOrNotFound(bookDTO);
 	}
 
@@ -196,10 +224,13 @@ public class BookResource {
 	 *
 	 * @param id the id of the bookDTO to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+	 * @throws Exception
 	 */
 	@DeleteMapping("/books/{id}")
-	public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteBook(@PathVariable Long id) throws Exception {
 		log.debug("REST request to delete Book : {}", id);
+		BookDTO bookDTO = bookService.findOne(id).get();
+		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
 		bookService.delete(id);
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

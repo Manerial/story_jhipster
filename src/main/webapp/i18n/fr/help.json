@@ -3,24 +3,23 @@
     "title": "Aide",
     "accessibility": {
       "title": "Accessibilité tout public",
-      "body": "Ce site est conçu pour être accessible au public le plus large possible (contrastes, choix des couleurs) tout en conservant son identité visuelle. Cependant, il est possible que certains points nous aient échappé lors de sa conception, aussi toute remarque constructive sera la bienvenue sur le <a href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée à l'accessibilté à tous."
+      "body": "Ce site est conçu pour être accessible au public le plus large possible (contrastes, choix des couleurs) tout en conservant son identité visuelle. Cependant, il est possible que certains points nous aient échappé lors de sa conception, aussi toute remarque constructive sera la bienvenue sur le <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée à l'accessibilté à tous."
     },
     "download": {
       "title": "Téléchargement au format Word",
-      "body1": "Pour télécharger l'œuvre de votre choix, cliquez sur l'icone\u00A0:",
-      "body2": "Le livre sera téléchargé au format .docx (word)."
+      "body": "Vous pouvez télécharger l'œuvre de votre choix au format PDF ou EPUB en cliquant sur l'icone de téléchargement placée sous chaque œuvre."
     },
-    "convert": {
-      "title": "Convertir au format epub",
-      "body": "Pour convertir facilement vos téléchargements au format epub, vous pouvez utiliser Word ou LibreOffice en passant par l'outil d'export\u00A0: <b>fichier -> exporter vers -> exporter au format EPUB</b> (ordinateur uniquement). Pour un meilleur confort de lecture, sélectionnez l'option \"Méthode de cission\u00A0: saut de pages\""
+    "B_Reading": {
+      "title": "Service de Bete Lecture",
+      "body": "Nous proposons un service de Bêta-Lecture rémunéré à toute personne qui le souhaite. Pour plus d'informations, contactez-nous sur le <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée à la Bêta-Lecture."
     },
     "generators": {
       "title": "Utilisation des générateurs",
-      "body": "Les générateurs sont mis à votre disposition en tant qu'outils ludiques pour vous permettre de créer librement. Ils seront complétés et étoffés dans le cycle de vie du site. Cependant, si vous souhaitez aider à l'élaboration de nouveaux dictionnaires, vous pouvez vous rendre sur le <a href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée au partage et a l'amélioration du contenu."
+      "body": "Les générateurs sont mis à votre disposition en tant qu'outils ludiques pour vous permettre de créer librement. Ils seront complétés et étoffés dans le cycle de vie du site. Cependant, si vous souhaitez aider à l'élaboration de nouveaux dictionnaires, vous pouvez vous rendre sur le <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée au partage et a l'amélioration du contenu."
     },
     "sharing": {
       "title": "Partager vos œuvres",
-      "body": "Vous souhaitez ajouter votre livre sur ce site\u00A0? Pas de soucis\u00A0! Contactez-nous sur le <a href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée aux nouveaux auteurs."
+      "body": "Vous souhaitez ajouter votre livre sur ce site\u00A0? Pas de soucis\u00A0! Contactez-nous sur le <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> de la communauté, dans la section dédiée aux nouveaux auteurs."
     }
   }
 }

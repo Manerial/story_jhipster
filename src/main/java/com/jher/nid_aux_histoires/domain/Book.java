@@ -42,6 +42,9 @@ public class Book implements Serializable {
 	@Column(name = "description")
 	private String description;
 
+	@Column(name = "visibility")
+	private Boolean visibility;
+
 	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Part> parts = new HashSet<>();
@@ -109,6 +112,14 @@ public class Book implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Boolean getVisibility() {
+		return visibility;
+	}
+
+	public void setVisibility(Boolean visibility) {
+		this.visibility = visibility;
 	}
 
 	public Set<Part> getParts() {

@@ -83,6 +83,7 @@ public class BookResourceIT {
 	 */
 	public static Book createEntity(EntityManager em) {
 		Book book = new Book().name(DEFAULT_NAME);
+		book.setVisibility(true);
 		return book;
 	}
 
