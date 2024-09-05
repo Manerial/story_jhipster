@@ -167,7 +167,7 @@ public class CommentResource {
 	}
 
 	private void setUserLogin(CommentDTO commentDTO) {
-		String login = SecurityConfiguration.getLoggedUser().getName();
+		String login = SecurityConfiguration.getUserLogin();
 		UserDTO user = userService.getUserLightByLogin(login);
 		commentDTO.setUserId(user.getId());
 	}

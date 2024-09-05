@@ -112,7 +112,7 @@ public class CoverResource {
 		if (SecurityConfiguration.IsAdmin()) {
 			page = coverService.findAll(pageable);
 		} else {
-			page = coverService.findAllByOwnerLogin(pageable, SecurityConfiguration.getLoggedUser().getName());
+			page = coverService.findAllByOwnerLogin(pageable, SecurityConfiguration.getUserLogin());
 		}
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
