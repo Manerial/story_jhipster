@@ -15,12 +15,15 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
 /**
  * A Bonus.
  */
 @Entity
 @Table(name = "bonus")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Data
 public class Bonus implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -49,30 +52,9 @@ public class Bonus implements Serializable {
 	@JsonIgnoreProperties(value = "bonus", allowSetters = true)
 	private User owner;
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 	public Bonus name(String name) {
 		this.name = name;
 		return this;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public byte[] getData() {
-		return data;
 	}
 
 	public Bonus data(byte[] data) {
@@ -80,25 +62,9 @@ public class Bonus implements Serializable {
 		return this;
 	}
 
-	public void setData(byte[] data) {
-		this.data = data;
-	}
-
-	public String getDataContentType() {
-		return dataContentType;
-	}
-
 	public Bonus dataContentType(String dataContentType) {
 		this.dataContentType = dataContentType;
 		return this;
-	}
-
-	public void setDataContentType(String dataContentType) {
-		this.dataContentType = dataContentType;
-	}
-
-	public Book getBook() {
-		return book;
 	}
 
 	public Bonus book(Book book) {
@@ -106,37 +72,14 @@ public class Bonus implements Serializable {
 		return this;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
-	}
-
-	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-	// setters here
-
-	public String getDescription() {
-		return description;
-	}
-
 	public Bonus description(String description) {
 		this.description = description;
 		return this;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public User getOwner() {
-		return owner;
-	}
-
 	public Bonus owner(User owner) {
 		this.owner = owner;
 		return this;
-	}
-
-	public void setOwner(User owner) {
-		this.owner = owner;
 	}
 
 	@Override

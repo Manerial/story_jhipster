@@ -19,12 +19,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
 /**
  * A Book.
  */
 @Entity
 @Table(name = "book")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Data
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -66,30 +69,9 @@ public class Book implements Serializable {
 	@JsonIgnoreProperties(value = "books", allowSetters = true)
 	private User author;
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 	public Book name(String name) {
 		this.name = name;
 		return this;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public User getAuthor() {
-		return author;
 	}
 
 	public Book author(User author) {
@@ -97,33 +79,9 @@ public class Book implements Serializable {
 		return this;
 	}
 
-	public void setAuthor(User author) {
-		this.author = author;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
 	public Book description(String description) {
 		this.description = description;
 		return this;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Boolean getVisibility() {
-		return visibility;
-	}
-
-	public void setVisibility(Boolean visibility) {
-		this.visibility = visibility;
-	}
-
-	public Set<Part> getParts() {
-		return parts;
 	}
 
 	public Book parts(Set<Part> parts) {
@@ -143,25 +101,9 @@ public class Book implements Serializable {
 		return this;
 	}
 
-	public void setParts(Set<Part> parts) {
-		this.parts = parts;
-	}
-
-	public Cover getCover() {
-		return cover;
-	}
-
 	public Book cover(Cover cover) {
 		this.cover = cover;
 		return this;
-	}
-
-	public void setCover(Cover cover) {
-		this.cover = cover;
-	}
-
-	public Set<Comment> getComments() {
-		return comments;
 	}
 
 	public Book comments(Set<Comment> comments) {
@@ -181,14 +123,6 @@ public class Book implements Serializable {
 		return this;
 	}
 
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
-	}
-
-	public Set<Bonus> getBonuses() {
-		return bonuses;
-	}
-
 	public Book bonuses(Set<Bonus> bonuses) {
 		this.bonuses = bonuses;
 		return this;
@@ -205,12 +139,6 @@ public class Book implements Serializable {
 		comment.setBook(null);
 		return this;
 	}
-
-	public void setBonuses(Set<Bonus> bonuses) {
-		this.bonuses = bonuses;
-	}
-	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-	// setters here
 
 	@Override
 	public boolean equals(Object o) {
