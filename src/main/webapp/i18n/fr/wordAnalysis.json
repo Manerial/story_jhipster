@@ -11,7 +11,7 @@
       "updated": "L'Analyse de mots avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "L'Analyse de mots avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer l'Analyse de mots' {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer l'Analyse de mots' {{ id }}\u00A0?"
       },
       "detail": {
         "title": "Analyse de mots"

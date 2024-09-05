@@ -1,11 +1,11 @@
-<jhi-alert></jhi-alert>
 <div class="content">
 	<h1 jhiTranslate="global.menu.library">Library</h1>
-	<div *ngIf="innerWidth >= 600" class="row m-2">
+	<div *ngIf="responsiveService.isBigScreen" class="row m-2">
 		<div class="main">
 			<ul id="bk-list" class="bk-list clearfix">
-				<li *ngFor="let book of books | filter:searchText">
-					<div class="bk-book bk-bookdefault" [ngClass]="isDownloading[book.id] ? 'rotating' : ''" (click)="flip($event)">
+				<li *ngFor="let book of books | bookFilter: searchText">
+					<div class="bk-book bk-bookdefault" [ngClass]="isDownloading[book.id] ? 'rotating' : ''"
+						(click)="flip($event)">
 						<div class="bk-front">
 							<div class="bk-cover"
 								style="background-image: url(data:image/jpg;base64,{{book.coverPreview}})">
@@ -40,7 +40,7 @@
 								<span jhiTranslate="library.download">Download</span>
 							</span>
 							<span [ngClass]="isDownloading[book.id] ? '' : 'hide-element'">
-								<fa-icon icon="spinner" ></fa-icon>
+								<fa-icon icon="spinner"></fa-icon>
 								<span jhiTranslate="library.downloading">Downloading</span>
 							</span>
 						</a>
@@ -50,31 +50,34 @@
 		</div>
 	</div>
 
-	<div *ngIf="innerWidth < 600" class="row m-2">
+	<div *ngIf="!responsiveService.isBigScreen" class="m-2">
 		<div *ngFor="let book of books | filter:searchText" class="col pb-4">
 			<div class="card">
 				<div class="card-body">
 					<h2 class="card-title">{{ book.name }}</h2>
-					<button class="btn bkg-gold ml-2" type="button"
-						(click)="collapseBooks[book.id] = !collapseBooks[book.id]">
-						<i class="fa fa-list-alt" title="Lire le résumé"></i>
-					</button>
-					<a routerLink="/book/{{ book.id }}" class="btn bkg-gold ml-2" title='Lire "{{ book.name }}"'>
-						<span>
-							<fa-icon icon="book-open"></fa-icon>
-							<span jhiTranslate="library.read">Read</span>
-						</span>
-					</a>
-					<a (click)="downloadBook(book.id, book.name)" class="btn bkg-gold ml-2" title="Télécharger">
+					<a (click)="downloadBook(book.id, book.name)" class="btn bkg-gold ml-2 mb-2" title="Télécharger">
 						<span [ngClass]="isDownloading[book.id] ? 'hide-element' : ''">
 							<fa-icon icon="download"></fa-icon>
 							<span jhiTranslate="library.download">Download</span>
 						</span>
 						<span [ngClass]="isDownloading[book.id] ? '' : 'hide-element'">
-							<fa-icon icon="spinner" ></fa-icon>
+							<fa-icon icon="spinner"></fa-icon>
 							<span jhiTranslate="library.downloading">Downloading</span>
 						</span>
 					</a>
+					<a routerLink="/book/{{ book.id }}" class="btn bkg-gold ml-2 mb-2" title='Lire "{{ book.name }}"'>
+						<span>
+							<fa-icon icon="book-open"></fa-icon>
+							<span jhiTranslate="library.read">Read</span>
+						</span>
+					</a>
+					<button class="btn bkg-gold ml-2 mb-2" type="button"
+						(click)="collapseBooks[book.id] = !collapseBooks[book.id]">
+						<span>
+							<fa-icon icon="bars"></fa-icon>
+							<span jhiTranslate="library.summary">summary</span>
+						</span>
+					</button>
 					<p [ngbCollapse]="collapseBooks[book.id]" class="card-text">{{ book.description }}</p>
 				</div>
 			</div>

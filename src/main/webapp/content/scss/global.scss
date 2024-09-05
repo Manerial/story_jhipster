@@ -4,6 +4,7 @@
 @import '~bootstrap/scss/variables';
 @import 'variables';
 @import 'style';
+@import 'responsive-style';
 
 /* ==============================================================
 Bootstrap tweaks
@@ -12,6 +13,7 @@ Bootstrap tweaks
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 
 body,
@@ -82,11 +84,6 @@ Generic styles
 
 .footer {
   border-top: 1px solid rgba($black, 0.125);
-}
-
-.container-limit {
-  height: calc(100% - 100px);
-  overflow: auto;
 }
 
 .hand,

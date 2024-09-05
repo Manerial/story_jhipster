@@ -11,7 +11,7 @@
       "updated": "La Partie avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "La Partie avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer la Partie {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer la Partie {{ id }}\u00A0?"
       },
       "detail": {
         "title": "Partie"

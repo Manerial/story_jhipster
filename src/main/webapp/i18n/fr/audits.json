@@ -20,7 +20,7 @@
         "data": "Autres données"
       },
       "data": {
-        "remoteAddress": "Adresse Distante :"
+        "remoteAddress": "Adresse Distante\u00A0:"
       }
     },
     "notFound": "Aucun audit trouvé"

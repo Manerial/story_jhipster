@@ -11,7 +11,7 @@
       "updated": "L'Image avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "L'Image avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer l'Image {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer l'Image {{ id }}\u00A0?"
       },
       "detail": {
         "title": "Image"
