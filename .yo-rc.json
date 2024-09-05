@@ -1,0 +1,43 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.jher.nid_aux_histoires",
+      "nativeLanguage": "fr"
+    },
+    "jhipsterVersion": "6.10.1",
+    "applicationType": "monolith",
+    "baseName": "nid_aux_histoires",
+    "packageName": "com.jher.nid_aux_histoires",
+    "packageFolder": "com/jher/nid_aux_histoires",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mariadb",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MjYwZjY0MWQwNmQxZWZiNjgyZjNhNjEyN2FiYWY3N2NjNDFmZmIyMzNhOGQyNTkwZGNhMDYxYjdiMDY0NDM5YjMyZjU5MTllYzg3YmVlY2M0YzQ5MTY4NjI5ZTljYjgxMTAyY2RmMmZhYzM1MDYyOTA1N2Q2NDcwMzNlZmU5NWY=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "lux",
+    "clientThemeVariant": "dark",
+    "creationTimestamp": 1601711154461,
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "fr",
+    "languages": ["fr", "en"],
+    "blueprints": []
+  }
+}
