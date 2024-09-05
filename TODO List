@@ -1,0 +1,21 @@
+Importer l'interface du site
+	Vue bibliothèque
+	Vue lecture
+	Vue images
+Gérer les chemins d'accès
+	Accès ADMIN
+	Accès USER
+Traduire le site
+	en anglais (interface)
+	en français (entités)
+Importer les générateurs
+	Générateur de mots
+		Front
+		Back
+	Générateur de personnages
+		Front
+		Back
+Utiliser les variables CSS pour rendre le code générique
+Tester l'application
+	Tests Back
+	Tests Front
