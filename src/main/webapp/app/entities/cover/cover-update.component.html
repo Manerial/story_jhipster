@@ -27,30 +27,12 @@
                                 <fa-icon icon="times"></fa-icon>
                             </button>
                         </div>
-                        <input type="file" id="file_picture" (change)="setFileData($event, 'picture', true)" accept="cover/*" jhiTranslate="entity.action.addcover"/>
+                        <input type="file" id="file_picture" (change)="setFileData($event, 'picture', true)" accept="image/*" jhiTranslate="entity.action.addcover"/>
                     </div>
                     <input type="hidden" class="form-control" name="picture" id="field_picture"
                            formControlName="picture"/>
-                    <input type="hidden" class="form-control" name="pictureContentType" id="field_pictureContentType"
-                           formControlName="pictureContentType" />
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.cover.preview" for="field_preview">Preview</label>
-                    <div>
-                        <img [src]="'data:' + editForm.get('previewContentType')!.value + ';base64,' + editForm.get('preview')!.value" style="max-height: 100px;" *ngIf="editForm.get('preview')!.value" alt="cover preview"/>
-                        <div *ngIf="editForm.get('preview')!.value" class="form-text text-danger clearfix">
-                            <span class="pull-left">{{ editForm.get('previewContentType')!.value }}, {{ byteSize(editForm.get('preview')!.value) }}</span>
-                            <button type="button" (click)="clearInputImage('preview', 'previewContentType', 'file_preview')" class="btn btn-secondary btn-xs pull-right">
-                                <fa-icon icon="times"></fa-icon>
-                            </button>
-                        </div>
-                        <input type="file" id="file_preview" (change)="setFileData($event, 'preview', true)" accept="cover/*" jhiTranslate="entity.action.addcover"/>
-                    </div>
-                    <input type="hidden" class="form-control" name="preview" id="field_preview"
-                           formControlName="preview"/>
-                    <input type="hidden" class="form-control" name="previewContentType" id="field_previewContentType"
-                           formControlName="previewContentType" />
+                           <input type="hidden" class="form-control" name="pictureContentType" id="field_pictureContentType"
+                                  formControlName="pictureContentType" />
                 </div>
             </div>
 
