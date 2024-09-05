@@ -30,9 +30,9 @@ import com.jher.nid_aux_histoires.repository.IdeaRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.LocationDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.PersonaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.WritingOptionDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
 import com.jher.nid_aux_histoires.service.mapper.IdeaMapper;
 
 /**
@@ -235,16 +235,16 @@ public class IdeaResourceIT {
 
 	@Test
 	public void createRandomLocation() {
-		ideaService.generateLocations(1, new LocationDTO());
+		ideaService.generateR_Locations(1, new R_LocationDTO());
 	}
 
 	@Test
 	public void createRandomWritingOption() {
-		ideaService.generateWritingOptions(1, new WritingOptionDTO());
+		ideaService.generateR_WritingOptions(1, new R_WritingOptionDTO());
 	}
 
 	@Test
 	public void createRandomPersona() {
-		ideaService.generatePersonas(1, new PersonaDTO());
+		ideaService.generateR_Personas(1, new R_PersonaDTO());
 	}
 }

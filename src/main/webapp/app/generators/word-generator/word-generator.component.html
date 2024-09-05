@@ -1,21 +1,38 @@
 <div class="content">
 	<div class="container">
 		<h1 jhiTranslate="generator.word.title">Générateur de mots</h1>
-		<div class="form-group">
+		<form name="form" role="form" [formGroup]="wordForm" class="form-group">
 			<div class="row">
 				<div class="col-sm">
 					<label for="numberOfWords" class="form-check-label" jhiTranslate="generator.word.number">
 						Nombre de mots :
 					</label>
-					<input id="numberOfWords" type="number" min="1" max="200" [(ngModel)]="numberOfWords"
-						class="form-control" />
+					<input id="numberOfWords" name="numberOfWords" formControlName="numberOfWords"
+					type="number" class="form-control" (keypress)="_keyNumber($event)"/>
+					<div *ngIf="wordForm.get('numberOfWords')!.invalid && (wordForm.get('numberOfWords')!.dirty || wordForm.get('numberOfWords')!.touched)" >
+						<small class="form-text text-danger"
+								*ngIf="wordForm.get('numberOfWords')?.errors?.required"
+								jhiTranslate="nidAuxHistoiresApp.word.number.validation.required">
+							A number of ideas is required.
+						</small>
+						<small class="form-text text-danger"
+								*ngIf="wordForm.get('numberOfWords')?.errors?.min"
+								jhiTranslate="nidAuxHistoiresApp.word.number.validation.min">
+							Must be greater than 0.
+						</small>
+						<small class="form-text text-danger"
+								*ngIf="wordForm.get('numberOfWords')?.errors?.max"
+								jhiTranslate="nidAuxHistoiresApp.word.number.validation.max">
+							Must be lesser than 200.
+						</small>
+					</div>
 				</div>
 				<div class="col-sm">
 					<label for="type" class="form-check-label" jhiTranslate="generator.word.type">
 						Type de mots :
 					</label>
-					<select id="type" class="form-control" [(ngModel)]="currentType">
-						<option *ngFor="let type of typeList" [ngValue]="type">{{ type.name | titlecase }}
+					<select id="type" name="type" formControlName="type" class="form-control">
+						<option *ngFor="let type of typeList" [ngValue]="type.type">{{ type.name | titlecase }}
 						</option>
 					</select>
 				</div>
@@ -23,10 +40,23 @@
 					<label for="fixLength" class="form-check-label" jhiTranslate="generator.word.length">
 						Taille de mot (si &lt; 2 : aléatoire) :
 					</label>
-					<input id="fixLength" type="number" min="0" max="20" [(ngModel)]="fixLength" class="form-control" />
+					<input id="fixLength" name="fixLength" formControlName="fixLength"
+					type="number" class="form-control" (keypress)="_keyNumber($event)"/>
+					<div *ngIf="wordForm.get('fixLength')!.invalid && (wordForm.get('fixLength')!.dirty || wordForm.get('fixLength')!.touched)" >
+						<small class="form-text text-danger"
+								*ngIf="wordForm.get('fixLength')?.errors?.min"
+								jhiTranslate="nidAuxHistoiresApp.word.length.validation.min">
+							Must be greater than 0.
+						</small>
+						<small class="form-text text-danger"
+								*ngIf="wordForm.get('fixLength')?.errors?.max"
+								jhiTranslate="nidAuxHistoiresApp.word.length.validation.max">
+							Must be lesser than 25.
+						</small>
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 		<div class="form-group">
 			<button class="btn bkg-gold mt-2" (click)="getWords()" jhiTranslate="generator.word.generate">
 				Générer

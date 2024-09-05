@@ -8,6 +8,11 @@ Section Contact
 
 Mots clés recherche Google
 
+GUI :
+	- Générateur de QR_Code
+	
+Traduire générateurs (contenu cartes)
+
 Page Accueil :
 	- Nouvelles sorties
 	- News du moment

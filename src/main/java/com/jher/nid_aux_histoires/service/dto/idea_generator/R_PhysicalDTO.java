@@ -1,6 +1,6 @@
 package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
-public class PhysicalDTO {
+public class R_PhysicalDTO {
 	private String eyesColor;
 	private String faceShape;
 	private String hairColor;
@@ -10,10 +10,10 @@ public class PhysicalDTO {
 	private double weight;
 	private String morphology;
 
-	public PhysicalDTO() {
+	public R_PhysicalDTO() {
 	}
 
-	public PhysicalDTO(PhysicalDTO physical) {
+	public R_PhysicalDTO(R_PhysicalDTO physical) {
 		setEyesColor(physical.getEyesColor());
 		setFaceShape(physical.getFaceShape());
 		setHairColor(physical.getHairColor());

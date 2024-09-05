@@ -16,9 +16,10 @@ import com.jher.nid_aux_histoires.repository.IdeaRepository;
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.WordAnalysisService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.LocationDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.PersonaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.WritingOptionDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
 import com.jher.nid_aux_histoires.service.mapper.IdeaMapper;
 import com.jher.nid_aux_histoires.service.tool.IdeaGenerator;
 
@@ -71,29 +72,38 @@ public class IdeaServiceImpl implements IdeaService {
 	}
 
 	@Override
-	public List<PersonaDTO> generatePersonas(int numberOfPersona, PersonaDTO constraint) {
-		List<PersonaDTO> personas = new ArrayList<>();
+	public List<R_PersonaDTO> generateR_Personas(int numberOfPersona, R_PersonaDTO constraint) {
+		List<R_PersonaDTO> personas = new ArrayList<>();
 		for (int i = 0; i < numberOfPersona; i++) {
-			personas.add(ideaGenerator.generatePersona(constraint));
+			personas.add(ideaGenerator.generateR_Persona(constraint));
 		}
 		return personas;
 	}
 
 	@Override
-	public List<LocationDTO> generateLocations(int numberOfLocation, LocationDTO constraint) {
-		List<LocationDTO> locations = new ArrayList<>();
+	public List<R_LocationDTO> generateR_Locations(int numberOfLocation, R_LocationDTO constraint) {
+		List<R_LocationDTO> locations = new ArrayList<>();
 		for (int i = 0; i < numberOfLocation; i++) {
-			locations.add(ideaGenerator.generateLocation(constraint));
+			locations.add(ideaGenerator.generateR_Location(constraint));
 		}
 		return locations;
 	}
 
 	@Override
-	public List<WritingOptionDTO> generateWritingOptions(int numberOfWritingOption, WritingOptionDTO constraint) {
-		List<WritingOptionDTO> writingOptions = new ArrayList<>();
+	public List<R_WritingOptionDTO> generateR_WritingOptions(int numberOfWritingOption, R_WritingOptionDTO constraint) {
+		List<R_WritingOptionDTO> writingOptions = new ArrayList<>();
 		for (int i = 0; i < numberOfWritingOption; i++) {
-			writingOptions.add(ideaGenerator.generateWritingOption(constraint));
+			writingOptions.add(ideaGenerator.generateR_WritingOption(constraint));
 		}
 		return writingOptions;
+	}
+
+	@Override
+	public List<R_ObjectDTO> generateR_Object(int numberOfObject, R_ObjectDTO constraint) {
+		List<R_ObjectDTO> objects = new ArrayList<>();
+		for (int i = 0; i < numberOfObject; i++) {
+			objects.add(ideaGenerator.generateR_Object(constraint));
+		}
+		return objects;
 	}
 }

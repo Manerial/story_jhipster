@@ -6,6 +6,7 @@ import { AlertErrorComponent } from './alert/alert-error.component';
 import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { BookFilterPipe, AuthorFilterPipe } from './util/search.pipe';
+import { InputPattern } from './util/input-pattern';
 
 @NgModule({
   imports: [NidAuxHistoiresSharedLibsModule],
@@ -29,5 +30,6 @@ import { BookFilterPipe, AuthorFilterPipe } from './util/search.pipe';
     LoginModalComponent,
     HasAnyAuthorityDirective,
   ],
+  providers: [InputPattern],
 })
 export class NidAuxHistoiresSharedModule {}

@@ -1,13 +1,13 @@
 package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
-public class WritingOptionDTO {
+public class R_WritingOptionDTO {
 	private String style;
 	private String theme;
 
-	public WritingOptionDTO() {
+	public R_WritingOptionDTO() {
 	}
 
-	public WritingOptionDTO(WritingOptionDTO writingOption) {
+	public R_WritingOptionDTO(R_WritingOptionDTO writingOption) {
 		setStyle(writingOption.getStyle());
 		setTheme(writingOption.getTheme());
 	}
