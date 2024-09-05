@@ -74,6 +74,7 @@ public class SceneServiceImpl implements SceneService {
 	public void delete(Long id) {
 		log.debug("Request to delete Scene : {}", id);
 		sceneRepository.deleteById(id);
+		sceneRepository.flush();
 	}
 
 	private int findNextNumberForBookId(Long chapterId) {

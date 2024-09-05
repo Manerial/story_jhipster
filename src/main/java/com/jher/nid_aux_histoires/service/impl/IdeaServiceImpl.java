@@ -74,6 +74,7 @@ public class IdeaServiceImpl implements IdeaService {
 	public void delete(Long id) {
 		log.debug("Request to delete Idea : {}", id);
 		ideaRepository.deleteById(id);
+		ideaRepository.flush();
 	}
 
 	@Override

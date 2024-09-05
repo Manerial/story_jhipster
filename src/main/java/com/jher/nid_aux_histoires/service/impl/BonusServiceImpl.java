@@ -77,5 +77,6 @@ public class BonusServiceImpl implements BonusService {
 	public void delete(Long id) {
 		log.debug("Request to delete Bonus : {}", id);
 		bonusRepository.deleteById(id);
+		bonusRepository.flush();
 	}
 }
