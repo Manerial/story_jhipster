@@ -67,6 +67,8 @@ public class CreatureGenerator extends RandomEntityGenerator {
 		case 2:
 			height = RNG.getRandomIntoInterval(1000, 5000);
 			break;
+		default:
+			break;
 		}
 		return height;
 	}

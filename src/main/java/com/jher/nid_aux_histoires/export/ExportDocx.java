@@ -48,11 +48,11 @@ public class ExportDocx {
 	private WordprocessingMLPackage mainDoc;
 
 	public static enum FILE_FORMAT {
-		docx, pdf, epub, png, jpg, jpeg
+		DOCX, PDF, EPUB, PNG, JPG, JPEG
 	};
 
 	public static enum AVAILABLE_FILE_FORMAT {
-		pdf, epub
+		PDF, EPUB
 	};
 
 	public static final String TEMP_DIR = System.getProperty("user.home") + "\\BooksExports\\";
@@ -87,10 +87,10 @@ public class ExportDocx {
 		LOGGER.info("Début de la génération du livre {} {}", format, bookName);
 		ConverterInterface CI = null;
 		switch (format) {
-		case epub:
+		case EPUB:
 			CI = new ConverterEPUB();
 			break;
-		case pdf:
+		case PDF:
 			CI = new ConverterPDF();
 			break;
 		default:
@@ -109,11 +109,11 @@ public class ExportDocx {
 	}
 
 	public static String getObjectFilePath(String objectName) {
-		return getObjectFilePath(objectName, FILE_FORMAT.docx);
+		return getObjectFilePath(objectName, FILE_FORMAT.DOCX);
 	}
 
 	public static String getObjectFilePath(String objectName, FILE_FORMAT format) {
-		return TEMP_DIR + objectName + "." + format;
+		return TEMP_DIR + objectName + "." + format.toString().toLowerCase();
 	}
 
 	private List<File> generateContent(BookDTO book) throws IOException, Docx4JException {

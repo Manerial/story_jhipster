@@ -30,6 +30,8 @@ public class HonoraryTitleGenerator extends RandomEntityGenerator {
 					+ getPart2(REG_Element.job).toLowerCase();
 		case 2:
 			return generateElement(REG_Element.adjective, REG_Article.article_defini);
+		default:
+			break;
 		}
 		return "";
 	}
@@ -42,6 +44,8 @@ public class HonoraryTitleGenerator extends RandomEntityGenerator {
 			return generateElement(REG_Element.adjective, null);
 		case 2:
 			return "";
+		default:
+			break;
 		}
 		return "";
 	}
@@ -57,6 +61,8 @@ public class HonoraryTitleGenerator extends RandomEntityGenerator {
 			return generateElement(REG_Element.adjective, null);
 		case 2:
 			return "";
+		default:
+			break;
 		}
 		return "";
 	}
