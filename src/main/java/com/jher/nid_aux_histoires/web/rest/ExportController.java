@@ -1,4 +1,4 @@
-package com.jher.nid_aux_histoires.web.rest.library;
+package com.jher.nid_aux_histoires.web.rest;
 
 import java.io.IOException;
 import java.nio.file.Files;

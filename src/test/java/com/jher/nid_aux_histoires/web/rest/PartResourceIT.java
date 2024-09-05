@@ -39,7 +39,6 @@ import com.jher.nid_aux_histoires.repository.PartRepository;
 import com.jher.nid_aux_histoires.service.PartService;
 import com.jher.nid_aux_histoires.service.dto.PartDTO;
 import com.jher.nid_aux_histoires.service.mapper.PartMapper;
-import com.jher.nid_aux_histoires.web.rest.library.PartResource;
 
 /**
  * Integration tests for the {@link PartResource} REST controller.
