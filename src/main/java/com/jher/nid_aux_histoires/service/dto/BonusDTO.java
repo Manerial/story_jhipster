@@ -24,6 +24,8 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 
 	private String description;
 
+	private boolean isImage;
+
 	public Long getId() {
 		return id;
 	}
@@ -86,6 +88,14 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isImage() {
+		return isImage;
+	}
+
+	public void setImage(boolean isImage) {
+		this.isImage = isImage;
 	}
 
 	@Override

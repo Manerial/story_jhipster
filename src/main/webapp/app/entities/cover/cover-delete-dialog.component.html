@@ -22,6 +22,6 @@
         </button>
     </div>
 </form>
-<form *ngIf="!cover" name="deleteForm" (ngSubmit)="confirmDelete(cover?.id!)">
+<div *ngIf="!cover">
     <div>NOCOVER</div>
-</form>
+</div>

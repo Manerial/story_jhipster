@@ -14,7 +14,6 @@ import com.jher.nid_aux_histoires.domain.Bonus;
 /**
  * Spring Data repository for the Bonus entity.
  */
-@SuppressWarnings("unused")
 @Repository
 public interface BonusRepository extends JpaRepository<Bonus, Long> {
 	@Query("select distinct bonus from Bonus bonus where bonus.book.id =:id")
