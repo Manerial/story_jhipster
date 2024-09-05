@@ -19,6 +19,15 @@
 #    io.github.jhipster: DEBUG
 #    com.jher.nid_aux_histoires: DEBUG
 
+#Export
+export:
+  model:
+    path: src/main/resources/templates/export/
+    book:
+      name: template_book.docx
+    part:
+      name: template_part.docx
+
 spring:
   profiles:
     active: dev

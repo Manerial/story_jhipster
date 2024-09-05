@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.jher.nid_aux_histoires.export.ExportDocx;
+
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Chapter} entity.
  */
@@ -101,5 +103,13 @@ public class ChapterDTO implements Serializable {
 	public String toString() {
 		return "ChapterDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", description='" + getDescription()
 				+ "'" + ", number=" + getNumber() + ", images='" + getImages() + "'" + ", partId=" + getPartId() + "}";
+	}
+
+	public String getFormattedText() {
+		String text = "";
+		for (SceneDTO scene : scenes) {
+			text += scene.getText() + ExportDocx.LINE_BREAK_PLACEHOLDER;
+		}
+		return text.replaceAll("\r\n", ExportDocx.LINE_BREAK_PLACEHOLDER);
 	}
 }
