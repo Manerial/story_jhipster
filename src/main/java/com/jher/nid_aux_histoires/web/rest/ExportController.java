@@ -80,8 +80,9 @@ public class ExportController {
 		try {
 			path = exportService.getPathOfExportedBook(id, format);
 			log.info(path.toString());
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		} catch (Exception e) {
+			String error = "Error during the reading of the document :" + e.getMessage();
+			log.warn(error, e);
 		}
 
 		byte[] data;

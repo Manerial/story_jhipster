@@ -1,9 +1,10 @@
 package com.jher.nid_aux_histoires.service.tool;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class RNG {
-	private static final Random random = new Random();
+	private static final Random random = new SecureRandom();
 
 	/**
 	 * Get a random number between 0 and max
