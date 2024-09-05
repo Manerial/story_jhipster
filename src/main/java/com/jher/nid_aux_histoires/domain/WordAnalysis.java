@@ -32,7 +32,7 @@ public class WordAnalysis implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "analysis", columnDefinition = "TEXT")
+	@Column(name = "analysis", columnDefinition = "CLOB")
 	private String analysis;
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here
