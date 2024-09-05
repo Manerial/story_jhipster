@@ -1,3 +1,7 @@
+OBLIGATOIRE
+Paramétrer la prod
+
+OPTIONNEL
 Alléger les échanges Back-Front
 	Alléger Part, Chapter et Scene
 Importer les générateurs
