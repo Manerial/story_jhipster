@@ -49,7 +49,6 @@ export class WordAnalysisUpdateComponent implements OnInit {
     if (wordAnalysis.id !== undefined) {
       this.subscribeToSaveResponse(this.wordAnalysisService.update(wordAnalysis));
     } else {
-      delete wordAnalysis.id;
       this.subscribeToSaveResponse(this.wordAnalysisService.create(wordAnalysis));
     }
   }

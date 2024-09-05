@@ -4,7 +4,7 @@ import { CoverService } from 'app/entities/cover/cover.service';
 import { ICover, Cover } from 'app/shared/model/cover.model';
 
 describe('Service Tests', () => {
-  describe('Image Service', () => {
+  describe('Cove Service', () => {
     let injector: TestBed;
     let service: CoverService;
     let httpMock: HttpTestingController;
@@ -34,7 +34,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(elemDefault);
       });
 
-      it('should create a Image', () => {
+      it('should create a Cover', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
@@ -51,7 +51,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a Image', () => {
+      it('should update a Cover', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
@@ -70,7 +70,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should return a list of Image', () => {
+      it('should return a list of Cover', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
@@ -90,7 +90,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a Image', () => {
+      it('should delete a Cover', () => {
         service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });

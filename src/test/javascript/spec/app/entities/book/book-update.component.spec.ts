@@ -7,12 +7,25 @@ import { NidAuxHistoiresTestModule } from '../../../test.module';
 import { BookUpdateComponent } from 'app/entities/book/book-update.component';
 import { BookService } from 'app/entities/book/book.service';
 import { Book } from 'app/shared/model/book.model';
+import { Account } from 'app/core/user/account.model';
 
 describe('Component Tests', () => {
   describe('Book Management Update Component', () => {
     let comp: BookUpdateComponent;
     let fixture: ComponentFixture<BookUpdateComponent>;
     let service: BookService;
+    const account: Account = {
+      id: 0,
+      firstName: 'John',
+      lastName: 'Doe',
+      activated: true,
+      email: 'john.doe@mail.com',
+      langKey: 'fr',
+      login: 'john',
+      authorities: [],
+      imageUrl: '',
+      introduction: '',
+    };
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -32,6 +45,7 @@ describe('Component Tests', () => {
       it('Should call update service on save for existing entity', fakeAsync(() => {
         // GIVEN
         const entity = new Book(123);
+        comp.account = account;
         spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN
@@ -46,6 +60,7 @@ describe('Component Tests', () => {
       it('Should call create service on save for new entity', fakeAsync(() => {
         // GIVEN
         const entity = new Book();
+        comp.account = account;
         spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN

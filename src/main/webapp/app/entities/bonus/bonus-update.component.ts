@@ -80,7 +80,6 @@ export class BonusUpdateComponent implements OnInit {
     if (bonus.id !== undefined) {
       this.subscribeToSaveResponse(this.bonusService.update(bonus));
     } else {
-      delete bonus.id;
       this.subscribeToSaveResponse(this.bonusService.create(bonus));
     }
   }

@@ -77,7 +77,6 @@ export class ChapterUpdateComponent implements OnInit {
     if (chapter.id !== undefined && chapter.id !== 0) {
       this.subscribeToSaveResponse(this.chapterService.update(chapter));
     } else {
-      delete chapter.id;
       this.subscribeToSaveResponse(this.chapterService.create(chapter));
     }
   }

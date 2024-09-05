@@ -9,7 +9,7 @@ import { CoverService } from 'app/entities/cover/cover.service';
 import { Cover } from 'app/shared/model/cover.model';
 
 describe('Component Tests', () => {
-  describe('cover Management Component', () => {
+  describe('Cover Management Component', () => {
     let comp: CoverComponent;
     let fixture: ComponentFixture<CoverComponent>;
     let service: CoverService;

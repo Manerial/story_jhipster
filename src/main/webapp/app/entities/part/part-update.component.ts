@@ -79,7 +79,6 @@ export class PartUpdateComponent implements OnInit {
     if (part.id !== undefined && part.id !== 0) {
       this.subscribeToSaveResponse(this.partService.update(part));
     } else {
-      delete part.id;
       this.subscribeToSaveResponse(this.partService.create(part));
     }
   }
