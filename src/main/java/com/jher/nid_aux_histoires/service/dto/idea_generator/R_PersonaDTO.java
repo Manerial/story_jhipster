@@ -1,12 +1,12 @@
 package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
-public class R_PersonaDTO {
+public class R_PersonaDTO implements Random_Interface {
 	private int age;
 	private String job;
 	private String name;
+	private String race;
 	private R_PhysicalDTO physical;
 	private String role;
-	private String title;
 	private R_TraitsDTO traits;
 
 	public R_PersonaDTO() {
@@ -20,7 +20,6 @@ public class R_PersonaDTO {
 		setName(persona.getName());
 		setPhysical(new R_PhysicalDTO(persona.getPhysical()));
 		setRole(persona.getRole());
-		setTitle(persona.getTitle());
 		setTraits(new R_TraitsDTO(persona.getTraits()));
 	}
 
@@ -48,6 +47,14 @@ public class R_PersonaDTO {
 		this.name = name;
 	}
 
+	public String getRace() {
+		return race;
+	}
+
+	public void setRace(String race) {
+		this.race = race;
+	}
+
 	public R_PhysicalDTO getPhysical() {
 		return physical;
 	}
@@ -62,14 +69,6 @@ public class R_PersonaDTO {
 
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public R_TraitsDTO getTraits() {

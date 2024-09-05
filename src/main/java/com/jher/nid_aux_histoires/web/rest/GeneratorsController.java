@@ -20,6 +20,8 @@ import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.Random_Interface;
+import com.jher.nid_aux_histoires.service.tool.REG_Entity;
 
 /**
  * REST controller for managing
@@ -47,9 +49,20 @@ public class GeneratorsController {
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/generate/personas")
-	public ResponseEntity<List<R_PersonaDTO>> generatePersonas(@RequestParam int number,
+	public ResponseEntity<List<Random_Interface>> generatePersonas(@RequestParam int number,
 			@Valid @RequestBody R_PersonaDTO constraint) {
-		List<R_PersonaDTO> generatedWords = ideaService.generateR_Personas(number, constraint);
+		List<Random_Interface> generatedWords = ideaService.generate(number, REG_Entity.persona, constraint);
+		return ResponseEntity.ok().body(generatedWords);
+	}
+
+	/**
+	 * Génère une liste de titres honorifiques
+	 * 
+	 * @return une réponse contenant la liste des entités
+	 */
+	@PostMapping("/generate/honorary_titles")
+	public ResponseEntity<List<Random_Interface>> generateHonoraryTitles(@RequestParam int number) {
+		List<Random_Interface> generatedWords = ideaService.generate(number, REG_Entity.honorary_title, null);
 		return ResponseEntity.ok().body(generatedWords);
 	}
 
@@ -59,9 +72,9 @@ public class GeneratorsController {
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/generate/locations")
-	public ResponseEntity<List<R_LocationDTO>> generateLocations(@RequestParam int number,
+	public ResponseEntity<List<Random_Interface>> generateLocations(@RequestParam int number,
 			@Valid @RequestBody R_LocationDTO constraint) {
-		List<R_LocationDTO> generatedLocations = ideaService.generateR_Locations(number, constraint);
+		List<Random_Interface> generatedLocations = ideaService.generate(number, REG_Entity.location, constraint);
 		return ResponseEntity.ok().body(generatedLocations);
 	}
 
@@ -71,9 +84,9 @@ public class GeneratorsController {
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/generate/objects")
-	public ResponseEntity<List<R_ObjectDTO>> generateObject(@RequestParam int number,
+	public ResponseEntity<List<Random_Interface>> generateObject(@RequestParam int number,
 			@Valid @RequestBody R_ObjectDTO constraint) {
-		List<R_ObjectDTO> generatedObject = ideaService.generateR_Object(number, constraint);
+		List<Random_Interface> generatedObject = ideaService.generate(number, REG_Entity.object, constraint);
 		return ResponseEntity.ok().body(generatedObject);
 	}
 
@@ -83,9 +96,10 @@ public class GeneratorsController {
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/generate/writing_options")
-	public ResponseEntity<List<R_WritingOptionDTO>> generateWritingOptions(@RequestParam int number,
+	public ResponseEntity<List<Random_Interface>> generateWritingOptions(@RequestParam int number,
 			@Valid @RequestBody R_WritingOptionDTO constraint) {
-		List<R_WritingOptionDTO> generatedWritingOptions = ideaService.generateR_WritingOptions(number, constraint);
+		List<Random_Interface> generatedWritingOptions = ideaService.generate(number, REG_Entity.writing_option,
+				constraint);
 		return ResponseEntity.ok().body(generatedWritingOptions);
 	}
 
@@ -97,7 +111,7 @@ public class GeneratorsController {
 	@GetMapping("/generate/words")
 	public ResponseEntity<List<String>> generateWords(@RequestParam int number, @RequestParam int fixLength,
 			@RequestParam String type) {
-		List<String> generatedWords = wordAnalysisService.generateWords(number, fixLength, type);
+		List<String> generatedWords = wordAnalysisService.generate(number, fixLength, type);
 		return ResponseEntity.ok().body(generatedWords);
 	}
 

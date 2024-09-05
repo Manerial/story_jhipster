@@ -2,7 +2,7 @@ package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
 import java.util.List;
 
-public class R_TraitsDTO {
+public class R_TraitsDTO implements Random_Interface {
 	private List<String> badTraits;
 	private List<String> caracteristics;
 	private List<String> goodTraits;

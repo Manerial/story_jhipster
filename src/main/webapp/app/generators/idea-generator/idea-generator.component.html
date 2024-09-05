@@ -37,6 +37,7 @@
 							<option value="writing_option">Style d'écriture</option>
 							<option value="location">Lieu</option>
 							<option value="object">Objet</option>
+							<option value="honorary_title">Titre honorifique</option>
 						</select>
 					</div>
 					<div class="col-sm">
@@ -77,6 +78,11 @@
 													[(ngModel)]="personaConstraint.name"></dd>
 										</dl>
 										<dl>
+											<dt>Race:</dt>
+											<dd><input class="form-control" type="text"
+													[(ngModel)]="personaConstraint.race"></dd>
+										</dl>
+										<dl>
 											<dt>Age:</dt>
 											<dd><input class="form-control" type="number"
 													[(ngModel)]="personaConstraint.age"></dd>
@@ -90,11 +96,6 @@
 											<dt>Rôle:</dt>
 											<dd><input class="form-control" type="text"
 													[(ngModel)]="personaConstraint.role"></dd>
-										</dl>
-										<dl>
-											<dt>Titre</dt>
-											<dd><input class="form-control" type="text"
-													[(ngModel)]="personaConstraint.title"></dd>
 										</dl>
 									</dl>
 									<dt><u>Physique:</u></dt>
@@ -165,7 +166,7 @@
 											</dd>
 										</dl>
 										<dl>
-											<dt>Caractère:</dt>
+											<dt>Passe-temps:</dt>
 											<dd><textarea class="form-control" [(ngModel)]="caracteristicsConstraint"
 													placeholder="a, b, c"></textarea>
 											</dd>
@@ -191,14 +192,14 @@
 										<dt>Thème:</dt>
 										<dd>
 											<input class="form-control" type="text"
-												[(ngModel)]="writingConstraint.theme">
+												[(ngModel)]="writingOptionConstraint.theme">
 										</dd>
 									</dl>
 									<dl>
 										<dt>Style:</dt>
 										<dd>
 											<input class="form-control" type="text"
-												[(ngModel)]="writingConstraint.style">
+												[(ngModel)]="writingOptionConstraint.style">
 										</dd>
 									</dl>
 								</dl>
@@ -284,6 +285,10 @@
 									<dd>{{persona.name}}</dd>
 								</dl>
 								<dl>
+									<dt>Race:</dt>
+									<dd>{{persona.race}}</dd>
+								</dl>
+								<dl>
 									<dt>Age:</dt>
 									<dd>{{persona.age}}</dd>
 								</dl>
@@ -294,10 +299,6 @@
 								<dl>
 									<dt>Rôle:</dt>
 									<dd>{{persona.role}}</dd>
-								</dl>
-								<dl>
-									<dt>Titre:</dt>
-									<dd>{{persona.title}}</dd>
 								</dl>
 							</dl>
 							<dt><u>Physique:</u></dt>
@@ -356,7 +357,7 @@
 									</dd>
 								</dl>
 								<dl>
-									<dt>Caractère:</dt>
+									<dt>Passe-temps:</dt>
 									<dd>
 										<div *ngFor="let caracteristic of persona.traits.caracteristics">
 											{{caracteristic}}
@@ -377,8 +378,17 @@
 					</div>
 				</div>
 			</div>
+			<div *ngIf="ideaForm.get('generationTool')!.value=='honorary_title'" class="row" style="margin:0px">
+				<div class="card col-sm-4 col-md-4 col-lg-4 bkg-gray-2" *ngFor="let honoraryTitle of honoraryTitleList">
+					<div class="card-body">
+						<dl class="mt-1">
+							<dt>{{honoraryTitle.title}}</dt>
+						</dl>
+					</div>
+				</div>
+			</div>
 			<div *ngIf="ideaForm.get('generationTool')!.value=='writing_option'" class="row" style="margin:0px">
-				<div class="card col-sm-4 col-md-4 col-lg-4 bkg-gray-2" *ngFor="let writing of writingList">
+				<div class="card col-sm-4 col-md-4 col-lg-4 bkg-gray-2" *ngFor="let writingOption of writingOptionList">
 					<div class="card-body">
 						<dl>
 							<dt><u>Général:</u></dt>
@@ -386,11 +396,11 @@
 							<dl class="pl-2">
 								<dl>
 									<dt>Thème:</dt>
-									<dd>{{writing.theme}}</dd>
+									<dd>{{writingOption.theme}}</dd>
 								</dl>
 								<dl>
 									<dt>Style:</dt>
-									<dd>{{writing.style}}</dd>
+									<dd>{{writingOption.style}}</dd>
 								</dl>
 							</dl>
 						</dl>

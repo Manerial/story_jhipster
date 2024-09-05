@@ -16,12 +16,15 @@ import com.jher.nid_aux_histoires.repository.IdeaRepository;
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.WordAnalysisService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.Random_Interface;
 import com.jher.nid_aux_histoires.service.mapper.IdeaMapper;
-import com.jher.nid_aux_histoires.service.tool.IdeaGenerator;
+import com.jher.nid_aux_histoires.service.tool.HonoraryTitleGenerator;
+import com.jher.nid_aux_histoires.service.tool.LocationGenerator;
+import com.jher.nid_aux_histoires.service.tool.ObjectGenerator;
+import com.jher.nid_aux_histoires.service.tool.PersonaGenerator;
+import com.jher.nid_aux_histoires.service.tool.REG_Entity;
+import com.jher.nid_aux_histoires.service.tool.RandomEntityGenerator;
+import com.jher.nid_aux_histoires.service.tool.WritingOptionGenerator;
 
 /**
  * Service Implementation for managing {@link Idea}.
@@ -34,13 +37,13 @@ public class IdeaServiceImpl implements IdeaService {
 
 	private final IdeaRepository ideaRepository;
 	private final IdeaMapper ideaMapper;
-	private final IdeaGenerator ideaGenerator;
+	private final WordAnalysisService wordAnalysisService;
 
 	public IdeaServiceImpl(IdeaRepository ideaRepository, IdeaMapper ideaMapper,
 			WordAnalysisService wordAnalysisService) {
 		this.ideaRepository = ideaRepository;
 		this.ideaMapper = ideaMapper;
-		ideaGenerator = new IdeaGenerator(ideaRepository, wordAnalysisService);
+		this.wordAnalysisService = wordAnalysisService;
 	}
 
 	@Override
@@ -72,37 +75,30 @@ public class IdeaServiceImpl implements IdeaService {
 	}
 
 	@Override
-	public List<R_PersonaDTO> generateR_Personas(int numberOfPersona, R_PersonaDTO constraint) {
-		List<R_PersonaDTO> personas = new ArrayList<>();
-		for (int i = 0; i < numberOfPersona; i++) {
-			personas.add(ideaGenerator.generateR_Persona(constraint));
+	public List<Random_Interface> generate(int number, REG_Entity type, Random_Interface constraint) {
+		List<Random_Interface> objects = new ArrayList<>();
+		RandomEntityGenerator ideaGenerator;
+		switch (type) {
+		case location:
+			ideaGenerator = new LocationGenerator(ideaRepository);
+			break;
+		case object:
+			ideaGenerator = new ObjectGenerator(ideaRepository);
+			break;
+		case persona:
+			ideaGenerator = new PersonaGenerator(ideaRepository, wordAnalysisService);
+			break;
+		case writing_option:
+			ideaGenerator = new WritingOptionGenerator(ideaRepository);
+			break;
+		case honorary_title:
+			ideaGenerator = new HonoraryTitleGenerator(ideaRepository);
+			break;
+		default:
+			return objects;
 		}
-		return personas;
-	}
-
-	@Override
-	public List<R_LocationDTO> generateR_Locations(int numberOfLocation, R_LocationDTO constraint) {
-		List<R_LocationDTO> locations = new ArrayList<>();
-		for (int i = 0; i < numberOfLocation; i++) {
-			locations.add(ideaGenerator.generateR_Location(constraint));
-		}
-		return locations;
-	}
-
-	@Override
-	public List<R_WritingOptionDTO> generateR_WritingOptions(int numberOfWritingOption, R_WritingOptionDTO constraint) {
-		List<R_WritingOptionDTO> writingOptions = new ArrayList<>();
-		for (int i = 0; i < numberOfWritingOption; i++) {
-			writingOptions.add(ideaGenerator.generateR_WritingOption(constraint));
-		}
-		return writingOptions;
-	}
-
-	@Override
-	public List<R_ObjectDTO> generateR_Object(int numberOfObject, R_ObjectDTO constraint) {
-		List<R_ObjectDTO> objects = new ArrayList<>();
-		for (int i = 0; i < numberOfObject; i++) {
-			objects.add(ideaGenerator.generateR_Object(constraint));
+		for (int i = 0; i < number; i++) {
+			objects.add(ideaGenerator.generate(constraint));
 		}
 		return objects;
 	}

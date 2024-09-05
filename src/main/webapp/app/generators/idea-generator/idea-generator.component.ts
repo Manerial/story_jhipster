@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { IPersona, Persona } from 'app/shared/model/idea-generator/persona.model';
-import { IWriting, Writing } from 'app/shared/model/idea-generator/writing.model';
+import { IWritingOption, WritingOption } from 'app/shared/model/idea-generator/writing-option.model';
 import { ILocation, Location } from 'app/shared/model/idea-generator/location.model';
 import { IObject, Object } from 'app/shared/model/idea-generator/object.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { InputPattern } from 'app/shared/util/input-pattern';
 import { GeneratorService } from '../generator.service';
+import { IHonoraryTitle } from 'app/shared/model/idea-generator/honorary-title.model';
 
 @Component({
   selector: 'jhi-idea-generator',
@@ -13,18 +14,22 @@ import { GeneratorService } from '../generator.service';
   styleUrls: ['./idea-generator.component.scss'],
 })
 export class IdeaGeneratorComponent implements OnInit {
-  public writingConstraint: IWriting = new Writing();
+  public writingOptionConstraint: IWritingOption = new WritingOption();
   public personaConstraint: IPersona = new Persona();
   public locationConstraint: ILocation = new Location();
   public objectConstraint: IObject = new Object();
+
   public badTraitsConstraint = '';
   public goodTraitsConstraint = '';
   public handicapsConstraint = '';
   public caracteristicsConstraint = '';
-  public writingList: IWriting[] = [];
+
+  public writingOptionList: IWritingOption[] = [];
   public personaList: IPersona[] = [];
   public locationList: ILocation[] = [];
   public objectList: IObject[] = [];
+  public honoraryTitleList: IHonoraryTitle[] = [];
+
   public hideConstraint = true;
   ideaForm = this.fb.group({
     generationTool: ['persona', [Validators.required]],
@@ -51,8 +56,8 @@ export class IdeaGeneratorComponent implements OnInit {
         this.personaList = response;
       });
     } else if (type === 'writing_option') {
-      this.generatorService.generateWriting(number, this.writingConstraint).subscribe(response => {
-        this.writingList = response;
+      this.generatorService.generateWritingOption(number, this.writingOptionConstraint).subscribe(response => {
+        this.writingOptionList = response;
       });
     } else if (type === 'location') {
       this.generatorService.generateLocation(number, this.locationConstraint).subscribe(response => {
@@ -62,11 +67,15 @@ export class IdeaGeneratorComponent implements OnInit {
       this.generatorService.generateObject(number, this.objectConstraint).subscribe(response => {
         this.objectList = response;
       });
+    } else if (type === 'honorary_title') {
+      this.generatorService.generateHonoraryTitle(number).subscribe(response => {
+        this.honoraryTitleList = response;
+      });
     }
   }
 
   resetConstraint(): void {
-    this.writingConstraint = new Writing();
+    this.writingOptionConstraint = new WritingOption();
     this.personaConstraint = new Persona();
     this.locationConstraint = new Location();
     this.objectConstraint = new Object();

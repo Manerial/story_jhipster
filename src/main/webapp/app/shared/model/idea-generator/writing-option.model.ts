@@ -1,9 +1,9 @@
-export interface IWriting {
+export interface IWritingOption {
   theme: string;
   style: string;
 }
 
-export class Writing implements IWriting {
+export class WritingOption implements IWritingOption {
   public theme: string;
   public style: string;
 

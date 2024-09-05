@@ -1,6 +1,6 @@
 package com.jher.nid_aux_histoires.service.dto.idea_generator;
 
-public class R_LocationDTO {
+public class R_LocationDTO implements Random_Interface {
 	private String place;
 	private String landscape;
 	private String material;

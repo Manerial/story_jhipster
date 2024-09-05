@@ -1,0 +1,1831 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="JHER" id="insertData_idea_eyes_color">
+		<insert tableName="idea">
+			<column name="type" value="eyes_color" />
+			<column name="value" value="Acier" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="eyes_color" />
+			<column name="value" value="Blanc" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="eyes_color" />
+			<column name="value" value="Bleu" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="eyes_color" />
+			<column name="value" value="Jaune" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="eyes_color" />
+			<column name="value" value="Marron" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="eyes_color" />
+			<column name="value" value="Rouge" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="eyes_color" />
+			<column name="value" value="Turquoise" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="eyes_color" />
+			<column name="value" value="Vairon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="eyes_color" />
+			<column name="value" value="Vert" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="eyes_color" />
+			<column name="value" value="Violet" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_face_shape">
+		<insert tableName="idea">
+			<column name="type" value="face_shape" />
+			<column name="value" value="Allongé" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="face_shape" />
+			<column name="value" value="Carré" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="face_shape" />
+			<column name="value" value="Empaté" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="face_shape" />
+			<column name="value" value="Oval" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="face_shape" />
+			<column name="value" value="Rond" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_hair_color">
+		<insert tableName="idea">
+			<column name="type" value="hair_color" />
+			<column name="value" value="Bleu" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_color" />
+			<column name="value" value="Blond" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_color" />
+			<column name="value" value="Brun" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_color" />
+			<column name="value" value="Chatain" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_color" />
+			<column name="value" value="Mauve" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_color" />
+			<column name="value" value="Noir" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_color" />
+			<column name="value" value="Platine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_color" />
+			<column name="value" value="Rouge" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_color" />
+			<column name="value" value="Roux" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_color" />
+			<column name="value" value="Vert" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_hair_style">
+		<insert tableName="idea">
+			<column name="type" value="hair_style" />
+			<column name="value" value="Brosse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_style" />
+			<column name="value" value="Long bouclé" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_style" />
+			<column name="value" value="Long lisse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_style" />
+			<column name="value" value="Carré" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_style" />
+			<column name="value" value="Chignon" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_style" />
+			<column name="value" value="Tresse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_style" />
+			<column name="value" value="Tresse Affricaine" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_style" />
+			<column name="value" value="Frisé" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_style" />
+			<column name="value" value="Bouclé" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_style" />
+			<column name="value" value="Anglaises" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hair_style" />
+			<column name="value" value="Catogan" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_morphology">
+		<insert tableName="idea">
+			<column name="type" value="morphology" />
+			<column name="value" value="Anorexique" />
+			<column name="complement" value="16-" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="morphology" />
+			<column name="value" value="Maigre" />
+			<column name="complement" value="16/19" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="morphology" />
+			<column name="value" value="Fin" />
+			<column name="complement" value="18/21" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="morphology" />
+			<column name="value" value="Elancé" />
+			<column name="complement" value="20/22" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="morphology" />
+			<column name="value" value="Carré" />
+			<column name="complement" value="21/25" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="morphology" />
+			<column name="value" value="Musclé" />
+			<column name="complement" value="21/25" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="morphology" />
+			<column name="value" value="Enveloppé" />
+			<column name="complement" value="23/25" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="morphology" />
+			<column name="value" value="Surpoid" />
+			<column name="complement" value="25/30" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="morphology" />
+			<column name="value" value="Obesité" />
+			<column name="complement" value="30+" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_role">
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Personnage Principal" />
+			<column name="complement" value="ALL" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Fratrie" />
+			<column name="complement" value="ALL" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Cousin(e)" />
+			<column name="complement" value="ALL" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Meilleur ami(e)" />
+			<column name="complement" value="ALL" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Ami(e)" />
+			<column name="complement" value="ALL" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Voisin(e)" />
+			<column name="complement" value="ALL" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Ennemi(e)" />
+			<column name="complement" value="ALL" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Pire ennemi(e)" />
+			<column name="complement" value="ALL" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Connaissance" />
+			<column name="complement" value="ALL" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="petit(e) ami(e)" />
+			<column name="complement" value="5+" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Fillancé(e)" />
+			<column name="complement" value="5+" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Stalker" />
+			<column name="complement" value="16+" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Sex Friend" />
+			<column name="complement" value="16+" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Collègue" />
+			<column name="complement" value="18+" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Epoux/Epouse" />
+			<column name="complement" value="23+" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Parent" />
+			<column name="complement" value="26+" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Oncle/Tante" />
+			<column name="complement" value="26+" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Enfant" />
+			<column name="complement" value="40-" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Neveu/Nièce" />
+			<column name="complement" value="40-" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="role" />
+			<column name="value" value="Aïeul" />
+			<column name="complement" value="40+" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_gender">
+		<insert tableName="idea">
+			<column name="type" value="gender" />
+			<column name="value" value="Homme" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="gender" />
+			<column name="value" value="Femme" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_bad_trait">
+		<insert tableName="idea">
+			<column name="type" value="bad_trait" />
+			<column name="value" value="Avide" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="bad_trait" />
+			<column name="value" value="Colerique" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="bad_trait" />
+			<column name="value" value="Fainéant" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="bad_trait" />
+			<column name="value" value="Fourbe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="bad_trait" />
+			<column name="value" value="Jaloux" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="bad_trait" />
+			<column name="value" value="Meurtrier" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="bad_trait" />
+			<column name="value" value="Pessimiste" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="bad_trait" />
+			<column name="value" value="Possessif" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="bad_trait" />
+			<column name="value" value="Psychopathe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="bad_trait" />
+			<column name="value" value="Obscène" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="bad_trait" />
+			<column name="value" value="Beauf" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_hobby">
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Collectionne des cartes à jouer" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Ecrit un roman" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value"
+				value="Souhaite battre un record du monde" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Fin gourmet" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Lecteur averti" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Musicien" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Otaku" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Croit aux extra-terrestres" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Sportif de haut niveau" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value"
+				value="Bénévole pour une association charitative" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Passioné de chimie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Passioné de biologie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Passioné de mathématiques" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Passioné d'Echecs" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Passioné de jeux vidéos" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Passioné de jeux de société" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Passioné de Jeux de Role" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Passioné d'énigmes" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Passioné de pêche" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Passioné d'informatique" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Fait du Foot" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Fait du Yoga" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Fait du Judo" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Fait du tir à l'arc" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Fait son propre alcool" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Fait de la potterie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="hobby" />
+			<column name="value" value="Fait du dessin" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_good_trait">
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Blagueur" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Collectionneur" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Courageux" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Croyant" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Curieux" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Dominant" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Empathique" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Fort" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Fougueux" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Frileux" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Frimeur" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Gentil" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Gourmand" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Hautain" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Intelligent" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Jovial" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Juste" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Maniaque" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Mielleux" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Optimiste" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Perspicace" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Precis" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Prolixe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Sage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Social" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Timide" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Travailleur" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Retiré" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Têtu" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="good_trait" />
+			<column name="value" value="Étourdi" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_handicap">
+		<insert tableName="idea">
+			<column name="type" value="handicap" />
+			<column name="value" value="Tetraplegique" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="handicap" />
+			<column name="value" value="Paraplegique" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="handicap" />
+			<column name="value" value="Cancéreux" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="handicap" />
+			<column name="value" value="Séropositif" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="handicap" />
+			<column name="value" value="Sourd" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="handicap" />
+			<column name="value" value="Muet" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="handicap" />
+			<column name="value" value="Aveugle" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="handicap" />
+			<column name="value" value="Androphobe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="handicap" />
+			<column name="value" value="Gynophobe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="handicap" />
+			<column name="value" value="Aracknophobe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="handicap" />
+			<column name="value" value="Claustrophobe" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_job">
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Affuteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Archer" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Architecte" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Armurier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Artilleur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Artisan" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Assassin" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Astraunaute" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Astrophysicien" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Aubergiste" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Auteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Auxiliaire de vie" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Aventurier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Barbier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Barde" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Bibliothécaire" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Bijoutier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Bonne" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Boucher" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Boulanger" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Bourreau" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Boutiquier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Bouvier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Brasseur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Bretteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Brute" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Bûcheron" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Cartographe" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Chanteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Charpentier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Chasseur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Chasseur de primes" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Chef d'entreprise" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Chercheur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Chevalier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Chirurgien" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Clerc" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Cocher" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Commandant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Comptable" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Conducteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Confiseur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Conseiller" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Conteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Contrebandier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Cordier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Cordonnier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Courtisan" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Couturier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Créateur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Cuisinier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Dentiste" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Dessinateur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Détective" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Devin" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Diplomate" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Dormeur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Dresseur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Druide" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Ébeniste" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Écrivain" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Éditeur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Empereur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Esclave" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Escroc" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Espion" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Exécuteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Fabricant de jouets" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Facteur d'arc" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Fermier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Fleuriste" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Forgeron" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Fromager" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Garde" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Garde du corps" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Geographe" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Gigolo" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Gladiateur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Gouvernant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Gouverneur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Guerisseur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Guerrier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Guide" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Herboriste" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Horloger" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Hôte" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Hôtesse" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Huissier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Illustrateur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Imposteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Infirmier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Ingénieur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Inspecteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Intendant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Inventeur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Jardinier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Joailler" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Jongleur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Joueur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Journaliste" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Juge" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Laquais" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Libraire" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Luthier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Mage" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Maire" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Maître" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Maître d'armes" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Maître de cérémonie" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Marchand" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Marcheur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Maréchal Ferrand" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Marin" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Marionnettiste" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Mathématicien" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Médecin" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Mendiant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Menuisier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Meurtrier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Militaire" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Mineur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Moine" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Musicien" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Négociant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Notaire" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Nourrice" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Opticien" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Orfèvre" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Ouvrier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Paladin" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Palfrenier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Papetier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Parfumeur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Pasteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Paysan" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Pêcheur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Peintre" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Pèlerin" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Percepteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Pharmacien" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Pirate" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Plombier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Policier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Politicien" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Pompier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Porteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Potier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Président" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Prêtre" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Primeur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Prince" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Prisonnier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Professeur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Prophète" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Prostituée" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Psychologue" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Réalisateur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Recycleur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Régent" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Reine" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Relieur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Rodeur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Roi" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Routier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Sage" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Sage femme" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Sbire" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Scribe" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Sculpteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Seigneur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Sellier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Serrurier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Serveur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Serviteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Soldat" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Sommelier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Sorcier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Tailleur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Tailleur de pierres" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Tanneur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Teinturier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Tenancier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Tisserand" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Tonnelier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Traducteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Trafiquant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Trancheur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Trappeur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Tueur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Tuteur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Vagabond" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Valet" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Vannier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Vendeur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Verrier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Vétérinaire" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Volcanologue" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="job" />
+			<column name="value" value="Voleur" />
+			<column name="complement" value="M" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_race">
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Humain" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Géant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Nain" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Machine" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Ange" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Dieu" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Bête" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Démon" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Colosse" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Ondin" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Automate" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Spectre" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Titan" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Golem" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="race" />
+			<column name="value" value="Vampire" />
+			<column name="complement" value="M" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>
