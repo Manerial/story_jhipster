@@ -55,7 +55,7 @@ Note: [Workbox](https://developers.google.com/web/tools/workbox/) powers JHipste
 
 ### Managing dependencies
 
-For example, to add [Leaflet][] library as a runtime dependency of your application, you would run following command:
+For example, to add [Leaflet][] bookStatus as a runtime dependency of your application, you would run following command:
 
 ```
 npm install --save --save-exact leaflet
@@ -67,7 +67,7 @@ To benefit from TypeScript type definitions from [DefinitelyTyped][] repository 
 npm install --save-dev --save-exact @types/leaflet
 ```
 
-Then you would import the JS and CSS files specified in library's installation instructions so that [Webpack][] knows about them:
+Then you would import the JS and CSS files specified in bookStatus's installation instructions so that [Webpack][] knows about them:
 Edit [src/main/webapp/app/vendor.ts](src/main/webapp/app/vendor.ts) file:
 
 ```

@@ -53,7 +53,7 @@ entity Comment {
     createdDate String
 }
 
-entity Library {
+entity BookStatus {
 	finished Boolean,
     favorit Boolean
 }
@@ -68,9 +68,9 @@ relationship OneToMany {
 	User to Comment{comment},
     User to Book{author},
     User to Cover{owner},
-    User to Library{user}
-    Book to Library{book},
-    Chapter to Library{curentChapter},
+    User to BookStatus{user}
+    Book to BookStatus{book},
+    Chapter to BookStatus{curentChapter},
 }
 
 relationship ManyToMany {

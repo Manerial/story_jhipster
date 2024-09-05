@@ -42,6 +42,11 @@
 						--><a routerLink="/bonus/book/{{ book.id }}" class="btn bkg-gold mt-2 ml-2"
 						title="{{ 'library.bonus' | translate }}">
 							<fa-icon icon="plus"></fa-icon>
+						</a><!--
+						--><a (click)="favorits(book)" class="btn bkg-gold mt-2 ml-2"
+						title="{{ test ? ('library.favorits.add' | translate) : ('library.favorits.remove' | translate) }}">
+							<fa-icon *ngIf="test" [icon]="['far', 'star']"></fa-icon>
+							<fa-icon *ngIf="!test" [icon]="['fas', 'star']"></fa-icon>
 						</a>
 					</div>
 				</li>

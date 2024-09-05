@@ -139,10 +139,10 @@
                         </a>
                     </li>
                     <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
-                        <a class="dropdown-item" routerLink="entities/library" routerLinkActive="active"
+                        <a class="dropdown-item" routerLink="entities/bookStatus" routerLinkActive="active"
                         	[routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.library">Library</span>
+                            <span jhiTranslate="global.menu.entities.bookStatus">BookStatus</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->

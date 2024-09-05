@@ -100,7 +100,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	private Set<Library> libraries = new HashSet<>();
+	private Set<BookStatus> bookStatuses = new HashSet<>();
 
 	@JsonIgnore
 	@ManyToMany

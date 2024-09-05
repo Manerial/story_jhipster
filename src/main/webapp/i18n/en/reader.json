@@ -8,6 +8,11 @@
     "download": "Download",
     "display": "Display",
     "bonus": "Bonus",
+    "favorits": {
+      "title": "Favorits",
+      "add": "Add to favorits",
+      "remove": "Remove from favorits"
+    },
     "flip": "Click to read the summary",
     "downloading": "Ongoing",
     "export": {

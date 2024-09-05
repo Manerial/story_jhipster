@@ -56,7 +56,7 @@ public class Book implements Serializable {
 
 	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	private Set<Library> libraries = new HashSet<>();
+	private Set<BookStatus> bookStatuses = new HashSet<>();
 
 	@ManyToOne
 	@JsonIgnoreProperties(value = "picture", allowSetters = true)

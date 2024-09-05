@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the Library entity.
+ * Performance test for the BookStatus entity.
  */
-class LibraryGatlingTest extends Simulation {
+class BookStatusGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -43,7 +43,7 @@ class LibraryGatlingTest extends Simulation {
         "Authorization" -> "${access_token}"
     )
 
-    val scn = scenario("Test the Library entity")
+    val scn = scenario("Test the BookStatus entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -62,13 +62,13 @@ class LibraryGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all libraries")
-            .get("/api/libraries")
+            exec(http("Get all bookStatuses")
+            .get("/api/bookStatuses")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new library")
-            .post("/api/libraries")
+            .exec(http("Create new bookStatus")
+            .post("/api/bookStatuses")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
@@ -76,16 +76,16 @@ class LibraryGatlingTest extends Simulation {
                 , "favorit":null
                 }""")).asJson
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_library_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_bookStatus_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created library")
-                .get("${new_library_url}")
+                exec(http("Get created bookStatus")
+                .get("${new_bookStatus_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created library")
-            .delete("${new_library_url}")
+            .exec(http("Delete created bookStatus")
+            .delete("${new_bookStatus_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

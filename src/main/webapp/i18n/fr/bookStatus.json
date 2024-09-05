@@ -1,0 +1,25 @@
+{
+  "nidAuxHistoiresApp": {
+    "bookStatus": {
+      "home": {
+        "title": "Status de livre",
+        "createLabel": "Créer un nouveau Status de livre",
+        "createOrEditLabel": "Créer ou éditer un Status de livre",
+        "notFound": "Aucun Status de livre trouvé"
+      },
+      "created": "Un nouveau Status de livre a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Status de livre avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Status de livre avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Status de livre {{ id }} ?"
+      },
+      "detail": {
+        "title": "Status de livre"
+      },
+      "finished": "Finis",
+      "favorit": "Favorit",
+      "book": "Livre",
+      "curentChapter": "Chapitre en cours"
+    }
+  }
+}

@@ -18,6 +18,7 @@ export class LibraryComponent implements OnInit {
   books: IBook[] = [];
   collapseBooks: boolean[] = [];
   format = 'pdf';
+  test = true;
 
   constructor(
     public bookService: BookService,
@@ -63,5 +64,9 @@ export class LibraryComponent implements OnInit {
   downloadBook(book: IBook): void {
     const modalRef = this.modalService.open(DownloadBookDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.book = book;
+  }
+
+  favorits(book: IBook): void {
+    this.test = !this.test;
   }
 }
