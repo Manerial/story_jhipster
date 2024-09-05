@@ -2,8 +2,9 @@ Analytics ?
 
 Bugs :
 	Discord
-	Téléchargement impossible sur le serveur
 	Sommaire ne va pas jusqu'en bas sur téléphone
+	Sommaire : Voir chapitre sélectionné
+	Lecture : Agrandir sur téléphone (option dans paramètres ?)
 
 GUI :
 	- Générateur de QR_Code
