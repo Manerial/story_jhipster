@@ -247,37 +247,37 @@ public class IdeaResourceIT {
 	@Test
 	public void createRandomPersona() {
 		List<Random_Interface> list = ideaService.generate(GENERATIONS, REG_Entity.persona, new R_PersonaDTO());
-		assertThat(list).hasSize(1000);
+		assertThat(list).hasSize(GENERATIONS);
 	}
 
 	@Test
 	public void createRandomHonoraryTitle() {
 		List<Random_Interface> list = ideaService.generate(GENERATIONS, REG_Entity.honorary_title, new R_ObjectDTO());
-		assertThat(list).hasSize(1000);
+		assertThat(list).hasSize(GENERATIONS);
 	}
 
 	@Test
 	public void createRandomLocation() {
 		List<Random_Interface> list = ideaService.generate(GENERATIONS, REG_Entity.location, new R_LocationDTO());
-		assertThat(list).hasSize(1000);
+		assertThat(list).hasSize(GENERATIONS);
 	}
 
 	@Test
 	public void createRandomObject() {
 		List<Random_Interface> list = ideaService.generate(GENERATIONS, REG_Entity.object, new R_ObjectDTO());
-		assertThat(list).hasSize(1000);
+		assertThat(list).hasSize(GENERATIONS);
 	}
 
 	@Test
 	public void createRandomWritingOption() {
 		List<Random_Interface> list = ideaService.generate(GENERATIONS, REG_Entity.writing_option,
 				new R_WritingOptionDTO());
-		assertThat(list).hasSize(1000);
+		assertThat(list).hasSize(GENERATIONS);
 	}
 
 	@Test
 	public void createRandomCreature() {
 		List<Random_Interface> list = ideaService.generate(GENERATIONS, REG_Entity.creature, new R_CreatureDTO());
-		assertThat(list).hasSize(1000);
+		assertThat(list).hasSize(GENERATIONS);
 	}
 }

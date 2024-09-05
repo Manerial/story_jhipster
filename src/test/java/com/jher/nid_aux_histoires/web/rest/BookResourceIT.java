@@ -174,7 +174,7 @@ public class BookResourceIT {
 	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getNonExistingBook() throws Exception {
 		// Get the book
-		restBookMockMvc.perform(get("/api/books/{id}", Long.MAX_VALUE)).andExpect(status().is5xxServerError());
+		restBookMockMvc.perform(get("/api/books/{id}", Long.MAX_VALUE)).andExpect(status().is4xxClientError());
 	}
 
 	@Test
