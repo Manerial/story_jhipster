@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -186,8 +187,8 @@ public class UserResource {
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the "login" user, or with status {@code 404 (Not Found)}.
 	 */
-	@GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
-	public ResponseEntity<UserDTO> getUser(@PathVariable String login) {
+	@GetMapping("/users/{login}")
+	public ResponseEntity<UserDTO> getUser(@Pattern(regexp = Constants.LOGIN_REGEX) @PathVariable String login) {
 		log.debug("REST request to get User : {}", login);
 		return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(UserDTO::new));
 	}
@@ -199,8 +200,8 @@ public class UserResource {
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the "login" user, or with status {@code 404 (Not Found)}.
 	 */
-	@GetMapping("/user_light/login/{login:" + Constants.LOGIN_REGEX + "}")
-	public ResponseEntity<UserDTO> getUserLight(@PathVariable String login) {
+	@GetMapping("/user_light/login/{login}")
+	public ResponseEntity<UserDTO> getUserLight(@Pattern(regexp = Constants.LOGIN_REGEX) @PathVariable String login) {
 		log.debug("REST request to get User : {}", login);
 		return ResponseEntity.ok(userService.getUserLightByLogin(login));
 	}
@@ -224,8 +225,9 @@ public class UserResource {
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
 	 * @throws Exception bad request
 	 */
-	@DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
-	public ResponseEntity<Void> deleteUser(@PathVariable String login) throws Exception {
+	@DeleteMapping("/users/{login}")
+	public ResponseEntity<Void> deleteUser(@Pattern(regexp = Constants.LOGIN_REGEX) @PathVariable String login)
+			throws Exception {
 		SecurityConfiguration.CheckLoggedUser(login);
 		log.debug("REST request to delete User: {}", login);
 		userService.deleteUser(login);
