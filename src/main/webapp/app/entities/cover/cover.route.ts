@@ -39,7 +39,7 @@ export const coverRoute: Routes = [
     path: '',
     component: CoverComponent,
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       defaultSort: 'id,asc',
       pageTitle: 'nidAuxHistoiresApp.cover.home.title',
     },
@@ -52,7 +52,7 @@ export const coverRoute: Routes = [
       cover: CoverResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.cover.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -64,7 +64,7 @@ export const coverRoute: Routes = [
       cover: CoverResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.cover.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -76,7 +76,7 @@ export const coverRoute: Routes = [
       cover: CoverResolve,
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.cover.home.title',
     },
     canActivate: [UserRouteAccessService],

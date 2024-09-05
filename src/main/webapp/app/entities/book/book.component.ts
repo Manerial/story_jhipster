@@ -10,6 +10,8 @@ import { IBook } from 'app/shared/model/book.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { BookService } from './book.service';
 import { BookDeleteDialogComponent } from './book-delete-dialog.component';
+import { AccountService } from 'app/core/auth/account.service';
+import { Authority } from 'app/shared/constants/authority.constants';
 
 @Component({
   selector: 'jhi-book',
@@ -30,22 +32,32 @@ export class BookComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private accountService: AccountService
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
-    const pageToLoad: number = page || this.page || 1;
-
-    this.bookService
-      .query({
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe(
-        (res: HttpResponse<IBook[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
-        () => this.onError()
-      );
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        const pageToLoad: number = page || this.page || 1;
+        const query = {
+          page: pageToLoad - 1,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        };
+        if (account.authorities.includes(Authority.ADMIN)) {
+          this.bookService.query(query).subscribe(
+            (res: HttpResponse<IBook[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+            () => this.onError()
+          );
+        } else {
+          this.bookService.findAllByAuthor(account.login).subscribe(
+            (res: HttpResponse<IBook[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+            () => this.onError()
+          );
+        }
+      }
+    });
   }
 
   ngOnInit(): void {

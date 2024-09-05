@@ -26,11 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Comment;
-import com.jher.nid_aux_histoires.repository.BookRepository;
 import com.jher.nid_aux_histoires.repository.CommentRepository;
-import com.jher.nid_aux_histoires.repository.UserRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
-import com.jher.nid_aux_histoires.service.CommentService;
 import com.jher.nid_aux_histoires.service.dto.CommentDTO;
 import com.jher.nid_aux_histoires.service.mapper.CommentMapper;
 
@@ -49,16 +46,7 @@ public class CommentResourceIT {
 	private CommentRepository commentRepository;
 
 	@Autowired
-	private BookRepository bookRepository;
-
-	@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
 	private CommentMapper commentMapper;
-
-	@Autowired
-	private CommentService commentService;
 
 	@Autowired
 	private EntityManager em;

@@ -100,7 +100,7 @@ export class BonusComponent implements OnInit, OnDestroy {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
-      this.router.navigate(['/bonus'], {
+      this.router.navigate(['/entities/bonus'], {
         queryParams: {
           page: this.page,
           size: this.itemsPerPage,

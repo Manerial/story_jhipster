@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeaService } from 'app/entities/idea/idea.service';
 import { IPersona, Persona } from 'app/shared/model/idea-generator/persona.model';
 import { IWriting, Writing } from 'app/shared/model/idea-generator/writing.model';
 import { ILocation, Location } from 'app/shared/model/idea-generator/location.model';
 import { IObject, Object } from 'app/shared/model/idea-generator/object.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { InputPattern } from 'app/shared/util/input-pattern';
+import { GeneratorService } from '../generator.service';
 
 @Component({
   selector: 'jhi-idea-generator',
@@ -31,7 +31,7 @@ export class IdeaGeneratorComponent implements OnInit {
     generationNumber: [9, [Validators.required, Validators.min(1), Validators.max(12)]],
   });
 
-  constructor(public ideaService: IdeaService, private fb: FormBuilder, private inputPattern: InputPattern) {}
+  constructor(public generatorService: GeneratorService, private fb: FormBuilder, private inputPattern: InputPattern) {}
 
   ngOnInit(): void {
     this.resetConstraint();
@@ -47,19 +47,19 @@ export class IdeaGeneratorComponent implements OnInit {
     this.hideConstraint = true;
     if (type === 'persona') {
       this.turnConstraintTraitsToList();
-      this.ideaService.generatePersona(number, this.personaConstraint).subscribe(response => {
+      this.generatorService.generatePersona(number, this.personaConstraint).subscribe(response => {
         this.personaList = response;
       });
     } else if (type === 'writing_option') {
-      this.ideaService.generateWriting(number, this.writingConstraint).subscribe(response => {
+      this.generatorService.generateWriting(number, this.writingConstraint).subscribe(response => {
         this.writingList = response;
       });
     } else if (type === 'location') {
-      this.ideaService.generateLocation(number, this.locationConstraint).subscribe(response => {
+      this.generatorService.generateLocation(number, this.locationConstraint).subscribe(response => {
         this.locationList = response;
       });
     } else if (type === 'object') {
-      this.ideaService.generateObject(number, this.objectConstraint).subscribe(response => {
+      this.generatorService.generateObject(number, this.objectConstraint).subscribe(response => {
         this.objectList = response;
       });
     }

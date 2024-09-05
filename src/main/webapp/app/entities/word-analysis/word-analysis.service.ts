@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IWordAnalysis } from 'app/shared/model/word-analysis.model';
-import { IType } from 'app/shared/model/type.model';
 
 type EntityResponseType = HttpResponse<IWordAnalysis>;
 type EntityArrayResponseType = HttpResponse<IWordAnalysis[]>;
-type ITypeArrayResponseType = HttpResponse<IType[]>;
 
 @Injectable({ providedIn: 'root' })
 export class WordAnalysisService {
@@ -36,18 +34,5 @@ export class WordAnalysisService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
-  }
-
-  getTypes(): Observable<ITypeArrayResponseType> {
-    return this.http.get<IType[]>(`${this.resourceUrl}/types`, { observe: 'response' });
-  }
-
-  generateWords(number: number, fixLength: number, type: string): Observable<string[]> {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('number', number.toString());
-    httpParams = httpParams.append('fixLength', fixLength.toString());
-    httpParams = httpParams.append('type', type);
-
-    return this.http.get<string[]>(`${this.resourceUrl}/words`, { params: httpParams });
   }
 }

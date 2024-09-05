@@ -23,10 +23,10 @@ export class ChapterUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    name: [Validators.required],
+    name: [null, [Validators.required]],
     description: [],
-    number: [Validators.required],
-    partId: [Validators.required],
+    number: [null, [Validators.required]],
+    partId: [null, [Validators.required]],
   });
 
   constructor(

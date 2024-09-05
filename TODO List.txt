@@ -1,17 +1,10 @@
 Gestion autonome des histoires :
 	Gestion des livres :
-		Ajouter / créer / modifier
 		Gérer la couverture (upload)
-		Remplissage AuthorId automatique
-	Gestion des parties :
-		Ajouter / créer / modifier
-		Remplissage numéro automatique
-	Gestion des chapitres :
-		Ajouter / créer / modifier
-		Remplissage numéro automatique
-	Gestion des scènes :
-		Ajouter / créer / modifier
-		Remplissage numéro automatique
+		
+Analytics ?
+
+Marquer comme "lu"
 
 GUI :
 	- Si bonus => image, bouton "voir" image

@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.jher.nid_aux_histoires.domain.Idea;
 import com.jher.nid_aux_histoires.repository.IdeaRepository;
 import com.jher.nid_aux_histoires.service.WordAnalysisService;
@@ -16,10 +13,8 @@ import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PhysicalDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_TraitsDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_WritingOptionDTO;
-import com.jher.nid_aux_histoires.service.impl.WordAnalysisServiceImpl;
 
 public class IdeaGenerator {
-	private final Logger log = LoggerFactory.getLogger(WordAnalysisServiceImpl.class);
 	public IdeaRepository ideaRepository;
 	public WordAnalysisService wordAnalysisService;
 

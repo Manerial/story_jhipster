@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
-import { WordAnalysisService } from 'app/entities/word-analysis/word-analysis.service';
 import { IType } from 'app/shared/model/type.model';
 import { InputPattern } from 'app/shared/util/input-pattern';
+import { GeneratorService } from '../generator.service';
 
 @Component({
   selector: 'jhi-word-generator',
@@ -19,10 +19,10 @@ export class WordGeneratorComponent implements OnInit {
     fixLength: [0, [Validators.required, Validators.min(0), Validators.max(25)]],
   });
 
-  constructor(public wordGeneratorService: WordAnalysisService, private fb: FormBuilder, private inputPattern: InputPattern) {}
+  constructor(public generatorService: GeneratorService, private fb: FormBuilder, private inputPattern: InputPattern) {}
 
   ngOnInit(): void {
-    this.wordGeneratorService.getTypes().subscribe(types => {
+    this.generatorService.getTypes().subscribe(types => {
       if (!types.body) throw 'No types found';
       this.typeList = types.body;
       this.wordForm.controls['type'].setValue(this.typeList[0].type);
@@ -38,7 +38,7 @@ export class WordGeneratorComponent implements OnInit {
     const fixLength = this.wordForm.get('fixLength')!.value;
     const type = this.wordForm.get('type')!.value;
 
-    this.wordGeneratorService.generateWords(numberOfWords, fixLength, type).subscribe(words => {
+    this.generatorService.generateWords(numberOfWords, fixLength, type).subscribe(words => {
       this.words = [];
       words.forEach(word => {
         this.words.push(word);

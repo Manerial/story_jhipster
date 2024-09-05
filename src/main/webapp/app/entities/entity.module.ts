@@ -10,7 +10,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
       {
         path: 'entities/book',
         data: {
-          authorities: [Authority.ADMIN],
+          authorities: [Authority.AUTHOR, Authority.ADMIN],
         },
         canActivate: [UserRouteAccessService],
         loadChildren: () => import('./book/book.module').then(m => m.NidAuxHistoiresBookModule),
@@ -18,7 +18,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
       {
         path: 'entities/part',
         data: {
-          authorities: [Authority.ADMIN],
+          authorities: [Authority.AUTHOR, Authority.ADMIN],
         },
         canActivate: [UserRouteAccessService],
         loadChildren: () => import('./part/part.module').then(m => m.NidAuxHistoiresPartModule),
@@ -26,7 +26,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
       {
         path: 'entities/chapter',
         data: {
-          authorities: [Authority.ADMIN],
+          authorities: [Authority.AUTHOR, Authority.ADMIN],
         },
         canActivate: [UserRouteAccessService],
         loadChildren: () => import('./chapter/chapter.module').then(m => m.NidAuxHistoiresChapterModule),
@@ -34,7 +34,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
       {
         path: 'entities/scene',
         data: {
-          authorities: [Authority.ADMIN],
+          authorities: [Authority.AUTHOR, Authority.ADMIN],
         },
         canActivate: [UserRouteAccessService],
         loadChildren: () => import('./scene/scene.module').then(m => m.NidAuxHistoiresSceneModule),
@@ -42,10 +42,18 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
       {
         path: 'entities/cover',
         data: {
-          authorities: [Authority.ADMIN],
+          authorities: [Authority.AUTHOR, Authority.ADMIN],
         },
         canActivate: [UserRouteAccessService],
         loadChildren: () => import('./cover/cover.module').then(m => m.NidAuxHistoiresCoverModule),
+      },
+      {
+        path: 'entities/bonus',
+        data: {
+          authorities: [Authority.AUTHOR, Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
+        loadChildren: () => import('./bonus/bonus.module').then(m => m.NidAuxHistoiresBonusModule),
       },
       {
         path: 'entities/idea',
@@ -65,11 +73,11 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
       },
       {
         path: 'entities/comment',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
         loadChildren: () => import('./comment/comment.module').then(m => m.NidAuxHistoiresCommentModule),
-      },
-      {
-        path: 'bonus',
-        loadChildren: () => import('./bonus/bonus.module').then(m => m.NidAuxHistoiresBonusModule),
       },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),

@@ -83,17 +83,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/account/reset-password/finish").permitAll()
             .antMatchers("/api/export/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/users/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/books/import").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/word-analyses/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/ideas/**").hasAuthority(AuthoritiesConstants.ADMIN)
             
-            .antMatchers("/api/parts/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/api/chapters/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/api/scenes/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            
-            .antMatchers(HttpMethod.PUT, "/api/covers/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers(HttpMethod.PUT, "/api/word-analyses/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers(HttpMethod.PUT, "/api/ideas/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers(HttpMethod.DELETE, "/api/covers/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers(HttpMethod.DELETE, "/api/word-analyses/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers(HttpMethod.DELETE, "/api/ideas/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/parts/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
+            .antMatchers("/api/chapters/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
+            .antMatchers("/api/scenes/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
+            .antMatchers("/api/covers/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
+            .antMatchers("/api/bonus/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
             
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
@@ -116,15 +114,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	public static void CheckLoggedUser(String login) throws Exception {
-		Authentication auth = getLoggedUser();
-		if (login != null && login.equals(auth.getName())) {
-			return;
-		}
-
-		if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals(AuthoritiesConstants.ADMIN))) {
+		if (IsLoggedUser(login) || IsAdmin()) {
 			return;
 		}
 
 		throw new Exception("User cannot access this resource : role does not match");
+	}
+
+	public static boolean IsLoggedUser(String login) {
+		Authentication auth = getLoggedUser();
+		return login != null && login.equals(auth.getName());
+	}
+
+	public static boolean IsAdmin() {
+		Authentication auth = getLoggedUser();
+		return auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals(AuthoritiesConstants.ADMIN));
 	}
 }

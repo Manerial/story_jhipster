@@ -10,8 +10,6 @@ import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -34,8 +32,6 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 @RestController
 @RequestMapping("/api")
 public class ToolResource {
-
-	private final Logger log = LoggerFactory.getLogger(ToolResource.class);
 
 	@Value("${jhipster.clientApp.name}")
 	private String applicationName;

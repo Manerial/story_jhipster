@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -64,11 +63,12 @@ public class BookResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new bookDTO, or with status {@code 400 (Bad Request)} if the
 	 *         book has already an ID.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception
 	 */
 	@PostMapping("/books")
-	public ResponseEntity<BookDTO> createBook(@RequestBody BookDTO bookDTO) throws URISyntaxException {
+	public ResponseEntity<BookDTO> createBook(@RequestBody BookDTO bookDTO) throws Exception {
 		log.debug("REST request to save Book : {}", bookDTO);
+		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
 		if (bookDTO.getId() != null) {
 			throw new BadRequestAlertException("A new book cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -115,8 +115,8 @@ public class BookResource {
 	 */
 	@PutMapping("/books")
 	public ResponseEntity<BookDTO> updateBook(@RequestBody BookDTO bookDTO) throws Exception {
-		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
 		log.debug("REST request to update Book : {}", bookDTO);
+		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
 		if (bookDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -126,11 +126,11 @@ public class BookResource {
 				.body(result);
 	}
 
-	@GetMapping("/books/visibility/{id}")
+	@PutMapping("/books/visibility/{id}")
 	public ResponseEntity<BookDTO> updateBookVisibility(@PathVariable Long id) throws Exception {
 		BookDTO bookDTO = bookService.findOne(id).get();
-		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
 		log.debug("REST request to update Book : {}", bookDTO);
+		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
 		if (bookDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -150,18 +150,17 @@ public class BookResource {
 	 *         of books in body.
 	 */
 	@GetMapping("/books")
-	public ResponseEntity<List<BookDTO>> getAllBooks(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
-			@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+	public ResponseEntity<List<BookDTO>> getAllBooks(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable) {
 		log.debug("REST request to get a page of Books");
-		if (eagerload) {
-			List<BookDTO> books = bookService.findAllWithEagerRelationships();
-			return ResponseEntity.ok().body(books);
+		Page<BookDTO> page = null;
+		if (SecurityConfiguration.IsAdmin()) {
+			page = bookService.findAll(pageable);
 		} else {
-			Page<BookDTO> page = bookService.findAll(pageable);
-			HttpHeaders headers = PaginationUtil
-					.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-			return ResponseEntity.ok().headers(headers).body(page.getContent());
+			page = bookService.findAllVisible(pageable);
 		}
+		HttpHeaders headers = PaginationUtil
+				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+		return ResponseEntity.ok().headers(headers).body(page.getContent());
 	}
 
 	/**
@@ -174,16 +173,19 @@ public class BookResource {
 	 *         of books in body.
 	 */
 	@GetMapping("/books/author/{login}")
-	public ResponseEntity<List<BookDTO>> getBooksByAuthor(@PathVariable String login) {
+	public ResponseEntity<List<BookDTO>> getBooksByAuthor(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
+			@PathVariable String login) {
 		log.debug("REST request to get a page of Books");
-		List<BookDTO> books = null;
+		Page<BookDTO> page = null;
 		try {
 			SecurityConfiguration.CheckLoggedUser(login);
-			books = bookService.findAllByAuthorId(login, false);
+			page = bookService.findAllByAuthorId(pageable, login);
 		} catch (Exception e) {
-			books = bookService.findAllByAuthorId(login, true);
+			page = bookService.findAllVisibleByAuthorId(pageable, login);
 		}
-		return ResponseEntity.ok().body(books);
+		HttpHeaders headers = PaginationUtil
+				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+		return ResponseEntity.ok().headers(headers).body(page.getContent());
 	}
 
 	/**
@@ -192,13 +194,14 @@ public class BookResource {
 	 * @param id the id of the bookDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the bookDTO, or with status {@code 404 (Not Found)}.
+	 * @throws Exception
 	 */
 	@GetMapping("/books/{id}")
-	public ResponseEntity<BookDTO> getBook(@PathVariable Long id) {
+	public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Book : {}", id);
 		Optional<BookDTO> bookDTO = bookService.findOne(id);
 		if (!bookDTO.get().getVisibility()) {
-			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+			SecurityConfiguration.CheckLoggedUser(bookDTO.get().getAuthorLogin());
 		}
 		return ResponseUtil.wrapOrNotFound(bookDTO);
 	}
@@ -209,13 +212,14 @@ public class BookResource {
 	 * @param id the id of the bookDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the bookDTO, or with status {@code 404 (Not Found)}.
+	 * @throws Exception
 	 */
-	@GetMapping("/books_light/{id}")
-	public ResponseEntity<BookDTO> getBookLight(@PathVariable Long id) {
+	@GetMapping("/books/light/{id}")
+	public ResponseEntity<BookDTO> getBookLight(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Book : {}", id);
 		Optional<BookDTO> bookDTO = bookService.findOneLight(id);
 		if (!bookDTO.get().getVisibility()) {
-			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+			SecurityConfiguration.CheckLoggedUser(bookDTO.get().getAuthorLogin());
 		}
 		return ResponseUtil.wrapOrNotFound(bookDTO);
 	}

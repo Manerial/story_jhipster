@@ -25,6 +25,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.scene.number" for="field_number">Number</label>
+                    <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.part.numberAuto" for="field_number">Number</label>
                     <input type="number" class="form-control" name="number" id="field_number"
                            formControlName="number"/>
                     <div *ngIf="editForm.get('number')!.invalid && (editForm.get('number')!.dirty || editForm.get('number')!.touched)" >

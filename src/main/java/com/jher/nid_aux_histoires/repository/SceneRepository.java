@@ -19,11 +19,17 @@ import com.jher.nid_aux_histoires.domain.Scene;
 public interface SceneRepository extends JpaRepository<Scene, Long> {
 
 	@Query(value = "select distinct scene from Scene scene", countQuery = "select count(distinct scene) from Scene scene")
-	Page<Scene> findAllWithEagerRelationships(Pageable pageable);
+	Page<Scene> findAll(Pageable pageable);
 
-	@Query("select distinct scene from Scene scene")
-	List<Scene> findAllWithEagerRelationships();
+	@Query("select distinct scene from Scene scene where scene.chapter.part.book.author.login =:login")
+	Page<Scene> findAllByAuthorLogin(Pageable pageable, @Param("login") String login);
+
+	@Query("select distinct scene from Scene scene where scene.chapter.id =:chapterId")
+	List<Scene> findAllByChapterId(@Param("chapterId") Long chapterId);
 
 	@Query("select scene from Scene scene where scene.id =:id")
-	Optional<Scene> findOneWithEagerRelationships(@Param("id") Long id);
+	Optional<Scene> findOne(@Param("id") Long id);
+
+	@Query("select scene.chapter.part.book.author.login from Scene scene where scene.id =:id")
+	String findAuthorLoginBySceneId(@Param("id") Long id);
 }

@@ -39,7 +39,7 @@ export const bonusRoute: Routes = [
     path: '',
     component: BonusComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       defaultSort: 'id,asc',
       pageTitle: 'nidAuxHistoiresApp.bonus.home.title',
     },
@@ -52,7 +52,7 @@ export const bonusRoute: Routes = [
       bonus: BonusResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.bonus.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -64,7 +64,7 @@ export const bonusRoute: Routes = [
       bonus: BonusResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.bonus.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -76,7 +76,7 @@ export const bonusRoute: Routes = [
       bonus: BonusResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN, Authority.AUTHOR],
       pageTitle: 'nidAuxHistoiresApp.bonus.home.title',
     },
     canActivate: [UserRouteAccessService],

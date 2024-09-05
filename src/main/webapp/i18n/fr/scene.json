@@ -18,6 +18,7 @@
       },
       "name": "Nom",
       "number": "Numéro",
+      "numberAuto": "(si < 1, sera renseigné automatiquement)",
       "text": "Texte",
       "timestampStart": "Date / Heure",
       "chapter": "Chapitre",

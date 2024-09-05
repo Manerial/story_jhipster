@@ -25,7 +25,6 @@
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="nidAuxHistoiresApp.scene.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="number"><span jhiTranslate="nidAuxHistoiresApp.scene.number">Number</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="text"><span jhiTranslate="nidAuxHistoiresApp.scene.text">Text</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="timestampStart"><span jhiTranslate="nidAuxHistoiresApp.scene.timestampStart">Timestamp Start</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="chapterId"><span jhiTranslate="nidAuxHistoiresApp.scene.chapter">Chapter</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -36,7 +35,6 @@
                     <td><a [routerLink]="['/entities/scene', scene.id, 'view']">{{ scene.id }}</a></td>
                     <td>{{ scene.name }}</td>
                     <td>{{ scene.number }}</td>
-                    <td>{{ scene.text }}</td>
                     <td>{{ scene.timestampStart | date:'medium' }}</td>
                     <td>
                         <div *ngIf="scene.chapterId">

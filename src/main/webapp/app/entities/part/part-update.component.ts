@@ -23,10 +23,10 @@ export class PartUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    name: [Validators.required],
+    name: [null, [Validators.required]],
     description: [],
-    number: [Validators.required],
-    bookId: [Validators.required],
+    number: [null, [Validators.required]],
+    bookId: [null, [Validators.required]],
   });
 
   constructor(

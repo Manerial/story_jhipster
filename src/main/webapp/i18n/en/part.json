@@ -19,8 +19,14 @@
       "name": "Name",
       "description": "Description",
       "number": "Number",
+      "numberAuto": "(if < 1, will be filled in automatically)",
       "chapter": "Chapter",
-      "book": "Book"
+      "book": "Book",
+      "required": {
+        "name": "Name field is required",
+        "number": "Number field is required",
+        "book": "Book field is required"
+      }
     }
   }
 }

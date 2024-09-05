@@ -20,7 +20,11 @@
       "author": "Auteur",
       "description": "Description",
       "part": "Partie",
-      "cover": "Couverture"
+      "cover": "Couverture",
+      "visibility": "Visibilité : ",
+      "required": {
+        "name": "Le champ Nom est requis"
+      }
     }
   }
 }

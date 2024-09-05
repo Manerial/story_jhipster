@@ -9,6 +9,8 @@ import { IBook, Book } from 'app/shared/model/book.model';
 import { BookService } from './book.service';
 import { ICover } from 'app/shared/model/cover.model';
 import { CoverService } from 'app/entities/cover/cover.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'jhi-book-update',
@@ -17,11 +19,14 @@ import { CoverService } from 'app/entities/cover/cover.service';
 export class BookUpdateComponent implements OnInit {
   isSaving = false;
   covers: ICover[] = [];
+  visible = true;
+  account!: Account;
 
   editForm = this.fb.group({
     id: [],
-    name: [Validators.required],
-    authorId: [Validators.required],
+    name: [null, [Validators.required]],
+    authorId: [null, [Validators.required]],
+    authorLogin: [null, [Validators.required]],
     description: [],
     coverId: [],
   });
@@ -30,14 +35,20 @@ export class BookUpdateComponent implements OnInit {
     protected bookService: BookService,
     protected coverService: CoverService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ book }) => {
-      this.updateForm(book);
-
-      this.coverService.query().subscribe((res: HttpResponse<ICover[]>) => (this.covers = res.body || []));
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        this.account = account;
+        this.activatedRoute.data.subscribe(({ book }) => {
+          this.updateForm(book);
+          this.visible = book.visibility;
+          this.coverService.query().subscribe((res: HttpResponse<ICover[]>) => (this.covers = res.body || []));
+        });
+      }
     });
   }
 
@@ -45,7 +56,8 @@ export class BookUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: book.id,
       name: book.name,
-      authorId: book.authorId,
+      authorId: book.authorId !== 0 ? book.authorId : this.account.id,
+      authorLogin: book.authorLogin !== '' ? book.authorLogin : this.account.login,
       description: book.description,
       coverId: book.coverId,
     });
@@ -72,8 +84,10 @@ export class BookUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       authorId: this.editForm.get(['authorId'])!.value,
+      authorLogin: this.editForm.get(['authorLogin'])!.value,
       description: this.editForm.get(['description'])!.value,
       coverId: this.editForm.get(['coverId'])!.value,
+      visibility: this.visible,
     };
   }
 

@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.SceneService;
 import com.jher.nid_aux_histoires.service.dto.SceneDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
@@ -83,11 +83,12 @@ public class SceneResource {
 	 *         sceneDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the sceneDTO couldn't be
 	 *         updated.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception
 	 */
 	@PutMapping("/scenes")
-	public ResponseEntity<SceneDTO> updateScene(@RequestBody SceneDTO sceneDTO) throws URISyntaxException {
+	public ResponseEntity<SceneDTO> updateScene(@RequestBody SceneDTO sceneDTO) throws Exception {
 		log.debug("REST request to update Scene : {}", sceneDTO);
+		SecurityConfiguration.CheckLoggedUser(sceneService.findAuthorLoginBySceneId(sceneDTO.getId()));
 		if (sceneDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -107,14 +108,13 @@ public class SceneResource {
 	 *         of scenes in body.
 	 */
 	@GetMapping("/scenes")
-	public ResponseEntity<List<SceneDTO>> getAllScenes(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
-			@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+	public ResponseEntity<List<SceneDTO>> getAllScenes(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable) {
 		log.debug("REST request to get a page of Scenes");
 		Page<SceneDTO> page;
-		if (eagerload) {
-			page = sceneService.findAllWithEagerRelationships(pageable);
-		} else {
+		if (SecurityConfiguration.IsAdmin()) {
 			page = sceneService.findAll(pageable);
+		} else {
+			page = sceneService.findAllByAuthorLogin(pageable, SecurityConfiguration.getLoggedUser().getName());
 		}
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -127,10 +127,12 @@ public class SceneResource {
 	 * @param id the id of the sceneDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the sceneDTO, or with status {@code 404 (Not Found)}.
+	 * @throws Exception
 	 */
 	@GetMapping("/scenes/{id}")
-	public ResponseEntity<SceneDTO> getScene(@PathVariable Long id) {
+	public ResponseEntity<SceneDTO> getSceneById(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Scene : {}", id);
+		SecurityConfiguration.CheckLoggedUser(sceneService.findAuthorLoginBySceneId(id));
 		Optional<SceneDTO> sceneDTO = sceneService.findOne(id);
 		return ResponseUtil.wrapOrNotFound(sceneDTO);
 	}

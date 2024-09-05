@@ -24,6 +24,13 @@
                         <a [routerLink]="['/entities/cover', book.coverId, 'view']">{{ book.coverId }}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.book.visibility">Visibility :</span></dt>
+                <dd>
+                    <div *ngIf="book.coverId">
+                        <fa-icon icon="eye" *ngIf="book.visibility"></fa-icon>
+                        <fa-icon icon="eye-slash" *ngIf="!book.visibility"></fa-icon>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
