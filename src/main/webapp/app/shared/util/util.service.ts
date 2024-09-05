@@ -10,4 +10,18 @@ export class UtilService {
     }
     return parseInt(paramStr, 10);
   }
+
+  scrollContainerLimitTop(scroll: number): number {
+    const view = document.getElementsByClassName('container-limit')[0];
+    const saveScroll = view.scrollTop;
+    view.scrollTop = scroll;
+    return saveScroll;
+  }
+
+  scrollContainerLimitLeft(scroll: number): number {
+    const view = document.getElementsByClassName('container-limit')[0];
+    const saveScroll = view.scrollLeft;
+    view.scrollLeft = scroll;
+    return saveScroll;
+  }
 }

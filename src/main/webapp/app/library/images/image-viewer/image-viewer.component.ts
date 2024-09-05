@@ -46,9 +46,6 @@ export class ImageViewerComponent implements OnInit {
 
   zoomInCoordinates(x: number, y: number): void {
     // Don't touch className position
-    if (!this.imageElement.parentElement || !this.imageElement.parentElement.parentElement) throw 'Image parent error';
-
-    const imageGranparent = this.imageElement.parentElement.parentElement;
     let calculatedTop: number;
     let calculatedLeft: number;
     if (this.imageElement.naturalHeight !== this.imageElement.height) {
@@ -61,8 +58,9 @@ export class ImageViewerComponent implements OnInit {
       calculatedLeft = 0;
     }
     this.imageElement.className = this.imageElement.className + ' ' + this.getZoomIcon();
-    imageGranparent.scrollTop = calculatedTop;
-    imageGranparent.scrollLeft = calculatedLeft;
+
+    this.utilService.scrollContainerLimitTop(calculatedTop);
+    this.utilService.scrollContainerLimitLeft(calculatedLeft);
   }
 
   getZoomIcon(): string {

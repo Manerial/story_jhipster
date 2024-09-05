@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { ReaderService } from 'app/library/reader/reader.service';
 import { Book, IBook } from 'app/shared/model/book.model';
 import { NavbarService } from 'app/shared/util/search.service';
+import { UtilService } from 'app/shared/util/util.service';
 
 @Component({
   selector: 'jhi-sidebar',
@@ -18,7 +19,7 @@ export class SidebarComponent implements OnInit {
   public innerWidth: number = window.innerWidth;
   private saveScroll = 0;
 
-  constructor(public readerService: ReaderService, private navbarService: NavbarService) {}
+  constructor(public readerService: ReaderService, private navbarService: NavbarService, private utilService: UtilService) {}
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
@@ -72,10 +73,10 @@ export class SidebarComponent implements OnInit {
   }
 
   toggleSommaire(): void {
-    const currentScroll = this.readerService.scroll(0);
+    const currentScroll = this.utilService.scrollContainerLimitTop(0);
     this.collapseSummary = !this.collapseSummary;
     if (this.collapseSummary) {
-      this.readerService.scroll(this.saveScroll);
+      this.utilService.scrollContainerLimitTop(this.saveScroll);
       this.saveScroll = 0;
     } else {
       this.saveScroll = currentScroll;

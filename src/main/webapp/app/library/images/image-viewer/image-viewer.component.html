@@ -1,5 +1,3 @@
-<div class="content">
-	<div [ngStyle]="{'visibility': isLoading ? 'hidden' : 'visible'}">
-		<img id="imageViewer" alt="Error occured during the image load" (click)="zoom($event);" />
-	</div>
+<div [ngStyle]="{'visibility': isLoading ? 'hidden' : 'visible'}">
+	<img id="imageViewer" alt="Error occured during the image load" (click)="zoom($event);" />
 </div>
