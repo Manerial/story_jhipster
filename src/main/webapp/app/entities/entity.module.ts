@@ -79,6 +79,14 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
         canActivate: [UserRouteAccessService],
         loadChildren: () => import('./comment/comment.module').then(m => m.NidAuxHistoiresCommentModule),
       },
+      {
+        path: 'entities/library',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
+        canActivate: [UserRouteAccessService],
+        loadChildren: () => import('./library/library.module').then(m => m.NidAuxHistoiresLibraryModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

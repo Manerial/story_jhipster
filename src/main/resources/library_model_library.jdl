@@ -3,11 +3,22 @@ entity Library {
     favorit Boolean
 }
 
+entity Book {
+	name String,
+	description String,
+    visibility Boolean
+}
+
+entity Chapter {
+	name String,
+	description String,
+	number Integer
+}
+
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
-    User to Library{user}
     Book to Library{book},
-    Chapter to Library{curentChapter},
+    Chapter to Library{curentChapter}
 }
 
 // Set pagination options

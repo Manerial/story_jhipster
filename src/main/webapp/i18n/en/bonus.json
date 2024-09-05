@@ -21,6 +21,7 @@
       "description": "Description",
       "dataContentType": "Data Content Type",
       "book": "Book",
+      "owner": "Owner",
       "required": {
         "name": "Field Name is required",
         "book": "Field Book is required"
