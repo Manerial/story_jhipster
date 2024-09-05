@@ -46,9 +46,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) {
-		web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**").antMatchers("/app/**/*.{js,html}").antMatchers("/i18n/**")
-				.antMatchers("/content/**").antMatchers("/h2-console/**").antMatchers("/swagger-ui/index.html")
-				.antMatchers("/test/**");
+		// @formatter:off
+		web.ignoring()
+		.antMatchers(HttpMethod.OPTIONS, "/**")
+		.antMatchers("/app/**/*.{js,html}")
+		.antMatchers("/i18n/**")
+		.antMatchers("/content/**")
+		.antMatchers("/h2-console/**")
+		.antMatchers("/swagger-ui/index.html")
+		.antMatchers("/test/**");
+		// @formatter:on
 	}
 
 	@Override
@@ -94,7 +101,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/covers/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
             .antMatchers("/api/bonus/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.AUTHOR)
             
-            .antMatchers("/api/**").authenticated()
+            .antMatchers("/api/**").permitAll()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/info").permitAll()
             .antMatchers("/management/prometheus").permitAll()
