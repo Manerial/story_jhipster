@@ -13,7 +13,7 @@ type EntityArrayResponseType = HttpResponse<IBook[]>;
 @Injectable({ providedIn: 'root' })
 export class BookService {
   public resourceUrl = SERVER_API_URL + 'api/books';
-  public exportUrl = SERVER_API_URL + 'api/export/book';
+  public downloadUrl = SERVER_API_URL + 'api/download/book';
 
   constructor(protected http: HttpClient) {}
 
@@ -39,6 +39,6 @@ export class BookService {
   }
 
   download(id: number): Observable<BookResponseType> {
-    return this.http.get(`${this.exportUrl}/${id}`, { observe: 'response', responseType: 'blob' });
+    return this.http.get(`${this.downloadUrl}/${id}`, { observe: 'response', responseType: 'blob' });
   }
 }

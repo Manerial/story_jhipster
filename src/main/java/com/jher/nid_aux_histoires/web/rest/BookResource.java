@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jher.nid_aux_histoires.service.BookService;
+import com.jher.nid_aux_histoires.service.ExportService;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
@@ -47,9 +48,11 @@ public class BookResource {
 	private String applicationName;
 
 	private final BookService bookService;
+	private final ExportService exportService;
 
-	public BookResource(BookService bookService) {
+	public BookResource(BookService bookService, ExportService exportService) {
 		this.bookService = bookService;
+		this.exportService = exportService;
 	}
 
 	/**
@@ -90,6 +93,7 @@ public class BookResource {
 			throw new BadRequestAlertException("A new book cannot already have an ID", ENTITY_NAME, "idexists");
 		}
 		BookDTO result = bookService.saveBash(bookDTO);
+		exportService.exportBook(result.getId());
 		return ResponseEntity
 				.created(new URI("/api/books/" + result.getId())).headers(HeaderUtil
 						.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

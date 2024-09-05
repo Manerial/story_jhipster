@@ -49,8 +49,13 @@
 }
 
 .bk-list li .bk-book.bk-bookdefault:hover {
-  -webkit-transform: rotate3d(0, 1, 0, 35deg);
-  transform: rotate3d(0, 1, 0, 35deg);
+  -webkit-transform: rotate3d(0, 1, 0, 30deg);
+  transform: rotate3d(0, 1, 0, 30deg);
+}
+
+.bk-list li .bk-book.bk-viewback:hover {
+  -webkit-transform: rotate3d(0, 1, 0, 15deg);
+  transform: rotate3d(0, 1, 0, 150deg);
 }
 
 .bk-list li .bk-book > div,
@@ -118,43 +123,6 @@
 .bk-list li .bk-book.bk-viewback {
   -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
   transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
-}
-
-@-webkit-keyframes rotating {
-  from {
-    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-  }
-  to {
-    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-  }
-}
-@keyframes rotating {
-  from {
-    -ms-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
-    -moz-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 180deg);
-    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 0deg);
-  }
-  to {
-    -ms-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    -moz-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    -webkit-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    -o-transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-    transform: translate3d(0, 0, 0px) rotate3d(0, 1, 0, 360deg);
-  }
-}
-
-.rotating {
-  -webkit-animation: rotating 5s linear infinite;
-  -moz-animation: rotating 5s linear infinite;
-  -ms-animation: rotating 5s linear infinite;
-  -o-animation: rotating 5s linear infinite;
-  animation: rotating 5s linear infinite;
 }
 
 /* Main colors and content */

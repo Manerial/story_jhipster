@@ -1,4 +1,5 @@
 OBLIGATOIRE
+Export EPUB
 
 OPTIONNEL
 Alléger les échanges Back-Front

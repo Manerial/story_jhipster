@@ -50,7 +50,9 @@ public class ExportDocx {
 	public static final String LINE_BREAK_PLACEHOLDER = "§";
 
 	public ExportDocx() {
-		tempDir = System.getProperty("java.io.tmpdir") + "/";
+		tempDir = System.getProperty("java.io.tmpdir") + "/wordExports/";
+		File file = new File(tempDir);
+		file.mkdir();
 	}
 
 	public Path launchGeneration(BookDTO book)
@@ -69,6 +71,10 @@ public class ExportDocx {
 		return new File(outputFile.getPath()).toPath();
 	}
 
+	public String getObjectFilePath(String objectName) {
+		return tempDir + objectName + WORD_EXTENSION;
+	}
+
 	private List<File> generateContent(BookDTO book) throws IOException, Docx4JException {
 		List<File> fileList = new ArrayList<>();
 		for (PartDTO part : book.getParts()) {
@@ -81,9 +87,9 @@ public class ExportDocx {
 			throws IOException, FileNotFoundException, Docx4JException {
 		LOGGER.info("Chargement du fichier model : " + modelFileName);
 		WordprocessingMLPackage wordMLPackage = Docx4J.load(new java.io.File(modelFilePath + modelFileName));
-		String outputFileName = objectName + WORD_EXTENSION;
-		LOGGER.info("Chargement du fichier de sortie : " + outputFileName);
-		File outputFile = new File(tempDir + outputFileName);
+		String outputFilePath = getObjectFilePath(objectName);
+		LOGGER.info("Chargement du fichier de sortie : " + outputFilePath);
+		File outputFile = new File(outputFilePath);
 		try (OutputStream out = new FileOutputStream(outputFile)) {
 			DocxStamper stamper = buildDocxStamper();
 			stamper.stamp(wordMLPackage, object, out);
