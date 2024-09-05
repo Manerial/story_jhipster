@@ -163,7 +163,7 @@ public class BookResourceIT {
 		bookRepository.saveAndFlush(book);
 
 		// Get all the bookList
-		restBookMockMvc.perform(get("/api/favorits")).andExpect(status().isOk())
+		restBookMockMvc.perform(get("/api/books/favorits")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
 	}
 
@@ -174,8 +174,8 @@ public class BookResourceIT {
 		bookRepository.saveAndFlush(book);
 
 		// Get all the bookList
-		restBookMockMvc.perform(get("/api/author/{login}", book.getAuthor().getLogin())).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
+		restBookMockMvc.perform(get("/api/books/author/{login}", book.getAuthor().getLogin()))
+				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
 	}
 
 	@Test
