@@ -3,7 +3,7 @@ package com.jher.nid_aux_histoires.service;
 import java.nio.file.Path;
 
 public interface ExportService {
-	Path getPathOfExportedBook(long id);
+	Path getPathOfExportedBook(long id) throws Exception;
 
-	Path exportBook(long id);
+	void exportBook(long id);
 }

@@ -3,6 +3,8 @@ package com.jher.nid_aux_histoires.web.rest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 import javax.xml.bind.JAXBException;
@@ -16,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +36,8 @@ public class ExportController {
 		this.exportService = exportService;
 	}
 
+	private List<String> lockedBooks = new ArrayList<>();
+
 	/**
 	 * Exporte un livre en Word
 	 * 
@@ -41,22 +46,29 @@ public class ExportController {
 	 * @throws IOException
 	 * @throws Docx4JException
 	 */
-	@GetMapping("/export/book/{id}")
+	@PostMapping("/export/book/{id}")
 	public ResponseEntity<String> exportBookById(@Valid @PathVariable int id) {
-		Path path = null;
-		try {
-			path = exportService.exportBook(id);
-		} catch (Exception e) {
-			String error = "Error during the generation of the document : " + e.getMessage();
-			log.warn(error, e);
-			return ResponseEntity.badRequest().body(error);
+		String idBook = "ID_" + id;
+		if (lockedBooks.contains(idBook)) {
+			log.warn("Le livre est déjà en cours d'export");
+			return ResponseEntity.badRequest().body("Export already ongoing");
+		} else {
+			lockedBooks.add(idBook);
 		}
-		if (path == null) {
-			String error = "Error during the generation of the document.";
-			log.warn(error);
-			return ResponseEntity.badRequest().body(error);
-		}
-		return ResponseEntity.ok().body("Export OK for : " + path);
+
+		Thread exportThread = new Thread() {
+			public void run() {
+				try {
+					exportService.exportBook(id);
+					lockedBooks.remove(idBook);
+				} catch (Exception e) {
+					String error = "Error during the generation of the document : " + e.getMessage();
+					log.warn(error, e);
+				}
+			}
+		};
+		exportThread.start();
+		return ResponseEntity.ok().body("Export ongoing");
 	}
 
 	/**
@@ -69,7 +81,12 @@ public class ExportController {
 	 */
 	@GetMapping("/download/book/{id}")
 	public ResponseEntity<ByteArrayResource> getBookWord(@Valid @PathVariable int id) {
-		Path path = exportService.getPathOfExportedBook(id);
+		Path path = null;
+		try {
+			path = exportService.getPathOfExportedBook(id);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		byte[] data;
 		try {
 			data = Files.readAllBytes(path);

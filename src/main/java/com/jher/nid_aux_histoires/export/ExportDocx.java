@@ -1,9 +1,11 @@
 package com.jher.nid_aux_histoires.export;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,6 +27,9 @@ import org.springframework.stereotype.Service;
 import org.wickedsource.docxstamper.DocxStamper;
 import org.wickedsource.docxstamper.DocxStamperConfiguration;
 
+import com.jher.nid_aux_histoires.export.converter.ConverterEPUB;
+import com.jher.nid_aux_histoires.export.converter.ConverterInterface;
+import com.jher.nid_aux_histoires.export.converter.ConverterPDF;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
 import com.jher.nid_aux_histoires.service.dto.PartDTO;
 
@@ -42,22 +47,22 @@ public class ExportDocx {
 
 	private WordprocessingMLPackage mainDoc;
 
-	private String tempDir;
+	public static enum FILE_FORMAT {
+		docx, pdf, epub
+	};
 
-	private static final String WORD_EXTENSION = ".docx";
+	public static final String TEMP_DIR = System.getProperty("user.home") + "\\BooksExports\\";
+	public static final String LINE_BREAK_PLACEHOLDER = "§";
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExportDocx.class);
 
-	public static final String LINE_BREAK_PLACEHOLDER = "§";
-
 	public ExportDocx() {
-		tempDir = System.getProperty("java.io.tmpdir") + "/wordExports/";
-		File file = new File(tempDir);
+		File file = new File(TEMP_DIR);
 		file.mkdir();
 	}
 
 	public Path launchGeneration(BookDTO book)
 			throws Docx4JException, IOException, JAXBException, InvalidFormatException {
-		LOGGER.info("Début de la génération du livre {}", book.getName());
+		LOGGER.info("Début de la génération du livre WORD {}", book.getName());
 		File outputFile = buildWordFile(modelBookFileName, book.getName(), book);
 		mainDoc = Docx4J.load(outputFile);
 
@@ -67,12 +72,44 @@ public class ExportDocx {
 
 		setProperties(outputFile.getPath(), book.getAuthor(), book.getName());
 
-		LOGGER.info("Fin de la génération du livre");
+		LOGGER.info("Fin de la génération du livre WORD");
 		return new File(outputFile.getPath()).toPath();
 	}
 
-	public String getObjectFilePath(String objectName) {
-		return tempDir + objectName + WORD_EXTENSION;
+	public void convertWordToFormat(BookDTO book, FILE_FORMAT format)
+			throws FileNotFoundException, Docx4JException, Exception {
+
+		String bookName = book.getName();
+		LOGGER.info("Début de la génération du livre {} {}", format, bookName);
+		ConverterInterface CI = null;
+		switch (format) {
+		case epub:
+			CI = new ConverterEPUB();
+			break;
+		case pdf:
+			CI = new ConverterPDF();
+			break;
+		default:
+			throw new Exception("Converter not found");
+		}
+		String[] cmd = CI.getCommand(bookName);
+		Runtime run = Runtime.getRuntime();
+		Process pr = run.exec(cmd);
+		// pr.waitFor();
+		BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+		String line = "";
+		while ((line = buf.readLine()) != null) {
+			LOGGER.info(line);
+		}
+		LOGGER.info("Fin de la génération du livre {}", format);
+	}
+
+	public static String getObjectFilePath(String objectName) {
+		return getObjectFilePath(objectName, FILE_FORMAT.docx);
+	}
+
+	public static String getObjectFilePath(String objectName, FILE_FORMAT format) {
+		return TEMP_DIR + objectName + "." + format;
 	}
 
 	private List<File> generateContent(BookDTO book) throws IOException, Docx4JException {
