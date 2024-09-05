@@ -18,16 +18,10 @@
                         <a [routerLink]="['/admin/user-management', book.authorLogin, 'view']">{{ book.authorLogin }}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="nidAuxHistoiresApp.book.image">Image</span></dt>
-                <dd>
-                    <span *ngFor="let image of book.images; let last = last">
-                        <a [routerLink]="['/entities/image', image?.id, 'view']">{{ image.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
                 <dt><span jhiTranslate="nidAuxHistoiresApp.book.cover">Cover</span></dt>
                 <dd>
                     <div *ngIf="book.coverId">
-                        <a [routerLink]="['/entities/image', book.coverId, 'view']">{{ book.coverId }}</a>
+                        <a [routerLink]="['/entities/cover', book.coverId, 'view']">{{ book.coverId }}</a>
                     </div>
                 </dd>
             </dl>

@@ -10,9 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -48,11 +45,6 @@ public class Part implements Serializable {
 	@OneToMany(mappedBy = "part", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Chapter> chapters = new HashSet<>();
-
-	@ManyToMany
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	@JoinTable(name = "part_image", joinColumns = @JoinColumn(name = "part_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id"))
-	private Set<Image> images = new HashSet<>();
 
 	@ManyToOne
 	@JsonIgnoreProperties(value = "parts", allowSetters = true)
@@ -129,31 +121,6 @@ public class Part implements Serializable {
 
 	public void setChapters(Set<Chapter> chapters) {
 		this.chapters = chapters;
-	}
-
-	public Set<Image> getImages() {
-		return images;
-	}
-
-	public Part images(Set<Image> images) {
-		this.images = images;
-		return this;
-	}
-
-	public Part addImage(Image image) {
-		this.images.add(image);
-		image.getParts().add(this);
-		return this;
-	}
-
-	public Part removeImage(Image image) {
-		this.images.remove(image);
-		image.getParts().remove(this);
-		return this;
-	}
-
-	public void setImages(Set<Image> images) {
-		this.images = images;
 	}
 
 	public Book getBook() {

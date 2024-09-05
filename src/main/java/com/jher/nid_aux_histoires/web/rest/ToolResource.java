@@ -29,7 +29,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 /**
- * REST controller for managing {@link com.jher.nid_aux_histoires.domain.Image}.
+ * REST controller for managing {@link com.jher.nid_aux_histoires.domain.Cover}.
  */
 @RestController
 @RequestMapping("/api")

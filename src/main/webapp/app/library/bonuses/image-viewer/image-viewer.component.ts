@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ImageService } from 'app/entities/image/image.service';
+import { CoverService } from 'app/entities/cover/cover.service';
 import { UtilService } from 'app/shared/util/util.service';
 
 @Component({
@@ -10,17 +10,17 @@ import { UtilService } from 'app/shared/util/util.service';
 })
 export class ImageViewerComponent implements OnInit {
   public isLoading = true;
-  public imageId = 0;
+  public coverId = 0;
   public imageElement!: HTMLImageElement;
 
-  constructor(public acRoute: ActivatedRoute, public imageService: ImageService, private utilService: UtilService) {}
+  constructor(public acRoute: ActivatedRoute, public imageService: CoverService, private utilService: UtilService) {}
 
   ngOnInit(): void {
     this.acRoute.paramMap.subscribe(params => {
-      this.imageId = this.utilService.getParamNumber(params, 'imageId');
+      this.coverId = this.utilService.getParamNumber(params, 'imageId');
       this.imageElement = document.getElementById('imageViewer') as HTMLImageElement;
 
-      this.imageService.find(this.imageId).subscribe(response => {
+      this.imageService.find(this.coverId).subscribe(response => {
         if (!response.body) throw 'No image found';
 
         this.imageElement.src = 'data:image/jpg;base64,' + response.body.picture;

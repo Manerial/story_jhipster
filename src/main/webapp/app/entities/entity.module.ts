@@ -40,12 +40,12 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
         loadChildren: () => import('./scene/scene.module').then(m => m.NidAuxHistoiresSceneModule),
       },
       {
-        path: 'entities/image',
+        path: 'entities/cover',
         data: {
           authorities: [Authority.ADMIN],
         },
         canActivate: [UserRouteAccessService],
-        loadChildren: () => import('./image/image.module').then(m => m.NidAuxHistoiresImageModule),
+        loadChildren: () => import('./cover/cover.module').then(m => m.NidAuxHistoiresCoverModule),
       },
       {
         path: 'entities/idea',

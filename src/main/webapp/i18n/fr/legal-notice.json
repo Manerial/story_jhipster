@@ -3,7 +3,7 @@
     "title": "Mentions Légales",
     "cookies": {
       "title": "Utilisation des cookies / données personnelles",
-      "body": "Ce site n'utilise ni cookies ni données personnelles. Par conséquent, la navigation au sein du site sera peut-être un peu moins fluide que vos autres experiences de lecture en ligne (pas de favorits, marque-pages, etc)"
+      "body": "Ce site n'utilise ni cookies ni données personnelles, mis à part votre E-Mail pour activer votre compte. Par conséquent, la navigation au sein du site sera peut-être un peu moins fluide que vos autres experiences de lecture en ligne (pas de favorits, marque-pages, etc)"
     },
     "download": {
       "title": "Téléchargement légal",
@@ -11,7 +11,7 @@
     },
     "distribution": {
       "title": "Distribution légale",
-      "body": "Toutes les œuvres de ce site sont placées sous la licence CC BY-NC-ND. Cela signifie\u00A0:",
+      "body": "Toutes les œuvres disponibles sur le \"Nid\" sont placées sous la licence CC BY-NC-ND. Cela signifie\u00A0:",
       "list": {
         "cc": "CC (Creative Commons): Que vous pouvez partager ces oeuvres.",
         "by": "BY (Attribution): Si vous citez correctement leur(s) auteur(s).",

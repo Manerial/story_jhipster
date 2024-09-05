@@ -6,7 +6,7 @@
       "body": "This site is designed to be accessible to the widest possible public (contrasts, choice of colors) while maintaining its visual identity. However, it is possible that some points escaped us during its design, so any constructive comments will be welcome on the <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> of the community, in the section dedicated to accessibility to all."
     },
     "download": {
-      "title": "Download in Word format",
+      "title": "Download",
       "body": "You can download the book of your choice in PDF or EPUB format by clicking on the download icon placed below each book."
     },
     "B_Reading": {
@@ -15,7 +15,7 @@
     },
     "generators": {
       "title": "Using generators",
-      "body": "The generators are made available to you as fun tools to allow you to create freely. They will be completed and fleshed out over the life cycle of the site. However, if you would like to help with the development of new dictionaries, you can go to the <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> community, in the section dedicated to sharing and improved content."
+      "body": "The generators are made available to you as fun tools to allow you to create freely. They will be completed and fleshed out over the life cycle of the site. However, if you would like to help with the development of new dictionaries or adding new content, you can go to the <a style=\"color: blue\" href=\"{{discordUrl}}\">Discord</a> community, in the section dedicated to sharing and improved content."
     },
     "sharing": {
       "title": "Share your works",

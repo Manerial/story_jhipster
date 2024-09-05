@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BonusService } from 'app/entities/bonus/bonus.service';
 import { BookService } from 'app/entities/book/book.service';
-import { ImageService } from 'app/entities/image/image.service';
+import { CoverService } from 'app/entities/cover/cover.service';
 import { IBonus } from 'app/shared/model/bonus.model';
-import { IImage } from 'app/shared/model/image.model';
 
 @Component({
   selector: 'jhi-bonus-list',
@@ -12,19 +11,12 @@ import { IImage } from 'app/shared/model/image.model';
   styleUrls: ['./bonus-list.component.scss'],
 })
 export class BonusListComponent implements OnInit {
-  public imageList: IImage[] = [];
   public bonusList: IBonus[] = [];
-  public imageIsLoading = true;
   public bonusIsLoading = true;
   public entityName = '';
   public showDescription: boolean[] = [];
 
-  constructor(
-    public acRoute: ActivatedRoute,
-    private bookService: BookService,
-    private imageService: ImageService,
-    private bonusService: BonusService
-  ) {}
+  constructor(public acRoute: ActivatedRoute, private bookService: BookService, private bonusService: BonusService) {}
 
   ngOnInit(): void {
     this.acRoute.paramMap.subscribe(params => {
@@ -33,19 +25,8 @@ export class BonusListComponent implements OnInit {
         if (entity.body) {
           this.entityName = entity.body.name;
         }
-        this.getAllImageByBookId(bookIdStr);
         this.getAllBonusByBookId(bookIdStr);
       });
-    });
-  }
-
-  getAllImageByBookId(id: number): void {
-    this.imageIsLoading = true;
-    this.imageService.getAllImagesByBookId(id).subscribe(imageList => {
-      if (imageList.body) {
-        this.imageList = imageList.body;
-      }
-      this.imageIsLoading = false;
     });
   }
 
@@ -68,18 +49,6 @@ export class BonusListComponent implements OnInit {
         const downloadURL = window.URL.createObjectURL(data.body);
         const anchor = document.createElement('a');
         anchor.download = bonus.name + '.' + bonus.extension;
-        anchor.href = downloadURL;
-        anchor.click();
-      }
-    });
-  }
-
-  downloadImage(image: IImage): void {
-    this.imageService.download(image.id).subscribe(data => {
-      if (data.body != null) {
-        const downloadURL = window.URL.createObjectURL(data.body);
-        const anchor = document.createElement('a');
-        anchor.download = image.name + '.' + image.pictureContentType.split('/')[1];
         anchor.href = downloadURL;
         anchor.click();
       }

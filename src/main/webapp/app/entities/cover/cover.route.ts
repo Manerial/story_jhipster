@@ -6,23 +6,23 @@ import { flatMap } from 'rxjs/operators';
 
 import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IImage, Image } from 'app/shared/model/image.model';
-import { ImageService } from './image.service';
-import { ImageComponent } from './image.component';
-import { ImageDetailComponent } from './image-detail.component';
-import { ImageUpdateComponent } from './image-update.component';
+import { ICover, Cover } from 'app/shared/model/cover.model';
+import { CoverService } from './cover.service';
+import { CoverComponent } from './cover.component';
+import { CoverDetailComponent } from './cover-detail.component';
+import { CoverUpdateComponent } from './cover-update.component';
 
 @Injectable({ providedIn: 'root' })
-export class ImageResolve implements Resolve<IImage> {
-  constructor(private service: ImageService, private router: Router) {}
+export class CoverResolve implements Resolve<ICover> {
+  constructor(private service: CoverService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IImage> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<ICover> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        flatMap((image: HttpResponse<Image>) => {
-          if (image.body) {
-            return of(image.body);
+        flatMap((cover: HttpResponse<Cover>) => {
+          if (cover.body) {
+            return of(cover.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -30,54 +30,54 @@ export class ImageResolve implements Resolve<IImage> {
         })
       );
     }
-    return of(new Image());
+    return of(new Cover());
   }
 }
 
-export const imageRoute: Routes = [
+export const coverRoute: Routes = [
   {
     path: '',
-    component: ImageComponent,
+    component: CoverComponent,
     data: {
       authorities: [Authority.ADMIN],
       defaultSort: 'id,asc',
-      pageTitle: 'nidAuxHistoiresApp.image.home.title',
+      pageTitle: 'nidAuxHistoiresApp.cover.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: ImageDetailComponent,
+    component: CoverDetailComponent,
     resolve: {
-      image: ImageResolve,
+      cover: CoverResolve,
     },
     data: {
       authorities: [Authority.ADMIN],
-      pageTitle: 'nidAuxHistoiresApp.image.home.title',
+      pageTitle: 'nidAuxHistoiresApp.cover.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
-    component: ImageUpdateComponent,
+    component: CoverUpdateComponent,
     resolve: {
-      image: ImageResolve,
+      cover: CoverResolve,
     },
     data: {
       authorities: [Authority.ADMIN],
-      pageTitle: 'nidAuxHistoiresApp.image.home.title',
+      pageTitle: 'nidAuxHistoiresApp.cover.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
-    component: ImageUpdateComponent,
+    component: CoverUpdateComponent,
     resolve: {
-      image: ImageResolve,
+      cover: CoverResolve,
     },
     data: {
       authorities: [Authority.ADMIN],
-      pageTitle: 'nidAuxHistoiresApp.image.home.title',
+      pageTitle: 'nidAuxHistoiresApp.cover.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

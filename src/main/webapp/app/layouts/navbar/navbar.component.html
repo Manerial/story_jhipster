@@ -17,21 +17,6 @@
                 aria-label="Rechercher">
         </form>
         <ul class="navbar-nav">
-            <!-- <div *ngIf="router.url.includes('/reader/book/')">
-                <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">
-                    <a class="nav-link" (click)="toggleBookImage();collapseNavbar()">
-                        <span *ngIf='isViewBook'>
-                            <fa-icon icon="image"></fa-icon>
-                            <span jhiTranslate="global.menu.images">Images</span>
-                        </span>
-                        <span *ngIf='!isViewBook'>
-                            <fa-icon icon="book"></fa-icon>
-                            <span jhiTranslate="global.menu.book">Book</span>
-                        </span>
-                    </a>
-                </li>
-            </div> -->
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
@@ -126,10 +111,10 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="entities/image" routerLinkActive="active"
+                        <a class="dropdown-item" routerLink="entities/cover" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.image">Image</span>
+                            <span jhiTranslate="global.menu.entities.cover">Cover</span>
                         </a>
                     </li>
                     <li>
@@ -155,6 +140,59 @@
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
+            <!--<li *jhiHasAnyAuthority="'ROLE_AUTHOR'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
+                    <span>
+                        <fa-icon icon="th-list"></fa-icon>
+                        <span jhiTranslate="global.menu.entities.main">Entities</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+                    <li>
+                        <a class="dropdown-item" routerLink="entities/book" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.book">Book</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="entities/part" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.part">Part</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="entities/chapter" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.chapter">Chapter</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="entities/scene" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.scene">Scene</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="entities/cover" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.cover">Cover</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="bonus" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.bonus">Bonus</span>
+                        </a>
+                    </li>-->
+                    <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+                <!--</ul>
+            </li>-->
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
                 routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
@@ -248,7 +286,7 @@
                         </span>
                     </span>
                     <span *ngIf="getImageUrl()">
-                        <img [src]="getImageUrl()" class="profile-image rounded-circle" alt="Avatar">
+                        <img [src]="getImageUrl()" class="profile-cover rounded-circle" alt="Avatar">
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">

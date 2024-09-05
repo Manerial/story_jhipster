@@ -7,7 +7,7 @@
       "library": "Library",
       "authors": "Authors",
       "tools": "Tools",
-      "images": "Images",
+      "covers": "Covers",
       "book": "Book",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
@@ -16,7 +16,7 @@
         "part": "Part",
         "chapter": "Chapter",
         "scene": "Scene",
-        "image": "Image",
+        "cover": "Cover",
         "idea": "Idea",
         "wordAnalysis": "Word Analysis",
         "comment": "Comment",
@@ -101,7 +101,7 @@
   "entity": {
     "action": {
       "addblob": "Add blob",
-      "addimage": "Add image",
+      "addcover": "Add cover",
       "back": "Back",
       "cancel": "Cancel",
       "delete": "Delete",
@@ -143,7 +143,7 @@
     "idnull": "Invalid ID",
     "file": {
       "could.not.extract": "Could not extract file",
-      "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
+      "not.cover": "File was expected to be a cover but was found to be \"{{ fileType }}\""
     }
   }
 }

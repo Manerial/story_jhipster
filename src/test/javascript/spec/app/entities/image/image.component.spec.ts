@@ -4,20 +4,20 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 import { NidAuxHistoiresTestModule } from '../../../test.module';
-import { ImageComponent } from 'app/entities/image/image.component';
-import { ImageService } from 'app/entities/image/image.service';
-import { Image } from 'app/shared/model/image.model';
+import { CoverComponent } from 'app/entities/cover/cover.component';
+import { CoverService } from 'app/entities/cover/cover.service';
+import { Cover } from 'app/shared/model/cover.model';
 
 describe('Component Tests', () => {
-  describe('Image Management Component', () => {
-    let comp: ImageComponent;
-    let fixture: ComponentFixture<ImageComponent>;
-    let service: ImageService;
+  describe('cover Management Component', () => {
+    let comp: CoverComponent;
+    let fixture: ComponentFixture<CoverComponent>;
+    let service: CoverService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [NidAuxHistoiresTestModule],
-        declarations: [ImageComponent],
+        declarations: [CoverComponent],
         providers: [
           {
             provide: ActivatedRoute,
@@ -36,12 +36,12 @@ describe('Component Tests', () => {
           },
         ],
       })
-        .overrideTemplate(ImageComponent, '')
+        .overrideTemplate(CoverComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(ImageComponent);
+      fixture = TestBed.createComponent(CoverComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(ImageService);
+      service = fixture.debugElement.injector.get(CoverService);
     });
 
     it('Should call load all on init', () => {
@@ -50,7 +50,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new Image(123)],
+            body: [new Cover(123)],
             headers,
           })
         )
@@ -61,7 +61,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.images && comp.images[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.covers && comp.covers[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should load a page', () => {
@@ -70,7 +70,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new Image(123)],
+            body: [new Cover(123)],
             headers,
           })
         )
@@ -81,7 +81,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.images && comp.images[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.covers && comp.covers[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should calculate the sort attribute for an id', () => {

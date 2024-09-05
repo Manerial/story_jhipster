@@ -9,13 +9,12 @@ import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } 
 import { IScene, Scene } from 'app/shared/model/scene.model';
 import { SceneService } from './scene.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
-import { IImage } from 'app/shared/model/image.model';
-import { ImageService } from 'app/entities/image/image.service';
+import { ICover } from 'app/shared/model/cover.model';
 import { IChapter } from 'app/shared/model/chapter.model';
 import { ChapterService } from 'app/entities/chapter/chapter.service';
 import { Regex } from 'app/shared/util/datetime-regex';
 
-type SelectableEntity = IImage | IChapter;
+type SelectableEntity = ICover | IChapter;
 
 @Component({
   selector: 'jhi-scene-update',
@@ -23,7 +22,6 @@ type SelectableEntity = IImage | IChapter;
 })
 export class SceneUpdateComponent implements OnInit {
   isSaving = false;
-  images: IImage[] = [];
   chapters: IChapter[] = [];
   timestampStartDp: any;
   datetimeFormat = Regex.datetimeFormat;
@@ -34,7 +32,6 @@ export class SceneUpdateComponent implements OnInit {
     number: [null, [Validators.required]],
     text: [null, [Validators.required]],
     timestampStart: [null, [Validators.pattern(Regex.datetime)]],
-    images: [],
     chapterId: [null, [Validators.required]],
   });
 
@@ -42,7 +39,6 @@ export class SceneUpdateComponent implements OnInit {
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected sceneService: SceneService,
-    protected imageService: ImageService,
     protected chapterService: ChapterService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -52,25 +48,17 @@ export class SceneUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ scene }) => {
       this.updateForm(scene);
 
-      this.imageService.query().subscribe((res: HttpResponse<IImage[]>) => (this.images = res.body || []));
-
       this.chapterService.query().subscribe((res: HttpResponse<IChapter[]>) => (this.chapters = res.body || []));
     });
   }
 
   updateForm(scene: IScene): void {
-    scene.images.forEach(image => {
-      image.picture = null;
-      image.preview = null;
-    });
-
     this.editForm.patchValue({
       id: scene.id,
       name: scene.name,
       number: scene.number,
       text: scene.text,
       timestampStart: scene.timestampStart,
-      images: scene.images,
       chapterId: scene.chapterId,
     });
   }
@@ -114,7 +102,6 @@ export class SceneUpdateComponent implements OnInit {
       number: this.editForm.get(['number'])!.value,
       text: this.editForm.get(['text'])!.value,
       timestampStart: this.editForm.get(['timestampStart'])!.value,
-      images: this.editForm.get(['images'])!.value,
       chapterId: this.editForm.get(['chapterId'])!.value,
     };
   }
@@ -139,7 +126,7 @@ export class SceneUpdateComponent implements OnInit {
     return item.id;
   }
 
-  getSelected(selectedVals: IImage[], option: IImage): IImage {
+  getSelected(selectedVals: ICover[], option: ICover): ICover {
     if (selectedVals) {
       for (let i = 0; i < selectedVals.length; i++) {
         if (option.id === selectedVals[i].id) {

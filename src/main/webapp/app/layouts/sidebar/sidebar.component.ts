@@ -12,7 +12,6 @@ import { UtilService } from 'app/shared/util/util.service';
 })
 export class SidebarComponent implements OnInit {
   public book: IBook = new Book();
-  public forceOpenAllImage = false;
   public forceOpenAllSmall = false;
   public collapseSummary = false;
   public collapseParts: boolean[] = [];
@@ -36,10 +35,6 @@ export class SidebarComponent implements OnInit {
       this.book.parts.forEach(part => {
         this.collapseParts[part.id] = true;
       });
-    });
-
-    this.navbarService.getCurrentIsViewBook().subscribe(isViewBook => {
-      this.forceOpenAllImage = !isViewBook;
     });
   }
 
@@ -111,7 +106,7 @@ export class SidebarComponent implements OnInit {
   }
 
   forceOpenAll(): boolean {
-    return this.forceOpenAllImage || this.forceOpenAllSmall;
+    return this.forceOpenAllSmall;
   }
 
   toggleCollapsePart(id: number): void {

@@ -36,17 +36,6 @@
     </changeSet>
 
     <changeSet id="20201004071842-1-relations" author="jhipster">
-
-        <createTable tableName="book_image">
-            <column name="image_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="book_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="book_id, image_id" tableName="book_image"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

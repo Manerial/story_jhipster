@@ -2,18 +2,13 @@ package com.jher.nid_aux_histoires.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -48,11 +43,6 @@ public class Scene implements Serializable {
 
 	@Column(name = "timestamp_start")
 	private Date timestampStart;
-
-	@ManyToMany
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	@JoinTable(name = "scene_image", joinColumns = @JoinColumn(name = "scene_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id"))
-	private Set<Image> images = new HashSet<>();
 
 	@ManyToOne
 	@JsonIgnoreProperties(value = "scenes", allowSetters = true)
@@ -117,31 +107,6 @@ public class Scene implements Serializable {
 
 	public void setTimestampStart(Date timestampStart) {
 		this.timestampStart = timestampStart;
-	}
-
-	public Set<Image> getImages() {
-		return images;
-	}
-
-	public Scene images(Set<Image> images) {
-		this.images = images;
-		return this;
-	}
-
-	public Scene addImage(Image image) {
-		this.images.add(image);
-		image.getScenes().add(this);
-		return this;
-	}
-
-	public Scene removeImage(Image image) {
-		this.images.remove(image);
-		image.getScenes().remove(this);
-		return this;
-	}
-
-	public void setImages(Set<Image> images) {
-		this.images = images;
 	}
 
 	public Chapter getChapter() {

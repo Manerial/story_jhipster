@@ -1,5 +1,4 @@
 import { IPart } from 'app/shared/model/part.model';
-import { IImage } from 'app/shared/model/image.model';
 
 export interface IBook {
   id: number;
@@ -8,7 +7,6 @@ export interface IBook {
   authorLogin: string;
   description: string;
   parts: IPart[];
-  images: IImage[];
   coverPreview?: Uint8Array;
   coverId: number;
   visibility: boolean;
@@ -21,7 +19,6 @@ export class Book implements IBook {
   public authorLogin: string;
   public description: string;
   public parts: IPart[];
-  public images: IImage[];
   public coverPreview?: Uint8Array;
   public coverId: number;
   public visibility: boolean;
@@ -34,7 +31,6 @@ export class Book implements IBook {
     authorLogin?: string,
     description?: string,
     parts?: IPart[],
-    images?: IImage[],
     coverPreview?: Uint8Array,
     coverId?: number,
     visibility?: boolean
@@ -47,7 +43,6 @@ export class Book implements IBook {
     authorLogin?: string,
     description?: string,
     parts?: IPart[],
-    images?: IImage[],
     coverPreview?: Uint8Array,
     coverId?: number,
     visibility?: boolean
@@ -58,7 +53,6 @@ export class Book implements IBook {
     this.authorLogin = authorLogin || '';
     this.description = description || '';
     this.parts = parts || [];
-    this.images = images || [];
     this.coverPreview = coverPreview;
     this.coverId = coverId || 0;
     this.visibility = visibility || true;

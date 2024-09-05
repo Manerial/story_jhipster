@@ -34,7 +34,7 @@ entity Scene {
 	timestampStart String
 }
 
-entity Image {
+entity Cover {
 	name String,
 	picture ImageBlob,
 	preview ImageBlob
@@ -49,20 +49,20 @@ relationship OneToMany {
 	Book{part} to Part{book},
 	Part{chapter} to Chapter{part},
 	Chapter{scene} to Scene{chapter},
-	Image{bookToCover} to Book{cover},
+	Cover{bookToCover} to Book{cover},
 	Comment{book} to Book{comment},
 	Comment{user} to User{comment}
 }
 
 relationship ManyToMany {
-	Book{image} to Image{book}
-	Part{image} to Image{part}
-	Chapter{image} to Image{chapter}
-	Scene{image} to Image{scene}
+	Book{cover} to Cover{book}
+	Part{cover} to Cover{part}
+	Chapter{cover} to Cover{chapter}
+	Scene{cover} to Cover{scene}
 }
 
 // Set pagination options
-paginate Book, Part, Chapter, Scene, Image with pagination
+paginate Book, Part, Chapter, Scene, Cover with pagination
 
 // Use Data Transfer Objects (DTO)
 dto * with mapstruct

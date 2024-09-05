@@ -4,15 +4,15 @@ import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 
 import { NidAuxHistoiresTestModule } from '../../../test.module';
-import { ImageUpdateComponent } from 'app/entities/image/image-update.component';
-import { ImageService } from 'app/entities/image/image.service';
-import { Image } from 'app/shared/model/image.model';
+import { ImageUpdateComponent } from 'app/entities/cover/cover-update.component';
+import { CoverService } from 'app/entities/cover/cover.service';
+import { Cover } from 'app/shared/model/cover.model';
 
 describe('Component Tests', () => {
   describe('Image Management Update Component', () => {
     let comp: ImageUpdateComponent;
     let fixture: ComponentFixture<ImageUpdateComponent>;
-    let service: ImageService;
+    let service: CoverService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -25,13 +25,13 @@ describe('Component Tests', () => {
 
       fixture = TestBed.createComponent(ImageUpdateComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(ImageService);
+      service = fixture.debugElement.injector.get(CoverService);
     });
 
     describe('save', () => {
       it('Should call update service on save for existing entity', fakeAsync(() => {
         // GIVEN
-        const entity = new Image(123);
+        const entity = new Cover(123);
         spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN
@@ -45,7 +45,7 @@ describe('Component Tests', () => {
 
       it('Should call create service on save for new entity', fakeAsync(() => {
         // GIVEN
-        const entity = new Image();
+        const entity = new Cover();
         spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN

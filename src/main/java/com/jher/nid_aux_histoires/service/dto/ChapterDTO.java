@@ -21,8 +21,6 @@ public class ChapterDTO implements Serializable, Comparable<ChapterDTO> {
 
 	private Integer number;
 
-	private Set<ImageDTO> images = new HashSet<>();
-
 	private Set<SceneDTO> scenes = new HashSet<>();
 
 	private Long partId;
@@ -57,14 +55,6 @@ public class ChapterDTO implements Serializable, Comparable<ChapterDTO> {
 
 	public void setNumber(Integer number) {
 		this.number = number;
-	}
-
-	public Set<ImageDTO> getImages() {
-		return images;
-	}
-
-	public void setImages(Set<ImageDTO> images) {
-		this.images = images;
 	}
 
 	public Long getPartId() {
@@ -105,7 +95,7 @@ public class ChapterDTO implements Serializable, Comparable<ChapterDTO> {
 	@Override
 	public String toString() {
 		return "ChapterDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", description='" + getDescription()
-				+ "'" + ", number=" + getNumber() + ", images='" + getImages() + "'" + ", partId=" + getPartId() + "}";
+				+ "'" + ", number=" + getNumber() + ", partId=" + getPartId() + "}";
 	}
 
 	public String getFormattedText() {

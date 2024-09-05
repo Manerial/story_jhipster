@@ -9,7 +9,7 @@
         <property name="autoIncrement" value="true"/>
 
     <!--
-        Added the entity Image.
+        Added the entity Bonus.
     -->
     <changeSet id="20210603151000-1" author="jhipster">
         <createTable tableName="bonus">

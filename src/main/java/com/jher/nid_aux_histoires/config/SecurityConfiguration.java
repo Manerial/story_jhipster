@@ -88,10 +88,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/chapters/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/scenes/**").hasAuthority(AuthoritiesConstants.ADMIN)
             
-            .antMatchers(HttpMethod.PUT, "/api/images/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers(HttpMethod.PUT, "/api/covers/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers(HttpMethod.PUT, "/api/word-analyses/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers(HttpMethod.PUT, "/api/ideas/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers(HttpMethod.DELETE, "/api/images/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers(HttpMethod.DELETE, "/api/covers/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers(HttpMethod.DELETE, "/api/word-analyses/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers(HttpMethod.DELETE, "/api/ideas/**").hasAuthority(AuthoritiesConstants.ADMIN)
             

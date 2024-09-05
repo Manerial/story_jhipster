@@ -19,8 +19,6 @@ public class PartDTO implements Serializable, Comparable<PartDTO> {
 
 	private Integer number;
 
-	private Set<ImageDTO> images = new HashSet<>();
-
 	private Set<ChapterDTO> chapters = new HashSet<>();
 
 	private Long bookId;
@@ -55,14 +53,6 @@ public class PartDTO implements Serializable, Comparable<PartDTO> {
 
 	public void setNumber(Integer number) {
 		this.number = number;
-	}
-
-	public Set<ImageDTO> getImages() {
-		return images;
-	}
-
-	public void setImages(Set<ImageDTO> images) {
-		this.images = images;
 	}
 
 	public Long getBookId() {
@@ -103,7 +93,7 @@ public class PartDTO implements Serializable, Comparable<PartDTO> {
 	@Override
 	public String toString() {
 		return "PartDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", description='" + getDescription() + "'"
-				+ ", number=" + getNumber() + ", images='" + getImages() + "'" + ", bookId=" + getBookId() + "}";
+				+ ", number=" + getNumber() + ", bookId=" + getBookId() + "}";
 	}
 
 	@Override

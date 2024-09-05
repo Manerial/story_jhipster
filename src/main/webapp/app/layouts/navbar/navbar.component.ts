@@ -83,11 +83,6 @@ export class NavbarComponent implements OnInit {
     this.navbarService.changeSearch(this.searchText);
   }
 
-  toggleBookImage(): void {
-    this.isViewBook = !this.isViewBook;
-    this.navbarService.changeIsViewBook(this.isViewBook);
-  }
-
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEventUp(event: any): void {
     switch (event.key) {

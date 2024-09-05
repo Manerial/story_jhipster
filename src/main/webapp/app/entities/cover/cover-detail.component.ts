@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
-import { IImage } from 'app/shared/model/image.model';
+import { ICover } from 'app/shared/model/cover.model';
 
 @Component({
-  selector: 'jhi-image-detail',
-  templateUrl: './image-detail.component.html',
+  selector: 'jhi-cover-detail',
+  templateUrl: './cover-detail.component.html',
 })
-export class ImageDetailComponent implements OnInit {
-  image: IImage | null = null;
+export class CoverDetailComponent implements OnInit {
+  cover: ICover | null = null;
 
   constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ image }) => (this.image = image));
+    this.activatedRoute.data.subscribe(({ cover }) => (this.cover = cover));
   }
 
   byteSize(base64String: string): string {

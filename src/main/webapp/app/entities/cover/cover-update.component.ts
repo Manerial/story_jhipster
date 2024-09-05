@@ -6,15 +6,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
-import { IImage, Image } from 'app/shared/model/image.model';
-import { ImageService } from './image.service';
+import { ICover, Cover } from 'app/shared/model/cover.model';
+import { CoverService } from './cover.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 
 @Component({
-  selector: 'jhi-image-update',
-  templateUrl: './image-update.component.html',
+  selector: 'jhi-cover-update',
+  templateUrl: './cover-update.component.html',
 })
-export class ImageUpdateComponent implements OnInit {
+export class CoverUpdateComponent implements OnInit {
   isSaving = false;
 
   editForm = this.fb.group({
@@ -29,26 +29,26 @@ export class ImageUpdateComponent implements OnInit {
   constructor(
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
-    protected imageService: ImageService,
+    protected coverService: CoverService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ image }) => {
-      this.updateForm(image);
+    this.activatedRoute.data.subscribe(({ cover }) => {
+      this.updateForm(cover);
     });
   }
 
-  updateForm(image: IImage): void {
+  updateForm(cover: ICover): void {
     this.editForm.patchValue({
-      id: image.id,
-      name: image.name,
-      picture: image.picture,
-      pictureContentType: image.pictureContentType,
-      preview: image.preview,
-      previewContentType: image.previewContentType,
+      id: cover.id,
+      name: cover.name,
+      picture: cover.picture,
+      pictureContentType: cover.pictureContentType,
+      preview: cover.preview,
+      previewContentType: cover.previewContentType,
     });
   }
 
@@ -84,18 +84,18 @@ export class ImageUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const image = this.createFromForm();
-    if (image.id !== undefined && image.id !== 0) {
-      this.subscribeToSaveResponse(this.imageService.update(image));
+    const cover = this.createFromForm();
+    if (cover.id !== undefined && cover.id !== 0) {
+      this.subscribeToSaveResponse(this.coverService.update(cover));
     } else {
-      delete image.id;
-      this.subscribeToSaveResponse(this.imageService.create(image));
+      delete cover.id;
+      this.subscribeToSaveResponse(this.coverService.create(cover));
     }
   }
 
   private createFromForm(): any {
     return {
-      ...new Image(),
+      ...new Cover(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       pictureContentType: this.editForm.get(['pictureContentType'])!.value,
@@ -105,7 +105,7 @@ export class ImageUpdateComponent implements OnInit {
     };
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IImage>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<ICover>>): void {
     result.subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()

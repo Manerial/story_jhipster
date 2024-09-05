@@ -20,7 +20,6 @@
       "description": "Description",
       "number": "Number",
       "scene": "Scene",
-      "image": "Image",
       "part": "Part"
     }
   }

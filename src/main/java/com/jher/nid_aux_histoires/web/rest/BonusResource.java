@@ -145,11 +145,11 @@ public class BonusResource {
 	}
 
 	/**
-	 * {@code GET  /images} : get all the images related to a Book.
+	 * {@code GET  /bonuses} : get all the bonuses related to a Book.
 	 *
 	 * @param id the id of the Book to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
-	 *         of images in body.
+	 *         of bonuses in body.
 	 */
 	@GetMapping("/bonuses/book/{id}")
 	public ResponseEntity<List<BonusDTO>> getAllBonusesByBook(@PathVariable Long id) {

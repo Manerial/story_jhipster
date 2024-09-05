@@ -21,15 +21,15 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 	@Query(value = "select distinct book from Book book where book.visibility = true", countQuery = "select count(distinct book) from Book book")
 	Page<Book> findAll(Pageable pageable);
 
-	@Query(value = "select distinct book from Book book left join fetch book.images where book.visibility = true", countQuery = "select count(distinct book) from Book book")
+	@Query(value = "select distinct book from Book book where book.visibility = true", countQuery = "select count(distinct book) from Book book")
 	Page<Book> findAllWithEagerRelationships(Pageable pageable);
 
-	@Query("select distinct book from Book book left join fetch book.images")
+	@Query("select distinct book from Book book")
 	List<Book> findAllWithEagerRelationships();
 
-	@Query("select book from Book book left join fetch book.images where book.id =:id")
+	@Query("select book from Book book where book.id =:id")
 	Optional<Book> findOneWithEagerRelationships(@Param("id") Long id);
 
-	@Query("select book from Book book left join fetch book.images where book.author.login =:login")
+	@Query("select book from Book book where book.author.login =:login")
 	List<Book> findAllByAuthorLogin(@Param("login") String login);
 }
