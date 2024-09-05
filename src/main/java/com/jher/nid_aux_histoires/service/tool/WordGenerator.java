@@ -21,8 +21,10 @@ public class WordGenerator {
 	 * list of words
 	 * 
 	 * @param numberOfWords : Number of word to generate
-	 * @param wordLength    : The length of the generated words. If <= 0, random
-	 * @throws JSONException
+	 * @param fixLength     : The length of the generated words. If lesser or equals
+	 *                      2, random
+	 * @return a list of generated words
+	 * @throws JSONException : All the JSON exceptions
 	 */
 	public List<String> generateWords(int numberOfWords, int fixLength) throws JSONException {
 		List<String> generatedWords = new ArrayList<>();
@@ -44,7 +46,7 @@ public class WordGenerator {
 	 * Create a new word using the parameters of the analyzer
 	 * 
 	 * @return a new word
-	 * @throws JSONException
+	 * @throws JSONException : All the JSON exceptions
 	 */
 	public String generateWord() throws JSONException {
 		String newWord = getRandomWordBeginning();

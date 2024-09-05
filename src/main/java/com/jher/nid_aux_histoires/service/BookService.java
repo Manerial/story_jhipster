@@ -32,7 +32,8 @@ public interface BookService {
 	/**
 	 * Switch visibility of book.
 	 *
-	 * @param id the id of the entity.
+	 * @param bookId the id of the entity.
+	 * @return the updated book
 	 */
 	BookDTO changeVisibility(Long bookId);
 
@@ -56,6 +57,7 @@ public interface BookService {
 	 * Get all the books by Author.
 	 *
 	 * @param pageable the pagination information.
+	 * @param login    the author login
 	 * @return the list of entities.
 	 */
 	Page<BookDTO> findAllByAuthorId(Pageable pageable, String login);
@@ -64,6 +66,7 @@ public interface BookService {
 	 * Get all the books tagged as Visible by Author.
 	 *
 	 * @param pageable the pagination information.
+	 * @param login    the author login
 	 * @return the list of entities.
 	 */
 	Page<BookDTO> findAllVisibleByAuthorId(Pageable pageable, String login);
@@ -72,6 +75,7 @@ public interface BookService {
 	 * Get all the books tagged as Visible and Favorits by Author.
 	 *
 	 * @param pageable the pagination information.
+	 * @param login    the author login
 	 * @return the list of entities.
 	 */
 	Page<BookDTO> findAllFavoritsVisible(Pageable pageable, String login);

@@ -71,8 +71,8 @@ public class PartServiceImpl implements PartService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<PartDTO> findAllByAuthorLogin(Pageable pageable, String authorLogin) {
-		return partRepository.findAllByAuthorLogin(pageable, authorLogin).map(partMapper::toDto);
+	public Page<PartDTO> findAllByAuthorLogin(Pageable pageable, String login) {
+		return partRepository.findAllByAuthorLogin(pageable, login).map(partMapper::toDto);
 	}
 
 	@Override

@@ -67,9 +67,9 @@ public class CoverServiceImpl implements CoverService {
 	}
 
 	@Override
-	public Page<CoverDTO> findAllByOwnerLogin(Pageable pageable, String name) {
+	public Page<CoverDTO> findAllByOwnerLogin(Pageable pageable, String login) {
 		log.debug("Request to get all Covers");
-		return coverRepository.findAllByOwnerLogin(pageable, name).map(coverMapperLight::toDto);
+		return coverRepository.findAllByOwnerLogin(pageable, login).map(coverMapperLight::toDto);
 	}
 
 	@Override

@@ -61,7 +61,7 @@ public class BonusResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new bonusDTO, or with status {@code 400 (Bad Request)} if
 	 *         the bonus has already an ID.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PostMapping(path = "/bonuses")
 	public ResponseEntity<BonusDTO> createBonus(@RequestBody BonusDTO bonusDTO) throws Exception {
@@ -86,7 +86,7 @@ public class BonusResource {
 	 *         bonusDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the bonusDTO couldn't be
 	 *         updated.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PutMapping(path = "/bonuses")
 	public ResponseEntity<BonusDTO> updateBonus(@RequestBody BonusDTO bonusDTO) throws Exception {
@@ -155,7 +155,7 @@ public class BonusResource {
 	 *
 	 * @param id the id of the bonusDTO to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@DeleteMapping("/bonuses/{id}")
 	public ResponseEntity<Void> deleteBonus(@PathVariable Long id) throws Exception {
@@ -168,6 +168,12 @@ public class BonusResource {
 				.build();
 	}
 
+	/**
+	 * Check if the logged user can update the bonus
+	 * 
+	 * @param bonusDTO the bonus to check.
+	 * @throws Exception the user cannot access the bonus.
+	 */
 	private void checkBonus(BonusDTO bonusDTO) throws Exception {
 		SecurityConfiguration.CheckLoggedUser(bonusDTO.getOwnerLogin());
 

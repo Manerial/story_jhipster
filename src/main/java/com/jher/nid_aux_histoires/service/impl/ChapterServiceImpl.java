@@ -73,8 +73,8 @@ public class ChapterServiceImpl implements ChapterService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<ChapterDTO> findAllByAuthorLogin(Pageable pageable, String authorLogin) {
-		return chapterRepository.findAllByAuthorLogin(pageable, authorLogin).map(chapterMapper::toDto);
+	public Page<ChapterDTO> findAllByAuthorLogin(Pageable pageable, String login) {
+		return chapterRepository.findAllByAuthorLogin(pageable, login).map(chapterMapper::toDto);
 	}
 
 	@Override

@@ -46,6 +46,8 @@ public class GeneratorsController {
 	/**
 	 * Génère une liste de personnages
 	 * 
+	 * @param number     : nombre d'entités à créer
+	 * @param constraint : entité contenant des contraintes à respecter
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/generate/personas")
@@ -58,6 +60,7 @@ public class GeneratorsController {
 	/**
 	 * Génère une liste de titres honorifiques
 	 * 
+	 * @param number : nombre d'entités à créer
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/generate/honorary_titles")
@@ -69,6 +72,8 @@ public class GeneratorsController {
 	/**
 	 * Génère une liste de lieux
 	 * 
+	 * @param number     : nombre d'entités à créer
+	 * @param constraint : entité contenant des contraintes à respecter
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/generate/locations")
@@ -81,6 +86,8 @@ public class GeneratorsController {
 	/**
 	 * Génère une liste d'objets
 	 * 
+	 * @param number     : nombre d'entités à créer
+	 * @param constraint : entité contenant des contraintes à respecter
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/generate/objects")
@@ -93,6 +100,8 @@ public class GeneratorsController {
 	/**
 	 * Génère une liste d'options d'écriture
 	 * 
+	 * @param number     : nombre d'entités à créer
+	 * @param constraint : entité contenant des contraintes à respecter
 	 * @return une réponse contenant la liste des entités
 	 */
 	@PostMapping("/generate/writing_options")
@@ -106,6 +115,9 @@ public class GeneratorsController {
 	/**
 	 * Génère une liste de mots en fonction de contraintes
 	 * 
+	 * @param number    : nombre de mots à créer
+	 * @param fixLength : taille de mots à respecter (random si inférieur à 2)
+	 * @param type      : type de mots à créer
 	 * @return une réponse contenant la liste des entités
 	 */
 	@GetMapping("/generate/words")

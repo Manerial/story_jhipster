@@ -66,7 +66,7 @@ public class BookResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new bookDTO, or with status {@code 400 (Bad Request)} if the
 	 *         book has already an ID.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PostMapping("/books")
 	public ResponseEntity<BookDTO> createBook(@RequestBody BookDTO bookDTO) throws Exception {
@@ -89,7 +89,7 @@ public class BookResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new bookDTO, or with status {@code 400 (Bad Request)} if the
 	 *         book has already an ID.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PostMapping("/books/import")
 	public ResponseEntity<BookDTO> importBook(@RequestBody BookDTO bookDTO) throws Exception {
@@ -115,7 +115,7 @@ public class BookResource {
 	 *         bookDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the bookDTO couldn't be
 	 *         updated.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PutMapping("/books")
 	public ResponseEntity<BookDTO> updateBook(@RequestBody BookDTO bookDTO) throws Exception {
@@ -130,6 +130,17 @@ public class BookResource {
 				.body(result);
 	}
 
+	/**
+	 * {@code PUT /books/visibility/{id}} : Updates an existing book visibility.
+	 *
+	 * @param id the book id to update.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+	 *         the updated bookDTO, or with status {@code 400 (Bad Request)} if the
+	 *         bookDTO is not valid, or with status
+	 *         {@code 500 (Internal Server Error)} if the bookDTO couldn't be
+	 *         updated.
+	 * @throws Exception bad request
+	 */
 	@PutMapping("/books/visibility/{id}")
 	public ResponseEntity<BookDTO> updateBookVisibility(@PathVariable Long id) throws Exception {
 		BookDTO bookDTO = bookService.findOne(id).get();
@@ -147,9 +158,7 @@ public class BookResource {
 	/**
 	 * {@code GET  /books} : get all the books.
 	 *
-	 * @param pageable  the pagination information.
-	 * @param eagerload flag to eager load entities from relationships (This is
-	 *                  applicable for many-to-many).
+	 * @param pageable the pagination information.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
 	 *         of books in body.
 	 */
@@ -170,9 +179,7 @@ public class BookResource {
 	/**
 	 * {@code GET  /books} : get all the books.
 	 *
-	 * @param pageable  the pagination information.
-	 * @param eagerload flag to eager load entities from relationships (This is
-	 *                  applicable for many-to-many).
+	 * @param pageable the pagination information.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
 	 *         of books in body.
 	 */
@@ -190,9 +197,8 @@ public class BookResource {
 	/**
 	 * {@code GET  /books} : get all the books.
 	 *
-	 * @param pageable  the pagination information.
-	 * @param eagerload flag to eager load entities from relationships (This is
-	 *                  applicable for many-to-many).
+	 * @param pageable the pagination information.
+	 * @param login    the author login.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
 	 *         of books in body.
 	 */
@@ -218,7 +224,7 @@ public class BookResource {
 	 * @param id the id of the bookDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the bookDTO, or with status {@code 404 (Not Found)}.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@GetMapping("/books/{id}")
 	public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) throws Exception {
@@ -236,7 +242,7 @@ public class BookResource {
 	 * @param id the id of the bookDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the bookDTO, or with status {@code 404 (Not Found)}.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@GetMapping("/books/light/{id}")
 	public ResponseEntity<BookDTO> getBookLight(@PathVariable Long id) throws Exception {
@@ -253,7 +259,7 @@ public class BookResource {
 	 *
 	 * @param id the id of the bookDTO to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@DeleteMapping("/books/{id}")
 	public ResponseEntity<Void> deleteBook(@PathVariable Long id) throws Exception {

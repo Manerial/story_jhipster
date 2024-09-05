@@ -32,7 +32,8 @@ public interface CoverService {
 	/**
 	 * Get all the covers related to an Owner.
 	 *
-	 * @param id the id of the book.
+	 * @param pageable the pagination information.
+	 * @param id       the id of the book.
 	 * @return the list of entities.
 	 */
 	Page<CoverDTO> findAllByOwnerId(Pageable pageable, Long id);
@@ -41,9 +42,10 @@ public interface CoverService {
 	 * Get all the covers by Owner login.
 	 *
 	 * @param pageable the pagination information.
+	 * @param login    the author login.
 	 * @return the list of entities.
 	 */
-	Page<CoverDTO> findAllByOwnerLogin(Pageable pageable, String name);
+	Page<CoverDTO> findAllByOwnerLogin(Pageable pageable, String login);
 
 	/**
 	 * Get the "id" cover.

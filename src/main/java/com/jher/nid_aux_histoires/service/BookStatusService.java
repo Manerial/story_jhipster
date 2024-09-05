@@ -26,7 +26,7 @@ public interface BookStatusService {
 	/**
 	 * Save a bookStatus chapter using login and bookId.
 	 *
-	 * @param userLogin the user login.
+	 * @param login     the user login.
 	 * @param bookId    the book id.
 	 * @param chapterId the chapter to update.
 	 * @return the persisted entity.
@@ -61,7 +61,8 @@ public interface BookStatusService {
 	/**
 	 * Get the bookStatus linked to the login and the book "bookId".
 	 *
-	 * @param id the id of the entity.
+	 * @param login  the login of the user.
+	 * @param bookId the id of the entity.
 	 * @return the entity.
 	 */
 	Optional<BookStatusDTO> findOneByUserBook(String login, Long bookId);

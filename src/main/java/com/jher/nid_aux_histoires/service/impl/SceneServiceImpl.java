@@ -53,8 +53,8 @@ public class SceneServiceImpl implements SceneService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<SceneDTO> findAllByAuthorLogin(Pageable pageable, String authorLogin) {
-		return sceneRepository.findAllByAuthorLogin(pageable, authorLogin).map(sceneMapper::toDto);
+	public Page<SceneDTO> findAllByAuthorLogin(Pageable pageable, String login) {
+		return sceneRepository.findAllByAuthorLogin(pageable, login).map(sceneMapper::toDto);
 	}
 
 	@Override

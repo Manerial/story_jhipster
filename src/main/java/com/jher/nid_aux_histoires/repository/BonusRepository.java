@@ -16,8 +16,8 @@ import com.jher.nid_aux_histoires.domain.Bonus;
  */
 @Repository
 public interface BonusRepository extends JpaRepository<Bonus, Long> {
-	@Query("select distinct bonus from Bonus bonus where bonus.book.id =:id")
-	List<Bonus> findAllByBookId(@Param("id") Long id);
+	@Query("select distinct bonus from Bonus bonus where bonus.book.id =:bookId")
+	List<Bonus> findAllByBookId(@Param("bookId") Long bookId);
 
 	@Query("select distinct bonus from Bonus bonus where bonus.owner.login =:login")
 	Page<Bonus> findAllByOwnerLogin(Pageable pageable, @Param("login") String login);

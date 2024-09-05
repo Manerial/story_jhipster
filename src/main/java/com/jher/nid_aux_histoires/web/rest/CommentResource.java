@@ -88,7 +88,7 @@ public class CommentResource {
 	 *         the commentDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the commentDTO couldn't be
 	 *         updated.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@PutMapping("/comments")
 	public ResponseEntity<CommentDTO> updateComment(@RequestBody CommentDTO commentDTO) throws Exception {
@@ -153,7 +153,7 @@ public class CommentResource {
 	 *
 	 * @param id the id of the commentDTO to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-	 * @throws Exception
+	 * @throws Exception bad request
 	 */
 	@DeleteMapping("/comments/{id}")
 	public ResponseEntity<Void> deleteComment(@PathVariable Long id) throws Exception {

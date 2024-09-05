@@ -29,12 +29,19 @@ public interface SceneService {
 	 */
 	Page<SceneDTO> findAll(Pageable pageable);
 
-	Page<SceneDTO> findAllByAuthorLogin(Pageable pageable, String authorLogin);
-
 	/**
-	 * Get all the scenes by author Id.
+	 * Get all the scenes related to an author.
 	 *
 	 * @param pageable the pagination information.
+	 * @param login    the author login.
+	 * @return the list of entities.
+	 */
+	Page<SceneDTO> findAllByAuthorLogin(Pageable pageable, String login);
+
+	/**
+	 * Get all the scenes by it's id.
+	 *
+	 * @param id the scene id.
 	 * @return the list of entities.
 	 */
 	String findAuthorLoginBySceneId(Long id);
