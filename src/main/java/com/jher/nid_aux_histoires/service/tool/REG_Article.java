@@ -6,5 +6,4 @@ public enum REG_Article {
 	article_partitif, // du, de la, des, d'
 	article_partitif_second, // de, de, des, d'
 	article_contractif // au, à la, aux, à l'
-
 }

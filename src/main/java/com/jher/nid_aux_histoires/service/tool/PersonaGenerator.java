@@ -2,6 +2,7 @@ package com.jher.nid_aux_histoires.service.tool;
 
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import com.jher.nid_aux_histoires.domain.Idea;
 import com.jher.nid_aux_histoires.repository.IdeaRepository;
@@ -146,7 +147,13 @@ public class PersonaGenerator extends RandomEntityGenerator {
 		Set<String> badTraits = getDefaultOrRandom(traits.getBadTraits(), REG_Element.bad_trait, 1, 3);
 		Set<String> carac = getDefaultOrRandom(traits.getCaracteristics(), REG_Element.hobby, 2, 5);
 		Set<String> goodTraits = getDefaultOrRandom(traits.getGoodTraits(), REG_Element.good_trait, 2, 5);
-		Set<String> handicaps = getDefaultOrRandom(traits.getHandicaps(), REG_Element.handicap, 0, 3);
+		Set<String> handicaps;
+		if (RNG.getRandBelow(100) < 40) {
+			handicaps = getDefaultOrRandom(traits.getHandicaps(), REG_Element.handicap, 1, 3);
+		} else {
+			handicaps = new TreeSet<String>();
+			handicaps.add("Aucun");
+		}
 		traits.setBadTraits(badTraits);
 		traits.setCaracteristics(carac);
 		traits.setGoodTraits(goodTraits);
