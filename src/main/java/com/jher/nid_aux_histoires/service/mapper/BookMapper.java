@@ -15,6 +15,7 @@ public interface BookMapper extends EntityMapper<BookDTO, Book> {
 	@Mapping(source = "author.login", target = "authorLogin")
 	@Mapping(source = "cover.id", target = "coverId")
 	@Mapping(source = "cover.preview", target = "coverPreview")
+	@Mapping(target = "bonuses", expression = "java(book.getBonuses().size() > 0)")
 	BookDTO toDto(Book book);
 
 	@Mapping(target = "parts", ignore = true)

@@ -15,6 +15,7 @@ public interface BookMapperLight extends EntityMapper<BookDTO, Book> {
 	@Mapping(source = "author.login", target = "authorLogin")
 	@Mapping(source = "cover.id", target = "coverId")
 	@Mapping(source = "cover.preview", target = "coverPreview")
+	@Mapping(target = "bonuses", expression = "java(book.getBonuses().size() > 0)")
 	@Mapping(target = "parts", ignore = true)
 	@Mapping(target = "images", ignore = true)
 	@Mapping(target = "comments", ignore = true)
@@ -24,6 +25,7 @@ public interface BookMapperLight extends EntityMapper<BookDTO, Book> {
 	@Mapping(target = "removePart", ignore = true)
 	@Mapping(target = "removeImage", ignore = true)
 	@Mapping(target = "comments", ignore = true)
+	@Mapping(target = "bonuses", ignore = true)
 	@Mapping(source = "coverId", target = "cover")
 	@Mapping(source = "authorId", target = "author")
 	Book toEntity(BookDTO bookDTO);

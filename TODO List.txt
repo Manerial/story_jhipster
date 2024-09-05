@@ -2,8 +2,7 @@ OBLIGATOIRE
 
 GUI :
 	- List / Download bonus
-		- API get bonus by bookId -> A tester
-		- Page livre : si bonus présents, alors bouton bonus
+		- Page livre : si bonus présents, alors bouton bonus (+)
 		- Page download bonus 
 			- reprendre page images
 				- Virer lien images / part / chapter / scene
