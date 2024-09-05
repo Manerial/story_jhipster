@@ -2,9 +2,12 @@ package com.jher.nid_aux_histoires.service.dto;
 
 import java.io.Serializable;
 
+import lombok.Data;
+
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Comment} entity.
  */
+@Data
 public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 	private static final long serialVersionUID = 1L;
 
@@ -25,78 +28,6 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 	private String description;
 
 	private boolean isImage;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Long getOwnerId() {
-		return ownerId;
-	}
-
-	public void setOwnerId(Long ownerId) {
-		this.ownerId = ownerId;
-	}
-
-	public String getOwnerLogin() {
-		return ownerLogin;
-	}
-
-	public void setOwnerLogin(String ownerLogin) {
-		this.ownerLogin = ownerLogin;
-	}
-
-	public byte[] getData() {
-		return data;
-	}
-
-	public void setData(byte[] data) {
-		this.data = data;
-	}
-
-	public String getDataContentType() {
-		return dataContentType;
-	}
-
-	public void setDataContentType(String dataContentType) {
-		this.dataContentType = dataContentType;
-	}
-
-	public Long getBookId() {
-		return bookId;
-	}
-
-	public void setBookId(Long bookId) {
-		this.bookId = bookId;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public boolean isImage() {
-		return isImage;
-	}
-
-	public void setImage(boolean isImage) {
-		this.isImage = isImage;
-	}
 
 	@Override
 	public boolean equals(Object o) {

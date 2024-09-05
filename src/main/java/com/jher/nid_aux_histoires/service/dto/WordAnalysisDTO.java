@@ -2,9 +2,12 @@ package com.jher.nid_aux_histoires.service.dto;
 
 import java.io.Serializable;
 
+import lombok.Data;
+
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.WordAnalysis} entity.
  */
+@Data
 public class WordAnalysisDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -15,38 +18,6 @@ public class WordAnalysisDTO implements Serializable {
 	private String name;
 
 	private String analysis;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAnalysis() {
-		return analysis;
-	}
-
-	public void setAnalysis(String analysis) {
-		this.analysis = analysis;
-	}
 
 	@Override
 	public boolean equals(Object o) {
