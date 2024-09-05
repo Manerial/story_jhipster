@@ -45,7 +45,7 @@ public class PersonaGenerator extends RandomEntityGenerator {
 		if (!stringEmpty(defaultName)) {
 			return defaultName;
 		}
-		return wordAnalysisService.generate("name");
+		return wordAnalysisService.generate(REG_WordAnalysis.NAME_FIRSTNAMES);
 	}
 
 	private String getRandomJob(String defaultJob, int age) {

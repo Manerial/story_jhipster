@@ -11,9 +11,9 @@ public class R_ObjectDTO implements Random_Interface {
 	public R_ObjectDTO() {
 	}
 
-	public R_ObjectDTO(R_ObjectDTO location) {
-		setObject(location.getObject());
-		setAdjective(location.getAdjective());
-		setSuffix(location.getSuffix());
+	public R_ObjectDTO(R_ObjectDTO object) {
+		setObject(object.getObject());
+		setAdjective(object.getAdjective());
+		setSuffix(object.getSuffix());
 	}
 }

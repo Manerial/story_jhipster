@@ -19,6 +19,7 @@ import com.jher.nid_aux_histoires.repository.WordAnalysisRepository;
 import com.jher.nid_aux_histoires.service.WordAnalysisService;
 import com.jher.nid_aux_histoires.service.dto.WordAnalysisDTO;
 import com.jher.nid_aux_histoires.service.mapper.WordAnalysisMapper;
+import com.jher.nid_aux_histoires.service.tool.REG_WordAnalysis;
 import com.jher.nid_aux_histoires.service.tool.WordGenerator;
 
 /**
@@ -82,8 +83,8 @@ public class WordAnalysisServiceImpl implements WordAnalysisService {
 	}
 
 	@Transactional
-	public List<String> generate(int numberOfWords, int fixLength, String type) {
-		WordAnalysis wordAnalysis = wordAnalysisRepository.findByType(type);
+	public List<String> generate(int numberOfWords, int fixLength, REG_WordAnalysis type) {
+		WordAnalysis wordAnalysis = wordAnalysisRepository.findByType(type.toString());
 		WordGenerator wordGenerator;
 		try {
 			wordGenerator = new WordGenerator(wordAnalysis);
@@ -95,8 +96,8 @@ public class WordAnalysisServiceImpl implements WordAnalysisService {
 	}
 
 	@Transactional
-	public String generate(String type) {
-		WordAnalysis wordAnalysis = wordAnalysisRepository.findByType(type);
+	public String generate(REG_WordAnalysis type) {
+		WordAnalysis wordAnalysis = wordAnalysisRepository.findByType(type.toString());
 		WordGenerator wordGenerator;
 		try {
 			wordGenerator = new WordGenerator(wordAnalysis);

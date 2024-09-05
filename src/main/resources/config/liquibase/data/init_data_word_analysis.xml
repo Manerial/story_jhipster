@@ -7,22 +7,58 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 	<changeSet author="JHER" id="insertData_word_analysis">
 		<insert tableName="word_analysis">
-			<column name="type" value="french" />
-			<column name="name" value="français" />
+			<column name="type" value="word_french" />
+			<column name="name" value="Mots français" />
 			<column name="analysis" encoding="UTF-8"
-				valueClobFile="wordAnalysis/fr.json" />
+				valueClobFile="wordAnalysis/word_french.json" />
 		</insert>
 		<insert tableName="word_analysis">
-			<column name="type" value="name" />
-			<column name="name" value="noms" />
+			<column name="type" value="name_firstnames" />
+			<column name="name" value="Prénoms" />
 			<column name="analysis" encoding="UTF-8"
-				valueClobFile="wordAnalysis/name.json" />
+				valueClobFile="wordAnalysis/name_firstnames.json" />
 		</insert>
 		<insert tableName="word_analysis">
-			<column name="type" value="animal" />
-			<column name="name" value="animaux" />
+			<column name="type" value="name_boys" />
+			<column name="name" value="Noms garçons" />
 			<column name="analysis" encoding="UTF-8"
-				valueClobFile="wordAnalysis/animal.json" />
+				valueClobFile="wordAnalysis/name_boys.json" />
+		</insert>
+		<insert tableName="word_analysis">
+			<column name="type" value="name_girls" />
+			<column name="name" value="Noms filles" />
+			<column name="analysis" encoding="UTF-8"
+				valueClobFile="wordAnalysis/name_girls.json" />
+		</insert>
+		<insert tableName="word_analysis">
+			<column name="type" value="name_animals" />
+			<column name="name" value="Noms animaux" />
+			<column name="analysis" encoding="UTF-8"
+				valueClobFile="wordAnalysis/name_animals.json" />
+		</insert>
+		<insert tableName="word_analysis">
+			<column name="type" value="name_angels" />
+			<column name="name" value="Noms anges" />
+			<column name="analysis" encoding="UTF-8"
+				valueClobFile="wordAnalysis/name_angels.json" />
+		</insert>
+		<insert tableName="word_analysis">
+			<column name="type" value="name_demons" />
+			<column name="name" value="Noms démons" />
+			<column name="analysis" encoding="UTF-8"
+				valueClobFile="wordAnalysis/name_demons.json" />
+		</insert>
+		<insert tableName="word_analysis">
+			<column name="type" value="name_greek" />
+			<column name="name" value="Noms grècques" />
+			<column name="analysis" encoding="UTF-8"
+				valueClobFile="wordAnalysis/name_greek.json" />
+		</insert>
+		<insert tableName="word_analysis">
+			<column name="type" value="name_nordic" />
+			<column name="name" value="Noms nordiques" />
+			<column name="analysis" encoding="UTF-8"
+				valueClobFile="wordAnalysis/name_nordic.json" />
 		</insert>
 	</changeSet>
 </databaseChangeLog>
