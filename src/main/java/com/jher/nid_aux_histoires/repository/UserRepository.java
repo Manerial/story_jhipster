@@ -43,7 +43,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findOneWithAuthoritiesByEmailIgnoreCase(String email);
 
 	@Query("select distinct user from User user left join user.books")
-	Page<User> findAllWithEager(Pageable pageable, String login);
+	List<User> findAllWithEager();
 
 	Page<User> findAllByLoginNot(Pageable pageable, String login);
 }

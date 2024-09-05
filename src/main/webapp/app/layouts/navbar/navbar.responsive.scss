@@ -1,5 +1,14 @@
 @import '../../../content/scss/variables.scss';
 
+@media only screen and (max-width: $screen_w_xxl) {
+  .nav-link {
+    padding: 0.2vw !important;
+  }
+  .nav-link span span {
+    font-size: calc(1.7vw - 11px) !important;
+  }
+}
+
 @media only screen and (max-width: $screen_w_xl) {
   .nav-item {
     margin-right: 0.35vw !important;
