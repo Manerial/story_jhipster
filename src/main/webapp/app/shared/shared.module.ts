@@ -7,6 +7,7 @@ import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { BookFilterPipe, AuthorFilterPipe } from './util/search.pipe';
 import { InputPattern } from './util/input-pattern';
+import { SecretCodeDirective } from './secret/secret-code.directive';
 
 @NgModule({
   imports: [NidAuxHistoiresSharedLibsModule],
@@ -18,6 +19,7 @@ import { InputPattern } from './util/input-pattern';
     AlertErrorComponent,
     LoginModalComponent,
     HasAnyAuthorityDirective,
+    SecretCodeDirective,
   ],
   entryComponents: [LoginModalComponent],
   exports: [
@@ -29,6 +31,7 @@ import { InputPattern } from './util/input-pattern';
     AlertErrorComponent,
     LoginModalComponent,
     HasAnyAuthorityDirective,
+    SecretCodeDirective,
   ],
   providers: [InputPattern],
 })

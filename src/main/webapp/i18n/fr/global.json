@@ -96,7 +96,8 @@
     "ribbon": {
       "dev": "Développement"
     },
-    "item-count": "Affichage {{first}} - {{second}} de {{total}} items."
+    "item-count": "Affichage {{first}} - {{second}} de {{total}} items.",
+    "secret": "Vous avez déclenché le premier code…"
   },
   "entity": {
     "action": {
