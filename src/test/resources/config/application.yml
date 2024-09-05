@@ -13,6 +13,14 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+export:
+  model:
+    path: src/main/resources/templates/export/
+    book:
+      name: template_book.docx
+    part:
+      name: template_part.docx
+
 spring:
   profiles:
   # Uncomment the following line to enable tests against production database type rather than H2, using Testcontainers

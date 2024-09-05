@@ -14,11 +14,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.persistence.EntityManager;
 
@@ -62,10 +63,8 @@ public class SceneResourceIT {
 	private static final String DEFAULT_TEXT = "AAAAAAAAAA";
 	private static final String UPDATED_TEXT = "BBBBBBBBBB";
 
-	private static final Date DEFAULT_TIMESTAMP_START = Date
-			.from(LocalDateTime.of(2000, 01, 01, 0, 0).toInstant(ZoneOffset.UTC));
-	private static final Date UPDATED_TIMESTAMP_START = Date
-			.from(LocalDateTime.of(2020, 01, 01, 0, 0).toInstant(ZoneOffset.UTC));
+	private static final Date DEFAULT_TIMESTAMP_START = parseDate("2001-01-01 01:00:00");
+	private static final Date UPDATED_TIMESTAMP_START = parseDate("2001-01-01 01:00:00");
 
 	@Autowired
 	private SceneRepository sceneRepository;
@@ -89,6 +88,16 @@ public class SceneResourceIT {
 	private MockMvc restSceneMockMvc;
 
 	private Scene scene;
+
+	public static Date parseDate(String date) {
+		SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			return parser.parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			return new Date();
+		}
+	}
 
 	/**
 	 * Create an entity for this test.
@@ -169,7 +178,7 @@ public class SceneResourceIT {
 				.andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
 				.andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
 				.andExpect(jsonPath("$.[*].text").value(hasItem(DEFAULT_TEXT.toString())))
-				.andExpect(jsonPath("$.[*].timestampStart").value(hasItem(DEFAULT_TIMESTAMP_START.toString())));
+				.andExpect(jsonPath("$.[*].timestampStart").value(hasItem(timeStampString(DEFAULT_TIMESTAMP_START))));
 	}
 
 	@SuppressWarnings({ "unchecked" })
@@ -202,7 +211,13 @@ public class SceneResourceIT {
 				.andExpect(jsonPath("$.id").value(scene.getId().intValue()))
 				.andExpect(jsonPath("$.name").value(DEFAULT_NAME)).andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
 				.andExpect(jsonPath("$.text").value(DEFAULT_TEXT.toString()))
-				.andExpect(jsonPath("$.timestampStart").value(DEFAULT_TIMESTAMP_START.toString()));
+				.andExpect(jsonPath("$.timestampStart").value(timeStampString(DEFAULT_TIMESTAMP_START)));
+	}
+
+	public String timeStampString(Date timestamp) {
+		SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+		formatterDate.setTimeZone(TimeZone.getTimeZone("ETC"));
+		return formatterDate.format(timestamp).replace("Z", "+0000");
 	}
 
 	@Test

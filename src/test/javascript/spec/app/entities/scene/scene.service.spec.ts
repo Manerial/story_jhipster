@@ -1,7 +1,5 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SceneService } from 'app/entities/scene/scene.service';
 import { IScene, Scene } from 'app/shared/model/scene.model';
 
@@ -12,7 +10,7 @@ describe('Service Tests', () => {
     let httpMock: HttpTestingController;
     let elemDefault: IScene;
     let expectedResult: IScene | IScene[] | boolean | null;
-    let currentDate: moment.Moment;
+    let currentDate: Date;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -22,7 +20,7 @@ describe('Service Tests', () => {
       injector = getTestBed();
       service = injector.get(SceneService);
       httpMock = injector.get(HttpTestingController);
-      currentDate = moment();
+      currentDate = new Date();
 
       elemDefault = new Scene(0, 'AAAAAAA', 0, 'AAAAAAA', currentDate);
     });
@@ -31,7 +29,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            timestampStart: currentDate.format(DATE_FORMAT),
+            timestampStart: currentDate,
           },
           elemDefault
         );
@@ -47,7 +45,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            timestampStart: currentDate.format(DATE_FORMAT),
+            timestampStart: currentDate,
           },
           elemDefault
         );
@@ -72,7 +70,7 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             number: 1,
             text: 'BBBBBB',
-            timestampStart: currentDate.format(DATE_FORMAT),
+            timestampStart: currentDate,
           },
           elemDefault
         );
@@ -97,7 +95,7 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             number: 1,
             text: 'BBBBBB',
-            timestampStart: currentDate.format(DATE_FORMAT),
+            timestampStart: currentDate,
           },
           elemDefault
         );
