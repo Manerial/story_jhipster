@@ -3,6 +3,7 @@ package com.jher.nid_aux_histoires.service.dto;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Book} entity.
@@ -86,7 +87,8 @@ public class BookDTO implements Serializable {
 	}
 
 	public void setParts(Set<PartDTO> parts) {
-		this.parts = parts;
+		this.parts = new TreeSet<PartDTO>();
+		this.parts.addAll(parts);
 	}
 
 	@Override

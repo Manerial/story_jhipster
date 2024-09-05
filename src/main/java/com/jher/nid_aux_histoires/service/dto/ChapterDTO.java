@@ -3,13 +3,14 @@ package com.jher.nid_aux_histoires.service.dto;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import com.jher.nid_aux_histoires.export.ExportDocx;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Chapter} entity.
  */
-public class ChapterDTO implements Serializable {
+public class ChapterDTO implements Serializable, Comparable<ChapterDTO> {
 
 	private Long id;
 
@@ -78,7 +79,8 @@ public class ChapterDTO implements Serializable {
 	}
 
 	public void setScenes(Set<SceneDTO> scenes) {
-		this.scenes = scenes;
+		this.scenes = new TreeSet<SceneDTO>();
+		this.scenes.addAll(scenes);
 	}
 
 	@Override
@@ -111,5 +113,10 @@ public class ChapterDTO implements Serializable {
 			text += scene.getText() + ExportDocx.LINE_BREAK_PLACEHOLDER;
 		}
 		return text.replaceAll("\r\n", ExportDocx.LINE_BREAK_PLACEHOLDER);
+	}
+
+	@Override
+	public int compareTo(ChapterDTO o) {
+		return this.number.compareTo(o.number);
 	}
 }
