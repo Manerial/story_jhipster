@@ -5,15 +5,5 @@
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     }
-  },
-  "library": {
-    "title": "Library",
-    "read": "Read",
-    "summary": "Summary",
-    "download": "Download",
-    "downloading": "Ongoing",
-    "export": {
-      "ongoing": "The export is in progress.\r\nPlease wait..."
-    }
   }
 }

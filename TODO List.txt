@@ -1,10 +1,9 @@
 Etudier l'agencement du projet JHipster
 Alléger les échanges Back-Front
 	Alléger Part, Chapter et Scene
+BUGS :
+	Au changement de la langue (vue livre) le titre de l'onglet disparait
 Importer l'interface du site
-	Vue lecture
-		Refaire CSS
-			Petite taille : ouvrir - sélectionner menu ramène au début + sauvegarde scroll si fermer
 	Vue images
 	Navbar
 	Footer

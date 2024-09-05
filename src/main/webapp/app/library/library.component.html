@@ -75,7 +75,7 @@
 						(click)="collapseBooks[book.id] = !collapseBooks[book.id]">
 						<span>
 							<fa-icon icon="bars"></fa-icon>
-							<span jhiTranslate="library.summary">summary</span>
+							<span jhiTranslate="library.synopsis">Synopsis</span>
 						</span>
 					</button>
 					<p [ngbCollapse]="collapseBooks[book.id]" class="card-text">{{ book.description }}</p>
