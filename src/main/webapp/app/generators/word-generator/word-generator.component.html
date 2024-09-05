@@ -12,17 +12,17 @@
 					<div *ngIf="wordForm.get('numberOfWords')!.invalid && (wordForm.get('numberOfWords')!.dirty || wordForm.get('numberOfWords')!.touched)" >
 						<small class="form-text text-danger"
 								*ngIf="wordForm.get('numberOfWords')?.errors?.required"
-								jhiTranslate="nidAuxHistoiresApp.word.number.validation.required">
+								jhiTranslate="generator.word.number.validation.required">
 							A number of ideas is required.
 						</small>
 						<small class="form-text text-danger"
 								*ngIf="wordForm.get('numberOfWords')?.errors?.min"
-								jhiTranslate="nidAuxHistoiresApp.word.number.validation.min">
+								jhiTranslate="generator.word.number.validation.min">
 							Must be greater than 0.
 						</small>
 						<small class="form-text text-danger"
 								*ngIf="wordForm.get('numberOfWords')?.errors?.max"
-								jhiTranslate="nidAuxHistoiresApp.word.number.validation.max">
+								jhiTranslate="generator.word.number.validation.max">
 							Must be lesser than 200.
 						</small>
 					</div>
@@ -44,13 +44,18 @@
 					type="number" class="form-control" (keypress)="_keyNumber($event)"/>
 					<div *ngIf="wordForm.get('fixLength')!.invalid && (wordForm.get('fixLength')!.dirty || wordForm.get('fixLength')!.touched)" >
 						<small class="form-text text-danger"
+								*ngIf="wordForm.get('fixLength')?.errors?.required"
+								jhiTranslate="generator.word.length.validation.required">
+							A length is required.
+						</small>
+						<small class="form-text text-danger"
 								*ngIf="wordForm.get('fixLength')?.errors?.min"
-								jhiTranslate="nidAuxHistoiresApp.word.length.validation.min">
+								jhiTranslate="generator.word.length.validation.min">
 							Must be greater than 0.
 						</small>
 						<small class="form-text text-danger"
 								*ngIf="wordForm.get('fixLength')?.errors?.max"
-								jhiTranslate="nidAuxHistoiresApp.word.length.validation.max">
+								jhiTranslate="generator.word.length.validation.max">
 							Must be lesser than 25.
 						</small>
 					</div>

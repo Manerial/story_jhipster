@@ -18,12 +18,7 @@
       },
       "type": "Type",
       "value": "Value",
-      "complement": "Complement",
-      "validation": {
-        "required": "A number of ideas is required.",
-        "min": "Must be greater than 0.",
-        "max": "Must be lesser than 13."
-      }
+      "complement": "Complement"
     }
   }
 }
