@@ -1,0 +1,51 @@
+{
+  "name": "Part",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "chapter",
+      "otherEntityRelationshipName": "part",
+      "relationshipName": "chapter"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "image",
+      "otherEntityRelationshipName": "part",
+      "relationshipName": "image",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "book",
+      "otherEntityRelationshipName": "part",
+      "relationshipName": "book",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201004071942",
+  "entityTableName": "part",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
