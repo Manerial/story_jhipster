@@ -94,6 +94,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "reset_date")
 	private Instant resetDate = null;
 
+	@Size(max = 5000)
+	@Column(name = "introduction")
+	private String introduction = null;
+
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "jhi_user_authority", joinColumns = {
@@ -214,6 +218,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	public void setAuthorities(Set<Authority> authorities) {
 		this.authorities = authorities;
+	}
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
 
 	public Set<Comment> getComments() {

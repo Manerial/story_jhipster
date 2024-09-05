@@ -8,6 +8,7 @@ import { registerRoute } from './register/register.route';
 import { settingsRoute } from './settings/settings.route';
 import { AccountComponent } from './account.component';
 import { Authority } from 'app/shared/constants/authority.constants';
+import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 
 export const accountState: Routes = [
   {
@@ -17,6 +18,7 @@ export const accountState: Routes = [
       authorities: [Authority.USER],
       pageTitle: 'global.menu.account.main',
     },
+    canActivate: [UserRouteAccessService],
   },
   activateRoute,
   passwordRoute,

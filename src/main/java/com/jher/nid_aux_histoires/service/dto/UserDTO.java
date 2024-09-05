@@ -52,6 +52,8 @@ public class UserDTO {
 
 	private Instant lastModifiedDate;
 
+	private String introduction;
+
 	private Set<String> authorities;
 
 	private Set<CommentDTO> comments = new HashSet<>();
@@ -73,6 +75,7 @@ public class UserDTO {
 		this.createdDate = user.getCreatedDate();
 		this.lastModifiedBy = user.getLastModifiedBy();
 		this.lastModifiedDate = user.getLastModifiedDate();
+		this.introduction = user.getIntroduction();
 		this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
 	}
 
@@ -170,6 +173,14 @@ public class UserDTO {
 
 	public void setLastModifiedDate(Instant lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
+	}
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
 
 	public Set<String> getAuthorities() {

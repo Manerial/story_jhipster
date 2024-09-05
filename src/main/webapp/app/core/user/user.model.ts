@@ -11,6 +11,7 @@ export interface IUser {
   createdDate: Date;
   lastModifiedBy: string;
   lastModifiedDate: Date;
+  introduction: string;
   password: string;
 }
 
@@ -27,6 +28,7 @@ export class User implements IUser {
   public createdDate: Date;
   public lastModifiedBy: string;
   public lastModifiedDate: Date;
+  public introduction: string;
   public password: string;
 
   constructor();
@@ -44,6 +46,7 @@ export class User implements IUser {
     createdDate?: Date,
     lastModifiedBy?: string,
     lastModifiedDate?: Date,
+    introduction?: string,
     password?: string
   );
 
@@ -60,6 +63,7 @@ export class User implements IUser {
     createdDate?: Date,
     lastModifiedBy?: string,
     lastModifiedDate?: Date,
+    introduction?: string,
     password?: string
   ) {
     this.id = id || null;
@@ -74,6 +78,7 @@ export class User implements IUser {
     this.createdDate = createdDate || new Date();
     this.lastModifiedBy = lastModifiedBy || '';
     this.lastModifiedDate = lastModifiedDate || new Date();
+    this.introduction = introduction || '';
     this.password = password || '';
   }
 }
