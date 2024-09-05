@@ -3,6 +3,7 @@ package com.jher.nid_aux_histoires.web.rest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jher.nid_aux_histoires.export.ExportDocx;
 import com.jher.nid_aux_histoires.export.ExportDocx.AVAILABLE_FILE_FORMAT;
+import com.jher.nid_aux_histoires.service.BonusService;
 import com.jher.nid_aux_histoires.service.ExportService;
+import com.jher.nid_aux_histoires.service.dto.BonusDTO;
 
 @RestController
 @RequestMapping("/api")
@@ -30,8 +34,11 @@ public class ExportController {
 
 	private final ExportService exportService;
 
-	public ExportController(ExportService exportService) {
+	private final BonusService bonusService;
+
+	public ExportController(ExportService exportService, BonusService bonusService) {
 		this.exportService = exportService;
+		this.bonusService = bonusService;
 	}
 
 	/**
@@ -88,5 +95,28 @@ public class ExportController {
 				.header(HttpHeaders.CONTENT_DISPOSITION,
 						"attachment;filename=\"" + path.getFileName().toString() + "\"")
 				.contentType(exportService.getMediaType(format)).contentLength(data.length).body(resource);
+	}
+
+	/**
+	 * {@code GET  /bonuses/:id} : get the "id" bonus.
+	 *
+	 * @param id the id of the bonusDTO to retrieve.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+	 *         the bonusDTO, or with status {@code 404 (Not Found)}.
+	 * @throws Exception
+	 */
+	@GetMapping("/download/bonus/{id}")
+	public ResponseEntity<byte[]> getBonus(@PathVariable Long id) throws Exception {
+		log.debug("REST request to get Bonus : {}", id);
+		Optional<BonusDTO> opt = bonusService.findOne(id);
+		if (!opt.isPresent()) {
+			String error = "Error during the reading of the document. Document not found";
+			return ResponseEntity.badRequest().body(error.getBytes());
+		}
+		BonusDTO bonusDTO = bonusService.findOne(id).get();
+		String fileName = bonusDTO.getName() + "." + bonusDTO.getExtension();
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"" + fileName + "\"")
+				.contentType(MediaType.MULTIPART_FORM_DATA).contentLength(bonusDTO.getData().length)
+				.body(bonusDTO.getData());
 	}
 }

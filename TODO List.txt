@@ -1,12 +1,7 @@
 OBLIGATOIRE
 
 Gérer les Bonus
-	Bonus:
-		Id
-		Name
-		Data
-		Extension
-		BookId
+	GUI List / Download bonus
 
 Section Contact
 "Vous pouvez nous contacter via le formulaire proposé ou sur le Discord de la communauté"
