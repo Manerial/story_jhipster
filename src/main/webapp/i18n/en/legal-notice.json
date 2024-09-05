@@ -1,0 +1,27 @@
+{
+  "legal-notice": {
+    "title": "Legal notice",
+    "cookies": {
+      "title": "Use of cookies / personal data",
+      "body": "This site does not use cookies or personal data. As a result, navigation within the site may be a little less fluid than your other online reading experiences (no favorites, bookmarks, etc.)"
+    },
+    "download": {
+      "title": "Legal download",
+      "body": "You can download the books you want in docx (word) format. Downloads are completely free, but the content of the works is protected by copyright. <br/> This set of laws is called <a href=\"{{PILegifranceUrl}}\">Code de la propriété intélectuelle</a>"
+    },
+    "distribution": {
+      "title": "Legal distribution",
+      "body": "All works on this site are licensed under the CC BY-NC-ND license. That means :",
+      "list": {
+        "cc": "CC (Creative Commons): That you can share these works.",
+        "by": "BY (Attribution): If you cite their author(s) correctly.",
+        "nc": "NC (Non Commercial): If this sharing is not remunerated.",
+        "nd": "ND (No Derivative): If the shared works are not altered * or modified **."
+      },
+      "exception": {
+        "*": "* : Shared works must be licensed under CC BY-NC-ND.",
+        "**": "** : Nonetheless, drifts based on fan-fiction will be tolerated (each reported case will be studied individually in order to avoid plagiarism)"
+      }
+    }
+  }
+}

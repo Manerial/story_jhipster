@@ -1,0 +1,27 @@
+{
+  "legal-notice": {
+    "title": "Mentions Légales",
+    "cookies": {
+      "title": "Utilisation des cookies / données personnelles",
+      "body": "Ce site n'utilise ni cookies ni données personnelles. Par conséquent, la navigation au sein du site sera peut-être un peu moins fluide que vos autres experiences de lecture en ligne (pas de favorits, marque-pages, etc)"
+    },
+    "download": {
+      "title": "Téléchargement légal",
+      "body": "Vous pouvez télécharger les livres que vous voulez au format docx (word). Les téléchargements sont totalement gratuits, mais le contenu des oeuvres est protégé par le droit d'auteur.<br/>Cette ensemble de lois se nomme <a href=\"{{PILegifranceUrl}}\">Code de la propriété intélectuelle</a>."
+    },
+    "distribution": {
+      "title": "Distribution légale",
+      "body": "Toutes les œuvres de ce site sont placées sous la licence CC BY-NC-ND. Cela signifie :",
+      "list": {
+        "cc": "CC (Creative Commons): Que vous pouvez partager ces oeuvres.",
+        "by": "BY (Attribution): Si vous citez correctement leur(s) auteur(s).",
+        "nc": "NC (Non Commercial): Si ce partage n'est pas rémunéré.",
+        "nd": "ND (No Derivative): Si les oeuvres partagées ne soit pas altérées* ou modifiées**."
+      },
+      "exception": {
+        "*": "* : Les oeuvres partagées doivent être sous licence CC BY-NC-ND.",
+        "**": "** : Seront néanmoins tolérées les dérives tenant de la fan-fiction (chaque cas reporté sera étudié individuellement afin d'éviter le plagiat)"
+      }
+    }
+  }
+}
