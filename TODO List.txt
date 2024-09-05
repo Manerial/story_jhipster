@@ -2,7 +2,6 @@ Analytics ?
 
 Bugs :
 	Discord
-	Sommaire ne va pas jusqu'en bas sur téléphone
 
 GUI :
 	- Générateur de QR_Code
