@@ -41,12 +41,21 @@ export class PartUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ part }) => {
       this.updateForm(part);
+      this.getBooks(part);
+    });
+  }
 
-      this.accountService.identity().subscribe(account => {
-        if (account) {
-          this.bookService.findAllByAuthor(account.login).subscribe((res: HttpResponse<IBook[]>) => (this.books = res.body || []));
-        }
-      });
+  getBooks(part: IPart): void {
+    this.bookService.query().subscribe((res: HttpResponse<IBook[]>) => (this.books = res.body || []));
+    this.getDefaultBook(part);
+  }
+
+  getDefaultBook(part: IPart): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['bookId'] && part.bookId === 0) {
+        part.bookId = Number(params['bookId']);
+        this.updateForm(part);
+      }
     });
   }
 

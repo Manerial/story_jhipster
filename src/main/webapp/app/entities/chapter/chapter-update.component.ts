@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { IChapter, Chapter } from 'app/shared/model/chapter.model';
 import { ChapterService } from './chapter.service';
 import { ICover } from 'app/shared/model/cover.model';
-import { IPart, Part } from 'app/shared/model/part.model';
+import { IPart } from 'app/shared/model/part.model';
 import { PartService } from 'app/entities/part/part.service';
 
 type SelectableEntity = ICover | IPart;
@@ -39,14 +39,20 @@ export class ChapterUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ chapter }) => {
       this.updateForm(chapter);
+      this.getParts(chapter);
+    });
+  }
 
-      if (chapter.partId !== undefined && chapter.partId !== null && chapter.partId !== 0) {
-        this.partService.find(chapter.partId).subscribe((dataPart: HttpResponse<IPart>) => {
-          const part = dataPart.body || new Part();
-          this.partService.query({ bookId: part.bookId }).subscribe((res: HttpResponse<IPart[]>) => (this.parts = res.body || []));
-        });
-      } else {
-        this.partService.query().subscribe((res: HttpResponse<IPart[]>) => (this.parts = res.body || []));
+  getParts(chapter: IChapter): void {
+    this.partService.query().subscribe((res: HttpResponse<IPart[]>) => (this.parts = res.body || []));
+    this.getDefaultPart(chapter);
+  }
+
+  getDefaultPart(chapter: IChapter): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['partId']) {
+        chapter.partId = Number(params['partId']);
+        this.updateForm(chapter);
       }
     });
   }

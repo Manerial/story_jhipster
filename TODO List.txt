@@ -1,6 +1,4 @@
 Gestion autonome des histoires :
-	Simplifier l'ajout d'un livre (lien direct ajouter une partie dans édition livre, lien ajouter un chapitre dans edition partie, etc)
-
 	Gestion des livres :
 		Gérer la couverture (upload)
 
