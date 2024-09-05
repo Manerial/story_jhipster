@@ -41,13 +41,7 @@
         "database": "Base de données",
         "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
       },
-      "language": "Langue",
-      "footer": {
-        "legal-notice": "Mentions légales",
-        "help": "Aide",
-        "github": "Github",
-        "discord": "Discord"
-      }
+      "language": "Langue"
     },
     "form": {
       "username.label": "Nom d'utilisateur",
@@ -146,6 +140,5 @@
       "could.not.extract": "Impossible d'extraire le fichier",
       "not.image": "Le fichier doit être une image et non du type \"{{ fileType }}\""
     }
-  },
-  "footer": "Ceci est votre pied de page"
+  }
 }
