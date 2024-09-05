@@ -1,6 +1,6 @@
 {
   "account": {
-    "title": "Compte de [<strong>{{username}}</strong>]",
+    "title": "Compte de <strong>{{username}}</strong>",
     "lastName": "Nom : {{lastName}}",
     "firstName": "Prénom : {{firstName}}",
     "email": "E-mail : {{email}}",

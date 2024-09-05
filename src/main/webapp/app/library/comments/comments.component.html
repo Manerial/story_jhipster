@@ -1,0 +1,6 @@
+<div>
+    <h2 jhiTranslate="nidAuxHistoiresApp.comment.list.title" [translateValues]="{ bookName: book.name }" *ngIf="book">List of comments for {{ book.name }}</h2>
+    <div class="table-responsive" id="entities" *ngIf="comments && comments.length > 0">
+    </div>
+</div>
+

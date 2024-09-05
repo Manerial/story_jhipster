@@ -18,7 +18,10 @@
       },
       "text": "Text",
       "book": "Livre",
-      "user": "Utilisateur"
+      "user": "Utilisateur",
+      "list": {
+        "title": "Commentaires pour {{ bookName }}"
+      }
     }
   }
 }

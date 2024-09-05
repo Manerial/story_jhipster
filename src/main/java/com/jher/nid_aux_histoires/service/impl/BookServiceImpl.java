@@ -93,6 +93,13 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
+	public Optional<BookDTO> findOneLight(Long id) {
+		log.debug("Request to get Book : {}", id);
+		return bookRepository.findOneWithEagerRelationships(id).map(bookMapperLight::toDto);
+	}
+
+	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Book : {}", id);
 		Book book = bookRepository.findById(id).get();

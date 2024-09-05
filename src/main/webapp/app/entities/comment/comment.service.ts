@@ -27,6 +27,10 @@ export class CommentService {
     return this.http.get<IComment>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findByBookId(id: number): Observable<EntityArrayResponseType> {
+    throw this.http.get<IComment[]>(`${this.resourceUrl}/book/${id}`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IComment[]>(this.resourceUrl, { params: options, observe: 'response' });

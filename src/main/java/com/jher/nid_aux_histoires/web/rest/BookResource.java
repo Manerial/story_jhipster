@@ -178,6 +178,20 @@ public class BookResource {
 	}
 
 	/**
+	 * {@code GET  /books/:id} : get the "id" book.
+	 *
+	 * @param id the id of the bookDTO to retrieve.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+	 *         the bookDTO, or with status {@code 404 (Not Found)}.
+	 */
+	@GetMapping("/books_light/{id}")
+	public ResponseEntity<BookDTO> getBookLight(@PathVariable Long id) {
+		log.debug("REST request to get Book : {}", id);
+		Optional<BookDTO> bookDTO = bookService.findOneLight(id);
+		return ResponseUtil.wrapOrNotFound(bookDTO);
+	}
+
+	/**
 	 * {@code DELETE  /books/:id} : delete the "id" book.
 	 *
 	 * @param id the id of the bookDTO to delete.
