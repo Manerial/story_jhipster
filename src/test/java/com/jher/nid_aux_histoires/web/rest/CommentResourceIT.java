@@ -25,9 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
-import com.jher.nid_aux_histoires.domain.Book;
 import com.jher.nid_aux_histoires.domain.Comment;
-import com.jher.nid_aux_histoires.domain.User;
 import com.jher.nid_aux_histoires.repository.BookRepository;
 import com.jher.nid_aux_histoires.repository.CommentRepository;
 import com.jher.nid_aux_histoires.repository.UserRepository;
@@ -45,9 +43,6 @@ public class CommentResourceIT {
 
 	private static final String DEFAULT_TEXT = "AAAAAAAAAA";
 	private static final String UPDATED_TEXT = "BBBBBBBBBB";
-
-	private static final User DEFAULT_USER = new User();
-	private static final Book DEFAULT_BOOK = new Book();
 
 	@Autowired
 	private CommentRepository commentRepository;
@@ -79,7 +74,7 @@ public class CommentResourceIT {
 	 * they test an entity which requires the current entity.
 	 */
 	public static Comment createEntity(EntityManager em) {
-		Comment comment = new Comment().text(DEFAULT_TEXT).user(DEFAULT_USER).book(DEFAULT_BOOK);
+		Comment comment = new Comment().text(DEFAULT_TEXT);
 		return comment;
 	}
 
@@ -96,16 +91,6 @@ public class CommentResourceIT {
 
 	@BeforeEach
 	public void initTest() {
-		DEFAULT_USER.setId(1L);
-		DEFAULT_USER.setLogin("Test");
-		DEFAULT_USER.setPassword("012345678901234567890123456789012345678901234567890123456789");
-		DEFAULT_BOOK.setId(1L);
-		if (bookRepository.count() == 0) {
-			bookRepository.saveAndFlush(DEFAULT_BOOK);
-		}
-		if (userRepository.count() == 0) {
-			userRepository.saveAndFlush(DEFAULT_USER);
-		}
 		comment = createEntity(em);
 	}
 
