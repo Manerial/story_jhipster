@@ -1,5 +1,7 @@
 OBLIGATOIRE
 
+Lier Auteur et User
+
 Commentaires (pas de notes)
 
 Tri/sélection

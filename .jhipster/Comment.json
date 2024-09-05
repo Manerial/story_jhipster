@@ -1,0 +1,21 @@
+{
+  "name": "Comment",
+  "fields": [
+    {
+      "fieldName": "text",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210506085457",
+  "entityTableName": "comment",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -64,7 +64,7 @@ public class ExportController {
 	 * @return une réponse contenant la liste des entités
 	 */
 	@GetMapping("/download/book/{id}")
-	public ResponseEntity<ByteArrayResource> getBookWord(@Valid @PathVariable int id,
+	public ResponseEntity<ByteArrayResource> getBook(@Valid @PathVariable int id,
 			@Valid @RequestParam ExportDocx.FILE_FORMAT format) {
 		Path path = null;
 		try {

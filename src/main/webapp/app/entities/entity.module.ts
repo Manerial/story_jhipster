@@ -63,6 +63,10 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
         canActivate: [UserRouteAccessService],
         loadChildren: () => import('./word-analysis/word-analysis.module').then(m => m.NidAuxHistoiresWordAnalysisModule),
       },
+      {
+        path: 'comment',
+        loadChildren: () => import('./comment/comment.module').then(m => m.NidAuxHistoiresCommentModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
