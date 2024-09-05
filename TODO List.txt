@@ -1,7 +1,7 @@
 Analytics ?
 
-Programme :
-Aspiration (liste de mots fr -> enlever une lettre -> vérifier si ça existe toujours. ex : Plage - l = page)
+Bugs :
+	Objets
 
 GUI :
 	- Générateur de QR_Code
