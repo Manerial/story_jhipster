@@ -36,6 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Part;
 import com.jher.nid_aux_histoires.repository.PartRepository;
+import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.PartService;
 import com.jher.nid_aux_histoires.service.dto.PartDTO;
 import com.jher.nid_aux_histoires.service.mapper.PartMapper;
@@ -110,6 +111,7 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createPart() throws Exception {
 		int databaseSizeBeforeCreate = partRepository.findAll().size();
 		// Create the Part
@@ -128,6 +130,7 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createPartWithExistingId() throws Exception {
 		int databaseSizeBeforeCreate = partRepository.findAll().size();
 
@@ -146,6 +149,7 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getAllParts() throws Exception {
 		// Initialize the database
 		partRepository.saveAndFlush(part);
@@ -179,6 +183,7 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getPart() throws Exception {
 		// Initialize the database
 		partRepository.saveAndFlush(part);
@@ -194,6 +199,7 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getNonExistingPart() throws Exception {
 		// Get the part
 		restPartMockMvc.perform(get("/api/parts/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
@@ -201,6 +207,7 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updatePart() throws Exception {
 		// Initialize the database
 		partRepository.saveAndFlush(part);
@@ -229,6 +236,7 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateNonExistingPart() throws Exception {
 		int databaseSizeBeforeUpdate = partRepository.findAll().size();
 
@@ -246,6 +254,7 @@ public class PartResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void deletePart() throws Exception {
 		// Initialize the database
 		partRepository.saveAndFlush(part);

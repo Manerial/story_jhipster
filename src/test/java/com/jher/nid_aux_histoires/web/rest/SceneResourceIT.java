@@ -40,6 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Scene;
 import com.jher.nid_aux_histoires.repository.SceneRepository;
+import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.SceneService;
 import com.jher.nid_aux_histoires.service.dto.SceneDTO;
 import com.jher.nid_aux_histoires.service.mapper.SceneMapper;
@@ -128,6 +129,7 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createScene() throws Exception {
 		int databaseSizeBeforeCreate = sceneRepository.findAll().size();
 		// Create the Scene
@@ -147,6 +149,7 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createSceneWithExistingId() throws Exception {
 		int databaseSizeBeforeCreate = sceneRepository.findAll().size();
 
@@ -165,6 +168,7 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getAllScenes() throws Exception {
 		// Initialize the database
 		sceneRepository.saveAndFlush(scene);
@@ -199,6 +203,7 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getScene() throws Exception {
 		// Initialize the database
 		sceneRepository.saveAndFlush(scene);
@@ -212,6 +217,7 @@ public class SceneResourceIT {
 				.andExpect(jsonPath("$.timestampStart").value(timeStampString(DEFAULT_TIMESTAMP_START)));
 	}
 
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public String timeStampString(Date timestamp) {
 		SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 		formatterDate.setTimeZone(TimeZone.getTimeZone("ETC"));
@@ -220,6 +226,7 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getNonExistingScene() throws Exception {
 		// Get the scene
 		restSceneMockMvc.perform(get("/api/scenes/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
@@ -227,6 +234,7 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateScene() throws Exception {
 		// Initialize the database
 		sceneRepository.saveAndFlush(scene);
@@ -257,6 +265,7 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateNonExistingScene() throws Exception {
 		int databaseSizeBeforeUpdate = sceneRepository.findAll().size();
 
@@ -274,6 +283,7 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void deleteScene() throws Exception {
 		// Initialize the database
 		sceneRepository.saveAndFlush(scene);

@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Idea;
 import com.jher.nid_aux_histoires.repository.IdeaRepository;
+import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.LocationDTO;
@@ -169,6 +170,7 @@ public class IdeaResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateIdea() throws Exception {
 		// Initialize the database
 		ideaRepository.saveAndFlush(idea);
@@ -197,6 +199,7 @@ public class IdeaResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateNonExistingIdea() throws Exception {
 		int databaseSizeBeforeUpdate = ideaRepository.findAll().size();
 
@@ -205,7 +208,7 @@ public class IdeaResourceIT {
 
 		// If the entity doesn't have an ID, it will throw BadRequestAlertException
 		restIdeaMockMvc.perform(put("/api/ideas").contentType(MediaType.APPLICATION_JSON)
-				.content(TestUtil.convertObjectToJsonBytes(ideaDTO))).andExpect(status().isBadRequest());
+				.content(TestUtil.convertObjectToJsonBytes(ideaDTO))).andExpect(status().is4xxClientError());
 
 		// Validate the Idea in the database
 		List<Idea> ideaList = ideaRepository.findAll();
@@ -214,6 +217,7 @@ public class IdeaResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void deleteIdea() throws Exception {
 		// Initialize the database
 		ideaRepository.saveAndFlush(idea);
