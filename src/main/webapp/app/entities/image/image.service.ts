@@ -8,10 +8,12 @@ import { IImage } from 'app/shared/model/image.model';
 
 type EntityResponseType = HttpResponse<IImage>;
 type EntityArrayResponseType = HttpResponse<IImage[]>;
+type ImageResponseType = HttpResponse<Blob>;
 
 @Injectable({ providedIn: 'root' })
 export class ImageService {
   public resourceUrl = SERVER_API_URL + 'api/images';
+  public downloadUrl = SERVER_API_URL + 'api/download';
 
   constructor(protected http: HttpClient) {}
 
@@ -42,5 +44,9 @@ export class ImageService {
 
   getAllImagesByBookId(id: number): Observable<EntityArrayResponseType> {
     return this.http.get<IImage[]>(`${this.resourceUrl}/book/${id}`, { observe: 'response' });
+  }
+
+  download(id: number): Observable<ImageResponseType> {
+    return this.http.get(`${this.downloadUrl}/image/${id}`, { observe: 'response', responseType: 'blob' });
   }
 }

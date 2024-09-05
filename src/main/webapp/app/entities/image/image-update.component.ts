@@ -88,11 +88,12 @@ export class ImageUpdateComponent implements OnInit {
     if (image.id !== undefined && image.id !== 0) {
       this.subscribeToSaveResponse(this.imageService.update(image));
     } else {
+      delete image.id;
       this.subscribeToSaveResponse(this.imageService.create(image));
     }
   }
 
-  private createFromForm(): IImage {
+  private createFromForm(): any {
     return {
       ...new Image(),
       id: this.editForm.get(['id'])!.value,

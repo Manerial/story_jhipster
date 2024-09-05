@@ -72,6 +72,10 @@ public class ImageDTO implements Serializable {
 		this.previewContentType = previewContentType;
 	}
 
+	public String getExtension() {
+		return this.pictureContentType.split("/")[1];
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

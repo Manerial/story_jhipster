@@ -1,9 +1,14 @@
 package com.jher.nid_aux_histoires.domain;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -134,6 +139,37 @@ public class Image implements Serializable {
 
 	public void setPreview(byte[] preview) {
 		this.preview = preview;
+	}
+
+	public void generatePreview() {
+		try {
+			ByteArrayInputStream bais = new ByteArrayInputStream(this.getPicture());
+			BufferedImage bImage = ImageIO.read(bais);
+			double ratio = bImage.getHeight() / 170;
+			int newWidth = (int) (bImage.getWidth() / ratio);
+			int newHeight = (int) (bImage.getHeight() / ratio);
+
+			BufferedImage newResizedImage = resizeImage(bImage, newWidth, newHeight);
+
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(newResizedImage, getExtension(), baos);
+			this.preview = baos.toByteArray();
+			this.previewContentType = this.pictureContentType;
+		} catch (Exception e) {
+
+		}
+	}
+
+	public String getExtension() {
+		return this.pictureContentType.split("/")[1];
+	}
+
+	BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
+		java.awt.Image resultingImage = originalImage.getScaledInstance(targetWidth, targetHeight,
+				java.awt.Image.SCALE_DEFAULT);
+		BufferedImage outputImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+		outputImage.getGraphics().drawImage(resultingImage, 0, 0, null);
+		return outputImage;
 	}
 
 	public String getPreviewContentType() {

@@ -101,11 +101,12 @@ export class SceneUpdateComponent implements OnInit {
     if (scene.id !== undefined && scene.id !== 0) {
       this.subscribeToSaveResponse(this.sceneService.update(scene));
     } else {
+      delete scene.id;
       this.subscribeToSaveResponse(this.sceneService.create(scene));
     }
   }
 
-  private createFromForm(): IScene {
+  private createFromForm(): any {
     return {
       ...new Scene(),
       id: this.editForm.get(['id'])!.value,

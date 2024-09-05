@@ -4,11 +4,20 @@
 		[translateValues]="{ entityName: entityName }" class="w-100">Images for "{{ entityName }}"</h1>
 		<div *ngFor="let image of imageList" class="ml-3 pb-4">
 			<div class="card">
-				<img id="imageViewer" alt="Error occured during the image load"
-					src="data:image/jpg;base64,{{ image.preview }}" />
 				<div class="card-body">
-					<button routerLink="/image/{{ image.id }}"
-						class="btn bkg-gold">{{ image.name }}</button>
+					<h3>{{ image.name }}</h3>
+					<img id="imageViewer" alt="Error occured during the image load"
+						src="data:image/jpg;base64,{{ image.preview }}" />
+					<div class="card-body">
+						<a routerLink="/image/{{ image.id }}" class="btn bkg-gold ml-2"
+						title="{{ 'library.display' | translate }}">
+							<fa-icon icon="eye"></fa-icon>
+						</a>
+						<a (click)="downloadImage(image)" class="btn bkg-gold ml-2"
+						title="{{ 'library.download' | translate }}">
+							<fa-icon icon="download"></fa-icon>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -20,11 +29,20 @@
 	<div class="row m-2">
 		<h1 *ngIf="bonusList.length != 0" jhiTranslate="bonus.title"
 		[translateValues]="{ entityName: entityName }" class="w-100">Bonuses for "{{ entityName }}"</h1>
-		<div *ngFor="let bonus of bonusList" class="ml-3 pb-4">
+		<div *ngFor="let bonus of bonusList" class="col-sm-6 mt-2">
 			<div class="card">
 				<div class="card-body">
-					<button (click)="download(bonus)"
-						class="btn bkg-gold">{{ bonus.name }}</button>
+					<h3>{{ bonus.name }}.{{ bonus.extension }}</h3>
+					<p *ngIf="showDescription[bonus.id]">{{ bonus.description }}</p>
+					<a (click)="toggleDescription(bonus.id)"
+						class="btn bkg-gold">
+						<fa-icon icon="plus" *ngIf="!showDescription[bonus.id]"></fa-icon>
+						<fa-icon icon="minus" *ngIf="showDescription[bonus.id]"></fa-icon>
+					</a>
+					<a (click)="downloadBonus(bonus)" class="btn bkg-gold ml-2"
+					title="{{ 'library.download' | translate }}">
+						<fa-icon icon="download"></fa-icon>
+					</a>
 				</div>
 			</div>
 		</div>

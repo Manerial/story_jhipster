@@ -48,7 +48,7 @@ public class ExportDocx {
 	private WordprocessingMLPackage mainDoc;
 
 	public static enum FILE_FORMAT {
-		docx, pdf, epub
+		docx, pdf, epub, png, jpg, jpeg
 	};
 
 	public static enum AVAILABLE_FILE_FORMAT {
