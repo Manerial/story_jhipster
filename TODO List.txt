@@ -1,15 +1,23 @@
 OBLIGATOIRE
-Export EPUB
 
-OPTIONNEL
-Alléger les échanges Back-Front
-	Alléger Part, Chapter et Scene
-Importer les générateurs
-	Transformer les contraintes en formulaires Angular
+Commentaires (pas de notes)
+
+Tri/sélection
+	Nouveau
+	Nom
+	Genre
+	Auteur
+	Aléatoire
+
+Page de présentation Auteur
+	Profil
+	Résumé
+	Oeuvres
+
+Section Contact
+
+CONTINUEL
+
 Traduire le site
-	en anglais (interface)
-Utiliser les variables CSS pour rendre le code générique
-Tester l'application
-	Tests Back
-	Tests Front
+
 Responsive design
