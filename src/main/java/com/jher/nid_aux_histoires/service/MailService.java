@@ -67,14 +67,14 @@ public class MailService {
 			javaMailSender.send(mimeMessage);
 			log.debug("Sent email to User '{}'", to);
 		} catch (MailException | MessagingException e) {
-			log.warn("Email could not be sent to user '{}'", to, e);
+			log.warn("Email could not be sent to user", e);
 		}
 	}
 
 	@Async
 	public void sendEmailFromTemplate(User user, String templateName, String titleKey) {
 		if (user.getEmail() == null) {
-			log.debug("Email doesn't exist for user '{}'", user.getLogin());
+			log.debug("Email doesn't exist for user");
 			return;
 		}
 		Locale locale = Locale.forLanguageTag(user.getLangKey());

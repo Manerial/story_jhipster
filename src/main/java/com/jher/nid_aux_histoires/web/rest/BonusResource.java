@@ -163,8 +163,7 @@ public class BonusResource {
 		log.debug("REST request to delete Bonus : {}", id);
 		Optional<BonusDTO> O_bonus = bonusService.findOne(id);
 		if (O_bonus.isPresent()) {
-			BonusDTO bonusDTO = O_bonus.get();
-			SecurityConfiguration.CheckLoggedUser(bonusDTO.getOwnerLogin());
+			SecurityConfiguration.CheckLoggedUser(O_bonus.get().getOwnerLogin());
 			bonusService.delete(id);
 			return ResponseEntity.noContent()
 					.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
@@ -182,6 +181,7 @@ public class BonusResource {
 	private void checkBonus(BonusDTO bonusDTO) throws Exception {
 		SecurityConfiguration.CheckLoggedUser(bonusDTO.getOwnerLogin());
 
+		// Avoid link with other resources
 		Long bookId = bonusDTO.getBookId();
 		Optional<BookDTO> O_book = bookService.findOneLight(bookId);
 		if (O_book.isPresent()) {

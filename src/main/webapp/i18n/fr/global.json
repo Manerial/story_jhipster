@@ -149,6 +149,7 @@
     "emailexists": "Email déjà utilisé\u00A0!",
     "idexists": "Une nouvelle entité {{entityName}} ne peut pas avoir d'identifiant\u00A0!",
     "idnull": "Identifiant invalide",
+    "donotexist": "L'entité {{entityName}} n'existe pas",
     "file": {
       "could.not.extract": "Impossible d'extraire le fichier",
       "not.cover": "Le fichier doit être une couverture et non du type \"{{ fileType }}\""

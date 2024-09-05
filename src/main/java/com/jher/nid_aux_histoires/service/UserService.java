@@ -288,7 +288,7 @@ public class UserService {
 	public void removeNotActivatedUsers() {
 		userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(
 				Instant.now().minus(3, ChronoUnit.DAYS)).forEach(user -> {
-					log.debug("Deleting not activated user {}", user.getLogin());
+					log.debug("Deleting not activated user");
 					userRepository.delete(user);
 					this.clearUserCaches(user);
 				});

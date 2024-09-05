@@ -27,6 +27,7 @@ import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.CoverService;
 import com.jher.nid_aux_histoires.service.ExportService;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
+import com.jher.nid_aux_histoires.service.dto.CoverDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -143,15 +144,15 @@ public class BookResource {
 	 */
 	@PutMapping("/books/visibility/{id}")
 	public ResponseEntity<BookDTO> updateBookVisibility(@PathVariable Long id) throws Exception {
-		BookDTO bookDTO = bookService.findOne(id).get();
-		log.debug("REST request to update Book : {}", bookDTO);
-		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
-		if (bookDTO.getId() == null) {
+		Optional<BookDTO> O_book = bookService.findOne(id);
+		log.debug("REST request to update Book : {}", O_book);
+		if (O_book.isEmpty() || O_book.get().getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
+		SecurityConfiguration.CheckLoggedUser(O_book.get().getAuthorLogin());
 		BookDTO result = bookService.changeVisibility(id);
 		return ResponseEntity.ok().headers(
-				HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, bookDTO.getId().toString()))
+				HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, O_book.get().getId().toString()))
 				.body(result);
 	}
 
@@ -247,11 +248,11 @@ public class BookResource {
 	@GetMapping("/books/light/{id}")
 	public ResponseEntity<BookDTO> getBookLight(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Book : {}", id);
-		Optional<BookDTO> bookDTO = bookService.findOneLight(id);
-		if (!bookDTO.get().getVisibility()) {
-			SecurityConfiguration.CheckLoggedUser(bookDTO.get().getAuthorLogin());
+		Optional<BookDTO> O_book = bookService.findOneLight(id);
+		if (O_book.isPresent() && !O_book.get().getVisibility()) {
+			SecurityConfiguration.CheckLoggedUser(O_book.get().getAuthorLogin());
 		}
-		return ResponseUtil.wrapOrNotFound(bookDTO);
+		return ResponseUtil.wrapOrNotFound(O_book);
 	}
 
 	/**
@@ -264,22 +265,26 @@ public class BookResource {
 	@DeleteMapping("/books/{id}")
 	public ResponseEntity<Void> deleteBook(@PathVariable Long id) throws Exception {
 		log.debug("REST request to delete Book : {}", id);
-		BookDTO bookDTO = bookService.findOne(id).get();
-		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
-		bookService.delete(id);
-		return ResponseEntity.noContent()
-				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-				.build();
+		Optional<BookDTO> O_book = bookService.findOne(id);
+		if (O_book.isPresent()) {
+			SecurityConfiguration.CheckLoggedUser(O_book.get().getAuthorLogin());
+			bookService.delete(id);
+			return ResponseEntity.noContent()
+					.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+					.build();
+		}
+		throw new BadRequestAlertException("The entity book does not exist", ENTITY_NAME, "donotexist");
 	}
 
 	private void checkBook(BookDTO bookDTO) throws Exception {
 		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
 
-		Long coverId = bookDTO.getCoverId();
-		if (coverId != null && coverId != 0) {
-			String login = coverService.findOne(coverId).get().getOwnerLogin();
+		// Avoid link with other resources
+		Optional<CoverDTO> O_cover = coverService.findOne(bookDTO.getCoverId());
+		if (O_cover.isPresent()) {
+			String login = O_cover.get().getOwnerLogin();
 			if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
-				throw new Exception("You have no access to this resource (Cover : " + coverId + ")");
+				throw new Exception("You have no access to this resource (Cover : " + bookDTO.getCoverId() + ")");
 			}
 		}
 	}
