@@ -31,6 +31,19 @@ export class Image implements IImage {
   public scenes: IScene[];
 
   constructor();
+  constructor(
+    id?: number,
+    name?: string,
+    pictureContentType?: string,
+    picture?: any,
+    previewContentType?: string,
+    preview?: any,
+    bookToCovers?: IBook[],
+    books?: IBook[],
+    parts?: IPart[],
+    chapters?: IChapter[],
+    scenes?: IScene[]
+  );
 
   constructor(
     id?: number,

@@ -65,7 +65,7 @@ export class BookUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const book = this.createFromForm();
-    if (book.id !== undefined) {
+    if (book.id !== undefined && book.id !== 0) {
       this.subscribeToSaveResponse(this.bookService.update(book));
     } else {
       this.subscribeToSaveResponse(this.bookService.create(book));

@@ -21,6 +21,7 @@ export class Part implements IPart {
   public bookId: number;
 
   constructor();
+  constructor(id?: number, name?: string, description?: string, number?: number, chapters?: IChapter[], images?: IImage[], bookId?: number);
 
   constructor(
     id?: number,

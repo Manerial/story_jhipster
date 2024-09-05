@@ -85,7 +85,7 @@ export class ImageUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const image = this.createFromForm();
-    if (image.id !== undefined) {
+    if (image.id !== undefined && image.id !== 0) {
       this.subscribeToSaveResponse(this.imageService.update(image));
     } else {
       this.subscribeToSaveResponse(this.imageService.create(image));

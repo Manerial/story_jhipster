@@ -20,6 +20,7 @@ export class Scene implements IScene {
   public chapterId: number;
 
   constructor();
+  constructor(id?: number, name?: string, number?: number, text?: any, timestampStart?: Date, images?: IImage[], chapterId?: number);
 
   constructor(id?: number, name?: string, number?: number, text?: any, timestampStart?: Date, images?: IImage[], chapterId?: number) {
     this.id = id || 0;

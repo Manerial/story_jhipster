@@ -73,7 +73,7 @@ export class PartUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const part = this.createFromForm();
-    if (part.id !== undefined) {
+    if (part.id !== undefined && part.id !== 0) {
       this.subscribeToSaveResponse(this.partService.update(part));
     } else {
       this.subscribeToSaveResponse(this.partService.create(part));
