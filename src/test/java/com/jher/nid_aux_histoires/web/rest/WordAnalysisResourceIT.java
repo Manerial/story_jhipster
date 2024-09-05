@@ -91,6 +91,7 @@ public class WordAnalysisResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createWordAnalysis() throws Exception {
 		int databaseSizeBeforeCreate = wordAnalysisRepository.findAll().size();
 		// Create the WordAnalysis
@@ -109,6 +110,7 @@ public class WordAnalysisResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createWordAnalysisWithExistingId() throws Exception {
 		int databaseSizeBeforeCreate = wordAnalysisRepository.findAll().size();
 
@@ -129,6 +131,7 @@ public class WordAnalysisResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getAllWordAnalyses() throws Exception {
 		// Initialize the database
 		wordAnalysisRepository.saveAndFlush(wordAnalysis);
@@ -144,6 +147,7 @@ public class WordAnalysisResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getWordAnalysis() throws Exception {
 		// Initialize the database
 		wordAnalysisRepository.saveAndFlush(wordAnalysis);
@@ -158,6 +162,7 @@ public class WordAnalysisResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getNonExistingWordAnalysis() throws Exception {
 		// Get the wordAnalysis
 		restWordAnalysisMockMvc.perform(get("/api/word-analyses/{id}", Long.MAX_VALUE))

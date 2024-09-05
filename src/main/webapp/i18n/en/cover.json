@@ -23,7 +23,10 @@
       "book": "Book",
       "part": "Part",
       "chapter": "Chapter",
-      "scene": "Scene"
+      "scene": "Scene",
+      "required": {
+        "name": "Field Name is required"
+      }
     }
   }
 }

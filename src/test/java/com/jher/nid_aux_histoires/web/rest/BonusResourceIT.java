@@ -21,7 +21,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
@@ -47,8 +46,8 @@ public class BonusResourceIT {
 	private static final String DEFAULT_NAME = "file";
 	private static final String UPDATED_NAME = "fileB";
 
-	private static final String DEFAULT_EXTENSION = "txt";
-	private static final String UPDATED_EXTENSION = "pdf";
+	private static final String DEFAULT_DATA_CONTENT_TYPE = "image/jpg";
+	private static final String UPDATED_DATA_CONTENT_TYPE = "image/png";
 
 	@Autowired
 	private BonusRepository bonusRepository;
@@ -71,7 +70,7 @@ public class BonusResourceIT {
 	 * they test an entity which requires the current entity.
 	 */
 	public static Bonus createEntity(EntityManager em) {
-		Bonus bonus = new Bonus().name(DEFAULT_NAME).extension(DEFAULT_EXTENSION);
+		Bonus bonus = new Bonus().name(DEFAULT_NAME).dataContentType(DEFAULT_DATA_CONTENT_TYPE);
 		return bonus;
 	}
 
@@ -82,7 +81,7 @@ public class BonusResourceIT {
 	 * they test an entity which requires the current entity.
 	 */
 	public static Bonus createUpdatedEntity(EntityManager em) {
-		Bonus bonus = new Bonus().name(UPDATED_NAME).extension(UPDATED_EXTENSION);
+		Bonus bonus = new Bonus().name(UPDATED_NAME).dataContentType(UPDATED_DATA_CONTENT_TYPE);
 		return bonus;
 	}
 
@@ -97,26 +96,16 @@ public class BonusResourceIT {
 	public void createBonus() throws Exception {
 		int databaseSizeBeforeCreate = bonusRepository.findAll().size();
 		// Create the Bonus
-
-		restBonusMockMvc.perform(MockMvcRequestBuilders.multipart("/api/bonuses").file(getMPF()))
-				.andExpect(status().isCreated());
+		BonusDTO bonusDTO = bonusMapper.toDto(bonus);
+		restBonusMockMvc.perform(post("/api/bonuses").contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.convertObjectToJsonBytes(bonusDTO))).andExpect(status().isCreated());
 
 		// Validate the Bonus in the database
 		List<Bonus> bonusList = bonusRepository.findAll();
 		assertThat(bonusList).hasSize(databaseSizeBeforeCreate + 1);
 		Bonus testBonus = bonusList.get(bonusList.size() - 1);
 		assertThat(testBonus.getName()).isEqualTo(DEFAULT_NAME);
-		assertThat(testBonus.getExtension()).isEqualTo(DEFAULT_EXTENSION);
-	}
-
-	private MockMultipartFile getMPF() {
-		return new MockMultipartFile(DEFAULT_NAME, DEFAULT_NAME + "." + DEFAULT_EXTENSION, MediaType.TEXT_PLAIN_VALUE,
-				"some xml".getBytes());
-	}
-
-	private MockMultipartFile getMPFUpdated() {
-		return new MockMultipartFile(DEFAULT_NAME, UPDATED_NAME + "." + UPDATED_EXTENSION,
-				MediaType.APPLICATION_PDF_VALUE, "some xml".getBytes());
+		assertThat(testBonus.getDataContentType()).isEqualTo(DEFAULT_DATA_CONTENT_TYPE);
 	}
 
 	@Test
@@ -130,7 +119,7 @@ public class BonusResourceIT {
 		BonusDTO bonusDTO = bonusMapper.toDto(bonus);
 
 		// An entity with an existing ID cannot be created, so this API call must fail
-		restBonusMockMvc.perform(post("/api/bonuses").contentType(MediaType.MULTIPART_FORM_DATA)
+		restBonusMockMvc.perform(post("/api/bonuses").contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(TestUtil.convertObjectToJsonBytes(bonusDTO))).andExpect(status().isBadRequest());
 
 		// Validate the Bonus in the database
@@ -149,7 +138,7 @@ public class BonusResourceIT {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*].id").value(hasItem(bonus.getId().intValue())))
 				.andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-				.andExpect(jsonPath("$.[*].extension").value(hasItem(DEFAULT_EXTENSION)));
+				.andExpect(jsonPath("$.[*].dataContentType").value(hasItem(DEFAULT_DATA_CONTENT_TYPE)));
 	}
 
 	@Test
@@ -163,7 +152,7 @@ public class BonusResourceIT {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.id").value(bonus.getId().intValue()))
 				.andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-				.andExpect(jsonPath("$.extension").value(DEFAULT_EXTENSION));
+				.andExpect(jsonPath("$.dataContentType").value(DEFAULT_DATA_CONTENT_TYPE));
 	}
 
 	@Test
@@ -195,16 +184,17 @@ public class BonusResourceIT {
 				return request;
 			}
 		});
-
-		restBonusMockMvc.perform(builder.file(getMPFUpdated()).param("id", updatedBonus.getId().toString()))
-				.andExpect(status().isOk());
+		updatedBonus.name(UPDATED_NAME).dataContentType(UPDATED_DATA_CONTENT_TYPE);
+		BonusDTO bonusDTO = bonusMapper.toDto(updatedBonus);
+		restBonusMockMvc.perform(put("/api/bonuses").contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil.convertObjectToJsonBytes(bonusDTO))).andExpect(status().isOk());
 
 		// Validate the Bonus in the database
 		List<Bonus> bonusList = bonusRepository.findAll();
 		assertThat(bonusList).hasSize(databaseSizeBeforeUpdate);
 		Bonus testBonus = bonusList.get(bonusList.size() - 1);
 		assertThat(testBonus.getName()).isEqualTo(UPDATED_NAME);
-		assertThat(testBonus.getExtension()).isEqualTo(UPDATED_EXTENSION);
+		assertThat(testBonus.getDataContentType()).isEqualTo(UPDATED_DATA_CONTENT_TYPE);
 	}
 
 	@Test
@@ -217,7 +207,7 @@ public class BonusResourceIT {
 		BonusDTO bonusDTO = bonusMapper.toDto(bonus);
 
 		// If the entity doesn't have an ID, it will throw BadRequestAlertException
-		restBonusMockMvc.perform(put("/api/bonuses").contentType(MediaType.MULTIPART_FORM_DATA)
+		restBonusMockMvc.perform(put("/api/bonuses").contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(TestUtil.convertObjectToJsonBytes(bonusDTO))).andExpect(status().isBadRequest());
 
 		// Validate the Bonus in the database

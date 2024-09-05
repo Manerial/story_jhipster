@@ -111,7 +111,7 @@ public class ExportController {
 			return ResponseEntity.badRequest().body(error.getBytes());
 		}
 		BonusDTO bonusDTO = bonusService.findOne(id).get();
-		String fileName = bonusDTO.getName() + "." + bonusDTO.getExtension();
+		String fileName = bonusDTO.getName() + "." + bonusDTO.getDataContentType();
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"" + fileName + "\"")
 				.contentType(MediaType.MULTIPART_FORM_DATA).contentLength(bonusDTO.getData().length)
 				.body(bonusDTO.getData());

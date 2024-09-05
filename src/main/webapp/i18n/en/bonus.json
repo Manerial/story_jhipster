@@ -17,8 +17,13 @@
         "title": "Bonus"
       },
       "name": "Name",
-      "extension": "Extension",
-      "book": "Book"
+      "file": "File",
+      "description": "Description",
+      "book": "Book",
+      "required": {
+        "name": "Field Name is required",
+        "book": "Field Book is required"
+      }
     }
   }
 }

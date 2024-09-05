@@ -56,7 +56,7 @@ export class PartUpdateComponent implements OnInit {
       name: part.name,
       description: part.description,
       number: part.number,
-      bookId: part.bookId,
+      bookId: part.bookId !== 0 ? part.bookId : null,
     });
   }
 

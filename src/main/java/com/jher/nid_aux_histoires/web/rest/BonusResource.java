@@ -12,17 +12,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jher.nid_aux_histoires.service.BonusService;
@@ -63,15 +61,9 @@ public class BonusResource {
 	 * @throws URISyntaxException if the Location URI syntax is incorrect.
 	 * @throws IOException
 	 */
-	@PostMapping(path = "/bonuses", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-	public ResponseEntity<BonusDTO> createBonus(@RequestParam(name = "bookId", required = false) Long bookId,
-			@RequestParam(name = "description", required = false) String description,
-			@RequestParam("file") MultipartFile file) throws URISyntaxException, IOException {
-		BonusDTO bonusDTO = new BonusDTO();
+	@PostMapping(path = "/bonuses")
+	public ResponseEntity<BonusDTO> createBonus(@RequestBody BonusDTO bonusDTO) throws URISyntaxException, IOException {
 		log.debug("REST request to save Bonus : {}", bonusDTO);
-		bonusDTO.setFile(file);
-		bonusDTO.setBookId(bookId);
-		bonusDTO.setDescription(description);
 		if (bonusDTO.getId() != null) {
 			throw new BadRequestAlertException("A new bonus cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -94,18 +86,10 @@ public class BonusResource {
 	 * @throws URISyntaxException if the Location URI syntax is incorrect.
 	 * @throws IOException
 	 */
-	@PutMapping(path = "/bonuses", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-	public ResponseEntity<BonusDTO> updateBonus(@RequestParam("id") Long id,
-			@RequestParam(name = "bookId", required = false) Long bookId,
-			@RequestParam(name = "description", required = false) String description,
-			@RequestParam("file") MultipartFile file) throws URISyntaxException, IOException {
-		BonusDTO bonusDTO = new BonusDTO();
-		bonusDTO.setId(id);
-		bonusDTO.setBookId(bookId);
-		bonusDTO.setDescription(description);
+	@PutMapping(path = "/bonuses")
+	public ResponseEntity<BonusDTO> updateBonus(@RequestBody BonusDTO bonusDTO) throws URISyntaxException, IOException {
 		log.debug("REST request to update Bonus : {}", bonusDTO);
-		bonusDTO.setFile(file);
-		if (id == null) {
+		if (bonusDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
 		BonusDTO result = bonusService.save(bonusDTO);

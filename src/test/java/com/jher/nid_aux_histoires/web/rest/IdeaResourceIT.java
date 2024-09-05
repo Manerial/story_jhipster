@@ -98,6 +98,7 @@ public class IdeaResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createIdea() throws Exception {
 		int databaseSizeBeforeCreate = ideaRepository.findAll().size();
 		// Create the Idea
@@ -116,6 +117,7 @@ public class IdeaResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createIdeaWithExistingId() throws Exception {
 		int databaseSizeBeforeCreate = ideaRepository.findAll().size();
 
@@ -134,6 +136,7 @@ public class IdeaResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getAllIdeas() throws Exception {
 		// Initialize the database
 		ideaRepository.saveAndFlush(idea);
@@ -149,6 +152,7 @@ public class IdeaResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getIdea() throws Exception {
 		// Initialize the database
 		ideaRepository.saveAndFlush(idea);
@@ -163,6 +167,7 @@ public class IdeaResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getNonExistingIdea() throws Exception {
 		// Get the idea
 		restIdeaMockMvc.perform(get("/api/ideas/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());

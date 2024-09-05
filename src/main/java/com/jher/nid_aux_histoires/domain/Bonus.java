@@ -35,8 +35,8 @@ public class Bonus implements Serializable {
 	@Column(name = "data")
 	private byte[] data;
 
-	@Column(name = "extension")
-	private String extension;
+	@Column(name = "data_content_type")
+	private String dataContentType;
 
 	@ManyToOne
 	@JsonIgnoreProperties(value = "bonuses", allowSetters = true)
@@ -80,17 +80,17 @@ public class Bonus implements Serializable {
 		this.data = data;
 	}
 
-	public String getExtension() {
-		return extension;
+	public String getDataContentType() {
+		return dataContentType;
 	}
 
-	public Bonus extension(String extension) {
-		this.extension = extension;
+	public Bonus dataContentType(String dataContentType) {
+		this.dataContentType = dataContentType;
 		return this;
 	}
 
-	public void setExtension(String extension) {
-		this.extension = extension;
+	public void setDataContentType(String dataContentType) {
+		this.dataContentType = dataContentType;
 	}
 
 	public Book getBook() {

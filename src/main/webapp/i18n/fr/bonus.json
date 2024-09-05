@@ -17,8 +17,13 @@
         "title": "Bonus"
       },
       "name": "Nom",
-      "extension": "Extension",
-      "book": "Livre"
+      "file": "Fichier",
+      "description": "Description",
+      "book": "Livre",
+      "required": {
+        "name": "Le champ Nom est requis",
+        "book": "Le champ Livre est requis"
+      }
     }
   }
 }

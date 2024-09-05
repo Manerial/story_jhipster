@@ -22,7 +22,7 @@
             <column name="data" type="longblob">
                 <constraints nullable="true" />
             </column>
-            <column name="extension" type="varchar(10)">
+            <column name="data_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="book_id" type="bigint">

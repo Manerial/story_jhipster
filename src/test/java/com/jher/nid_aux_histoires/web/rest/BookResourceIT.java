@@ -97,6 +97,7 @@ public class BookResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createBook() throws Exception {
 		int databaseSizeBeforeCreate = bookRepository.findAll().size();
 		// Create the Book
@@ -113,6 +114,7 @@ public class BookResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createBookWithExistingId() throws Exception {
 		int databaseSizeBeforeCreate = bookRepository.findAll().size();
 

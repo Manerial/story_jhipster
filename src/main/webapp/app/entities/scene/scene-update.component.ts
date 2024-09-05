@@ -60,7 +60,7 @@ export class SceneUpdateComponent implements OnInit {
       text: scene.text,
       timeStart: String(scene.timestampStart).substring(11, 19),
       dateStart: String(scene.timestampStart).substring(0, 10),
-      chapterId: scene.chapterId,
+      chapterId: scene.chapterId !== 0 ? scene.chapterId : null,
     });
   }
 

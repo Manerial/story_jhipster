@@ -100,6 +100,7 @@ public class CoverResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createCover() throws Exception {
 		int databaseSizeBeforeCreate = coverRepository.findAll().size();
 		// Create the Cover
@@ -120,6 +121,7 @@ public class CoverResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createCoverWithExistingId() throws Exception {
 		int databaseSizeBeforeCreate = coverRepository.findAll().size();
 
@@ -138,6 +140,7 @@ public class CoverResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getAllCovers() throws Exception {
 		// Initialize the database
 		coverRepository.saveAndFlush(cover);
@@ -155,6 +158,7 @@ public class CoverResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getCover() throws Exception {
 		// Initialize the database
 		coverRepository.saveAndFlush(cover);
@@ -172,6 +176,7 @@ public class CoverResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getNonExistingCover() throws Exception {
 		// Get the cover
 		restCoverMockMvc.perform(get("/api/covers/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
