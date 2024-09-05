@@ -76,9 +76,9 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public BookDTO changeVisibility(Long bookId) {
-		Optional<Book> O_book = bookRepository.findById(bookId);
-		if (O_book.isPresent()) {
-			Book book = O_book.get();
+		Optional<Book> optBook = bookRepository.findById(bookId);
+		if (optBook.isPresent()) {
+			Book book = optBook.get();
 			book.setVisibility(!book.getVisibility());
 			bookRepository.save(book);
 		}
@@ -134,9 +134,9 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Book : {}", id);
-		Optional<Book> O_book = bookRepository.findById(id);
-		if (O_book.isPresent()) {
-			Book book = O_book.get();
+		Optional<Book> optBook = bookRepository.findById(id);
+		if (optBook.isPresent()) {
+			Book book = optBook.get();
 
 			for (Comment comment : book.getComments()) {
 				commentService.delete(comment.getId());

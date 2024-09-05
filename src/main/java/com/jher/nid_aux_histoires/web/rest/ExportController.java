@@ -115,12 +115,12 @@ public class ExportController {
 	@GetMapping("/download/bonus/{id}")
 	public ResponseEntity<byte[]> getBonus(@PathVariable Long id) {
 		log.debug("REST request to get Bonus : {}", id);
-		Optional<BonusDTO> O_bonus = bonusService.findOne(id);
-		if (!O_bonus.isPresent()) {
+		Optional<BonusDTO> optBonus = bonusService.findOne(id);
+		if (!optBonus.isPresent()) {
 			String error = "Error during the reading of the document. Document not found";
 			return ResponseEntity.badRequest().body(error.getBytes());
 		}
-		BonusDTO bonusDTO = O_bonus.get();
+		BonusDTO bonusDTO = optBonus.get();
 		MediaType MT = MediaType.parseMediaType(bonusDTO.getDataContentType());
 		String fileName = bonusDTO.getName() + "." + bonusDTO.getDataContentType();
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"" + fileName + "\"")

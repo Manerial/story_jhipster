@@ -158,9 +158,9 @@ public class CommentResource {
 	@DeleteMapping("/comments/{id}")
 	public ResponseEntity<Void> deleteComment(@PathVariable Long id) throws Exception {
 		log.debug("REST request to delete Comment : {}", id);
-		Optional<CommentDTO> O_comment = commentService.findOne(id);
-		if (O_comment.isPresent()) {
-			CommentDTO commentDTO = O_comment.get();
+		Optional<CommentDTO> optComment = commentService.findOne(id);
+		if (optComment.isPresent()) {
+			CommentDTO commentDTO = optComment.get();
 			SecurityConfiguration.CheckLoggedUser(commentDTO.getUserLogin());
 			commentService.delete(id);
 			return ResponseEntity.noContent()

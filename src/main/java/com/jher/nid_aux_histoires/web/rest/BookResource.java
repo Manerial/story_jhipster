@@ -144,16 +144,15 @@ public class BookResource {
 	 */
 	@PutMapping("/books/visibility/{id}")
 	public ResponseEntity<BookDTO> updateBookVisibility(@PathVariable Long id) throws Exception {
-		Optional<BookDTO> O_book = bookService.findOne(id);
-		log.debug("REST request to update Book : {}", O_book);
-		if (O_book.isEmpty() || O_book.get().getId() == null) {
+		Optional<BookDTO> optBook = bookService.findOne(id);
+		log.debug("REST request to update Book : {}", optBook);
+		if (optBook.isEmpty() || optBook.get().getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
-		SecurityConfiguration.CheckLoggedUser(O_book.get().getAuthorLogin());
+		SecurityConfiguration.CheckLoggedUser(optBook.get().getAuthorLogin());
 		BookDTO result = bookService.changeVisibility(id);
-		return ResponseEntity.ok().headers(
-				HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, O_book.get().getId().toString()))
-				.body(result);
+		return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME,
+				optBook.get().getId().toString())).body(result);
 	}
 
 	/**
@@ -230,11 +229,11 @@ public class BookResource {
 	@GetMapping("/books/{id}")
 	public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Book : {}", id);
-		Optional<BookDTO> O_book = bookService.findOne(id);
-		if (O_book.isPresent() && !O_book.get().getVisibility()) {
-			SecurityConfiguration.CheckLoggedUser(O_book.get().getAuthorLogin());
+		Optional<BookDTO> optBook = bookService.findOne(id);
+		if (optBook.isPresent() && !optBook.get().getVisibility()) {
+			SecurityConfiguration.CheckLoggedUser(optBook.get().getAuthorLogin());
 		}
-		return ResponseUtil.wrapOrNotFound(O_book);
+		return ResponseUtil.wrapOrNotFound(optBook);
 	}
 
 	/**
@@ -248,11 +247,11 @@ public class BookResource {
 	@GetMapping("/books/light/{id}")
 	public ResponseEntity<BookDTO> getBookLight(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Book : {}", id);
-		Optional<BookDTO> O_book = bookService.findOneLight(id);
-		if (O_book.isPresent() && !O_book.get().getVisibility()) {
-			SecurityConfiguration.CheckLoggedUser(O_book.get().getAuthorLogin());
+		Optional<BookDTO> optBook = bookService.findOneLight(id);
+		if (optBook.isPresent() && !optBook.get().getVisibility()) {
+			SecurityConfiguration.CheckLoggedUser(optBook.get().getAuthorLogin());
 		}
-		return ResponseUtil.wrapOrNotFound(O_book);
+		return ResponseUtil.wrapOrNotFound(optBook);
 	}
 
 	/**
@@ -265,9 +264,9 @@ public class BookResource {
 	@DeleteMapping("/books/{id}")
 	public ResponseEntity<Void> deleteBook(@PathVariable Long id) throws Exception {
 		log.debug("REST request to delete Book : {}", id);
-		Optional<BookDTO> O_book = bookService.findOne(id);
-		if (O_book.isPresent()) {
-			SecurityConfiguration.CheckLoggedUser(O_book.get().getAuthorLogin());
+		Optional<BookDTO> optBook = bookService.findOne(id);
+		if (optBook.isPresent()) {
+			SecurityConfiguration.CheckLoggedUser(optBook.get().getAuthorLogin());
 			bookService.delete(id);
 			return ResponseEntity.noContent()
 					.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
@@ -281,9 +280,9 @@ public class BookResource {
 
 		// Avoid link with other resources
 		if (bookDTO.getCoverId() != null) {
-			Optional<CoverDTO> O_cover = coverService.findOne(bookDTO.getCoverId());
-			if (O_cover.isPresent()) {
-				String login = O_cover.get().getOwnerLogin();
+			Optional<CoverDTO> optCover = coverService.findOne(bookDTO.getCoverId());
+			if (optCover.isPresent()) {
+				String login = optCover.get().getOwnerLogin();
 				if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
 					throw new Exception("You have no access to this resource (Cover : " + bookDTO.getCoverId() + ")");
 				}

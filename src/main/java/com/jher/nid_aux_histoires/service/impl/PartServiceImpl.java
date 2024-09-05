@@ -91,9 +91,9 @@ public class PartServiceImpl implements PartService {
 	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Part : {}", id);
-		Optional<Part> O_part = partRepository.findById(id);
-		if (O_part.isPresent()) {
-			Part part = O_part.get();
+		Optional<Part> optPart = partRepository.findById(id);
+		if (optPart.isPresent()) {
+			Part part = optPart.get();
 			for (Chapter chapter : part.getChapters()) {
 				chapterService.delete(chapter.getId());
 			}

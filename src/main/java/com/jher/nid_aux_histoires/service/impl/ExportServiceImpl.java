@@ -37,9 +37,9 @@ public class ExportServiceImpl implements ExportService {
 
 	@Override
 	public Path getPathOfExportedBook(long id, ExportDocx.FILE_FORMAT format) throws Exception {
-		Optional<BookDTO> O_book = bookService.findOne(id);
-		if (O_book.isPresent()) {
-			BookDTO book = O_book.get();
+		Optional<BookDTO> optBook = bookService.findOne(id);
+		if (optBook.isPresent()) {
+			BookDTO book = optBook.get();
 			String bookPathString = ExportDocx.getObjectFilePath(book.getName(), format);
 			return Paths.get(bookPathString);
 		}
@@ -70,9 +70,9 @@ public class ExportServiceImpl implements ExportService {
 	}
 
 	private void export(long id) {
-		Optional<BookDTO> O_book = bookService.findOne(id);
-		if (O_book.isPresent()) {
-			BookDTO book = O_book.get();
+		Optional<BookDTO> optBook = bookService.findOne(id);
+		if (optBook.isPresent()) {
+			BookDTO book = optBook.get();
 
 			try {
 				exportDocx.launchGeneration(book);

@@ -82,9 +82,9 @@ public class CoverServiceImpl implements CoverService {
 	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Cover : {}", id);
-		Optional<Cover> O_cover = coverRepository.findById(id);
-		if (O_cover.isPresent()) {
-			Cover cover = O_cover.get();
+		Optional<Cover> optCover = coverRepository.findById(id);
+		if (optCover.isPresent()) {
+			Cover cover = optCover.get();
 			for (Book book : cover.getBookToCovers()) {
 				book.setCover(null);
 			}

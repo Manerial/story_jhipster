@@ -63,9 +63,9 @@ public class BookStatusServiceImpl implements BookStatusService {
 			bookStatusDTO.setFavorit(false);
 			bookStatusDTO.setFinished(false);
 			bookStatusDTO.setCurentChapterId(chapterId);
-			Optional<User> O_user = userRepository.findOneByLogin(login);
-			if (O_user.isPresent()) {
-				bookStatusDTO.setUserId(O_user.get().getId());
+			Optional<User> optUser = userRepository.findOneByLogin(login);
+			if (optUser.isPresent()) {
+				bookStatusDTO.setUserId(optUser.get().getId());
 			}
 		}
 		return save(bookStatusDTO);
