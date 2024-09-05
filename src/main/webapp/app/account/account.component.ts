@@ -18,8 +18,6 @@ export class AccountComponent implements OnInit {
     this.accountService.identity().subscribe(account => {
       if (account) {
         this.account = account;
-        // eslint-disable-next-line no-console
-        console.log(this.account);
         this.bookService.findAllByAuthor(account.login).subscribe(books => {
           if (books) {
             this.books = books.body || [];

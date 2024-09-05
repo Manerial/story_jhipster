@@ -10,8 +10,9 @@ import { PasswordComponent } from './password/password.component';
 import { PasswordResetInitComponent } from './password-reset/init/password-reset-init.component';
 import { PasswordResetFinishComponent } from './password-reset/finish/password-reset-finish.component';
 import { SettingsComponent } from './settings/settings.component';
-import { accountState } from './account.route';
 import { AccountComponent } from './account.component';
+import { accountState } from './account.route';
+import { VisitComponent } from './visit/visit.component';
 
 @NgModule({
   imports: [NidAuxHistoiresSharedModule, RouterModule.forChild(accountState)],
@@ -24,6 +25,7 @@ import { AccountComponent } from './account.component';
     PasswordResetFinishComponent,
     SettingsComponent,
     AccountComponent,
+    VisitComponent,
   ],
 })
 export class AccountModule {}
