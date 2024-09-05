@@ -6,84 +6,89 @@ import java.io.Serializable;
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Library} entity.
  */
 public class LibraryDTO implements Serializable {
-    
-    private Long id;
+	private static final long serialVersionUID = 1L;
 
-    private Boolean finished;
+	private Long id;
 
-    private Boolean favorit;
+	private Boolean finished;
 
+	private Boolean favorit;
 
-    private Long bookId;
+	private Long bookId;
 
-    private Long curentChapterId;
-    
-    public Long getId() {
-        return id;
-    }
+	private Long curentChapterId;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	private Long userId;
 
-    public Boolean isFinished() {
-        return finished;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setFinished(Boolean finished) {
-        this.finished = finished;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Boolean isFavorit() {
-        return favorit;
-    }
+	public Boolean isFinished() {
+		return finished;
+	}
 
-    public void setFavorit(Boolean favorit) {
-        this.favorit = favorit;
-    }
+	public void setFinished(Boolean finished) {
+		this.finished = finished;
+	}
 
-    public Long getBookId() {
-        return bookId;
-    }
+	public Boolean isFavorit() {
+		return favorit;
+	}
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
-    }
+	public void setFavorit(Boolean favorit) {
+		this.favorit = favorit;
+	}
 
-    public Long getCurentChapterId() {
-        return curentChapterId;
-    }
+	public Long getBookId() {
+		return bookId;
+	}
 
-    public void setCurentChapterId(Long chapterId) {
-        this.curentChapterId = chapterId;
-    }
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof LibraryDTO)) {
-            return false;
-        }
+	public Long getCurentChapterId() {
+		return curentChapterId;
+	}
 
-        return id != null && id.equals(((LibraryDTO) o).id);
-    }
+	public void setCurentChapterId(Long chapterId) {
+		this.curentChapterId = chapterId;
+	}
 
-    @Override
-    public int hashCode() {
-        return 31;
-    }
+	public Long getUserId() {
+		return userId;
+	}
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "LibraryDTO{" +
-            "id=" + getId() +
-            ", finished='" + isFinished() + "'" +
-            ", favorit='" + isFavorit() + "'" +
-            ", bookId=" + getBookId() +
-            ", curentChapterId=" + getCurentChapterId() +
-            "}";
-    }
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof LibraryDTO)) {
+			return false;
+		}
+
+		return id != null && id.equals(((LibraryDTO) o).id);
+	}
+
+	@Override
+	public int hashCode() {
+		return 31;
+	}
+
+	// prettier-ignore
+	@Override
+	public String toString() {
+		return "LibraryDTO{" + "id=" + getId() + ", finished='" + isFinished() + "'" + ", favorit='" + isFavorit() + "'"
+				+ ", bookId=" + getBookId() + ", curentChapterId=" + getCurentChapterId() + "}";
+	}
 }

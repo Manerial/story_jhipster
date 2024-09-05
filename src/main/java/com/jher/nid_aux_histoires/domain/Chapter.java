@@ -46,6 +46,10 @@ public class Chapter implements Serializable {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Scene> scenes = new HashSet<>();
 
+	@OneToMany(mappedBy = "curentChapter", fetch = FetchType.LAZY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private Set<Library> libraries = new HashSet<>();
+
 	@ManyToOne
 	@JsonIgnoreProperties(value = "chapters", allowSetters = true)
 	private Part part;

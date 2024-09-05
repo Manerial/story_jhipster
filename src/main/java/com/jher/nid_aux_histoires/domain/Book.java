@@ -54,6 +54,10 @@ public class Book implements Serializable {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Bonus> bonuses = new HashSet<>();
 
+	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private Set<Library> libraries = new HashSet<>();
+
 	@ManyToOne
 	@JsonIgnoreProperties(value = "picture", allowSetters = true)
 	private Cover cover;
