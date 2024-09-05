@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jher.nid_aux_histoires.config.SecurityConfiguration;
+import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.PartService;
 import com.jher.nid_aux_histoires.service.dto.PartDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
@@ -47,8 +48,11 @@ public class PartResource {
 
 	private final PartService partService;
 
-	public PartResource(PartService partService) {
+	private final BookService bookService;
+
+	public PartResource(PartService partService, BookService bookService) {
 		this.partService = partService;
+		this.bookService = bookService;
 	}
 
 	/**
@@ -63,6 +67,7 @@ public class PartResource {
 	@PostMapping("/parts")
 	public ResponseEntity<PartDTO> createPart(@RequestBody PartDTO partDTO) throws Exception {
 		log.debug("REST request to save Part : {}", partDTO);
+		checkPart(partDTO);
 		if (partDTO.getId() != null) {
 			throw new BadRequestAlertException("A new part cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -87,7 +92,7 @@ public class PartResource {
 	@PutMapping("/parts")
 	public ResponseEntity<PartDTO> updatePart(@RequestBody PartDTO partDTO) throws Exception {
 		log.debug("REST request to update Part : {}", partDTO);
-		SecurityConfiguration.CheckLoggedUser(partService.findAuthorLoginByPartId(partDTO.getId()));
+		checkPart(partDTO);
 		if (partDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -149,5 +154,17 @@ public class PartResource {
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();
+	}
+
+	private void checkPart(PartDTO partDTO) throws Exception {
+		if (partDTO.getId() != null) {
+			SecurityConfiguration.CheckLoggedUser(partService.findAuthorLoginByPartId(partDTO.getId()));
+		}
+
+		Long bookId = partDTO.getBookId();
+		String login = bookService.findOne(bookId).get().getAuthorLogin();
+		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getLoggedUser().getName())) {
+			throw new Exception("You have no access to this resource (Book : " + bookId + ")");
+		}
 	}
 }

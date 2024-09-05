@@ -82,7 +82,7 @@ public class BonusResourceIT {
 	 */
 	public Bonus createEntity(EntityManager em) {
 		Bonus bonus = new Bonus().name(DEFAULT_NAME).dataContentType(DEFAULT_DATA_CONTENT_TYPE).data(DEFAULT_DATA);
-		bonus.setOwner(userRepository.getOne(1L));
+		bonus.setOwner(userRepository.getOne(3L));
 		bonus.setBook(bookRepository.getOne(1L));
 		return bonus;
 	}
@@ -144,6 +144,7 @@ public class BonusResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getAllBonuses() throws Exception {
 		// Initialize the database
 		bonusRepository.saveAndFlush(bonus);
@@ -232,6 +233,7 @@ public class BonusResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void deleteBonus() throws Exception {
 		// Initialize the database
 		bonusRepository.saveAndFlush(bonus);

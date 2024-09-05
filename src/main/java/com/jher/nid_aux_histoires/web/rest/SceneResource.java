@@ -1,7 +1,6 @@
 package com.jher.nid_aux_histoires.web.rest;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jher.nid_aux_histoires.config.SecurityConfiguration;
+import com.jher.nid_aux_histoires.service.ChapterService;
 import com.jher.nid_aux_histoires.service.SceneService;
 import com.jher.nid_aux_histoires.service.dto.SceneDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
@@ -48,8 +48,11 @@ public class SceneResource {
 
 	private final SceneService sceneService;
 
-	public SceneResource(SceneService sceneService) {
+	private final ChapterService chapterService;
+
+	public SceneResource(SceneService sceneService, ChapterService chapterService) {
 		this.sceneService = sceneService;
+		this.chapterService = chapterService;
 	}
 
 	/**
@@ -59,11 +62,12 @@ public class SceneResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new sceneDTO, or with status {@code 400 (Bad Request)} if
 	 *         the scene has already an ID.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception
 	 */
 	@PostMapping("/scenes")
-	public ResponseEntity<SceneDTO> createScene(@RequestBody SceneDTO sceneDTO) throws URISyntaxException {
+	public ResponseEntity<SceneDTO> createScene(@RequestBody SceneDTO sceneDTO) throws Exception {
 		log.debug("REST request to save Scene : {}", sceneDTO);
+		checkScene(sceneDTO);
 		if (sceneDTO.getId() != null) {
 			throw new BadRequestAlertException("A new scene cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -88,7 +92,7 @@ public class SceneResource {
 	@PutMapping("/scenes")
 	public ResponseEntity<SceneDTO> updateScene(@RequestBody SceneDTO sceneDTO) throws Exception {
 		log.debug("REST request to update Scene : {}", sceneDTO);
-		SecurityConfiguration.CheckLoggedUser(sceneService.findAuthorLoginBySceneId(sceneDTO.getId()));
+		checkScene(sceneDTO);
 		if (sceneDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -150,5 +154,17 @@ public class SceneResource {
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();
+	}
+
+	private void checkScene(SceneDTO sceneDTO) throws Exception {
+		if (sceneDTO.getId() != null) {
+			SecurityConfiguration.CheckLoggedUser(sceneService.findAuthorLoginBySceneId(sceneDTO.getId()));
+		}
+
+		Long chapterId = sceneDTO.getChapterId();
+		String login = chapterService.findAuthorLoginByChapterId(chapterId);
+		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getLoggedUser().getName())) {
+			throw new Exception("You have no access to this resource (Chapter : " + chapterId + ")");
+		}
 	}
 }

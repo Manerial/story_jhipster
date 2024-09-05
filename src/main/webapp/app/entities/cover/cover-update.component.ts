@@ -9,6 +9,8 @@ import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } 
 import { ICover, Cover } from 'app/shared/model/cover.model';
 import { CoverService } from './cover.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'jhi-cover-update',
@@ -16,10 +18,13 @@ import { AlertError } from 'app/shared/alert/alert-error.model';
 })
 export class CoverUpdateComponent implements OnInit {
   isSaving = false;
+  account!: Account;
 
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
+    ownerId: [null, [Validators.required]],
+    ownerLogin: [null, [Validators.required]],
     picture: [null, [Validators.required]],
     pictureContentType: [],
   });
@@ -29,13 +34,19 @@ export class CoverUpdateComponent implements OnInit {
     protected eventManager: JhiEventManager,
     protected coverService: CoverService,
     protected elementRef: ElementRef,
+    private accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ cover }) => {
-      this.updateForm(cover);
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        this.account = account;
+        this.activatedRoute.data.subscribe(({ cover }) => {
+          this.updateForm(cover);
+        });
+      }
     });
   }
 
@@ -43,6 +54,8 @@ export class CoverUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: cover.id,
       name: cover.name,
+      ownerId: cover.ownerId !== 0 ? cover.ownerId : this.account.id,
+      ownerLogin: cover.ownerLogin !== '' ? cover.ownerLogin : this.account.login,
       picture: cover.picture,
       pictureContentType: cover.pictureContentType,
     });
@@ -94,6 +107,8 @@ export class CoverUpdateComponent implements OnInit {
       ...new Cover(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
+      ownerId: this.editForm.get(['ownerId'])!.value,
+      ownerLogin: this.editForm.get(['ownerLogin'])!.value,
       pictureContentType: this.editForm.get(['pictureContentType'])!.value,
       picture: this.editForm.get(['picture'])!.value,
     };

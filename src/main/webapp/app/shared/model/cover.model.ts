@@ -3,6 +3,8 @@ import { IBook } from 'app/shared/model/book.model';
 export interface ICover {
   id: number;
   name: string;
+  ownerId: number;
+  ownerLogin: string;
   pictureContentType: string;
   picture: any;
   previewContentType: string;
@@ -13,6 +15,8 @@ export interface ICover {
 export class Cover implements ICover {
   public id: number;
   public name: string;
+  public ownerId: number;
+  public ownerLogin: string;
   public pictureContentType: string;
   public picture: any;
   public previewContentType: string;
@@ -23,6 +27,8 @@ export class Cover implements ICover {
   constructor(
     id?: number,
     name?: string,
+    ownerId?: number,
+    ownerLogin?: string,
     pictureContentType?: string,
     picture?: any,
     previewContentType?: string,
@@ -33,6 +39,8 @@ export class Cover implements ICover {
   constructor(
     id?: number,
     name?: string,
+    ownerId?: number,
+    ownerLogin?: string,
     pictureContentType?: string,
     picture?: any,
     previewContentType?: string,
@@ -41,6 +49,8 @@ export class Cover implements ICover {
   ) {
     this.id = id || 0;
     this.name = name || '';
+    this.ownerId = ownerId || 0;
+    this.ownerLogin = ownerLogin || '';
     this.pictureContentType = pictureContentType || '';
     this.picture = picture;
     this.previewContentType = previewContentType || '';

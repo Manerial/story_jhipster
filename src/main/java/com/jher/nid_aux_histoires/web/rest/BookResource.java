@@ -1,7 +1,6 @@
 package com.jher.nid_aux_histoires.web.rest;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.BookService;
+import com.jher.nid_aux_histoires.service.CoverService;
 import com.jher.nid_aux_histoires.service.ExportService;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
@@ -49,10 +49,13 @@ public class BookResource {
 
 	private final BookService bookService;
 
+	private final CoverService coverService;
+
 	private final ExportService exportService;
 
-	public BookResource(BookService bookService, ExportService exportService) {
+	public BookResource(BookService bookService, CoverService coverService, ExportService exportService) {
 		this.bookService = bookService;
+		this.coverService = coverService;
 		this.exportService = exportService;
 	}
 
@@ -68,7 +71,7 @@ public class BookResource {
 	@PostMapping("/books")
 	public ResponseEntity<BookDTO> createBook(@RequestBody BookDTO bookDTO) throws Exception {
 		log.debug("REST request to save Book : {}", bookDTO);
-		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
+		checkBook(bookDTO);
 		if (bookDTO.getId() != null) {
 			throw new BadRequestAlertException("A new book cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -86,11 +89,12 @@ public class BookResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new bookDTO, or with status {@code 400 (Bad Request)} if the
 	 *         book has already an ID.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception
 	 */
 	@PostMapping("/books/import")
-	public ResponseEntity<BookDTO> importBook(@RequestBody BookDTO bookDTO) throws URISyntaxException {
+	public ResponseEntity<BookDTO> importBook(@RequestBody BookDTO bookDTO) throws Exception {
 		log.debug("REST request to save Book : {}", bookDTO);
+		checkBook(bookDTO);
 		if (bookDTO.getId() != null) {
 			throw new BadRequestAlertException("A new book cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -116,7 +120,7 @@ public class BookResource {
 	@PutMapping("/books")
 	public ResponseEntity<BookDTO> updateBook(@RequestBody BookDTO bookDTO) throws Exception {
 		log.debug("REST request to update Book : {}", bookDTO);
-		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
+		checkBook(bookDTO);
 		if (bookDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -240,5 +244,17 @@ public class BookResource {
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();
+	}
+
+	private void checkBook(BookDTO bookDTO) throws Exception {
+		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
+
+		Long coverId = bookDTO.getCoverId();
+		if (coverId != null) {
+			String login = coverService.findOne(coverId).get().getOwnerLogin();
+			if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getLoggedUser().getName())) {
+				throw new Exception("You have no access to this resource (Cover : " + coverId + ")");
+			}
+		}
 	}
 }

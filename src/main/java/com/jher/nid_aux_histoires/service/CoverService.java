@@ -1,6 +1,5 @@
 package com.jher.nid_aux_histoires.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -31,6 +30,22 @@ public interface CoverService {
 	Page<CoverDTO> findAll(Pageable pageable);
 
 	/**
+	 * Get all the covers related to an Owner.
+	 *
+	 * @param id the id of the book.
+	 * @return the list of entities.
+	 */
+	Page<CoverDTO> findAllByOwnerId(Pageable pageable, Long id);
+
+	/**
+	 * Get all the covers by Owner login.
+	 *
+	 * @param pageable the pagination information.
+	 * @return the list of entities.
+	 */
+	Page<CoverDTO> findAllByOwnerLogin(Pageable pageable, String name);
+
+	/**
 	 * Get the "id" cover.
 	 *
 	 * @param id the id of the entity.
@@ -44,13 +59,4 @@ public interface CoverService {
 	 * @param id the id of the entity.
 	 */
 	void delete(Long id);
-
-	/**
-	 * Get all the covers related to an Author.
-	 *
-	 * @param id the id of the book.
-	 * @return the list of entities.
-	 */
-
-	List<CoverDTO> findAllByAuthorId(Long id);
 }

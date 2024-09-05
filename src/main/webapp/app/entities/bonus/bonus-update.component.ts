@@ -12,6 +12,7 @@ import { AlertError } from 'app/shared/alert/alert-error.model';
 import { BookService } from '../book/book.service';
 import { IBook } from 'app/shared/model/book.model';
 import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'jhi-bonus-update',
@@ -20,10 +21,13 @@ import { AccountService } from 'app/core/auth/account.service';
 export class BonusUpdateComponent implements OnInit {
   isSaving = false;
   books: IBook[] = [];
+  account!: Account;
 
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
+    ownerId: [null, [Validators.required]],
+    ownerLogin: [null, [Validators.required]],
     file: [null, [Validators.required]],
     fileContentType: [],
     description: [],
@@ -42,14 +46,14 @@ export class BonusUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ bonus }) => {
-      this.updateForm(bonus);
-
-      this.accountService.identity().subscribe(account => {
-        if (account) {
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        this.account = account;
+        this.activatedRoute.data.subscribe(({ bonus }) => {
+          this.updateForm(bonus);
           this.bookService.findAllByAuthor(account.login).subscribe((res: HttpResponse<IBook[]>) => (this.books = res.body || []));
-        }
-      });
+        });
+      }
     });
   }
 
@@ -57,6 +61,8 @@ export class BonusUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: bonus.id,
       name: bonus.name,
+      ownerId: bonus.ownerId !== 0 ? bonus.ownerId : this.account.id,
+      ownerLogin: bonus.ownerLogin !== '' ? bonus.ownerLogin : this.account.login,
       file: bonus.data,
       fileContentType: bonus.extension,
       description: bonus.description,
@@ -88,6 +94,8 @@ export class BonusUpdateComponent implements OnInit {
       ...new Bonus(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
+      ownerId: this.editForm.get(['ownerId'])!.value,
+      ownerLogin: this.editForm.get(['ownerLogin'])!.value,
       data: this.editForm.get(['file'])!.value,
       extension: this.editForm.get(['fileContentType'])!.value,
       description: this.editForm.get(['description'])!.value,

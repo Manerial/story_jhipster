@@ -38,10 +38,6 @@ export class CoverService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getAllCoversByAuthorId(id: number): Observable<EntityArrayResponseType> {
-    return this.http.get<ICover[]>(`${this.resourceUrl}/author/${id}`, { observe: 'response' });
-  }
-
   download(id: number): Observable<CoverResponseType> {
     return this.http.get(`${this.downloadUrl}/cover/${id}`, { observe: 'response', responseType: 'blob' });
   }

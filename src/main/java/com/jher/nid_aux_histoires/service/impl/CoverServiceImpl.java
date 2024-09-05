@@ -1,6 +1,5 @@
 package com.jher.nid_aux_histoires.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -57,9 +56,15 @@ public class CoverServiceImpl implements CoverService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<CoverDTO> findAllByAuthorId(Long id) {
+	public Page<CoverDTO> findAllByOwnerId(Pageable pageable, Long id) {
 		log.debug("Request to get all Covers");
-		return coverMapperLight.toDto(coverRepository.findAllByAuthorId(id));
+		return coverRepository.findAllByOwnerId(pageable, id).map(coverMapperLight::toDto);
+	}
+
+	@Override
+	public Page<CoverDTO> findAllByOwnerLogin(Pageable pageable, String name) {
+		log.debug("Request to get all Covers");
+		return coverRepository.findAllByOwnerLogin(pageable, name).map(coverMapperLight::toDto);
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.jher.nid_aux_histoires.web.rest;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.CoverService;
 import com.jher.nid_aux_histoires.service.dto.CoverDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
@@ -58,11 +58,12 @@ public class CoverResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new coverDTO, or with status {@code 400 (Bad Request)} if
 	 *         the cover has already an ID.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception
 	 */
 	@PostMapping("/covers")
-	public ResponseEntity<CoverDTO> createCover(@RequestBody CoverDTO coverDTO) throws URISyntaxException {
+	public ResponseEntity<CoverDTO> createCover(@RequestBody CoverDTO coverDTO) throws Exception {
 		log.debug("REST request to save Cover : {}", coverDTO);
+		SecurityConfiguration.CheckLoggedUser(coverDTO.getOwnerLogin());
 		if (coverDTO.getId() != null) {
 			throw new BadRequestAlertException("A new cover cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -82,11 +83,12 @@ public class CoverResource {
 	 *         coverDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the coverDTO couldn't be
 	 *         updated.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception
 	 */
 	@PutMapping("/covers")
-	public ResponseEntity<CoverDTO> updateCover(@RequestBody CoverDTO coverDTO) throws URISyntaxException {
+	public ResponseEntity<CoverDTO> updateCover(@RequestBody CoverDTO coverDTO) throws Exception {
 		log.debug("REST request to update Cover : {}", coverDTO);
+		SecurityConfiguration.CheckLoggedUser(coverDTO.getOwnerLogin());
 		if (coverDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -106,24 +108,15 @@ public class CoverResource {
 	@GetMapping("/covers")
 	public ResponseEntity<List<CoverDTO>> getAllCovers(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable) {
 		log.debug("REST request to get a page of Covers");
-		Page<CoverDTO> page = coverService.findAll(pageable);
+		Page<CoverDTO> page;
+		if (SecurityConfiguration.IsAdmin()) {
+			page = coverService.findAll(pageable);
+		} else {
+			page = coverService.findAllByOwnerLogin(pageable, SecurityConfiguration.getLoggedUser().getName());
+		}
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
 		return ResponseEntity.ok().headers(headers).body(page.getContent());
-	}
-
-	/**
-	 * {@code GET  /covers} : get all the covers related to an Author.
-	 *
-	 * @param id the id of the Author to retrieve.
-	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
-	 *         of covers in body.
-	 */
-	@GetMapping("/covers/author/{id}")
-	public ResponseEntity<List<CoverDTO>> getAllCoversByAuthor(@PathVariable Long id) {
-		log.debug("REST request to get a list of Covers related to an Author");
-		List<CoverDTO> covers = coverService.findAllByAuthorId(id);
-		return ResponseEntity.ok().body(covers);
 	}
 
 	/**
@@ -145,10 +138,13 @@ public class CoverResource {
 	 *
 	 * @param id the id of the coverDTO to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+	 * @throws Exception
 	 */
 	@DeleteMapping("/covers/{id}")
-	public ResponseEntity<Void> deleteCover(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteCover(@PathVariable Long id) throws Exception {
 		log.debug("REST request to delete Cover : {}", id);
+		CoverDTO coverDTO = coverService.findOne(id).get();
+		SecurityConfiguration.CheckLoggedUser(coverDTO.getOwnerLogin());
 		coverService.delete(id);
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
