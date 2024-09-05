@@ -2,6 +2,8 @@ package com.jher.nid_aux_histoires.service;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,6 +22,16 @@ public interface BookStatusService {
 	 * @return the persisted entity.
 	 */
 	BookStatusDTO save(BookStatusDTO bookStatusDTO);
+
+	/**
+	 * Save a bookStatus chapter using login and bookId.
+	 *
+	 * @param userLogin the user login.
+	 * @param bookId    the book id.
+	 * @param chapterId the chapter to update.
+	 * @return the persisted entity.
+	 */
+	BookStatusDTO upsertCurrentChapterByLoginAndBook(String login, @Valid Long bookId, @Valid Long chapterId);
 
 	/**
 	 * Get all the bookStatuses.
@@ -45,6 +57,14 @@ public interface BookStatusService {
 	 * @return the entity.
 	 */
 	Optional<BookStatusDTO> findOne(Long id);
+
+	/**
+	 * Get the bookStatus linked to the login and the book "bookId".
+	 *
+	 * @param id the id of the entity.
+	 * @return the entity.
+	 */
+	Optional<BookStatusDTO> findOneByUserBook(String login, Long bookId);
 
 	/**
 	 * Delete the "id" bookStatus.

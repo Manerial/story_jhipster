@@ -1,7 +1,6 @@
 Analytics ?
 
 GUI :
-	- Quand lecture, récupérer chapitre en cours
 	- Si bonus => preview
 	- Taille bonus
 	- Supprimer image viewer

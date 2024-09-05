@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -98,6 +101,17 @@ public class BookStatusResource {
 				bookStatusDTO.getId().toString())).body(result);
 	}
 
+	@PutMapping("/bookStatuses/saveChapter")
+	public ResponseEntity<BookStatusDTO> upsertBookStatus(@Valid @RequestParam Long bookId,
+			@Valid @RequestParam Long chapterId) {
+		log.debug("REST request to update BookStatus chapter : {}", chapterId);
+		BookStatusDTO result = bookStatusService
+				.upsertCurrentChapterByLoginAndBook(SecurityConfiguration.getUserLogin(), bookId, chapterId);
+		return ResponseEntity.ok().headers(
+				HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+				.body(result);
+	}
+
 	/**
 	 * {@code GET  /bookStatuses} : get all the bookStatuses.
 	 *
@@ -141,6 +155,21 @@ public class BookStatusResource {
 	public ResponseEntity<BookStatusDTO> getBookStatus(@PathVariable Long id) {
 		log.debug("REST request to get BookStatus : {}", id);
 		Optional<BookStatusDTO> bookStatusDTO = bookStatusService.findOne(id);
+		return ResponseUtil.wrapOrNotFound(bookStatusDTO);
+	}
+
+	/**
+	 * {@code GET  /bookStatuses/:id} : get the "id" bookStatus.
+	 *
+	 * @param bookId the id of the book linked to the bookStatusDTO to retrieve.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+	 *         the bookStatusDTO, or with status {@code 404 (Not Found)}.
+	 */
+	@GetMapping("/bookStatuses/book/{bookId}")
+	public ResponseEntity<BookStatusDTO> getBookStatusByBookId(@PathVariable Long bookId) {
+		log.debug("REST request to get BookStatus for book : {}", bookId);
+		Optional<BookStatusDTO> bookStatusDTO = bookStatusService
+				.findOneByUserBook(SecurityConfiguration.getUserLogin(), bookId);
 		return ResponseUtil.wrapOrNotFound(bookStatusDTO);
 	}
 

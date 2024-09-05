@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
@@ -23,8 +23,19 @@ export class BookStatusService {
     return this.http.put<IBookStatus>(this.resourceUrl, bookStatus, { observe: 'response' });
   }
 
+  upsert(bookId: number, chapterId: number): Observable<EntityResponseType> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('bookId', bookId.toString());
+    httpParams = httpParams.append('chapterId', chapterId.toString());
+    return this.http.put<IBookStatus>(`${this.resourceUrl}/saveChapter`, null, { observe: 'response', params: httpParams });
+  }
+
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IBookStatus>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findByBook(bookId: number): Observable<EntityResponseType> {
+    return this.http.get<IBookStatus>(`${this.resourceUrl}/book/${bookId}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

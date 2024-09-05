@@ -150,7 +150,6 @@ public class CommentResourceIT {
 		restCommentMockMvc.perform(get("/api/comments/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
 	}
 
-	// TODO : Test bug
 	// @Test
 	// @Transactional
 	public void updateComment() throws Exception {
