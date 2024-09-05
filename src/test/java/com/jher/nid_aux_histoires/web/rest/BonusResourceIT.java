@@ -31,6 +31,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Bonus;
 import com.jher.nid_aux_histoires.repository.BonusRepository;
+import com.jher.nid_aux_histoires.repository.BookRepository;
+import com.jher.nid_aux_histoires.repository.UserRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.dto.BonusDTO;
 import com.jher.nid_aux_histoires.service.mapper.BonusMapper;
@@ -49,11 +51,20 @@ public class BonusResourceIT {
 	private static final String DEFAULT_DATA_CONTENT_TYPE = "image/jpg";
 	private static final String UPDATED_DATA_CONTENT_TYPE = "image/png";
 
+	private static final byte[] DEFAULT_DATA = "DATA".getBytes();
+	private static final byte[] UPDATED_DATA = "DATA7".getBytes();
+
 	@Autowired
 	private BonusRepository bonusRepository;
 
 	@Autowired
 	private BonusMapper bonusMapper;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private BookRepository bookRepository;
 
 	@Autowired
 	private EntityManager em;
@@ -69,8 +80,10 @@ public class BonusResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Bonus createEntity(EntityManager em) {
-		Bonus bonus = new Bonus().name(DEFAULT_NAME).dataContentType(DEFAULT_DATA_CONTENT_TYPE);
+	public Bonus createEntity(EntityManager em) {
+		Bonus bonus = new Bonus().name(DEFAULT_NAME).dataContentType(DEFAULT_DATA_CONTENT_TYPE).data(DEFAULT_DATA);
+		bonus.setOwner(userRepository.getOne(1L));
+		bonus.setBook(bookRepository.getOne(1L));
 		return bonus;
 	}
 
@@ -80,8 +93,10 @@ public class BonusResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Bonus createUpdatedEntity(EntityManager em) {
-		Bonus bonus = new Bonus().name(UPDATED_NAME).dataContentType(UPDATED_DATA_CONTENT_TYPE);
+	public Bonus createUpdatedEntity(EntityManager em) {
+		Bonus bonus = new Bonus().name(UPDATED_NAME).dataContentType(UPDATED_DATA_CONTENT_TYPE).data(UPDATED_DATA);
+		bonus.setOwner(userRepository.getOne(1L));
+		bonus.setBook(bookRepository.getOne(1L));
 		return bonus;
 	}
 

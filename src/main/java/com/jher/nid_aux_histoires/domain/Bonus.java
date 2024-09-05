@@ -45,6 +45,10 @@ public class Bonus implements Serializable {
 	@Column(name = "description")
 	private String description;
 
+	@ManyToOne
+	@JsonIgnoreProperties(value = "bonus", allowSetters = true)
+	private User owner;
+
 	// jhipster-needle-entity-add-field - JHipster will add fields here
 	public Long getId() {
 		return id;
@@ -120,6 +124,19 @@ public class Bonus implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public Bonus owner(User owner) {
+		this.owner = owner;
+		return this;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 
 	@Override

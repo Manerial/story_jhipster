@@ -9,14 +9,17 @@ import com.jher.nid_aux_histoires.service.dto.CoverDTO;
 /**
  * Mapper for the entity {@link Cover} and its DTO {@link CoverDTO}.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = { UserMapper.class })
 public interface CoverMapperLight extends EntityMapper<CoverDTO, Cover> {
 
 	@Mapping(target = "picture", ignore = true)
+	@Mapping(source = "owner.id", target = "ownerId")
+	@Mapping(source = "owner.login", target = "ownerLogin")
 	CoverDTO toDto(Cover coverDTO);
 
 	@Mapping(target = "bookToCovers", ignore = true)
 	@Mapping(target = "removeBookToCover", ignore = true)
+	@Mapping(source = "ownerId", target = "owner")
 	Cover toEntity(CoverDTO coverDTO);
 
 	default Cover fromId(Long id) {

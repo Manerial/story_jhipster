@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,6 +23,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * A Cover.
@@ -58,6 +60,10 @@ public class Cover implements Serializable {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonIgnore
 	private Set<Book> bookToCovers = new HashSet<>();
+
+	@ManyToOne
+	@JsonIgnoreProperties(value = "cover", allowSetters = true)
+	private User owner;
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here
 	public Long getId() {
@@ -188,6 +194,20 @@ public class Cover implements Serializable {
 	public void setBookToCovers(Set<Book> books) {
 		this.bookToCovers = books;
 	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public Cover owner(User owner) {
+		this.owner = owner;
+		return this;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
 	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
 	// setters here
 

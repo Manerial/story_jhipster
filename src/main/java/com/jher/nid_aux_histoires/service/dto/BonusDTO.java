@@ -12,6 +12,10 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 
 	private String name;
 
+	private Long ownerId;
+
+	private String ownerLogin;
+
 	private byte[] data;
 
 	private String dataContentType;
@@ -34,6 +38,22 @@ public class BonusDTO implements Serializable, Comparable<BonusDTO> {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Long getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(Long ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public String getOwnerLogin() {
+		return ownerLogin;
+	}
+
+	public void setOwnerLogin(String ownerLogin) {
+		this.ownerLogin = ownerLogin;
 	}
 
 	public byte[] getData() {

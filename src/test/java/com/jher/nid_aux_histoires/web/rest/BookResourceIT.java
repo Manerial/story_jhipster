@@ -30,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Book;
 import com.jher.nid_aux_histoires.repository.BookRepository;
+import com.jher.nid_aux_histoires.repository.UserRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
@@ -54,6 +55,9 @@ public class BookResourceIT {
 	private BookRepository bookRepositoryMock;
 
 	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
 	private BookMapper bookMapper;
 
 	@Mock
@@ -73,9 +77,10 @@ public class BookResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Book createEntity(EntityManager em) {
+	public Book createEntity(EntityManager em) {
 		Book book = new Book().name(DEFAULT_NAME);
 		book.setVisibility(true);
+		book.setAuthor(userRepository.getOne(1L));
 		return book;
 	}
 
@@ -85,8 +90,10 @@ public class BookResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Book createUpdatedEntity(EntityManager em) {
+	public Book createUpdatedEntity(EntityManager em) {
 		Book book = new Book().name(UPDATED_NAME);
+		book.setVisibility(false);
+		book.setAuthor(userRepository.getOne(1L));
 		return book;
 	}
 
