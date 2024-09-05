@@ -51,6 +51,11 @@ export class ChapterUpdateComponent implements OnInit {
   }
 
   updateForm(chapter: IChapter): void {
+    chapter.images.forEach(image => {
+      image.picture = null;
+      image.preview = null;
+    });
+
     this.editForm.patchValue({
       id: chapter.id,
       name: chapter.name,
