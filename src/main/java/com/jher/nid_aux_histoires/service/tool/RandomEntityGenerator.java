@@ -67,7 +67,12 @@ public abstract class RandomEntityGenerator {
 			complement = "A";
 		}
 
-		String article = ideaRepository.findByTypeAndComplement(articleType.toString(), complement).getValue();
+		Idea ideaFromRepo = ideaRepository.findByTypeAndComplement(articleType.toString(), complement);
+		if (articleType == null || ideaRepository == null || ideaFromRepo == null) {
+			System.out.println();
+		}
+
+		String article = ideaFromRepo.getValue();
 
 		return article + idea.getValue().toLowerCase();
 	}

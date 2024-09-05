@@ -1216,7 +1216,7 @@
 		<insert tableName="idea">
 			<column name="type" value="object" />
 			<column name="value" value="Rose" />
-			<column name="complement" value="f" />
+			<column name="complement" value="F" />
 		</insert>
 		<insert tableName="idea">
 			<column name="type" value="object" />

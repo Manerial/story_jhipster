@@ -30,6 +30,7 @@ import com.jher.nid_aux_histoires.repository.IdeaRepository;
 import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_CreatureDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
@@ -242,26 +243,31 @@ public class IdeaResourceIT {
 
 	@Test
 	public void createRandomPersona() {
-		ideaService.generate(100, REG_Entity.persona, new R_PersonaDTO());
+		ideaService.generate(1000, REG_Entity.persona, new R_PersonaDTO());
 	}
 
 	@Test
 	public void createRandomHonoraryTitle() {
-		ideaService.generate(100, REG_Entity.honorary_title, new R_ObjectDTO());
+		ideaService.generate(1000, REG_Entity.honorary_title, new R_ObjectDTO());
 	}
 
 	@Test
 	public void createRandomLocation() {
-		ideaService.generate(100, REG_Entity.location, new R_LocationDTO());
+		ideaService.generate(1000, REG_Entity.location, new R_LocationDTO());
 	}
 
 	@Test
 	public void createRandomObject() {
-		ideaService.generate(100, REG_Entity.object, new R_ObjectDTO());
+		ideaService.generate(1000, REG_Entity.object, new R_ObjectDTO());
 	}
 
 	@Test
 	public void createRandomWritingOption() {
-		ideaService.generate(100, REG_Entity.writing_option, new R_WritingOptionDTO());
+		ideaService.generate(1000, REG_Entity.writing_option, new R_WritingOptionDTO());
+	}
+
+	@Test
+	public void createRandomCreature() {
+		ideaService.generate(1000, REG_Entity.creature, new R_CreatureDTO());
 	}
 }
