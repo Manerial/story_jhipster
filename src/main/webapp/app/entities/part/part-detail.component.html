@@ -26,6 +26,12 @@
                         <a [routerLink]="['/entities/book', part.bookId, 'view']">{{ part.bookId }}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.part.chapters">Chapters</span></dt>
+                <dd>
+                    <div *ngFor="let chapter of part.chapters">
+                        <a [routerLink]="['/entities/chapter', chapter.id, 'view']">{{ chapter.id }} - {{ chapter.name }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

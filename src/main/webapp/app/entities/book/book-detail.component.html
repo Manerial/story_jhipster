@@ -31,6 +31,12 @@
                         <fa-icon icon="eye-slash" *ngIf="!book.visibility"></fa-icon>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.book.parts">Parts</span></dt>
+                <dd>
+                    <div *ngFor="let part of book.parts">
+                        <a [routerLink]="['/entities/part', part.id, 'view']">{{ part.id }} - {{ part.name }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

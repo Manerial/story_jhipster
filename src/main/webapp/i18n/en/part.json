@@ -20,7 +20,7 @@
       "description": "Description",
       "number": "Number",
       "numberAuto": "(if < 1, will be filled in automatically)",
-      "chapter": "Chapter",
+      "chapters": "Chapters",
       "book": "Book",
       "required": {
         "name": "Name field is required",
