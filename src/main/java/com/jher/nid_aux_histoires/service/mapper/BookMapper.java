@@ -19,6 +19,7 @@ public interface BookMapper extends EntityMapper<BookDTO, Book> {
 
 	@Mapping(target = "parts", ignore = true)
 	@Mapping(target = "comments", ignore = true)
+	@Mapping(target = "bonuses", ignore = true)
 	@Mapping(target = "removePart", ignore = true)
 	@Mapping(target = "removeImage", ignore = true)
 	@Mapping(source = "coverId", target = "cover")

@@ -58,6 +58,10 @@ public class Book implements Serializable {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Comment> comments = new HashSet<>();
 
+	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private Set<Bonus> bonuses = new HashSet<>();
+
 	@ManyToOne
 	@JsonIgnoreProperties(value = "picture", allowSetters = true)
 	private Image cover;
@@ -208,6 +212,31 @@ public class Book implements Serializable {
 
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public Set<Bonus> getBonuses() {
+		return bonuses;
+	}
+
+	public Book bonuses(Set<Bonus> bonuses) {
+		this.bonuses = bonuses;
+		return this;
+	}
+
+	public Book addBonus(Bonus comment) {
+		this.bonuses.add(comment);
+		comment.setBook(this);
+		return this;
+	}
+
+	public Book removeBonus(Bonus comment) {
+		this.bonuses.remove(comment);
+		comment.setBook(null);
+		return this;
+	}
+
+	public void setBonuses(Set<Bonus> bonuses) {
+		this.bonuses = bonuses;
 	}
 	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
 	// setters here
