@@ -91,6 +91,10 @@ Generic styles
 /* ==========================================================================
 Custom alerts for notification
 ========================================================================== */
+.alert {
+  margin-top: 20px;
+}
+
 .alerts {
   .alert {
     text-overflow: ellipsis;
