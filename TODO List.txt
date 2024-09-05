@@ -4,6 +4,7 @@ Importer l'interface du site
 	Vue images
 	Navbar
 	Footer
+		Lien du discord
 Gérer les chemins d'accès
 	Accès ADMIN
 	Accès USER

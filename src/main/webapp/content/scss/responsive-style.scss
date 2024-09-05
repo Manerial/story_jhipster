@@ -1,7 +1,19 @@
 @import 'variables';
 
+@media only screen and (max-width: 1370px) {
+  .nav-item {
+    margin-right: 0.35vw !important;
+  }
+}
+
 @media only screen and (max-width: 850px) {
-  h1 {
+  .logo-img {
+    height: 5vw !important;
+    width: 5vw !important;
+  }
+
+  h1,
+  .display-4 {
     font-size: 5vw;
   }
 
@@ -14,11 +26,11 @@
   }
 
   h4 {
-    font-size: 3.5v;
+    font-size: 3.5vw;
   }
 
   h5 {
-    font-size: 160%;
+    font-size: 2vw;
   }
 
   h6 {
@@ -26,12 +38,54 @@
   }
 }
 
+@media only screen and (max-width: 600px) {
+  html,
+  body {
+    overflow: auto !important;
+  }
+
+  .container-limit {
+    height: auto !important;
+  }
+
+  .footer .navbar {
+    display: grid;
+  }
+
+  .footer .navbar .navbar-brand,
+  .footer .navbar .navbar-brand.ml-auto {
+    margin-left: 10px !important;
+  }
+}
+
+@media only screen and (max-height: 350px) {
+  html,
+  body {
+    overflow: auto !important;
+  }
+
+  .container-limit {
+    height: auto !important;
+  }
+}
+
 @media only screen and (max-width: 400px) {
-  h1 {
+  .logo-img {
+    height: 20px !important;
+    width: 20px !important;
+  }
+
+  h1,
+  .display-4 {
     font-size: 20px;
   }
 
-  h2 {
-    font-size: 18px;
+  h2,
+  .navbar-title {
+    font-size: 14px;
+  }
+
+  .navbar .navbar-brand {
+    margin-right: 5px;
   }
 }
