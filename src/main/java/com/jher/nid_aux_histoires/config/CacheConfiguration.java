@@ -65,6 +65,8 @@ public class CacheConfiguration {
             createCache(cm, com.jher.nid_aux_histoires.domain.Image.class.getName() + ".parts");
             createCache(cm, com.jher.nid_aux_histoires.domain.Image.class.getName() + ".chapters");
             createCache(cm, com.jher.nid_aux_histoires.domain.Image.class.getName() + ".scenes");
+            createCache(cm, com.jher.nid_aux_histoires.domain.Idea.class.getName());
+            createCache(cm, com.jher.nid_aux_histoires.domain.WordAnalysis.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

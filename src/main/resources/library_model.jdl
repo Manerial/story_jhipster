@@ -1,3 +1,14 @@
+entity Idea {
+	type String,
+    value String,
+    complement String
+}
+
+entity WordAnalysis {
+	type String,
+    name String,
+    analysis String
+}
 
 entity Book {
 	name String,
@@ -20,7 +31,7 @@ entity Scene {
 	name String,
 	number Integer,
 	text TextBlob,
-	timestampStart LocalDate
+	timestampStart String
 }
 
 entity Image {
@@ -45,7 +56,7 @@ relationship ManyToMany {
 }
 
 // Set pagination options
-paginate Book, Part, Chapter, Scene, Image with pagination
+paginate * with pagination
 
 // Use Data Transfer Objects (DTO)
 dto * with mapstruct
