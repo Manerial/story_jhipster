@@ -59,6 +59,7 @@ export class NavbarComponent implements OnInit {
   }
 
   login(): void {
+    this.collapseNavbar();
     this.loginModalService.open();
   }
 
