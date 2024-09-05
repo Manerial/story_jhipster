@@ -1,0 +1,51 @@
+{
+  "name": "Chapter",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "scene",
+      "otherEntityRelationshipName": "chapter",
+      "relationshipName": "scene"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "image",
+      "otherEntityRelationshipName": "chapter",
+      "relationshipName": "image",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "part",
+      "otherEntityRelationshipName": "chapter",
+      "relationshipName": "part",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201004072042",
+  "entityTableName": "chapter",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

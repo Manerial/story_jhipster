@@ -1,0 +1,47 @@
+{
+  "name": "Book",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "author",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "part",
+      "otherEntityRelationshipName": "book",
+      "relationshipName": "part"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "image",
+      "otherEntityRelationshipName": "book",
+      "relationshipName": "image",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "image",
+      "otherEntityRelationshipName": "bookToCover",
+      "relationshipName": "cover",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201004071842",
+  "entityTableName": "book",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
