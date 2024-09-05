@@ -37,6 +37,7 @@ update_server() {
 
 	unzip "$file_name"
 	rm "$file_name"
+	
 	"$java_win" -jar nid-aux-histoires-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod,swagger &
 	process_id=$!
 }
