@@ -43,7 +43,7 @@
 		<!-- Dependency versions -->
 		<jhipster-dependencies.version>3.9.0</jhipster-dependencies.version>
 		<!-- The spring-boot version should match the one managed by https://mvnrepository.com/artifact/io.github.jhipster/jhipster-dependencies/${jhipster-dependencies.version} -->
-		<spring-boot.version>2.2.7.RELEASE</spring-boot.version>
+		<spring-boot.version>2.7.0</spring-boot.version>
 		<!-- The hibernate version should match the one managed by https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
 		<hibernate.version>5.4.15.Final</hibernate.version>
 		<!-- The javassist version should match the one managed by https://mvnrepository.com/artifact/org.hibernate/hibernate-core/${hibernate.version} -->
@@ -69,6 +69,7 @@
 		<maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
 		<maven-war-plugin.version>3.2.3</maven-war-plugin.version>
 		<maven-checkstyle.version>3.1.1</maven-checkstyle.version>
+		<springdoc.version>1.6.8</springdoc.version>
 		<checkstyle.version>8.32</checkstyle.version>
 		<spring-nohttp-checkstyle.version>0.0.4.RELEASE</spring-nohttp-checkstyle.version>
 		<frontend-maven-plugin.version>1.10.0</frontend-maven-plugin.version>
@@ -139,10 +140,11 @@
 			<artifactId>h2</artifactId>
 			<scope>test, runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.6.11</version>
+        </dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-bean-validators</artifactId>
@@ -357,7 +359,6 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
-			<version>${lombok.version}</version>
 		</dependency>
 	</dependencies>
 
