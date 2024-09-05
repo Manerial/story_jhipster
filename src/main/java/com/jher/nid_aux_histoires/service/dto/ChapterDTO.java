@@ -57,7 +57,7 @@ public class ChapterDTO implements Serializable, Comparable<ChapterDTO> {
 				+ "'" + ", number=" + getNumber() + ", partId=" + getPartId() + "}";
 	}
 
-	public String getFormattedText() {
+	String getFormattedText() {
 		String text = "";
 		for (SceneDTO scene : scenes) {
 			text += scene.getText() + ExportDocx.LINE_BREAK_PLACEHOLDER;
