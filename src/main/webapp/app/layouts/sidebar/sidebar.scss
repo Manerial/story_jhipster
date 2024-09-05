@@ -1,0 +1,113 @@
+@import '../../../content/scss/variables';
+
+p {
+  margin: 5px;
+}
+
+h1 {
+  margin: auto;
+  padding-left: 0px !important;
+  font-size: 30px !important;
+}
+
+h2,
+.h2 {
+  font-size: 2vw;
+}
+
+h3,
+.h3 {
+  font-size: 1.75vw;
+}
+
+h4,
+.h4 {
+  font-size: 1.5vw;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-align: left;
+  padding-left: 10px;
+}
+
+h2,
+h3,
+h4 {
+  padding-top: 0px;
+  padding-bottom: 5px;
+  margin: 0px;
+}
+
+h4 {
+  padding-left: 15px;
+}
+
+.summary {
+  border-right: 1px solid black;
+  margin: 0px;
+  text-align: left;
+  float: left;
+  height: $height_nav;
+  overflow: auto;
+  width: 25%;
+  z-index: 1;
+}
+
+.summary > div:nth-child(1) {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 880px) {
+  h1 {
+    margin-left: 45px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .summary {
+    border: none;
+    width: 100%;
+    height: fit-content;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+}
+
+.menu-button {
+  color: $gold;
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
+  margin-left: 15px;
+  margin-top: 15px;
+  width: 30px;
+  font-size: 30px !important;
+}
+
+.menu-bkg {
+  color: $white;
+  z-index: 1;
+}
+
+a.bkg-white:hover,
+.bkg-white h2:hover,
+.bkg-white h3:hover,
+.bkg-white h4:hover,
+button.bkg-white:hover {
+  background-color: $gray !important;
+  cursor: pointer;
+}

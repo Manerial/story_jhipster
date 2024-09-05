@@ -1,12 +1,15 @@
+import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IBook } from 'app/shared/model/book.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+
+type EntityResponseType = HttpResponse<IBook>;
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReaderService {
-  private book: Observable<IBook> | undefined;
+  private book: Observable<EntityResponseType> = of();
 
   private bookSource = new BehaviorSubject('');
   public currentBookIdObs = this.bookSource.asObservable();
@@ -22,19 +25,16 @@ export class ReaderService {
 
   constructor() {}
 
-  getBook(): Observable<IBook> {
-    if (this.book !== undefined) {
-      return this.book;
-    }
-    throw 'Book is undefined';
+  getBook(): Observable<EntityResponseType> {
+    return this.book;
   }
 
-  setBook(book: Observable<IBook>) {
+  setBook(book: Observable<EntityResponseType>): void {
     this.book = book;
   }
 
-  changeBook(bookId: number) {
-    if (this.currentBookId != bookId) {
+  changeBook(bookId: number): void {
+    if (this.currentBookId !== bookId) {
       this.currentBookId = bookId;
       this.bookSource.next(bookId.toString());
       this.partSource.next('');
@@ -44,34 +44,41 @@ export class ReaderService {
     }
   }
 
-  changePart(partId: number) {
+  changePart(partId: number): void {
     this.currentPartId = partId;
     this.partSource.next(partId.toString());
   }
 
-  changeChapter(chapterId: number) {
+  changeChapter(chapterId: number): void {
     this.currentChapterId = chapterId;
     this.chapterSource.next(chapterId.toString());
   }
 
-  changeChapterNumber(variance: number) {
-    this.getBook().subscribe(book => {
-      var currentChapterNumber = this.getCurentChapterNumber(book);
-      book.parts.forEach(part => {
-        part.chapters.forEach(chapter => {
-          if (chapter.number === currentChapterNumber + variance) {
-            this.changeChapter(chapter.id);
+  changeChapterNumber(variance: number): void {
+    const bookObserver = this.getBook();
+    if (bookObserver !== undefined) {
+      bookObserver.subscribe(book => {
+        if (book.body) {
+          const currentChapterNumber = this.getCurentChapterNumber(book.body);
+          if (book.body.parts) {
+            book.body.parts.forEach(part => {
+              part.chapters.forEach(chapter => {
+                if (chapter.number === currentChapterNumber + variance) {
+                  this.changeChapter(chapter.id);
+                }
+              });
+            });
           }
-        });
+        }
       });
-    });
+    }
   }
 
   getCurentChapterNumber(book: IBook): number {
-    var chapterNumber = -1;
+    let chapterNumber = -1;
     book.parts.forEach(part => {
       part.chapters.forEach(chapter => {
-        if (chapter.id == this.currentChapterId) {
+        if (chapter.id === this.currentChapterId) {
           chapterNumber = chapter.number;
         }
       });

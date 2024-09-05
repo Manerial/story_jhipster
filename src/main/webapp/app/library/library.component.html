@@ -28,7 +28,7 @@
 						</div>
 					</div>
 					<div class="bk-info text-center">
-						<a routerLink="/book/{{ book.id }}" class="btn bkg-gold" title='Lire "{{ book.name }}"'>
+						<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold" title='Lire "{{ book.name }}"'>
 							<span>
 								<fa-icon icon="book-open"></fa-icon>
 								<span jhiTranslate="library.read">Read</span>
@@ -65,7 +65,7 @@
 							<span jhiTranslate="library.downloading">Downloading</span>
 						</span>
 					</a>
-					<a routerLink="/book/{{ book.id }}" class="btn bkg-gold ml-2 mb-2" title='Lire "{{ book.name }}"'>
+					<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold ml-2 mb-2" title='Lire "{{ book.name }}"'>
 						<span>
 							<fa-icon icon="book-open"></fa-icon>
 							<span jhiTranslate="library.read">Read</span>
