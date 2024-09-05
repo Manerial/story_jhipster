@@ -71,6 +71,7 @@ public class CacheConfiguration {
 			createCache(cm, com.jher.nid_aux_histoires.domain.Idea.class.getName());
 			createCache(cm, com.jher.nid_aux_histoires.domain.WordAnalysis.class.getName());
 			createCache(cm, com.jher.nid_aux_histoires.domain.Comment.class.getName());
+createCache(cm, com.jher.nid_aux_histoires.domain.Bonus.class.getName());
 			// jhipster-needle-ehcache-add-entry
 		};
 	}

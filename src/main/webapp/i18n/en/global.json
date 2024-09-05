@@ -20,6 +20,7 @@
         "idea": "Idea",
         "wordAnalysis": "Word Analysis",
         "comment": "Comment",
+        "bonus": "Bonus",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

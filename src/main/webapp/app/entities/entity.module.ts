@@ -67,6 +67,10 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
         path: 'entities/comment',
         loadChildren: () => import('./comment/comment.module').then(m => m.NidAuxHistoiresCommentModule),
       },
+      {
+        path: 'bonus',
+        loadChildren: () => import('./bonus/bonus.module').then(m => m.NidAuxHistoiresBonusModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
