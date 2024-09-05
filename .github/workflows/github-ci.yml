@@ -57,3 +57,8 @@ jobs:
                   mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Manerial_story_jhipster -Dsonar.login=$SONAR_TOKEN
             - name: Package application
               run: ./mvnw -ntp package -Pprod -DskipTests
+            - name: Upload artifact
+              uses: actions/upload-artifact@v2
+              with:
+                name: website_jar
+                path: /home/runner/work/story_jhipster/story_jhipster/target/nid-aux-histoires-0.0.1-SNAPSHOT.jar
