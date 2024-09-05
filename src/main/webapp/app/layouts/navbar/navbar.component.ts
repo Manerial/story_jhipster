@@ -14,7 +14,7 @@ import { SearchService } from 'app/shared/util/search.service';
 @Component({
   selector: 'jhi-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['navbar.scss'],
+  styleUrls: ['navbar.scss', 'navbar.responsive.scss'],
 })
 export class NavbarComponent implements OnInit {
   inProduction?: boolean;

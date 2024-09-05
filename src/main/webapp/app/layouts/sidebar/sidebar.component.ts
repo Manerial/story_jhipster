@@ -5,7 +5,7 @@ import { Book, IBook } from 'app/shared/model/book.model';
 @Component({
   selector: 'jhi-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.scss'],
+  styleUrls: ['./sidebar.scss', './sidebar.responsive.scss'],
 })
 export class SidebarComponent implements OnInit {
   public book: IBook = new Book();
@@ -20,15 +20,13 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
     this.checkCollapseSommaire();
-    const bookObserver = this.readerService.getBook();
-    if (bookObserver)
-      bookObserver.subscribe(book => {
-        if (book.body) this.book = book.body;
-        this.isLoading = false;
-        this.book.parts.forEach(part => {
-          this.collapseParts[part.id] = true;
-        });
+    this.readerService.book.subscribe(book => {
+      this.book = book;
+      this.isLoading = false;
+      this.book.parts.forEach(part => {
+        this.collapseParts[part.id] = true;
       });
+    });
   }
 
   changeBook(id: number): void {
@@ -53,10 +51,9 @@ export class SidebarComponent implements OnInit {
   }
 
   checkCollapseSommaire(): void {
-    if (this.innerWidth <= 800) {
-      this.forceOpenAll = true;
-      this.collapseSummary = true;
-    }
+    const force = this.innerWidth <= 850;
+    this.forceOpenAll = force;
+    this.collapseSummary = force;
     this.toggleAddaptSummary();
   }
 

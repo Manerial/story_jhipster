@@ -15,12 +15,10 @@ export class TitleComponent implements OnInit {
   constructor(public readerService: ReaderService, private titleService: Title) {}
 
   ngOnInit(): void {
-    const bookObserver = this.readerService.getBook();
-    if (bookObserver)
-      bookObserver.subscribe(book => {
-        if (book.body) this.book = book.body;
-        this.isLoading = false;
-        this.titleService.setTitle(this.book.name);
-      });
+    this.readerService.book.subscribe(book => {
+      this.book = book;
+      this.isLoading = false;
+      this.titleService.setTitle(this.book.name);
+    });
   }
 }

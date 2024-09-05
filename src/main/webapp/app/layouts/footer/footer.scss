@@ -2,10 +2,9 @@
 
 nav.navbar {
   padding: 0px;
-}
-
-.footer {
-  border-top: 1px solid rgba($black, 0.125);
+  bottom: 0px;
+  position: fixed;
+  width: 100%;
 }
 
 .footer .navbar-brand {

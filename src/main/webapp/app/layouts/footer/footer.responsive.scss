@@ -1,0 +1,13 @@
+@import '../../../content/scss/variables.scss';
+
+@media only screen and (max-width: $screen_w_m) {
+  .footer span {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: $screen_w_s) {
+  .navbar .navbar-brand {
+    margin-right: 5px;
+  }
+}

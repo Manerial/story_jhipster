@@ -4,6 +4,7 @@ Alléger les échanges Back-Front
 Importer l'interface du site
 	Vue lecture
 		Refaire CSS
+			Petite taille : ouvrir - sélectionner menu ramène au début + sauvegarde scroll si fermer
 	Vue images
 	Navbar
 	Footer
