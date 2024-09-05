@@ -11,8 +11,6 @@ export class NavbarService {
   private isViewBook = new BehaviorSubject(true);
   public currentIsViewBook = this.isViewBook.asObservable();
 
-  constructor() {}
-
   changeSearch(search: string): void {
     this.search.next(search);
   }
