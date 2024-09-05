@@ -73,10 +73,10 @@ export class ReaderService {
   changeChapterNumber(variance: number): void {
     this.book.subscribe(book => {
       const currentChapterNumber = this.getCurentChapterNumber(book);
-      book.parts.forEach(part => {
-        part.chapters.forEach(chapter => {
+      book.parts?.forEach(part => {
+        part.chapters?.forEach(chapter => {
           if (chapter.number === currentChapterNumber + variance) {
-            this.changeChapter(chapter.id);
+            this.changeChapter(chapter.id!);
           }
         });
       });
@@ -85,10 +85,10 @@ export class ReaderService {
 
   getCurentChapterNumber(book: IBook): number {
     let chapterNumber = -1;
-    book.parts.forEach(part => {
-      part.chapters.forEach(chapter => {
+    book.parts?.forEach(part => {
+      part.chapters?.forEach(chapter => {
         if (chapter.id === this.currentChapterId) {
-          chapterNumber = chapter.number;
+          chapterNumber = chapter.number!;
         }
       });
     });

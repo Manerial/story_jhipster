@@ -22,7 +22,7 @@ export class BonusListComponent implements OnInit {
       const bookIdStr = Number(params.get('bookId'));
       this.bookService.findLight(bookIdStr).subscribe(entity => {
         if (entity.body) {
-          this.entityName = entity.body.name;
+          this.entityName = entity.body.name!;
         }
         this.getAllBonusByBookId(bookIdStr);
       });
@@ -35,7 +35,7 @@ export class BonusListComponent implements OnInit {
       if (bonusList.body) {
         this.bonusList = bonusList.body;
         for (const bonus of this.bonusList) {
-          this.showDescription[bonus.id] = false;
+          this.showDescription[bonus.id!] = false;
         }
       }
       this.bonusIsLoading = false;
@@ -43,7 +43,7 @@ export class BonusListComponent implements OnInit {
   }
 
   downloadBonus(bonus: IBonus): void {
-    this.bonusService.download(bonus.id).subscribe(data => {
+    this.bonusService.download(bonus.id!).subscribe(data => {
       if (data.body != null) {
         const downloadURL = window.URL.createObjectURL(data.body);
         const anchor = document.createElement('a');

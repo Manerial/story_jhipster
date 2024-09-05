@@ -32,7 +32,7 @@
 						Type de mots :
 					</label>
 					<select id="type" name="type" formControlName="type" class="form-control">
-						<option *ngFor="let type of typeList" [ngValue]="type.type">{{ type.name | titlecase }}
+						<option *ngFor="let type of typeList" [ngValue]="type.type">{{ type.name! | titlecase }}
 						</option>
 					</select>
 				</div>
