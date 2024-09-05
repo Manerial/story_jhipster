@@ -92,7 +92,7 @@ public class Cover implements Serializable {
 		try {
 			ByteArrayInputStream bais = new ByteArrayInputStream(this.getPicture());
 			BufferedImage bImage = ImageIO.read(bais);
-			double ratio = bImage.getHeight() / 170;
+			double ratio = ((double) bImage.getHeight()) / 170;
 			int newWidth = (int) (bImage.getWidth() / ratio);
 			int newHeight = (int) (bImage.getHeight() / ratio);
 

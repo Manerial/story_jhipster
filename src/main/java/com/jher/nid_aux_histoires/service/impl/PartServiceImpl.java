@@ -91,11 +91,14 @@ public class PartServiceImpl implements PartService {
 	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Part : {}", id);
-		Part part = partRepository.findById(id).get();
-		for (Chapter chapter : part.getChapters()) {
-			chapterService.delete(chapter.getId());
+		Optional<Part> O_part = partRepository.findById(id);
+		if (O_part.isPresent()) {
+			Part part = O_part.get();
+			for (Chapter chapter : part.getChapters()) {
+				chapterService.delete(chapter.getId());
+			}
+			partRepository.deleteById(id);
 		}
-		partRepository.deleteById(id);
 	}
 
 	private int findNextNumberForBookId(Long bookId) {

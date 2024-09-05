@@ -136,7 +136,7 @@ public class BookServiceImpl implements BookService {
 		log.debug("Request to delete Book : {}", id);
 		Optional<Book> O_book = bookRepository.findById(id);
 		if (O_book.isPresent()) {
-			Book book = bookRepository.findById(id).get();
+			Book book = O_book.get();
 
 			for (Comment comment : book.getComments()) {
 				commentService.delete(comment.getId());

@@ -96,7 +96,7 @@ public class ChapterServiceImpl implements ChapterService {
 		log.debug("Request to delete Chapter : {}", id);
 		Optional<Chapter> O_chapter = chapterRepository.findById(id);
 		if (O_chapter.isPresent()) {
-			Chapter chapter = chapterRepository.findById(id).get();
+			Chapter chapter = O_chapter.get();
 			for (Scene scene : chapter.getScenes()) {
 				sceneService.delete(scene.getId());
 			}

@@ -61,7 +61,7 @@ public class UserService {
 	}
 
 	public Optional<User> activateRegistration(String key) {
-		log.debug("Activating user for activation key {}", key);
+		log.debug("Activating user for activation key");
 		return userRepository.findOneByActivationKey(key).map(user -> {
 			// activate given user for the registration key.
 			user.setActivated(true);
@@ -73,7 +73,7 @@ public class UserService {
 	}
 
 	public Optional<User> completePasswordReset(String newPassword, String key) {
-		log.debug("Reset user password for reset key {}", key);
+		log.debug("Reset user password for reset key");
 		return userRepository.findOneByResetKey(key)
 				.filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400))).map(user -> {
 					user.setPassword(passwordEncoder.encode(newPassword));
@@ -127,7 +127,7 @@ public class UserService {
 		newUser.setAuthorities(authorities);
 		userRepository.save(newUser);
 		this.clearUserCaches(newUser);
-		log.debug("Created Information for User: {}", newUser);
+		log.debug("Created Information for User");
 		return newUser;
 	}
 
@@ -269,7 +269,7 @@ public class UserService {
 	public UserDTO getUserLightByLogin(String login) {
 		Optional<User> user = userRepository.findOneByLogin(login);
 		if (user.isPresent()) {
-			return userMapperLight.userToUserDTO(userRepository.findOneByLogin(login).get());
+			return userMapperLight.userToUserDTO(user.get());
 		}
 		return null;
 	}
