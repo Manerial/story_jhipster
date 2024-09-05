@@ -1,11 +1,18 @@
 package com.jher.nid_aux_histoires.web.rest;
 
-import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
-import com.jher.nid_aux_histoires.domain.Bonus;
-import com.jher.nid_aux_histoires.repository.BonusRepository;
-import com.jher.nid_aux_histoires.service.BonusService;
-import com.jher.nid_aux_histoires.service.dto.BonusDTO;
-import com.jher.nid_aux_histoires.service.mapper.BonusMapper;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,16 +20,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
+import com.jher.nid_aux_histoires.domain.Bonus;
+import com.jher.nid_aux_histoires.repository.BonusRepository;
+import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
+import com.jher.nid_aux_histoires.service.dto.BonusDTO;
+import com.jher.nid_aux_histoires.service.mapper.BonusMapper;
 
 /**
  * Integration tests for the {@link BonusResource} REST controller.
@@ -32,200 +44,201 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class BonusResourceIT {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+	private static final String DEFAULT_NAME = "file";
+	private static final String UPDATED_NAME = "fileB";
 
-    private static final String DEFAULT_EXTENSION = "AAAAAAAAAA";
-    private static final String UPDATED_EXTENSION = "BBBBBBBBBB";
+	private static final String DEFAULT_EXTENSION = "txt";
+	private static final String UPDATED_EXTENSION = "pdf";
 
-    @Autowired
-    private BonusRepository bonusRepository;
+	@Autowired
+	private BonusRepository bonusRepository;
 
-    @Autowired
-    private BonusMapper bonusMapper;
+	@Autowired
+	private BonusMapper bonusMapper;
 
-    @Autowired
-    private BonusService bonusService;
+	@Autowired
+	private EntityManager em;
 
-    @Autowired
-    private EntityManager em;
+	@Autowired
+	private MockMvc restBonusMockMvc;
 
-    @Autowired
-    private MockMvc restBonusMockMvc;
+	private Bonus bonus;
 
-    private Bonus bonus;
+	/**
+	 * Create an entity for this test.
+	 *
+	 * This is a static method, as tests for other entities might also need it, if
+	 * they test an entity which requires the current entity.
+	 */
+	public static Bonus createEntity(EntityManager em) {
+		Bonus bonus = new Bonus().name(DEFAULT_NAME).extension(DEFAULT_EXTENSION);
+		return bonus;
+	}
 
-    /**
-     * Create an entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Bonus createEntity(EntityManager em) {
-        Bonus bonus = new Bonus()
-            .name(DEFAULT_NAME)
-            .extension(DEFAULT_EXTENSION);
-        return bonus;
-    }
-    /**
-     * Create an updated entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Bonus createUpdatedEntity(EntityManager em) {
-        Bonus bonus = new Bonus()
-            .name(UPDATED_NAME)
-            .extension(UPDATED_EXTENSION);
-        return bonus;
-    }
+	/**
+	 * Create an updated entity for this test.
+	 *
+	 * This is a static method, as tests for other entities might also need it, if
+	 * they test an entity which requires the current entity.
+	 */
+	public static Bonus createUpdatedEntity(EntityManager em) {
+		Bonus bonus = new Bonus().name(UPDATED_NAME).extension(UPDATED_EXTENSION);
+		return bonus;
+	}
 
-    @BeforeEach
-    public void initTest() {
-        bonus = createEntity(em);
-    }
+	@BeforeEach
+	public void initTest() {
+		bonus = createEntity(em);
+	}
 
-    @Test
-    @Transactional
-    public void createBonus() throws Exception {
-        int databaseSizeBeforeCreate = bonusRepository.findAll().size();
-        // Create the Bonus
-        BonusDTO bonusDTO = bonusMapper.toDto(bonus);
-        restBonusMockMvc.perform(post("/api/bonuses")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(bonusDTO)))
-            .andExpect(status().isCreated());
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void createBonus() throws Exception {
+		int databaseSizeBeforeCreate = bonusRepository.findAll().size();
+		// Create the Bonus
 
-        // Validate the Bonus in the database
-        List<Bonus> bonusList = bonusRepository.findAll();
-        assertThat(bonusList).hasSize(databaseSizeBeforeCreate + 1);
-        Bonus testBonus = bonusList.get(bonusList.size() - 1);
-        assertThat(testBonus.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testBonus.getExtension()).isEqualTo(DEFAULT_EXTENSION);
-    }
+		restBonusMockMvc.perform(MockMvcRequestBuilders.multipart("/api/bonuses").file(getMPF()))
+				.andExpect(status().isCreated());
 
-    @Test
-    @Transactional
-    public void createBonusWithExistingId() throws Exception {
-        int databaseSizeBeforeCreate = bonusRepository.findAll().size();
+		// Validate the Bonus in the database
+		List<Bonus> bonusList = bonusRepository.findAll();
+		assertThat(bonusList).hasSize(databaseSizeBeforeCreate + 1);
+		Bonus testBonus = bonusList.get(bonusList.size() - 1);
+		assertThat(testBonus.getName()).isEqualTo(DEFAULT_NAME);
+		assertThat(testBonus.getExtension()).isEqualTo(DEFAULT_EXTENSION);
+	}
 
-        // Create the Bonus with an existing ID
-        bonus.setId(1L);
-        BonusDTO bonusDTO = bonusMapper.toDto(bonus);
+	private MockMultipartFile getMPF() {
+		return new MockMultipartFile(DEFAULT_NAME, DEFAULT_NAME + "." + DEFAULT_EXTENSION, MediaType.TEXT_PLAIN_VALUE,
+				"some xml".getBytes());
+	}
 
-        // An entity with an existing ID cannot be created, so this API call must fail
-        restBonusMockMvc.perform(post("/api/bonuses")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(bonusDTO)))
-            .andExpect(status().isBadRequest());
+	private MockMultipartFile getMPFUpdated() {
+		return new MockMultipartFile(DEFAULT_NAME, UPDATED_NAME + "." + UPDATED_EXTENSION,
+				MediaType.APPLICATION_PDF_VALUE, "some xml".getBytes());
+	}
 
-        // Validate the Bonus in the database
-        List<Bonus> bonusList = bonusRepository.findAll();
-        assertThat(bonusList).hasSize(databaseSizeBeforeCreate);
-    }
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void createBonusWithExistingId() throws Exception {
+		int databaseSizeBeforeCreate = bonusRepository.findAll().size();
 
+		// Create the Bonus with an existing ID
+		bonus.setId(1L);
+		BonusDTO bonusDTO = bonusMapper.toDto(bonus);
 
-    @Test
-    @Transactional
-    public void getAllBonuses() throws Exception {
-        // Initialize the database
-        bonusRepository.saveAndFlush(bonus);
+		// An entity with an existing ID cannot be created, so this API call must fail
+		restBonusMockMvc.perform(post("/api/bonuses").contentType(MediaType.MULTIPART_FORM_DATA)
+				.content(TestUtil.convertObjectToJsonBytes(bonusDTO))).andExpect(status().isBadRequest());
 
-        // Get all the bonusList
-        restBonusMockMvc.perform(get("/api/bonuses?sort=id,desc"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(bonus.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].extension").value(hasItem(DEFAULT_EXTENSION)));
-    }
-    
-    @Test
-    @Transactional
-    public void getBonus() throws Exception {
-        // Initialize the database
-        bonusRepository.saveAndFlush(bonus);
+		// Validate the Bonus in the database
+		List<Bonus> bonusList = bonusRepository.findAll();
+		assertThat(bonusList).hasSize(databaseSizeBeforeCreate);
+	}
 
-        // Get the bonus
-        restBonusMockMvc.perform(get("/api/bonuses/{id}", bonus.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(bonus.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.extension").value(DEFAULT_EXTENSION));
-    }
-    @Test
-    @Transactional
-    public void getNonExistingBonus() throws Exception {
-        // Get the bonus
-        restBonusMockMvc.perform(get("/api/bonuses/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
-    }
+	@Test
+	@Transactional
+	public void getAllBonuses() throws Exception {
+		// Initialize the database
+		bonusRepository.saveAndFlush(bonus);
 
-    @Test
-    @Transactional
-    public void updateBonus() throws Exception {
-        // Initialize the database
-        bonusRepository.saveAndFlush(bonus);
+		// Get all the bonusList
+		restBonusMockMvc.perform(get("/api/bonuses?sort=id,desc")).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(jsonPath("$.[*].id").value(hasItem(bonus.getId().intValue())))
+				.andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+				.andExpect(jsonPath("$.[*].extension").value(hasItem(DEFAULT_EXTENSION)));
+	}
 
-        int databaseSizeBeforeUpdate = bonusRepository.findAll().size();
+	@Test
+	@Transactional
+	public void getBonus() throws Exception {
+		// Initialize the database
+		bonusRepository.saveAndFlush(bonus);
 
-        // Update the bonus
-        Bonus updatedBonus = bonusRepository.findById(bonus.getId()).get();
-        // Disconnect from session so that the updates on updatedBonus are not directly saved in db
-        em.detach(updatedBonus);
-        updatedBonus
-            .name(UPDATED_NAME)
-            .extension(UPDATED_EXTENSION);
-        BonusDTO bonusDTO = bonusMapper.toDto(updatedBonus);
+		// Get the bonus
+		restBonusMockMvc.perform(get("/api/bonuses/{id}", bonus.getId())).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(jsonPath("$.id").value(bonus.getId().intValue()))
+				.andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+				.andExpect(jsonPath("$.extension").value(DEFAULT_EXTENSION));
+	}
 
-        restBonusMockMvc.perform(put("/api/bonuses")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(bonusDTO)))
-            .andExpect(status().isOk());
+	@Test
+	@Transactional
+	public void getNonExistingBonus() throws Exception {
+		// Get the bonus
+		restBonusMockMvc.perform(get("/api/bonuses/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
+	}
 
-        // Validate the Bonus in the database
-        List<Bonus> bonusList = bonusRepository.findAll();
-        assertThat(bonusList).hasSize(databaseSizeBeforeUpdate);
-        Bonus testBonus = bonusList.get(bonusList.size() - 1);
-        assertThat(testBonus.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testBonus.getExtension()).isEqualTo(UPDATED_EXTENSION);
-    }
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void updateBonus() throws Exception {
+		// Initialize the database
+		bonusRepository.saveAndFlush(bonus);
 
-    @Test
-    @Transactional
-    public void updateNonExistingBonus() throws Exception {
-        int databaseSizeBeforeUpdate = bonusRepository.findAll().size();
+		int databaseSizeBeforeUpdate = bonusRepository.findAll().size();
 
-        // Create the Bonus
-        BonusDTO bonusDTO = bonusMapper.toDto(bonus);
+		// Update the bonus
+		Bonus updatedBonus = bonusRepository.findById(bonus.getId()).get();
+		// Disconnect from session so that the updates on updatedBonus are not directly
+		// saved in db
+		MockMultipartHttpServletRequestBuilder builder = MockMvcRequestBuilders.multipart("/api/bonuses");
 
-        // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restBonusMockMvc.perform(put("/api/bonuses")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(bonusDTO)))
-            .andExpect(status().isBadRequest());
+		builder.with(new RequestPostProcessor() {
+			@Override
+			public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
+				request.setMethod("PUT");
+				return request;
+			}
+		});
 
-        // Validate the Bonus in the database
-        List<Bonus> bonusList = bonusRepository.findAll();
-        assertThat(bonusList).hasSize(databaseSizeBeforeUpdate);
-    }
+		restBonusMockMvc.perform(builder.file(getMPFUpdated()).param("id", updatedBonus.getId().toString()))
+				.andExpect(status().isOk());
 
-    @Test
-    @Transactional
-    public void deleteBonus() throws Exception {
-        // Initialize the database
-        bonusRepository.saveAndFlush(bonus);
+		// Validate the Bonus in the database
+		List<Bonus> bonusList = bonusRepository.findAll();
+		assertThat(bonusList).hasSize(databaseSizeBeforeUpdate);
+		Bonus testBonus = bonusList.get(bonusList.size() - 1);
+		assertThat(testBonus.getName()).isEqualTo(UPDATED_NAME);
+		assertThat(testBonus.getExtension()).isEqualTo(UPDATED_EXTENSION);
+	}
 
-        int databaseSizeBeforeDelete = bonusRepository.findAll().size();
+	@Test
+	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
+	public void updateNonExistingBonus() throws Exception {
+		int databaseSizeBeforeUpdate = bonusRepository.findAll().size();
 
-        // Delete the bonus
-        restBonusMockMvc.perform(delete("/api/bonuses/{id}", bonus.getId())
-            .accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isNoContent());
+		// Create the Bonus
+		BonusDTO bonusDTO = bonusMapper.toDto(bonus);
 
-        // Validate the database contains one less item
-        List<Bonus> bonusList = bonusRepository.findAll();
-        assertThat(bonusList).hasSize(databaseSizeBeforeDelete - 1);
-    }
+		// If the entity doesn't have an ID, it will throw BadRequestAlertException
+		restBonusMockMvc.perform(put("/api/bonuses").contentType(MediaType.MULTIPART_FORM_DATA)
+				.content(TestUtil.convertObjectToJsonBytes(bonusDTO))).andExpect(status().isBadRequest());
+
+		// Validate the Bonus in the database
+		List<Bonus> bonusList = bonusRepository.findAll();
+		assertThat(bonusList).hasSize(databaseSizeBeforeUpdate);
+	}
+
+	@Test
+	@Transactional
+	public void deleteBonus() throws Exception {
+		// Initialize the database
+		bonusRepository.saveAndFlush(bonus);
+
+		int databaseSizeBeforeDelete = bonusRepository.findAll().size();
+
+		// Delete the bonus
+		restBonusMockMvc.perform(delete("/api/bonuses/{id}", bonus.getId()).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
+
+		// Validate the database contains one less item
+		List<Bonus> bonusList = bonusRepository.findAll();
+		assertThat(bonusList).hasSize(databaseSizeBeforeDelete - 1);
+	}
 }

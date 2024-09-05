@@ -16,8 +16,9 @@
       "detail": {
         "title": "Bonus"
       },
-      "name": "Name",
-      "extension": "Extension"
+      "name": "Nom",
+      "extension": "Extension",
+      "book": "Livre"
     }
   }
 }

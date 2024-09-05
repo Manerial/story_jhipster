@@ -17,7 +17,7 @@
                 aria-label="Rechercher">
         </form>
         <ul class="navbar-nav">
-            <div *ngIf="router.url.includes('/reader/book/')">
+            <!-- <div *ngIf="router.url.includes('/reader/book/')">
                 <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active"
                     [routerLinkActiveOptions]="{ exact: true }">
                     <a class="nav-link" (click)="toggleBookImage();collapseNavbar()">
@@ -31,7 +31,7 @@
                         </span>
                     </a>
                 </li>
-            </div>
+            </div> -->
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
@@ -133,6 +133,12 @@
                         </a>
                     </li>
                     <li>
+                        <a class="dropdown-item" routerLink="bonus" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.bonus">Bonus</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item" routerLink="entities/idea" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
@@ -144,12 +150,6 @@
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.wordAnalysis">Word Analysis</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="bonus" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.bonus">Bonus</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->

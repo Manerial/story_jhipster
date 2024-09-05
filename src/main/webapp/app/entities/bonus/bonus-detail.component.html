@@ -16,6 +16,10 @@
                 <dd>
                     <span>{{ bonus.extension }}</span>
                 </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.bonus.book">Book</span></dt>
+                <dd>
+                    <a [routerLink]="['/entities/book', bonus.bookId, 'view']">{{ bonus.bookId }}</a>
+                </dd>
             </dl>
 
             <button type="submit"
