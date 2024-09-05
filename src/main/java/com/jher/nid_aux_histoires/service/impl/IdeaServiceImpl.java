@@ -18,6 +18,7 @@ import com.jher.nid_aux_histoires.service.WordAnalysisService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.Random_Interface;
 import com.jher.nid_aux_histoires.service.mapper.IdeaMapper;
+import com.jher.nid_aux_histoires.service.tool.CreatureGenerator;
 import com.jher.nid_aux_histoires.service.tool.HonoraryTitleGenerator;
 import com.jher.nid_aux_histoires.service.tool.LocationGenerator;
 import com.jher.nid_aux_histoires.service.tool.ObjectGenerator;
@@ -93,6 +94,9 @@ public class IdeaServiceImpl implements IdeaService {
 			break;
 		case honorary_title:
 			ideaGenerator = new HonoraryTitleGenerator(ideaRepository);
+			break;
+		case creature:
+			ideaGenerator = new CreatureGenerator(ideaRepository, wordAnalysisService);
 			break;
 		default:
 			return objects;

@@ -17,6 +17,13 @@ public enum REG_Element {
 	job,
 	race,
 	
+	// Creature
+	move,
+	skin,
+	diet,
+	attribute,
+	skill,
+	
 	// Writing Option
 	style,
 	theme,

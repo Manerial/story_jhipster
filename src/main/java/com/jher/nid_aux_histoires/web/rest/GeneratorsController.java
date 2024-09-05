@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.WordAnalysisService;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.R_CreatureDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_LocationDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_ObjectDTO;
 import com.jher.nid_aux_histoires.service.dto.idea_generator.R_PersonaDTO;
@@ -53,8 +54,22 @@ public class GeneratorsController {
 	@PostMapping("/generate/personas")
 	public ResponseEntity<List<Random_Interface>> generatePersonas(@RequestParam int number,
 			@Valid @RequestBody R_PersonaDTO constraint) {
-		List<Random_Interface> generatedWords = ideaService.generate(number, REG_Entity.persona, constraint);
-		return ResponseEntity.ok().body(generatedWords);
+		List<Random_Interface> generatedPersonas = ideaService.generate(number, REG_Entity.persona, constraint);
+		return ResponseEntity.ok().body(generatedPersonas);
+	}
+
+	/**
+	 * Génère une liste de créatures
+	 * 
+	 * @param number     : nombre d'entités à créer
+	 * @param constraint : entité contenant des contraintes à respecter
+	 * @return une réponse contenant la liste des entités
+	 */
+	@PostMapping("/generate/creatures")
+	public ResponseEntity<List<Random_Interface>> generateCreatures(@RequestParam int number,
+			@Valid @RequestBody R_CreatureDTO constraint) {
+		List<Random_Interface> generatedCreatures = ideaService.generate(number, REG_Entity.creature, constraint);
+		return ResponseEntity.ok().body(generatedCreatures);
 	}
 
 	/**
@@ -65,8 +80,8 @@ public class GeneratorsController {
 	 */
 	@PostMapping("/generate/honorary_titles")
 	public ResponseEntity<List<Random_Interface>> generateHonoraryTitles(@RequestParam int number) {
-		List<Random_Interface> generatedWords = ideaService.generate(number, REG_Entity.honorary_title, null);
-		return ResponseEntity.ok().body(generatedWords);
+		List<Random_Interface> generatedHonoraryTitles = ideaService.generate(number, REG_Entity.honorary_title, null);
+		return ResponseEntity.ok().body(generatedHonoraryTitles);
 	}
 
 	/**
@@ -93,8 +108,8 @@ public class GeneratorsController {
 	@PostMapping("/generate/objects")
 	public ResponseEntity<List<Random_Interface>> generateObject(@RequestParam int number,
 			@Valid @RequestBody R_ObjectDTO constraint) {
-		List<Random_Interface> generatedObject = ideaService.generate(number, REG_Entity.object, constraint);
-		return ResponseEntity.ok().body(generatedObject);
+		List<Random_Interface> generatedObjects = ideaService.generate(number, REG_Entity.object, constraint);
+		return ResponseEntity.ok().body(generatedObjects);
 	}
 
 	/**

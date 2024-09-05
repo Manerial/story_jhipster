@@ -1,7 +1,8 @@
 package com.jher.nid_aux_histoires.service.tool;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.jher.nid_aux_histoires.domain.Idea;
 import com.jher.nid_aux_histoires.repository.IdeaRepository;
@@ -22,22 +23,20 @@ public abstract class RandomEntityGenerator {
 		return (!stringEmpty(defaultValue)) ? defaultValue : getRandomIdeaByType(type).getValue();
 	}
 
-	protected List<String> getDefaultOrRandom(List<String> defaultValues, String type, int defaultMin, int defaultMax) {
+	protected Set<String> getDefaultOrRandom(Set<String> defaultValues, REG_Element type, int defaultMin,
+			int defaultMax) {
 		if (defaultValues != null && defaultValues.size() > 0) {
 			return defaultValues;
 		}
-		List<String> ideas = new ArrayList<String>();
-		List<Idea> ideaResources = ideaRepository.findByType(type);
+		Set<String> ideas = new TreeSet<String>();
+		List<Idea> ideaResources = ideaRepository.findByType(type.toString());
 		int number = (int) RNG.getRandomIntoInterval(defaultMin, defaultMax);
 		if (number == 0) {
 			ideas.add("Aucun");
 		}
 		while (ideas.size() < number) {
 			int index = RNG.getRandBelow(ideaResources.size());
-			String hasSash = (ideas.size() < number - 1) ? "," : "";
-			if (!ideas.contains(ideaResources.get(index).getValue())) {
-				ideas.add(ideaResources.get(index).getValue() + hasSash);
-			}
+			ideas.add(ideaResources.get(index).getValue());
 		}
 		return ideas;
 	}

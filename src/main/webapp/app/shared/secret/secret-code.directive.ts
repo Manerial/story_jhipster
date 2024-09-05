@@ -27,7 +27,7 @@ export class SecretCodeDirective {
       this.sequence.forEach((element, index) => {
         element.push(event.key.toString());
         // eslint-disable-next-line no-console
-        console.log(event.key.toString());
+        // console.log(event.key.toString());
 
         if (element.length > this.secretCode[index].length) {
           element.shift();
