@@ -10,11 +10,11 @@
 	</div>
 	<div [ngbCollapse]="collapseSummary">
 		<div *ngIf="!isLoading">
-			<h2 (click)="changeBook(book.id)">
+			<h2 (click)="changeBook(book.id, book.name)">
 				{{book.name}}
 			</h2>
 			<div *ngFor="let part of book.parts">
-				<h3 (click)="toggleCollapsePart(part.id); changePart(part.id)">
+				<h3 (click)="toggleCollapsePart(part.id); changePart(part.id, part.name)">
 					{{part.name}}
 					<span *ngIf="!forceOpenAll()">
 						<fa-icon icon="angle-up" *ngIf="!collapseParts[part.id]"></fa-icon>
@@ -23,7 +23,7 @@
 				</h3>
 				<div [ngbCollapse]="isPartCollapse(part.id)">
 					<div *ngFor="let chapter of part.chapters">
-						<h4 (click)="changeChapter(chapter.id)">{{chapter.number}} {{chapter.name}}</h4>
+						<h4 (click)="changeChapter(chapter.id, chapter.name)">{{chapter.number}} {{chapter.name}}</h4>
 					</div>
 				</div>
 			</div>

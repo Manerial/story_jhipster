@@ -15,5 +15,8 @@
     "previous": "Précédent",
     "next": "Suivant",
     "author": "Auteur : "
+  },
+  "image": {
+    "no_image": "Pas d'image pour \"{{ entityName }}\""
   }
 }

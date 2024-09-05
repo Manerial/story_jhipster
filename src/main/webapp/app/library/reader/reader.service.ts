@@ -24,6 +24,10 @@ export class ReaderService {
   public currentChapterIdObs = this.chapterSource.asObservable();
   public currentChapterId: number | undefined;
 
+  private entitySource = new BehaviorSubject('');
+  public currentEntityNameObs = this.entitySource.asObservable();
+  public currentEntityName: string | undefined;
+
   constructor() {}
 
   getBookObservable(): Observable<EntityResponseType> {
@@ -35,8 +39,6 @@ export class ReaderService {
   }
 
   changeBook(bookId: number): void {
-    // eslint-disable-next-line no-console
-    console.log('entity : book, id : ' + bookId);
     this.partSource.next('');
     this.chapterSource.next('');
     this.currentBookId = bookId;
@@ -44,8 +46,6 @@ export class ReaderService {
   }
 
   changePart(partId: number): void {
-    // eslint-disable-next-line no-console
-    console.log('entity : part, id : ' + partId);
     this.bookSource.next('');
     this.chapterSource.next('');
     this.currentPartId = partId;
@@ -53,12 +53,15 @@ export class ReaderService {
   }
 
   changeChapter(chapterId: number): void {
-    // eslint-disable-next-line no-console
-    console.log('entity : chapter, id : ' + chapterId);
     this.bookSource.next('');
     this.partSource.next('');
     this.currentChapterId = chapterId;
     this.chapterSource.next(chapterId.toString());
+  }
+
+  changeEntity(entityName: string): void {
+    this.currentEntityName = entityName;
+    this.entitySource.next(entityName);
   }
 
   changeChapterNumber(variance: number): void {

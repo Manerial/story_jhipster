@@ -11,18 +11,18 @@ import { UtilService } from 'app/shared/util/util.service';
 export class ImageViewerComponent implements OnInit {
   public isLoading = true;
   public imageId = 0;
-  public imageElement = new HTMLImageElement();
+  public imageElement!: HTMLImageElement;
 
   constructor(public acRoute: ActivatedRoute, public imageService: ImageService, private utilService: UtilService) {}
 
   ngOnInit(): void {
     this.acRoute.paramMap.subscribe(params => {
       this.imageId = this.utilService.getParamNumber(params, 'imageId');
+      this.imageElement = document.getElementById('imageViewer') as HTMLImageElement;
 
       this.imageService.find(this.imageId).subscribe(response => {
         if (!response.body) throw 'No image found';
 
-        this.imageElement = document.getElementById('imageViewer') as HTMLImageElement;
         this.imageElement.src = 'data:image/jpg;base64,' + response.body.picture;
         // Give the time to the image to load
         setTimeout(() => {

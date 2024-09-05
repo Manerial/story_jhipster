@@ -36,18 +36,21 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  changeBook(id: number): void {
+  changeBook(id: number, name: string): void {
     this.readerService.changeBook(id);
+    this.readerService.changeEntity(name);
     this.checkCollapseSommaire();
   }
 
-  changePart(id: number): void {
+  changePart(id: number, name: string): void {
     this.readerService.changePart(id);
+    this.readerService.changeEntity(name);
     this.checkCollapseSommaire();
   }
 
-  changeChapter(id: number): void {
+  changeChapter(id: number, name: string): void {
     this.readerService.changeChapter(id);
+    this.readerService.changeEntity(name);
     this.checkCollapseSommaire();
   }
 
