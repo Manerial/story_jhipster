@@ -39,7 +39,7 @@ export const ideaRoute: Routes = [
     path: '',
     component: IdeaComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       defaultSort: 'id,asc',
       pageTitle: 'nidAuxHistoiresApp.idea.home.title',
     },
@@ -52,7 +52,7 @@ export const ideaRoute: Routes = [
       idea: IdeaResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.idea.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -64,7 +64,7 @@ export const ideaRoute: Routes = [
       idea: IdeaResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.idea.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -76,7 +76,7 @@ export const ideaRoute: Routes = [
       idea: IdeaResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.idea.home.title',
     },
     canActivate: [UserRouteAccessService],

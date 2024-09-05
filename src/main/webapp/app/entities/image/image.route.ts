@@ -39,7 +39,7 @@ export const imageRoute: Routes = [
     path: '',
     component: ImageComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       defaultSort: 'id,asc',
       pageTitle: 'nidAuxHistoiresApp.image.home.title',
     },
@@ -52,7 +52,7 @@ export const imageRoute: Routes = [
       image: ImageResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.image.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -64,7 +64,7 @@ export const imageRoute: Routes = [
       image: ImageResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.image.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -76,7 +76,7 @@ export const imageRoute: Routes = [
       image: ImageResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.image.home.title',
     },
     canActivate: [UserRouteAccessService],

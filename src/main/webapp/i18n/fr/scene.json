@@ -2,19 +2,19 @@
   "nidAuxHistoiresApp": {
     "scene": {
       "home": {
-        "title": "Scenes",
-        "createLabel": "Créer un nouveau Scene",
-        "createOrEditLabel": "Créer ou éditer un Scene",
-        "notFound": "Aucun Scene trouvé"
+        "title": "Scènes",
+        "createLabel": "Créer une nouvelle Scène",
+        "createOrEditLabel": "Créer ou éditer une Scène",
+        "notFound": "Aucune Scène trouvé"
       },
-      "created": "Un nouveau Scene a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Scene avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Scene avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Scène a été créé avec l'identifiant {{ param }}",
+      "updated": "La Scène avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La Scène avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer la Scene {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer la Scène {{ id }} ?"
       },
       "detail": {
-        "title": "Scene"
+        "title": "Scène"
       },
       "name": "Nom",
       "number": "Numéro",

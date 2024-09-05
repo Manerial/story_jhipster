@@ -45,7 +45,7 @@ public class Part implements Serializable {
 	@Column(name = "number")
 	private Integer number;
 
-	@OneToMany(mappedBy = "part", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "part", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Chapter> chapters = new HashSet<>();
 

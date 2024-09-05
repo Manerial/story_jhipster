@@ -2,26 +2,26 @@
   "nidAuxHistoiresApp": {
     "part": {
       "home": {
-        "title": "Parts",
-        "createLabel": "Créer un nouveau Part",
-        "createOrEditLabel": "Créer ou éditer un Part",
-        "notFound": "Aucun Part trouvé"
+        "title": "Parties",
+        "createLabel": "Créer une nouvelle Partie",
+        "createOrEditLabel": "Créer ou éditer un Partie",
+        "notFound": "Aucun Partie trouvé"
       },
-      "created": "Un nouveau Part a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Part avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Part avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouveau Partie a été créé avec l'identifiant {{ param }}",
+      "updated": "La Partie avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La Partie avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Part {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer la Partie {{ id }} ?"
       },
       "detail": {
-        "title": "Part"
+        "title": "Partie"
       },
-      "name": "Name",
+      "name": "Nom",
       "description": "Description",
-      "number": "Number",
-      "chapter": "Chapter",
+      "number": "Numéro",
+      "chapter": "Chapitre",
       "image": "Image",
-      "book": "Book"
+      "book": "Livre"
     }
   }
 }

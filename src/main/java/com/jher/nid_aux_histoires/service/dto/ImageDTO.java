@@ -1,99 +1,97 @@
 package com.jher.nid_aux_histoires.service.dto;
 
 import java.io.Serializable;
+
 import javax.persistence.Lob;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Image} entity.
  */
 public class ImageDTO implements Serializable {
-    
-    private Long id;
 
-    private String name;
+	private Long id;
 
-    @Lob
-    private byte[] picture;
+	private String name;
 
-    private String pictureContentType;
-    @Lob
-    private byte[] preview;
+	@Lob
+	private byte[] picture;
 
-    private String previewContentType;
-    
-    public Long getId() {
-        return id;
-    }
+	private String pictureContentType;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Lob
+	private byte[] preview;
 
-    public String getName() {
-        return name;
-    }
+	private String previewContentType;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public byte[] getPicture() {
-        return picture;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setPicture(byte[] picture) {
-        this.picture = picture;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getPictureContentType() {
-        return pictureContentType;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setPictureContentType(String pictureContentType) {
-        this.pictureContentType = pictureContentType;
-    }
+	public byte[] getPicture() {
+		return picture;
+	}
 
-    public byte[] getPreview() {
-        return preview;
-    }
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
+	}
 
-    public void setPreview(byte[] preview) {
-        this.preview = preview;
-    }
+	public String getPictureContentType() {
+		return pictureContentType;
+	}
 
-    public String getPreviewContentType() {
-        return previewContentType;
-    }
+	public void setPictureContentType(String pictureContentType) {
+		this.pictureContentType = pictureContentType;
+	}
 
-    public void setPreviewContentType(String previewContentType) {
-        this.previewContentType = previewContentType;
-    }
+	public byte[] getPreview() {
+		return preview;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof ImageDTO)) {
-            return false;
-        }
+	public void setPreview(byte[] preview) {
+		this.preview = preview;
+	}
 
-        return id != null && id.equals(((ImageDTO) o).id);
-    }
+	public String getPreviewContentType() {
+		return previewContentType;
+	}
 
-    @Override
-    public int hashCode() {
-        return 31;
-    }
+	public void setPreviewContentType(String previewContentType) {
+		this.previewContentType = previewContentType;
+	}
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "ImageDTO{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", picture='" + getPicture() + "'" +
-            ", preview='" + getPreview() + "'" +
-            "}";
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof ImageDTO)) {
+			return false;
+		}
+
+		return id != null && id.equals(((ImageDTO) o).id);
+	}
+
+	@Override
+	public int hashCode() {
+		return 31;
+	}
+
+	// prettier-ignore
+	@Override
+	public String toString() {
+		return "ImageDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", picture='" + getPicture() + "'"
+				+ ", preview='" + getPreview() + "'" + "}";
+	}
 }

@@ -2,25 +2,26 @@
   "nidAuxHistoiresApp": {
     "book": {
       "home": {
-        "title": "Books",
-        "createLabel": "Créer un nouveau Book",
-        "createOrEditLabel": "Créer ou éditer un Book",
-        "notFound": "Aucun Book trouvé"
+        "title": "Livres",
+        "createLabel": "Créer un nouveau Livre",
+        "createOrEditLabel": "Créer ou éditer un Livre",
+        "notFound": "Aucun Livre trouvé"
       },
-      "created": "Un nouveau Book a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Book avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Book avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Livre a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Livre avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Livre avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Book {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer le Livre {{ id }} ?"
       },
       "detail": {
-        "title": "Book"
+        "title": "Livre"
       },
-      "name": "Name",
-      "author": "Author",
-      "part": "Part",
+      "name": "Nom",
+      "author": "Auteur",
+      "description": "Description",
+      "part": "Partie",
       "image": "Image",
-      "cover": "Cover"
+      "cover": "Couverture"
     }
   }
 }

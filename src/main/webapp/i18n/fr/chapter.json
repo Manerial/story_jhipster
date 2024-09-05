@@ -2,26 +2,26 @@
   "nidAuxHistoiresApp": {
     "chapter": {
       "home": {
-        "title": "Chapters",
-        "createLabel": "Créer un nouveau Chapter",
-        "createOrEditLabel": "Créer ou éditer un Chapter",
-        "notFound": "Aucun Chapter trouvé"
+        "title": "Chapitres",
+        "createLabel": "Créer un nouveau Chapitre",
+        "createOrEditLabel": "Créer ou éditer un Chapitre",
+        "notFound": "Aucun Chapitre trouvé"
       },
-      "created": "Un nouveau Chapter a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Chapter avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Chapter avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Chapitre a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Chapitre avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Chapitre avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Chapter {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer le Chapitre {{ id }} ?"
       },
       "detail": {
-        "title": "Chapter"
+        "title": "Chapitre"
       },
-      "name": "Name",
+      "name": "Nom",
       "description": "Description",
-      "number": "Number",
-      "scene": "Scene",
+      "number": "Numéro",
+      "scene": "Scène",
       "image": "Image",
-      "part": "Part"
+      "part": "Partie"
     }
   }
 }

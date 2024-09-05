@@ -7,11 +7,13 @@ import { createRequestOption } from 'app/shared/util/request-util';
 import { IBook } from 'app/shared/model/book.model';
 
 type EntityResponseType = HttpResponse<IBook>;
+type BookResponseType = HttpResponse<Blob>;
 type EntityArrayResponseType = HttpResponse<IBook[]>;
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
   public resourceUrl = SERVER_API_URL + 'api/books';
+  public exportUrl = SERVER_API_URL + 'api/export/book/';
 
   constructor(protected http: HttpClient) {}
 
@@ -34,5 +36,9 @@ export class BookService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  download(id: number): Observable<BookResponseType> {
+    return this.http.get(`${this.exportUrl}/${id}`, { observe: 'response', responseType: 'blob' });
   }
 }

@@ -4,16 +4,17 @@
     "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.",
     "menu": {
       "home": "Accueil",
+      "library": "Bibliothèque",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entités",
-        "book": "Book",
-        "part": "Part",
-        "chapter": "Chapter",
-        "scene": "Scene",
+        "book": "Livre",
+        "part": "Partie",
+        "chapter": "Chapitre",
+        "scene": "Scène",
         "image": "Image",
-        "idea": "Idea",
-        "wordAnalysis": "Word Analysis",
+        "idea": "Idée",
+        "wordAnalysis": "Analyse de mots",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

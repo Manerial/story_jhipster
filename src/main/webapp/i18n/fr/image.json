@@ -3,27 +3,27 @@
     "image": {
       "home": {
         "title": "Images",
-        "createLabel": "Créer un nouveau Image",
-        "createOrEditLabel": "Créer ou éditer un Image",
-        "notFound": "Aucun Image trouvé"
+        "createLabel": "Créer une nouvelle Image",
+        "createOrEditLabel": "Créer ou éditer une Image",
+        "notFound": "Aucune Image trouvé"
       },
-      "created": "Un nouveau Image a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Image avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Image avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Image a été créé avec l'identifiant {{ param }}",
+      "updated": "L'Image avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'Image avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Image {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer l'Image {{ id }} ?"
       },
       "detail": {
         "title": "Image"
       },
-      "name": "Name",
-      "picture": "Picture",
-      "preview": "Preview",
-      "bookToCover": "Book To Cover",
-      "book": "Book",
-      "part": "Part",
-      "chapter": "Chapter",
-      "scene": "Scene"
+      "name": "Nom",
+      "picture": "Photo",
+      "preview": "Aperçu",
+      "bookToCover": "Livre à couvrir",
+      "book": "Livre",
+      "part": "Partie",
+      "chapter": "Chapitre",
+      "scene": "Scène"
     }
   }
 }

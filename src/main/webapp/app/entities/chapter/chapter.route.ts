@@ -39,7 +39,7 @@ export const chapterRoute: Routes = [
     path: '',
     component: ChapterComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       defaultSort: 'id,asc',
       pageTitle: 'nidAuxHistoiresApp.chapter.home.title',
     },
@@ -52,7 +52,7 @@ export const chapterRoute: Routes = [
       chapter: ChapterResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.chapter.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -64,7 +64,7 @@ export const chapterRoute: Routes = [
       chapter: ChapterResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.chapter.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -76,7 +76,7 @@ export const chapterRoute: Routes = [
       chapter: ChapterResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'nidAuxHistoiresApp.chapter.home.title',
     },
     canActivate: [UserRouteAccessService],

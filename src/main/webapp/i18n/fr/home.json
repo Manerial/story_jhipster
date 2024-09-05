@@ -5,5 +5,14 @@
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\"."
     }
+  },
+  "library": {
+    "title": "Bibliothèque",
+    "read": "Lire",
+    "download": "Télécharger",
+    "downloading": "En cours",
+    "export": {
+      "ongoing": "L'export est en cours.\r\nVeuillez patienter..."
+    }
   }
 }

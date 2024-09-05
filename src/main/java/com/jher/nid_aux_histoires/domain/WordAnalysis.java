@@ -1,11 +1,16 @@
 package com.jher.nid_aux_histoires.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import java.io.Serializable;
 
 /**
  * A WordAnalysis.
@@ -15,94 +20,91 @@ import java.io.Serializable;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class WordAnalysis implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "type")
-    private String type;
+	@Column(name = "type")
+	private String type;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "analysis")
-    private String analysis;
+	@Column(name = "analysis", columnDefinition = "TEXT")
+	private String analysis;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
-    public Long getId() {
-        return id;
-    }
+	// jhipster-needle-entity-add-field - JHipster will add fields here
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public WordAnalysis type(String type) {
-        this.type = type;
-        return this;
-    }
+	public WordAnalysis type(String type) {
+		this.type = type;
+		return this;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public WordAnalysis name(String name) {
-        this.name = name;
-        return this;
-    }
+	public WordAnalysis name(String name) {
+		this.name = name;
+		return this;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getAnalysis() {
-        return analysis;
-    }
+	public String getAnalysis() {
+		return analysis;
+	}
 
-    public WordAnalysis analysis(String analysis) {
-        this.analysis = analysis;
-        return this;
-    }
+	public WordAnalysis analysis(String analysis) {
+		this.analysis = analysis;
+		return this;
+	}
 
-    public void setAnalysis(String analysis) {
-        this.analysis = analysis;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
+	}
+	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+	// setters here
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof WordAnalysis)) {
-            return false;
-        }
-        return id != null && id.equals(((WordAnalysis) o).id);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof WordAnalysis)) {
+			return false;
+		}
+		return id != null && id.equals(((WordAnalysis) o).id);
+	}
 
-    @Override
-    public int hashCode() {
-        return 31;
-    }
+	@Override
+	public int hashCode() {
+		return 31;
+	}
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "WordAnalysis{" +
-            "id=" + getId() +
-            ", type='" + getType() + "'" +
-            ", name='" + getName() + "'" +
-            ", analysis='" + getAnalysis() + "'" +
-            "}";
-    }
+	// prettier-ignore
+	@Override
+	public String toString() {
+		return "WordAnalysis{" + "id=" + getId() + ", type='" + getType() + "'" + ", name='" + getName() + "'"
+				+ ", analysis='" + getAnalysis() + "'" + "}";
+	}
 }
