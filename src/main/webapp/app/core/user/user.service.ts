@@ -9,6 +9,7 @@ import { IUser } from './user.model';
 @Injectable({ providedIn: 'root' })
 export class UserService {
   public resourceUrl = SERVER_API_URL + 'api/users';
+  public resourceUrlLight = SERVER_API_URL + 'api/user_light';
 
   constructor(private http: HttpClient) {}
 
@@ -22,6 +23,14 @@ export class UserService {
 
   find(login: string): Observable<IUser> {
     return this.http.get<IUser>(`${this.resourceUrl}/${login}`);
+  }
+
+  findLight(login: string): Observable<IUser> {
+    return this.http.get<IUser>(`${this.resourceUrlLight}/login/${login}`);
+  }
+
+  findAuthors(): Observable<IUser[]> {
+    return this.http.get<IUser[]>(`${this.resourceUrlLight}/authors`);
   }
 
   query(req?: Pagination): Observable<HttpResponse<IUser[]>> {

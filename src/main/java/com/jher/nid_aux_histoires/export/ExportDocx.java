@@ -25,6 +25,9 @@ import org.springframework.stereotype.Service;
 import org.wickedsource.docxstamper.DocxStamper;
 import org.wickedsource.docxstamper.DocxStamperConfiguration;
 
+import com.jher.nid_aux_histoires.export.converter.ConverterEPUB;
+import com.jher.nid_aux_histoires.export.converter.ConverterInterface;
+import com.jher.nid_aux_histoires.export.converter.ConverterPDF;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
 import com.jher.nid_aux_histoires.service.dto.PartDTO;
 
@@ -42,20 +45,26 @@ public class ExportDocx {
 
 	private WordprocessingMLPackage mainDoc;
 
-	private String tempDir;
+	public static enum FILE_FORMAT {
+		DOCX, PDF, EPUB, PNG, JPG, JPEG
+	};
 
-	private static final String WORD_EXTENSION = ".docx";
+	public static enum AVAILABLE_FILE_FORMAT {
+		PDF, EPUB
+	};
+
+	public static final String TEMP_DIR = System.getProperty("user.home") + "/BooksExports/";
+	public static final String LINE_BREAK_PLACEHOLDER = "§";
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExportDocx.class);
 
-	public static final String LINE_BREAK_PLACEHOLDER = "§";
-
 	public ExportDocx() {
-		tempDir = System.getProperty("java.io.tmpdir") + "/";
+		File file = new File(TEMP_DIR);
+		file.mkdir();
 	}
 
 	public Path launchGeneration(BookDTO book)
 			throws Docx4JException, IOException, JAXBException, InvalidFormatException {
-		LOGGER.info("Début de la génération du livre {}", book.getName());
+		LOGGER.info("Début de la génération du livre WORD {}", book.getName());
 		File outputFile = buildWordFile(modelBookFileName, book.getName(), book);
 		mainDoc = Docx4J.load(outputFile);
 
@@ -63,10 +72,38 @@ public class ExportDocx {
 		appendFileList(cvJobs);
 		mainDoc.save(outputFile);
 
-		setProperties(outputFile.getPath(), book.getAuthor(), book.getName());
+		setProperties(outputFile.getPath(), book.getAuthorLogin(), book.getName());
 
-		LOGGER.info("Fin de la génération du livre");
+		LOGGER.info("Fin de la génération du livre WORD");
 		return new File(outputFile.getPath()).toPath();
+	}
+
+	public void convertWordToFormat(BookDTO book, FILE_FORMAT format)
+			throws FileNotFoundException, Docx4JException, Exception {
+
+		String bookName = book.getName();
+		LOGGER.info("Début de la génération du livre {} {}", format, bookName);
+		ConverterInterface CI = null;
+		switch (format) {
+		case EPUB:
+			CI = new ConverterEPUB();
+			break;
+		case PDF:
+			CI = new ConverterPDF();
+			break;
+		default:
+			throw new Exception("Converter not found");
+		}
+		CI.startConvertion(bookName);
+		LOGGER.info("Fin de la génération du livre {}", format);
+	}
+
+	public static String getObjectFilePath(String objectName) {
+		return getObjectFilePath(objectName, FILE_FORMAT.DOCX);
+	}
+
+	public static String getObjectFilePath(String objectName, FILE_FORMAT format) {
+		return TEMP_DIR + objectName + "." + format.toString().toLowerCase();
 	}
 
 	private List<File> generateContent(BookDTO book) throws IOException, Docx4JException {
@@ -81,9 +118,9 @@ public class ExportDocx {
 			throws IOException, FileNotFoundException, Docx4JException {
 		LOGGER.info("Chargement du fichier model : " + modelFileName);
 		WordprocessingMLPackage wordMLPackage = Docx4J.load(new java.io.File(modelFilePath + modelFileName));
-		String outputFileName = objectName + WORD_EXTENSION;
-		LOGGER.info("Chargement du fichier de sortie : " + outputFileName);
-		File outputFile = new File(tempDir + outputFileName);
+		String outputFilePath = getObjectFilePath(objectName);
+		LOGGER.info("Chargement du fichier de sortie : " + outputFilePath);
+		File outputFile = new File(outputFilePath);
 		try (OutputStream out = new FileOutputStream(outputFile)) {
 			DocxStamper stamper = buildDocxStamper();
 			stamper.stamp(wordMLPackage, object, out);
@@ -96,12 +133,16 @@ public class ExportDocx {
 
 	private void setProperties(String file, String author, String title) throws IOException, InvalidFormatException {
 		OPCPackage opc = OPCPackage.open(file);
-		PackageProperties pp = opc.getPackageProperties();
+		try {
+			PackageProperties pp = opc.getPackageProperties();
 
-		pp.setCreatorProperty(author);
-		pp.setTitleProperty(title);
+			pp.setCreatorProperty(author);
+			pp.setTitleProperty(title);
+		} catch (Exception e) {
 
-		opc.close();
+		} finally {
+			opc.close();
+		}
 	}
 
 	private void appendFileList(List<File> files) throws IOException, Docx4JException {

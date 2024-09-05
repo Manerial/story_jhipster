@@ -1,0 +1,31 @@
+{
+  "nidAuxHistoiresApp": {
+    "bonus": {
+      "home": {
+        "title": "Bonuses",
+        "createLabel": "Create a new Bonus",
+        "createOrEditLabel": "Create or edit a Bonus",
+        "notFound": "No Bonuses found"
+      },
+      "created": "A new Bonus is created with identifier {{ param }}",
+      "updated": "A Bonus is updated with identifier {{ param }}",
+      "deleted": "A Bonus is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete the Bonus {{ id }}?"
+      },
+      "detail": {
+        "title": "Bonus"
+      },
+      "name": "Name",
+      "file": "File",
+      "description": "Description",
+      "dataContentType": "Data Content Type",
+      "book": "Book",
+      "owner": "Owner",
+      "required": {
+        "name": "Field Name is required",
+        "book": "Field Book is required"
+      }
+    }
+  }
+}

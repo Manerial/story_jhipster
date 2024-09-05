@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="comment">
+            <h2><span jhiTranslate="nidAuxHistoiresApp.comment.detail.title">Comment</span> {{ comment.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="nidAuxHistoiresApp.comment.text">Text</span></dt>
+                <dd>
+                    <span>{{ comment.text }}</span>
+                </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.comment.book">Book</span></dt>
+                <dd>
+                    <div *ngIf="comment.bookId">
+                        <a [routerLink]="['/entities/book', comment.bookId, 'view']">{{ comment.bookId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.comment.user">User</span></dt>
+                <dd>
+                    <div *ngIf="comment.userLogin">
+                        <a [routerLink]="['/admin/user-management', comment.userLogin, 'view']">{{ comment.userLogin }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/entities/comment', comment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -53,7 +53,7 @@ export class WordAnalysisUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): IWordAnalysis {
+  private createFromForm(): any {
     return {
       ...new WordAnalysis(),
       id: this.editForm.get(['id'])!.value,

@@ -53,7 +53,7 @@ export class IdeaUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): IIdea {
+  private createFromForm(): any {
     return {
       ...new Idea(),
       id: this.editForm.get(['id'])!.value,

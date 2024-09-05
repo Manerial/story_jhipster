@@ -1,7 +1,6 @@
 package com.jher.nid_aux_histoires.web.rest;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,12 +19,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.BookService;
+import com.jher.nid_aux_histoires.service.CoverService;
+import com.jher.nid_aux_histoires.service.ExportService;
 import com.jher.nid_aux_histoires.service.dto.BookDTO;
+import com.jher.nid_aux_histoires.service.dto.CoverDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -48,8 +50,14 @@ public class BookResource {
 
 	private final BookService bookService;
 
-	public BookResource(BookService bookService) {
+	private final CoverService coverService;
+
+	private final ExportService exportService;
+
+	public BookResource(BookService bookService, CoverService coverService, ExportService exportService) {
 		this.bookService = bookService;
+		this.coverService = coverService;
+		this.exportService = exportService;
 	}
 
 	/**
@@ -59,11 +67,12 @@ public class BookResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new bookDTO, or with status {@code 400 (Bad Request)} if the
 	 *         book has already an ID.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception bad request
 	 */
 	@PostMapping("/books")
-	public ResponseEntity<BookDTO> createBook(@RequestBody BookDTO bookDTO) throws URISyntaxException {
+	public ResponseEntity<BookDTO> createBook(@RequestBody BookDTO bookDTO) throws Exception {
 		log.debug("REST request to save Book : {}", bookDTO);
+		checkBook(bookDTO);
 		if (bookDTO.getId() != null) {
 			throw new BadRequestAlertException("A new book cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -81,15 +90,17 @@ public class BookResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new bookDTO, or with status {@code 400 (Bad Request)} if the
 	 *         book has already an ID.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception bad request
 	 */
 	@PostMapping("/books/import")
-	public ResponseEntity<BookDTO> importBook(@RequestBody BookDTO bookDTO) throws URISyntaxException {
+	public ResponseEntity<BookDTO> importBook(@RequestBody BookDTO bookDTO) throws Exception {
 		log.debug("REST request to save Book : {}", bookDTO);
+		checkBook(bookDTO);
 		if (bookDTO.getId() != null) {
 			throw new BadRequestAlertException("A new book cannot already have an ID", ENTITY_NAME, "idexists");
 		}
 		BookDTO result = bookService.saveBash(bookDTO);
+		exportService.exportBook(result.getId());
 		return ResponseEntity
 				.created(new URI("/api/books/" + result.getId())).headers(HeaderUtil
 						.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -105,11 +116,12 @@ public class BookResource {
 	 *         bookDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the bookDTO couldn't be
 	 *         updated.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception bad request
 	 */
 	@PutMapping("/books")
-	public ResponseEntity<BookDTO> updateBook(@RequestBody BookDTO bookDTO) throws URISyntaxException {
+	public ResponseEntity<BookDTO> updateBook(@RequestBody BookDTO bookDTO) throws Exception {
 		log.debug("REST request to update Book : {}", bookDTO);
+		checkBook(bookDTO);
 		if (bookDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -120,23 +132,86 @@ public class BookResource {
 	}
 
 	/**
+	 * {@code PUT /books/visibility/{id}} : Updates an existing book visibility.
+	 *
+	 * @param id the book id to update.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+	 *         the updated bookDTO, or with status {@code 400 (Bad Request)} if the
+	 *         bookDTO is not valid, or with status
+	 *         {@code 500 (Internal Server Error)} if the bookDTO couldn't be
+	 *         updated.
+	 * @throws Exception bad request
+	 */
+	@PutMapping("/books/visibility/{id}")
+	public ResponseEntity<BookDTO> updateBookVisibility(@PathVariable Long id) throws Exception {
+		Optional<BookDTO> optBook = bookService.findOne(id);
+		log.debug("REST request to update Book : {}", optBook);
+		if (optBook.isEmpty() || optBook.get().getId() == null) {
+			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+		}
+		SecurityConfiguration.CheckLoggedUser(optBook.get().getAuthorLogin());
+		BookDTO result = bookService.changeVisibility(id);
+		return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME,
+				optBook.get().getId().toString())).body(result);
+	}
+
+	/**
 	 * {@code GET  /books} : get all the books.
 	 *
-	 * @param pageable  the pagination information.
-	 * @param eagerload flag to eager load entities from relationships (This is
-	 *                  applicable for many-to-many).
+	 * @param pageable the pagination information.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
 	 *         of books in body.
 	 */
 	@GetMapping("/books")
-	public ResponseEntity<List<BookDTO>> getAllBooks(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
-			@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+	public ResponseEntity<List<BookDTO>> getAllBooks(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable) {
 		log.debug("REST request to get a page of Books");
-		Page<BookDTO> page;
-		if (eagerload) {
-			page = bookService.findAllWithEagerRelationships(pageable);
-		} else {
+		Page<BookDTO> page = null;
+		if (SecurityConfiguration.IsAdmin()) {
 			page = bookService.findAll(pageable);
+		} else {
+			page = bookService.findAllVisible(pageable);
+		}
+		HttpHeaders headers = PaginationUtil
+				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+		return ResponseEntity.ok().headers(headers).body(page.getContent());
+	}
+
+	/**
+	 * {@code GET  /books} : get all the books.
+	 *
+	 * @param pageable the pagination information.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+	 *         of books in body.
+	 */
+	@GetMapping("/books/favorits")
+	public ResponseEntity<List<BookDTO>> getAllBooksFavorits(
+			@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable) {
+		log.debug("REST request to get a page of favorites Books");
+		Page<BookDTO> page = bookService.findAllFavoritsVisible(pageable, SecurityConfiguration.getUserLogin());
+
+		HttpHeaders headers = PaginationUtil
+				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+		return ResponseEntity.ok().headers(headers).body(page.getContent());
+	}
+
+	/**
+	 * {@code GET  /books} : get all the books.
+	 *
+	 * @param pageable the pagination information.
+	 * @param login    the author login.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+	 *         of books in body.
+	 */
+	@GetMapping("/books/author/{login}")
+	public ResponseEntity<List<BookDTO>> getBooksByAuthor(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
+			@PathVariable String login) {
+		log.debug("REST request to get a page of Books by authors");
+		Page<BookDTO> page = null;
+		try {
+			SecurityConfiguration.CheckLoggedUser(login);
+			page = bookService.findAllByAuthorId(pageable, login);
+		} catch (Exception e) {
+			page = bookService.findAllVisibleByAuthorId(pageable, login);
 		}
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -149,12 +224,34 @@ public class BookResource {
 	 * @param id the id of the bookDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the bookDTO, or with status {@code 404 (Not Found)}.
+	 * @throws Exception bad request
 	 */
 	@GetMapping("/books/{id}")
-	public ResponseEntity<BookDTO> getBook(@PathVariable Long id) {
+	public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Book : {}", id);
-		Optional<BookDTO> bookDTO = bookService.findOne(id);
-		return ResponseUtil.wrapOrNotFound(bookDTO);
+		Optional<BookDTO> optBook = bookService.findOne(id);
+		if (optBook.isPresent() && !optBook.get().getVisibility()) {
+			SecurityConfiguration.CheckLoggedUser(optBook.get().getAuthorLogin());
+		}
+		return ResponseUtil.wrapOrNotFound(optBook);
+	}
+
+	/**
+	 * {@code GET  /books/:id} : get the "id" book.
+	 *
+	 * @param id the id of the bookDTO to retrieve.
+	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+	 *         the bookDTO, or with status {@code 404 (Not Found)}.
+	 * @throws Exception bad request
+	 */
+	@GetMapping("/books/light/{id}")
+	public ResponseEntity<BookDTO> getBookLight(@PathVariable Long id) throws Exception {
+		log.debug("REST request to get Book : {}", id);
+		Optional<BookDTO> optBook = bookService.findOneLight(id);
+		if (optBook.isPresent() && !optBook.get().getVisibility()) {
+			SecurityConfiguration.CheckLoggedUser(optBook.get().getAuthorLogin());
+		}
+		return ResponseUtil.wrapOrNotFound(optBook);
 	}
 
 	/**
@@ -162,13 +259,34 @@ public class BookResource {
 	 *
 	 * @param id the id of the bookDTO to delete.
 	 * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+	 * @throws Exception bad request
 	 */
 	@DeleteMapping("/books/{id}")
-	public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteBook(@PathVariable Long id) throws Exception {
 		log.debug("REST request to delete Book : {}", id);
-		bookService.delete(id);
-		return ResponseEntity.noContent()
-				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-				.build();
+		Optional<BookDTO> optBook = bookService.findOne(id);
+		if (optBook.isPresent()) {
+			SecurityConfiguration.CheckLoggedUser(optBook.get().getAuthorLogin());
+			bookService.delete(id);
+			return ResponseEntity.noContent()
+					.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+					.build();
+		}
+		throw new BadRequestAlertException("The entity book does not exist", ENTITY_NAME, "donotexist");
+	}
+
+	private void checkBook(BookDTO bookDTO) throws Exception {
+		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
+
+		// Avoid link with other resources
+		if (bookDTO.getCoverId() != null) {
+			Optional<CoverDTO> optCover = coverService.findOne(bookDTO.getCoverId());
+			if (optCover.isPresent()) {
+				String login = optCover.get().getOwnerLogin();
+				if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
+					throw new Exception("You have no access to this resource (Cover : " + bookDTO.getCoverId() + ")");
+				}
+			}
+		}
 	}
 }

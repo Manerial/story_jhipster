@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="JHER" id="insertData_word_analysis">
+		<insert tableName="word_analysis">
+			<column name="type" value="french" />
+			<column name="name" value="français" />
+			<column name="analysis" encoding="UTF-8"
+				valueClobFile="wordAnalysis/fr.json" />
+		</insert>
+		<insert tableName="word_analysis">
+			<column name="type" value="name" />
+			<column name="name" value="noms" />
+			<column name="analysis" encoding="UTF-8"
+				valueClobFile="wordAnalysis/name.json" />
+		</insert>
+		<insert tableName="word_analysis">
+			<column name="type" value="animal" />
+			<column name="name" value="animaux" />
+			<column name="analysis" encoding="UTF-8"
+				valueClobFile="wordAnalysis/animal.json" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,27 @@
+<form *ngIf="book" name="downloadForm" (ngSubmit)="confirmDownload()">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="library.download_format.title">Select file format</h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="cancel()">&times;</button>
+    </div>
+
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <p id="jhi-download-book-heading" jhiTranslate="library.download_format.question" [translateValues]="{ entityName: book.name }">Select a file format for your download</p>
+
+        <select id="selectFormat" class="form-control" [(ngModel)]="format" name="format">
+            <option *ngFor="let formatItem of formatList" [ngValue]="formatItem">{{ formatItem | uppercase }}</option>
+        </select>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="library.download_format.cancel">Cancel</span>
+        </button>
+
+        <button id="jhi-confirm-download-book" type="submit" class="btn bkg-gold">
+            <fa-icon icon="download"></fa-icon>&nbsp;<span jhiTranslate="library.download_format.validate">Download</span>
+        </button>
+    </div>
+</form>

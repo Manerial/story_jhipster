@@ -7,12 +7,28 @@ import { NidAuxHistoiresTestModule } from '../../../test.module';
 import { BookComponent } from 'app/entities/book/book.component';
 import { BookService } from 'app/entities/book/book.service';
 import { Book } from 'app/shared/model/book.model';
+import { Account } from 'app/core/user/account.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { MockAccountService } from '../../../helpers/mock-account.service';
 
 describe('Component Tests', () => {
   describe('Book Management Component', () => {
     let comp: BookComponent;
     let fixture: ComponentFixture<BookComponent>;
     let service: BookService;
+    let mockAccount: MockAccountService;
+    const account: Account = {
+      id: 0,
+      firstName: 'John',
+      lastName: 'Doe',
+      activated: true,
+      email: 'john.doe@mail.com',
+      langKey: 'fr',
+      login: 'john',
+      authorities: [],
+      imageUrl: '',
+      introduction: '',
+    };
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -42,12 +58,14 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(BookComponent);
       comp = fixture.componentInstance;
       service = fixture.debugElement.injector.get(BookService);
+      mockAccount = TestBed.get(AccountService);
+      mockAccount.setIdentityResponse(account);
     });
 
     it('Should call load all on init', () => {
       // GIVEN
       const headers = new HttpHeaders().append('link', 'link;link');
-      spyOn(service, 'query').and.returnValue(
+      spyOn(service, 'findAllByAuthor').and.returnValue(
         of(
           new HttpResponse({
             body: [new Book(123)],
@@ -60,14 +78,14 @@ describe('Component Tests', () => {
       comp.ngOnInit();
 
       // THEN
-      expect(service.query).toHaveBeenCalled();
+      expect(service.findAllByAuthor).toHaveBeenCalled();
       expect(comp.books && comp.books[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should load a page', () => {
       // GIVEN
       const headers = new HttpHeaders().append('link', 'link;link');
-      spyOn(service, 'query').and.returnValue(
+      spyOn(service, 'findAllByAuthor').and.returnValue(
         of(
           new HttpResponse({
             body: [new Book(123)],
@@ -80,7 +98,7 @@ describe('Component Tests', () => {
       comp.loadPage(1);
 
       // THEN
-      expect(service.query).toHaveBeenCalled();
+      expect(service.findAllByAuthor).toHaveBeenCalled();
       expect(comp.books && comp.books[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 

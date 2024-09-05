@@ -1,0 +1,31 @@
+entity BookStatus {
+	finished Boolean,
+    favorit Boolean
+}
+
+entity Book {
+	name String,
+	description String,
+    visibility Boolean
+}
+
+entity Chapter {
+	name String,
+	description String,
+	number Integer
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+    Book to BookStatus{book},
+    Chapter to BookStatus{curentChapter}
+}
+
+// Set pagination options
+paginate BookStatus with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

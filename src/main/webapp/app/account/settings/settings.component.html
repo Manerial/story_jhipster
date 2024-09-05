@@ -101,6 +101,20 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" for="introduction" jhiTranslate="settings.form.introduction">Introduction</label>
+                    <textarea class="form-control" id="introduction" name="introduction" placeholder="{{ 'settings.form.introduction.placeholder' | translate }}"
+                        formControlName="introduction"></textarea>
+
+                    <div *ngIf="settingsForm.get('introduction')!.invalid && (settingsForm.get('introduction')!.dirty || settingsForm.get('introduction')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="settingsForm.get('introduction')?.errors?.maxlength"
+                               jhiTranslate="settings.messages.validate.introduction.maxlength">
+                            Your first name cannot be longer than 5000 characters.
+                        </small>
+                    </div>
+                </div>
+
                 <button type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary" jhiTranslate="settings.form.button">Save</button>
             </form>
         </div>

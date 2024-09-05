@@ -19,9 +19,14 @@
       "name": "Name",
       "description": "Description",
       "number": "Number",
-      "scene": "Scene",
-      "image": "Image",
-      "part": "Part"
+      "numberAuto": "(if < 1, will be filled in automatically)",
+      "scenes": "Scenes",
+      "part": "Part",
+      "required": {
+        "name": "Name field is required",
+        "number": "Number field is required",
+        "part": "Part field is required"
+      }
     }
   }
 }

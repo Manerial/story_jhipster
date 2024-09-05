@@ -2,15 +2,17 @@ package com.jher.nid_aux_histoires.service.dto;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Lob;
+
+import lombok.Data;
 
 /**
  * A DTO for the {@link com.jher.nid_aux_histoires.domain.Scene} entity.
  */
-public class SceneDTO implements Serializable {
+@Data
+public class SceneDTO implements Serializable, Comparable<SceneDTO> {
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
@@ -23,65 +25,7 @@ public class SceneDTO implements Serializable {
 
 	private Date timestampStart;
 
-	private Set<ImageDTO> images = new HashSet<>();
-
 	private Long chapterId;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public Date getTimestampStart() {
-		return timestampStart;
-	}
-
-	public void setTimestampStart(Date timestampStart) {
-		this.timestampStart = timestampStart;
-	}
-
-	public Set<ImageDTO> getImages() {
-		return images;
-	}
-
-	public void setImages(Set<ImageDTO> images) {
-		this.images = images;
-	}
-
-	public Long getChapterId() {
-		return chapterId;
-	}
-
-	public void setChapterId(Long chapterId) {
-		this.chapterId = chapterId;
-	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -104,7 +48,12 @@ public class SceneDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "SceneDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", number=" + getNumber() + ", text='"
-				+ getText() + "'" + ", timestampStart='" + getTimestampStart() + "'" + ", images='" + getImages() + "'"
-				+ ", chapterId=" + getChapterId() + "}";
+				+ getText() + "'" + ", timestampStart='" + getTimestampStart() + "'" + ", chapterId=" + getChapterId()
+				+ "}";
+	}
+
+	@Override
+	public int compareTo(SceneDTO o) {
+		return this.number.compareTo(o.number);
 	}
 }

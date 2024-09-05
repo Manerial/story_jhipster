@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeaService } from 'app/entities/idea/idea.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { InputPattern } from 'app/shared/util/input-pattern';
+import { GeneratorService } from '../generator.service';
 import { IPersona, Persona } from 'app/shared/model/idea-generator/persona.model';
-import { IWriting, Writing } from 'app/shared/model/idea-generator/writing.model';
+import { IWritingOption, WritingOption } from 'app/shared/model/idea-generator/writing-option.model';
+import { ILocation, Location } from 'app/shared/model/idea-generator/location.model';
+import { IObject, Object } from 'app/shared/model/idea-generator/object.model';
+import { IHonoraryTitle } from 'app/shared/model/idea-generator/honorary-title.model';
+import { ICreature, Creature } from 'app/shared/model/idea-generator/creature.model';
 
 @Component({
   selector: 'jhi-idea-generator',
@@ -9,49 +15,105 @@ import { IWriting, Writing } from 'app/shared/model/idea-generator/writing.model
   styleUrls: ['./idea-generator.component.scss'],
 })
 export class IdeaGeneratorComponent implements OnInit {
-  public type = 'persona';
-  public number = 9;
-  public writingConstraint: IWriting = new Writing();
   public personaConstraint: IPersona = new Persona();
-  public badTraitsConstraint = '';
-  public goodTraitsConstraint = '';
-  public handicapsConstraint = '';
-  public caracteristicsConstraint = '';
-  public writingList: IWriting[] = [];
-  public personaList: IPersona[] = [];
-  public hideConstraint = true;
+  public pe_badTraitsConstraint = '';
+  public pe_goodTraitsConstraint = '';
+  public pe_handicapsConstraint = '';
+  public pe_caracteristicsConstraint = '';
 
-  constructor(public ideaService: IdeaService) {}
+  public creatureConstraint: ICreature = new Creature();
+  public cr_locationConstraint = '';
+  public cr_senseConstraint = '';
+  public cr_dietConstraint = '';
+  public cr_attributeConstraint = '';
+  public cr_skillConstraint = '';
+
+  public writingOptionConstraint: IWritingOption = new WritingOption();
+  public locationConstraint: ILocation = new Location();
+  public objectConstraint: IObject = new Object();
+
+  public writingOptionList: IWritingOption[] = [];
+  public personaList: IPersona[] = [];
+  public locationList: ILocation[] = [];
+  public objectList: IObject[] = [];
+  public honoraryTitleList: IHonoraryTitle[] = [];
+  public creatureList: ICreature[] = [];
+
+  public hideConstraint = true;
+  ideaForm = this.fb.group({
+    generationTool: ['persona', [Validators.required]],
+    generationNumber: [9, [Validators.required, Validators.min(1), Validators.max(12)]],
+  });
+
+  constructor(public generatorService: GeneratorService, private fb: FormBuilder, private inputPattern: InputPattern) {}
 
   ngOnInit(): void {
     this.resetConstraint();
   }
 
   generate(): void {
+    if (!this.ideaForm.valid) {
+      return;
+    }
+    const number = this.ideaForm.get(['generationNumber'])!.value;
+    const type = this.ideaForm.get(['generationTool'])!.value;
+
     this.hideConstraint = true;
-    if (this.type === 'persona') {
+    if (type === 'persona') {
       this.turnConstraintTraitsToList();
-      this.ideaService.generatePersona(this.number, this.personaConstraint).subscribe(response => {
+      this.generatorService.generatePersona(number, this.personaConstraint).subscribe(response => {
         this.personaList = response;
       });
-    } else {
-      this.ideaService.generateWriting(this.number, this.writingConstraint).subscribe(response => {
-        this.writingList = response;
+    } else if (type === 'writing_option') {
+      this.generatorService.generateWritingOption(number, this.writingOptionConstraint).subscribe(response => {
+        this.writingOptionList = response;
+      });
+    } else if (type === 'location') {
+      this.generatorService.generateLocation(number, this.locationConstraint).subscribe(response => {
+        this.locationList = response;
+      });
+    } else if (type === 'object') {
+      this.generatorService.generateObject(number, this.objectConstraint).subscribe(response => {
+        this.objectList = response;
+      });
+    } else if (type === 'honorary_title') {
+      this.generatorService.generateHonoraryTitle(number).subscribe(response => {
+        this.honoraryTitleList = response;
+      });
+    } else if (type === 'creature') {
+      this.turnConstraintCreatureToList();
+      this.generatorService.generateCreature(number, this.creatureConstraint).subscribe(response => {
+        this.creatureList = response;
       });
     }
   }
 
   resetConstraint(): void {
-    this.writingConstraint = new Writing();
+    this.writingOptionConstraint = new WritingOption();
     this.personaConstraint = new Persona();
+    this.locationConstraint = new Location();
+    this.objectConstraint = new Object();
   }
 
   turnConstraintTraitsToList(): void {
-    if (!this.personaConstraint.traits) throw 'no traits found';
-    this.personaConstraint.traits.badTraits = this.badTraitsConstraint.length > 0 ? this.badTraitsConstraint.split(', ') : [];
-    this.personaConstraint.traits.goodTraits = this.goodTraitsConstraint.length > 0 ? this.goodTraitsConstraint.split(', ') : [];
-    this.personaConstraint.traits.caracteristics =
-      this.caracteristicsConstraint.length > 0 ? this.caracteristicsConstraint.split(', ') : [];
-    this.personaConstraint.traits.handicaps = this.handicapsConstraint.length > 0 ? this.handicapsConstraint.split(', ') : [];
+    this.personaConstraint.traits.badTraits = this.stringTolist(this.pe_badTraitsConstraint);
+    this.personaConstraint.traits.goodTraits = this.stringTolist(this.pe_goodTraitsConstraint);
+    this.personaConstraint.traits.caracteristics = this.stringTolist(this.pe_caracteristicsConstraint);
+    this.personaConstraint.traits.handicaps = this.stringTolist(this.pe_handicapsConstraint);
+  }
+
+  turnConstraintCreatureToList(): void {
+    this.creatureConstraint.attributes = this.stringTolist(this.cr_attributeConstraint);
+    this.creatureConstraint.locations = this.stringTolist(this.cr_locationConstraint);
+    this.creatureConstraint.skills = this.stringTolist(this.cr_skillConstraint);
+    this.creatureConstraint.diets = this.stringTolist(this.cr_dietConstraint);
+  }
+
+  stringTolist(stringList: string): string[] {
+    return stringList.length > 0 ? stringList.split(', ') : [];
+  }
+
+  _keyNumber(event: any): void {
+    this.inputPattern.forceNumber(event);
   }
 }

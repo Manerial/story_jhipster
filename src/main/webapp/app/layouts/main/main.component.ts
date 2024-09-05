@@ -57,4 +57,8 @@ export class MainComponent implements OnInit {
     }
     this.translateService.get(pageTitle).subscribe(title => this.titleService.setTitle(title));
   }
+
+  triggerSecret(event: string): void {
+    alert(event);
+  }
 }

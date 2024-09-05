@@ -22,13 +22,7 @@
                 </dd>
                 <dt><span jhiTranslate="nidAuxHistoiresApp.scene.timestampStart">Timestamp Start</span></dt>
                 <dd>
-                    <span>{{ scene.timestampStart | date:'medium' }}</span>
-                </dd>
-                <dt><span jhiTranslate="nidAuxHistoiresApp.scene.image">Image</span></dt>
-                <dd>
-                    <span *ngFor="let image of scene.images; let last = last">
-                        <a [routerLink]="['/entities/image', image?.id, 'view']">{{ image.name }}</a>{{ last ? '' : ', ' }}
-                    </span>
+                    <span>{{ scene.timestampStart | date:'medium':'UTC' }}</span>
                 </dd>
                 <dt><span jhiTranslate="nidAuxHistoiresApp.scene.chapter">Chapter</span></dt>
                 <dd>

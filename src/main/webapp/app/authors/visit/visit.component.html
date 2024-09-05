@@ -1,0 +1,16 @@
+<div>
+    <div class="row justify-content-center">
+        <div class="col-md-8" *ngIf="user">
+            <h2 jhiTranslate="visit.title" [translateValues]="{ username: user.login }">Profile of [<b>{{ user.login }}</b>]</h2>
+            <!--Présentation-->
+            <p jhiTranslate="visit.introduction" [translateValues]="{ introduction: user.introduction }" >Introduction: {{ user.introduction }}</p>
+            <!--Oeuvres-->
+            <div>
+                <p jhiTranslate="visit.bookNumber" [translateValues]="{ number: books.length }" >Number of books: {{ books.length }}</p>
+                <ul>
+                    <li *ngFor="let book of books"><a routerLink="/reader/book/{{ book.id }}">{{ book.name }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,17 @@
       "number": "Nombre de mots\u00A0:",
       "type": "Type de mots\u00A0:",
       "length": "Taille de mot (si &lt; 2\u00A0: aléatoire)",
-      "generate": "Générer"
+      "generate": "Générer",
+      "number.validation": {
+        "required": "Le nombre de mots est requis.",
+        "min": "Doit être supérieur ou égal à 1.",
+        "max": "Doit être inférieur ou égal à 200."
+      },
+      "length.validation": {
+        "required": "La taille de mots est requise.",
+        "min": "Doit être supérieur ou égal à 0.",
+        "max": "Doit être inférieur ou égal à 25."
+      }
     },
     "idea": {
       "title": "Générateur d'idées",
@@ -16,6 +26,11 @@
         "clean": "Nettoyer contraintes",
         "display": "Afficher contraintes",
         "hide": "Masquer contraintes"
+      },
+      "validation": {
+        "required": "Le nombre d'idées est requis.",
+        "min": "Doit être supérieur ou égal à 1.",
+        "max": "Doit être inférieur ou égal à 12."
       }
     }
   }

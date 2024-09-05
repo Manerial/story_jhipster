@@ -1,0 +1,42 @@
+{
+  "library": {
+    "title": "Library",
+    "read": "Read",
+    "comments": "Comments",
+    "synopsis": "Synopsis",
+    "summary": "Summary",
+    "download": "Download",
+    "display": "Display",
+    "bonus": "Bonus",
+    "favorits": {
+      "title": "Favorits",
+      "add": "Add to favorits",
+      "remove": "Remove from favorits"
+    },
+    "flip": "Click to read the summary",
+    "downloading": "Ongoing",
+    "export": {
+      "ongoing": "The export is in progress.\r\nPlease wait..."
+    },
+    "download_format": {
+      "title": "Select file format",
+      "question": "Select a file format for \"{{ entityName }}\"",
+      "validate": "Validate",
+      "cancel": "Cancel"
+    }
+  },
+  "reader": {
+    "select_chapter": "Please select a chapter",
+    "previous": "Previous",
+    "next": "Next",
+    "author": "Author\u00A0: "
+  },
+  "cover": {
+    "title": "Covers for \"{{ entityName }}\"",
+    "no_cover": "No cover for \"{{ entityName }}\""
+  },
+  "bonus": {
+    "title": "Bonuses for \"{{ entityName }}\"",
+    "no_bonus": "No bonus for \"{{ entityName }}\""
+  }
+}

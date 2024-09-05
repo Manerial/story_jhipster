@@ -5,8 +5,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,14 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.PersonaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.WritingOptionDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -143,29 +138,5 @@ public class IdeaResource {
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();
-	}
-
-	/**
-	 * Génère une liste de personnages
-	 * 
-	 * @return une réponse contenant la liste des entités
-	 */
-	@PostMapping("/ideas/personas")
-	public ResponseEntity<List<PersonaDTO>> generatePersonas(@RequestParam int number,
-			@Valid @RequestBody PersonaDTO constraint) {
-		List<PersonaDTO> generatedWords = ideaService.generatePersonas(number, constraint);
-		return ResponseEntity.ok().body(generatedWords);
-	}
-
-	/**
-	 * Génère une liste d'options d'écriture
-	 * 
-	 * @return une réponse contenant la liste des entités
-	 */
-	@PostMapping("/ideas/writing_options")
-	public ResponseEntity<List<WritingOptionDTO>> generateWritingOptions(@RequestParam int number,
-			@Valid @RequestBody WritingOptionDTO constraint) {
-		List<WritingOptionDTO> generatedWritingOptions = ideaService.generateWritingOptions(number, constraint);
-		return ResponseEntity.ok().body(generatedWritingOptions);
 	}
 }

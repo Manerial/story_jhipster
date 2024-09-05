@@ -1,5 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BookStatusService } from 'app/entities/bookStatus/bookStatus.service';
 import { IBook } from 'app/shared/model/book.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
@@ -28,7 +29,7 @@ export class ReaderService {
   public currentEntityNameObs = this.entitySource.asObservable();
   public currentEntityName: string | undefined;
 
-  constructor() {}
+  constructor(private bookStatusService: BookStatusService) {}
 
   getBookObservable(): Observable<EntityResponseType> {
     return this.bookObservable;
@@ -57,6 +58,11 @@ export class ReaderService {
     this.partSource.next('');
     this.currentChapterId = chapterId;
     this.chapterSource.next(chapterId.toString());
+    this.saveCurrentChapter();
+  }
+
+  saveCurrentChapter(): void {
+    this.bookStatusService.upsert(this.currentBookId!, this.currentChapterId!).subscribe();
   }
 
   changeEntity(entityName: string): void {
@@ -67,10 +73,10 @@ export class ReaderService {
   changeChapterNumber(variance: number): void {
     this.book.subscribe(book => {
       const currentChapterNumber = this.getCurentChapterNumber(book);
-      book.parts.forEach(part => {
-        part.chapters.forEach(chapter => {
+      book.parts?.forEach(part => {
+        part.chapters?.forEach(chapter => {
           if (chapter.number === currentChapterNumber + variance) {
-            this.changeChapter(chapter.id);
+            this.changeChapter(chapter.id!);
           }
         });
       });
@@ -79,10 +85,10 @@ export class ReaderService {
 
   getCurentChapterNumber(book: IBook): number {
     let chapterNumber = -1;
-    book.parts.forEach(part => {
-      part.chapters.forEach(chapter => {
+    book.parts?.forEach(part => {
+      part.chapters?.forEach(chapter => {
         if (chapter.id === this.currentChapterId) {
-          chapterNumber = chapter.number;
+          chapterNumber = chapter.number!;
         }
       });
     });

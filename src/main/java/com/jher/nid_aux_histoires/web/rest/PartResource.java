@@ -1,7 +1,6 @@
 package com.jher.nid_aux_histoires.web.rest;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +19,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jher.nid_aux_histoires.config.SecurityConfiguration;
+import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.PartService;
+import com.jher.nid_aux_histoires.service.dto.BookDTO;
 import com.jher.nid_aux_histoires.service.dto.PartDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
@@ -48,8 +49,11 @@ public class PartResource {
 
 	private final PartService partService;
 
-	public PartResource(PartService partService) {
+	private final BookService bookService;
+
+	public PartResource(PartService partService, BookService bookService) {
 		this.partService = partService;
+		this.bookService = bookService;
 	}
 
 	/**
@@ -59,11 +63,12 @@ public class PartResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new partDTO, or with status {@code 400 (Bad Request)} if the
 	 *         part has already an ID.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception bad request
 	 */
 	@PostMapping("/parts")
-	public ResponseEntity<PartDTO> createPart(@RequestBody PartDTO partDTO) throws URISyntaxException {
+	public ResponseEntity<PartDTO> createPart(@RequestBody PartDTO partDTO) throws Exception {
 		log.debug("REST request to save Part : {}", partDTO);
+		checkPart(partDTO);
 		if (partDTO.getId() != null) {
 			throw new BadRequestAlertException("A new part cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -83,11 +88,12 @@ public class PartResource {
 	 *         partDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the partDTO couldn't be
 	 *         updated.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception bad request
 	 */
 	@PutMapping("/parts")
-	public ResponseEntity<PartDTO> updatePart(@RequestBody PartDTO partDTO) throws URISyntaxException {
+	public ResponseEntity<PartDTO> updatePart(@RequestBody PartDTO partDTO) throws Exception {
 		log.debug("REST request to update Part : {}", partDTO);
+		checkPart(partDTO);
 		if (partDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -100,21 +106,18 @@ public class PartResource {
 	/**
 	 * {@code GET  /parts} : get all the parts.
 	 *
-	 * @param pageable  the pagination information.
-	 * @param eagerload flag to eager load entities from relationships (This is
-	 *                  applicable for many-to-many).
+	 * @param pageable the pagination information.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
 	 *         of parts in body.
 	 */
 	@GetMapping("/parts")
-	public ResponseEntity<List<PartDTO>> getAllParts(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
-			@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+	public ResponseEntity<List<PartDTO>> getAllParts(@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable) {
 		log.debug("REST request to get a page of Parts");
 		Page<PartDTO> page;
-		if (eagerload) {
-			page = partService.findAllWithEagerRelationships(pageable);
-		} else {
+		if (SecurityConfiguration.IsAdmin()) {
 			page = partService.findAll(pageable);
+		} else {
+			page = partService.findAllByAuthorLogin(pageable, SecurityConfiguration.getUserLogin());
 		}
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -127,10 +130,12 @@ public class PartResource {
 	 * @param id the id of the partDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the partDTO, or with status {@code 404 (Not Found)}.
+	 * @throws Exception bad request
 	 */
 	@GetMapping("/parts/{id}")
-	public ResponseEntity<PartDTO> getPart(@PathVariable Long id) {
+	public ResponseEntity<PartDTO> getPartById(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Part : {}", id);
+		SecurityConfiguration.CheckLoggedUser(partService.findAuthorLoginByPartId(id));
 		Optional<PartDTO> partDTO = partService.findOne(id);
 		return ResponseUtil.wrapOrNotFound(partDTO);
 	}
@@ -148,5 +153,20 @@ public class PartResource {
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();
+	}
+
+	private void checkPart(PartDTO partDTO) throws Exception {
+		if (partDTO.getId() != null) {
+			SecurityConfiguration.CheckLoggedUser(partService.findAuthorLoginByPartId(partDTO.getId()));
+		}
+
+		Long bookId = partDTO.getBookId();
+		Optional<BookDTO> optBook = bookService.findOne(bookId);
+		if (optBook.isPresent()) {
+			String login = optBook.get().getAuthorLogin();
+			if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
+				throw new Exception("You have no access to this resource (Book : " + bookId + ")");
+			}
+		}
 	}
 }

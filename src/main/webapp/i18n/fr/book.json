@@ -11,7 +11,7 @@
       "updated": "Le Livre avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Livre avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Livre {{ id }}\u00A0?"
+        "question": "Etes-vous certain de vouloir supprimer le Livre \"{{ name }}\"\u00A0? (Irreversible)"
       },
       "detail": {
         "title": "Livre"
@@ -19,9 +19,12 @@
       "name": "Nom",
       "author": "Auteur",
       "description": "Description",
-      "part": "Partie",
-      "image": "Image",
-      "cover": "Couverture"
+      "parts": "Parties",
+      "cover": "Couverture",
+      "visibility": "Visibilité : ",
+      "required": {
+        "name": "Le champ Nom est requis"
+      }
     }
   }
 }

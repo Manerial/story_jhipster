@@ -2,10 +2,6 @@ package com.jher.nid_aux_histoires.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -16,7 +12,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -31,7 +26,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -39,7 +33,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jher.nid_aux_histoires.NidAuxHistoiresApp;
 import com.jher.nid_aux_histoires.domain.Scene;
+import com.jher.nid_aux_histoires.repository.ChapterRepository;
 import com.jher.nid_aux_histoires.repository.SceneRepository;
+import com.jher.nid_aux_histoires.security.AuthoritiesConstants;
 import com.jher.nid_aux_histoires.service.SceneService;
 import com.jher.nid_aux_histoires.service.dto.SceneDTO;
 import com.jher.nid_aux_histoires.service.mapper.SceneMapper;
@@ -72,13 +68,13 @@ public class SceneResourceIT {
 	private SceneRepository sceneRepositoryMock;
 
 	@Autowired
+	private ChapterRepository chapterRepository;
+
+	@Autowired
 	private SceneMapper sceneMapper;
 
 	@Mock
 	private SceneService sceneServiceMock;
-
-	@Autowired
-	private SceneService sceneService;
 
 	@Autowired
 	private EntityManager em;
@@ -103,9 +99,10 @@ public class SceneResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Scene createEntity(EntityManager em) {
+	public Scene createEntity(EntityManager em) {
 		Scene scene = new Scene().name(DEFAULT_NAME).number(DEFAULT_NUMBER).text(DEFAULT_TEXT)
 				.timestampStart(DEFAULT_TIMESTAMP_START);
+		scene.setChapter(chapterRepository.getOne(1L));
 		return scene;
 	}
 
@@ -115,9 +112,10 @@ public class SceneResourceIT {
 	 * This is a static method, as tests for other entities might also need it, if
 	 * they test an entity which requires the current entity.
 	 */
-	public static Scene createUpdatedEntity(EntityManager em) {
+	public Scene createUpdatedEntity(EntityManager em) {
 		Scene scene = new Scene().name(UPDATED_NAME).number(UPDATED_NUMBER).text(UPDATED_TEXT)
 				.timestampStart(UPDATED_TIMESTAMP_START);
+		scene.setChapter(chapterRepository.getOne(1L));
 		return scene;
 	}
 
@@ -128,9 +126,11 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createScene() throws Exception {
 		int databaseSizeBeforeCreate = sceneRepository.findAll().size();
 		// Create the Scene
+
 		SceneDTO sceneDTO = sceneMapper.toDto(scene);
 		restSceneMockMvc.perform(post("/api/scenes").contentType(MediaType.APPLICATION_JSON)
 				.content(TestUtil.convertObjectToJsonBytes(sceneDTO))).andExpect(status().isCreated());
@@ -147,6 +147,7 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void createSceneWithExistingId() throws Exception {
 		int databaseSizeBeforeCreate = sceneRepository.findAll().size();
 
@@ -165,8 +166,10 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getAllScenes() throws Exception {
 		// Initialize the database
+
 		sceneRepository.saveAndFlush(scene);
 
 		// Get all the sceneList
@@ -179,28 +182,12 @@ public class SceneResourceIT {
 				.andExpect(jsonPath("$.[*].timestampStart").value(hasItem(timeStampString(DEFAULT_TIMESTAMP_START))));
 	}
 
-	@SuppressWarnings({ "unchecked" })
-	public void getAllScenesWithEagerRelationshipsIsEnabled() throws Exception {
-		when(sceneServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-		restSceneMockMvc.perform(get("/api/scenes?eagerload=true")).andExpect(status().isOk());
-
-		verify(sceneServiceMock, times(1)).findAllWithEagerRelationships(any());
-	}
-
-	@SuppressWarnings({ "unchecked" })
-	public void getAllScenesWithEagerRelationshipsIsNotEnabled() throws Exception {
-		when(sceneServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-		restSceneMockMvc.perform(get("/api/scenes?eagerload=true")).andExpect(status().isOk());
-
-		verify(sceneServiceMock, times(1)).findAllWithEagerRelationships(any());
-	}
-
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getScene() throws Exception {
 		// Initialize the database
+
 		sceneRepository.saveAndFlush(scene);
 
 		// Get the scene
@@ -212,6 +199,7 @@ public class SceneResourceIT {
 				.andExpect(jsonPath("$.timestampStart").value(timeStampString(DEFAULT_TIMESTAMP_START)));
 	}
 
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public String timeStampString(Date timestamp) {
 		SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 		formatterDate.setTimeZone(TimeZone.getTimeZone("ETC"));
@@ -220,6 +208,7 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void getNonExistingScene() throws Exception {
 		// Get the scene
 		restSceneMockMvc.perform(get("/api/scenes/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
@@ -227,8 +216,10 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateScene() throws Exception {
 		// Initialize the database
+
 		sceneRepository.saveAndFlush(scene);
 
 		int databaseSizeBeforeUpdate = sceneRepository.findAll().size();
@@ -257,6 +248,7 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void updateNonExistingScene() throws Exception {
 		int databaseSizeBeforeUpdate = sceneRepository.findAll().size();
 
@@ -274,8 +266,10 @@ public class SceneResourceIT {
 
 	@Test
 	@Transactional
+	@WithMockUser(username = "admin", authorities = { AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER })
 	public void deleteScene() throws Exception {
 		// Initialize the database
+
 		sceneRepository.saveAndFlush(scene);
 
 		int databaseSizeBeforeDelete = sceneRepository.findAll().size();

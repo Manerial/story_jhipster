@@ -1,13 +1,17 @@
 package com.jher.nid_aux_histoires.service;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
-import javax.xml.bind.JAXBException;
+import org.springframework.http.MediaType;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.docx4j.openpackaging.exceptions.Docx4JException;
+import com.jher.nid_aux_histoires.export.ExportDocx;
 
 public interface ExportService {
-	Path getPathOfExportedBook(long id) throws Docx4JException, IOException, JAXBException, InvalidFormatException;
+	Path getPathOfExportedBook(long id, ExportDocx.FILE_FORMAT format);
+
+	boolean exportBook(long id);
+
+	MediaType getMediaType(ExportDocx.FILE_FORMAT format);
+
+	boolean isLockedBook(long idBook);
 }

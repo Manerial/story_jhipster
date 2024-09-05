@@ -16,10 +16,16 @@ import com.jher.nid_aux_histoires.repository.IdeaRepository;
 import com.jher.nid_aux_histoires.service.IdeaService;
 import com.jher.nid_aux_histoires.service.WordAnalysisService;
 import com.jher.nid_aux_histoires.service.dto.IdeaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.PersonaDTO;
-import com.jher.nid_aux_histoires.service.dto.idea_generator.WritingOptionDTO;
+import com.jher.nid_aux_histoires.service.dto.idea_generator.Random_Interface;
 import com.jher.nid_aux_histoires.service.mapper.IdeaMapper;
-import com.jher.nid_aux_histoires.service.tool.IdeaGenerator;
+import com.jher.nid_aux_histoires.service.tool.CreatureGenerator;
+import com.jher.nid_aux_histoires.service.tool.HonoraryTitleGenerator;
+import com.jher.nid_aux_histoires.service.tool.LocationGenerator;
+import com.jher.nid_aux_histoires.service.tool.ObjectGenerator;
+import com.jher.nid_aux_histoires.service.tool.PersonaGenerator;
+import com.jher.nid_aux_histoires.service.tool.REG_Entity;
+import com.jher.nid_aux_histoires.service.tool.RandomEntityGenerator;
+import com.jher.nid_aux_histoires.service.tool.WritingOptionGenerator;
 
 /**
  * Service Implementation for managing {@link Idea}.
@@ -31,10 +37,8 @@ public class IdeaServiceImpl implements IdeaService {
 	private final Logger log = LoggerFactory.getLogger(IdeaServiceImpl.class);
 
 	private final IdeaRepository ideaRepository;
-
-	private final WordAnalysisService wordAnalysisService;
-
 	private final IdeaMapper ideaMapper;
+	private final WordAnalysisService wordAnalysisService;
 
 	public IdeaServiceImpl(IdeaRepository ideaRepository, IdeaMapper ideaMapper,
 			WordAnalysisService wordAnalysisService) {
@@ -72,22 +76,34 @@ public class IdeaServiceImpl implements IdeaService {
 	}
 
 	@Override
-	public List<PersonaDTO> generatePersonas(int numberOfPersona, PersonaDTO constraint) {
-		List<PersonaDTO> personas = new ArrayList<>();
-		IdeaGenerator ideaGenerator = new IdeaGenerator(ideaRepository, wordAnalysisService);
-		for (int i = 0; i < numberOfPersona; i++) {
-			personas.add(ideaGenerator.generatePersona(constraint));
+	public List<Random_Interface> generate(int number, REG_Entity type, Random_Interface constraint) {
+		List<Random_Interface> objects = new ArrayList<>();
+		RandomEntityGenerator ideaGenerator;
+		switch (type) {
+		case LOCATION:
+			ideaGenerator = new LocationGenerator(ideaRepository);
+			break;
+		case OBJECT:
+			ideaGenerator = new ObjectGenerator(ideaRepository);
+			break;
+		case PERSONA:
+			ideaGenerator = new PersonaGenerator(ideaRepository, wordAnalysisService);
+			break;
+		case WRITING_OPTION:
+			ideaGenerator = new WritingOptionGenerator(ideaRepository);
+			break;
+		case HONORARY_TITLE:
+			ideaGenerator = new HonoraryTitleGenerator(ideaRepository);
+			break;
+		case CREATURE:
+			ideaGenerator = new CreatureGenerator(ideaRepository, wordAnalysisService);
+			break;
+		default:
+			return objects;
 		}
-		return personas;
-	}
-
-	@Override
-	public List<WritingOptionDTO> generateWritingOptions(int numberOfWritingOption, WritingOptionDTO constraint) {
-		List<WritingOptionDTO> writingOptions = new ArrayList<>();
-		IdeaGenerator ideaGenerator = new IdeaGenerator(ideaRepository, wordAnalysisService);
-		for (int i = 0; i < numberOfWritingOption; i++) {
-			writingOptions.add(ideaGenerator.generateWritingOption(constraint));
+		for (int i = 0; i < number; i++) {
+			objects.add(ideaGenerator.generate(constraint));
 		}
-		return writingOptions;
+		return objects;
 	}
 }

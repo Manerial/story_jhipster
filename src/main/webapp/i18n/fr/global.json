@@ -4,25 +4,33 @@
     "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.",
     "menu": {
       "home": "Accueil",
-      "library": "Librairie",
+      "library": "Bibliothèque",
+      "authors": "Auteurs",
       "tools": "Outils",
-      "images": "Images",
+      "covers": "Covers",
       "book": "Livre",
+      "books": "Livres",
+      "favorits": "Favorits",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entités",
+        "main2": "Gestion",
         "book": "Livre",
         "part": "Partie",
         "chapter": "Chapitre",
         "scene": "Scène",
-        "image": "Image",
+        "cover": "Couverture",
         "idea": "Idée",
         "wordAnalysis": "Analyse de mots",
+        "comment": "Commentaire",
+        "bonus": "Bonus",
+        "bookStatus": "Status de livre",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
         "main": "Compte",
-        "settings": "Profil",
+        "profile": "Mon compte",
+        "settings": "Paramètres",
         "password": "Mot de passe",
         "sessions": "Sessions",
         "login": "S'authentifier",
@@ -92,12 +100,16 @@
     "ribbon": {
       "dev": "Développement"
     },
-    "item-count": "Affichage {{first}} - {{second}} de {{total}} items."
+    "item-count": "Affichage {{first}} - {{second}} de {{total}} items.",
+    "secret": {
+      "1": "Vous avez déclenché le premier code…",
+      "2": "Vous avez déclenché le second code…"
+    }
   },
   "entity": {
     "action": {
       "addblob": "Ajouter blob",
-      "addimage": "Ajouter image",
+      "addcover": "Ajouter couverture",
       "back": "Retour",
       "cancel": "Annuler",
       "edit": "Editer",
@@ -137,9 +149,10 @@
     "emailexists": "Email déjà utilisé\u00A0!",
     "idexists": "Une nouvelle entité {{entityName}} ne peut pas avoir d'identifiant\u00A0!",
     "idnull": "Identifiant invalide",
+    "donotexist": "L'entité {{entityName}} n'existe pas",
     "file": {
       "could.not.extract": "Impossible d'extraire le fichier",
-      "not.image": "Le fichier doit être une image et non du type \"{{ fileType }}\""
+      "not.cover": "Le fichier doit être une couverture et non du type \"{{ fileType }}\""
     }
   }
 }

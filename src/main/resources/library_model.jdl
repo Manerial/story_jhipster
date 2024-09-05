@@ -1,4 +1,4 @@
-entity Idea {
+entity IdeaResource {
 	type String,
     value String,
     complement String
@@ -12,7 +12,8 @@ entity WordAnalysis {
 
 entity Book {
 	name String,
-	author String
+	description String,
+    visibility Boolean
 }
 
 entity Part {
@@ -34,10 +35,27 @@ entity Scene {
 	timestampStart String
 }
 
-entity Image {
+entity Cover {
 	name String,
 	picture ImageBlob,
 	preview ImageBlob
+}
+
+entity Bonus {
+	name String,
+    description String,
+    isImage Boolean,
+	data Blob
+}
+
+entity Comment {
+	text String,
+    createdDate String
+}
+
+entity BookStatus {
+	finished Boolean,
+    favorit Boolean
 }
 
 // defining multiple OneToMany relationships with comments
@@ -45,18 +63,22 @@ relationship OneToMany {
 	Book{part} to Part{book},
 	Part{chapter} to Chapter{part},
 	Chapter{scene} to Scene{chapter},
-	Image{bookToCover} to Book{cover}
+	Cover{book} to Book{cover},
+	Comment{book} to Book{comment},
+	User to Comment{comment},
+    User to Book{author},
+    User to Cover{owner},
+    User to BookStatus{user}
+    Book to BookStatus{book},
+    Chapter to BookStatus{curentChapter},
 }
 
 relationship ManyToMany {
-	Book{image} to Image{book}
-	Part{image} to Image{part}
-	Chapter{image} to Image{chapter}
-	Scene{image} to Image{scene}
+	Bonus{book} to Book{bonus},
 }
 
 // Set pagination options
-paginate * with pagination
+paginate Book, Part, Chapter, Scene, Cover, Bonus, Comment with pagination
 
 // Use Data Transfer Objects (DTO)
 dto * with mapstruct

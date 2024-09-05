@@ -1,0 +1,36 @@
+{
+  "nidAuxHistoiresApp": {
+    "comment": {
+      "home": {
+        "title": "Commentaires",
+        "createLabel": "Créer un nouveau Commentaire",
+        "createOrEditLabel": "Créer ou éditer un Commentaire",
+        "notFound": "Aucun Commentaire trouvé"
+      },
+      "created": "Un nouveau Commentaire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Commentaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Commentaire avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Commentaire {{ id }} ?"
+      },
+      "detail": {
+        "title": "Commentaire"
+      },
+      "text": "Text",
+      "book": "Livre",
+      "user": "Utilisateur",
+      "list": {
+        "title": "Commentaires pour {{ bookName }}"
+      },
+      "add": {
+        "title": "Ajouter un commentaire",
+        "button": "Commenter",
+        "question": "Votre commentaire",
+        "validate": "Valider",
+        "cancel": "Fermer",
+        "read": "Lire"
+      },
+      "empty": "Pas de commentaires pour ce livre"
+    }
+  }
+}

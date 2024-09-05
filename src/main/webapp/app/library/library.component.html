@@ -1,16 +1,16 @@
 <div class="content">
-	<h1 jhiTranslate="global.menu.library">Library</h1>
+	<h1 *ngIf="!favorits" jhiTranslate="global.menu.library">Library</h1>
+	<h1 *ngIf="favorits" jhiTranslate="global.menu.favorits">Favorits</h1>
 	<div *ngIf="responsiveService.isBigScreen" class="row m-2">
 		<div class="main">
 			<ul id="bk-list" class="bk-list clearfix">
 				<li *ngFor="let book of books | bookFilter: searchText">
-					<div class="bk-book bk-bookdefault" [ngClass]="isDownloading[book.id] ? 'rotating' : ''"
-						(click)="flip($event)">
+					<div class="bk-book bk-bookdefault" (click)="flip($event)">
 						<div class="bk-front">
 							<div class="bk-cover"
 								style="background-image: url(data:image/jpg;base64,{{book.coverPreview}})">
 								<h2>
-									<span>{{ book.author }}</span>
+									<span>{{ book.authorLogin }}</span>
 									<span>{{ book.name }}</span>
 								</h2>
 							</div>
@@ -20,7 +20,7 @@
 						</div>
 						<div class="bk-left">
 							<h2>
-								<span>{{ book.author }}</span>
+								<span>{{ book.authorLogin }}</span>
 								<span>{{ book.name }}</span>
 							</h2>
 						</div>
@@ -28,21 +28,26 @@
 						</div>
 					</div>
 					<div class="bk-info text-center">
-						<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold" title='Lire "{{ book.name }}"'>
-							<span>
-								<fa-icon icon="book-open"></fa-icon>
-								<span jhiTranslate="library.read">Read</span>
-							</span>
-						</a>
-						<a (click)="downloadBook(book.id, book.name)" class="btn bkg-gold ml-2" title="Télécharger">
-							<span [ngClass]="isDownloading[book.id] ? 'hide-element' : ''">
-								<fa-icon icon="download"></fa-icon>
-								<span jhiTranslate="library.download">Download</span>
-							</span>
-							<span [ngClass]="isDownloading[book.id] ? '' : 'hide-element'">
-								<fa-icon icon="spinner"></fa-icon>
-								<span jhiTranslate="library.downloading">Downloading</span>
-							</span>
+						<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold mt-2"
+						title="{{ 'library.read' | translate }}">
+							<fa-icon icon="book-open"></fa-icon>
+						</a><!--
+						--><a (click)="downloadBook(book)" class="btn bkg-gold mt-2 ml-2"
+						title="{{ 'library.download' | translate }}">
+							<fa-icon icon="download"></fa-icon>
+						</a><!--
+						--><a routerLink="/comments/book/{{ book.id }}" class="btn bkg-gold mt-2 ml-2"
+						title="{{ 'library.comments' | translate }}">
+							<fa-icon icon="comment"></fa-icon>
+						</a><!--
+						--><a routerLink="/bonus/book/{{ book.id }}" class="btn bkg-gold mt-2 ml-2"
+						title="{{ 'library.bonus' | translate }}">
+							<fa-icon icon="plus"></fa-icon>
+						</a><!--
+						--><a (click)="toggleFavorits(book.id)" class="btn bkg-gold mt-2 ml-2"
+						title="{{ !findBookStatusByBookId(book.id).favorit ? ('library.favorits.add' | translate) : ('library.favorits.remove' | translate) }}">
+							<fa-icon *ngIf="!findBookStatusByBookId(book.id).favorit" [icon]="['far', 'star']"></fa-icon>
+							<fa-icon *ngIf="findBookStatusByBookId(book.id).favorit" [icon]="['fas', 'star']"></fa-icon>
 						</a>
 					</div>
 				</li>
@@ -55,23 +60,41 @@
 			<div class="card">
 				<div class="card-body">
 					<h2 class="card-title">{{ book.name }}</h2>
-					<a (click)="downloadBook(book.id, book.name)" class="btn bkg-gold ml-2 mb-2" title="Télécharger">
-						<span [ngClass]="isDownloading[book.id] ? 'hide-element' : ''">
+					<a (click)="downloadBook(book)" class="btn bkg-gold ml-2 mb-2">
+						<span >
 							<fa-icon icon="download"></fa-icon>
 							<span jhiTranslate="library.download">Download</span>
 						</span>
-						<span [ngClass]="isDownloading[book.id] ? '' : 'hide-element'">
-							<fa-icon icon="spinner"></fa-icon>
-							<span jhiTranslate="library.downloading">Downloading</span>
-						</span>
-					</a>
-					<a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold ml-2 mb-2" title='Lire "{{ book.name }}"'>
+					</a><!--
+					--><a routerLink="/reader/book/{{ book.id }}" class="btn bkg-gold ml-2 mb-2">
 						<span>
 							<fa-icon icon="book-open"></fa-icon>
 							<span jhiTranslate="library.read">Read</span>
 						</span>
-					</a>
-					<button class="btn bkg-gold ml-2 mb-2" type="button"
+					</a><!--
+					--><a routerLink="/comments/book/{{ book.id }}" class="btn bkg-gold ml-2 mb-2">
+						<span>
+							<fa-icon icon="comment"></fa-icon>
+							<span jhiTranslate="library.comments">Comment</span>
+						</span>
+					</a><!--
+					--><a routerLink="/bonus/book/{{ book.id }}" class="btn bkg-gold ml-2 mb-2">
+						<span>
+							<fa-icon icon="plus"></fa-icon>
+							<span jhiTranslate="library.bonus">Bonus</span>
+						</span>
+					</a><!--
+					--><a (click)="toggleFavorits(book.id)" class="btn bkg-gold ml-2 mb-2">
+						<span *ngIf="!findBookStatusByBookId(book.id).favorit">
+							<fa-icon [icon]="['far', 'star']"></fa-icon>
+							<span jhiTranslate="library.favorits.add">Ajouter aux favorits</span>
+						</span>	
+						<span *ngIf="findBookStatusByBookId(book.id).favorit">
+							<fa-icon [icon]="['fas', 'star']"></fa-icon>
+							<span jhiTranslate="library.favorits.remove">Retirer des favorits</span>
+						</span>
+					</a><!--
+					--><button class="btn bkg-gold ml-2 mb-2" type="button"
 						(click)="collapseBooks[book.id] = !collapseBooks[book.id]">
 						<span>
 							<fa-icon icon="bars"></fa-icon>

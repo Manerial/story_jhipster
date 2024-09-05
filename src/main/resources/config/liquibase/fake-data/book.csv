@@ -1,1 +1,2 @@
-id;name;author
+id;name;author_id;visibility
+1;Toto;1;true

@@ -24,7 +24,7 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="nidAuxHistoiresApp.book.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="author"><span jhiTranslate="nidAuxHistoiresApp.book.author">Author</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="authorLogin"><span jhiTranslate="nidAuxHistoiresApp.book.author">Author</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="coverId"><span jhiTranslate="nidAuxHistoiresApp.book.cover">Cover</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -33,10 +33,10 @@
                 <tr *ngFor="let book of books ;trackBy: trackId">
                     <td><a [routerLink]="['/entities/book', book.id, 'view']">{{ book.id }}</a></td>
                     <td>{{ book.name }}</td>
-                    <td>{{ book.author }}</td>
+                    <td><a [routerLink]="['/admin/user-management', book.authorLogin, 'view']">{{ book.authorLogin }}</a></td>
                     <td>
                         <div *ngIf="book.coverId">
-                            <a [routerLink]="['/entities/image', book.coverId , 'view']" >{{ book.coverId }}</a>
+                            <a [routerLink]="['/entities/cover', book.coverId , 'view']" >{{ book.coverId }}</a>
                         </div>
                     </td>
                     <td class="text-right">

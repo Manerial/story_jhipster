@@ -1,0 +1,25 @@
+<article *ngIf=!bonusIsLoading>
+	<div class="row m-2">
+		<h1 *ngIf="bonusList.length != 0" jhiTranslate="bonus.title"
+		[translateValues]="{ entityName: entityName }" class="w-100">Bonuses for "{{ entityName }}"</h1>
+		<div *ngFor="let bonus of bonusList" class="col-sm-6 mt-2">
+			<div class="card">
+				<div class="card-body">
+					<h3>{{ bonus.name }}.{{ bonus.dataContentType!.split("/")[1] }}</h3>
+					<p *ngIf="showDescription[bonus.id!]">{{ bonus.description }}</p>
+					<a (click)="toggleDescription(bonus.id!)"
+						class="btn bkg-gold">
+						<fa-icon icon="plus" *ngIf="!showDescription[bonus.id!]"></fa-icon>
+						<fa-icon icon="minus" *ngIf="showDescription[bonus.id!]"></fa-icon>
+					</a>
+					<a (click)="downloadBonus(bonus)" class="btn bkg-gold ml-2"
+					title="{{ 'library.download' | translate }}">
+						<fa-icon icon="download"></fa-icon>
+					</a>
+				</div>
+			</div>
+		</div>
+		<h1 *ngIf="bonusList.length == 0" jhiTranslate="bonus.no_bonus"
+		[translateValues]="{ entityName: entityName }" class="w-100">No bonus for "{{ entityName }}"</h1>
+	</div>
+</article>

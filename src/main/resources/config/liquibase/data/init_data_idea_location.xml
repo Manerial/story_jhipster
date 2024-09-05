@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="JHER" id="insertData_idea_place">
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Barrage" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Route" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Geyser" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Cascade" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Chemin" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Passage" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Gué" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Pont" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Rue" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Campement" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Temple" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Château" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Palais" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Donjon" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Tour" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Ruine" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Domaine" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Cabanne" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Maison" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Manoir" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Jardin" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Egoût" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Dédale" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Haut quartier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Bas quartier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Cimetière" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Tombeau" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Cave" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Forge" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Usine" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Abatoire" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Musée" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Hôpital" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Laboratoire" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Restaurant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Auberge" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Ferme" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Champ" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Bateau" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Vaisseau" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Base stellaire" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Nid" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Parc" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Décharge" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Cité" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Ville" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Village" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Colonie" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="place" />
+			<column name="value" value="Terrain vague" />
+			<column name="complement" value="M" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_landscape">
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Désert" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Forêt" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Jungle" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Rivière" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Fleuve" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Lagon" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Mer" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Océan" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Abysses" />
+			<column name="complement" value="P" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Lac" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Ile" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Archipel" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Plage" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Marécage" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Grotte" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Caverne" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Volcan" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Montagne" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Sommet" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Plateau" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Plaine" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Val" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Valée" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Canyon" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Profondeurs" />
+			<column name="complement" value="P" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Ciel" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Galaxie" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Vide spatial" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Astéroïde" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Satellite naturel" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="landscape" />
+			<column name="value" value="Sol" />
+			<column name="complement" value="M" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

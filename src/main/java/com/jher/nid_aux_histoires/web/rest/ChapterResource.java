@@ -1,7 +1,6 @@
 package com.jher.nid_aux_histoires.web.rest;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jher.nid_aux_histoires.config.SecurityConfiguration;
 import com.jher.nid_aux_histoires.service.ChapterService;
+import com.jher.nid_aux_histoires.service.PartService;
 import com.jher.nid_aux_histoires.service.dto.ChapterDTO;
 import com.jher.nid_aux_histoires.web.rest.errors.BadRequestAlertException;
 
@@ -49,8 +49,11 @@ public class ChapterResource {
 
 	private final ChapterService chapterService;
 
-	public ChapterResource(ChapterService chapterService) {
+	private final PartService partService;
+
+	public ChapterResource(ChapterService chapterService, PartService partService) {
 		this.chapterService = chapterService;
+		this.partService = partService;
 	}
 
 	/**
@@ -60,11 +63,12 @@ public class ChapterResource {
 	 * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
 	 *         body the new chapterDTO, or with status {@code 400 (Bad Request)} if
 	 *         the chapter has already an ID.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception bad request
 	 */
 	@PostMapping("/chapters")
-	public ResponseEntity<ChapterDTO> createChapter(@RequestBody ChapterDTO chapterDTO) throws URISyntaxException {
+	public ResponseEntity<ChapterDTO> createChapter(@RequestBody ChapterDTO chapterDTO) throws Exception {
 		log.debug("REST request to save Chapter : {}", chapterDTO);
+		checkChapter(chapterDTO);
 		if (chapterDTO.getId() != null) {
 			throw new BadRequestAlertException("A new chapter cannot already have an ID", ENTITY_NAME, "idexists");
 		}
@@ -84,11 +88,12 @@ public class ChapterResource {
 	 *         the chapterDTO is not valid, or with status
 	 *         {@code 500 (Internal Server Error)} if the chapterDTO couldn't be
 	 *         updated.
-	 * @throws URISyntaxException if the Location URI syntax is incorrect.
+	 * @throws Exception bad request
 	 */
 	@PutMapping("/chapters")
-	public ResponseEntity<ChapterDTO> updateChapter(@RequestBody ChapterDTO chapterDTO) throws URISyntaxException {
+	public ResponseEntity<ChapterDTO> updateChapter(@RequestBody ChapterDTO chapterDTO) throws Exception {
 		log.debug("REST request to update Chapter : {}", chapterDTO);
+		checkChapter(chapterDTO);
 		if (chapterDTO.getId() == null) {
 			throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 		}
@@ -101,22 +106,19 @@ public class ChapterResource {
 	/**
 	 * {@code GET  /chapters} : get all the chapters.
 	 *
-	 * @param pageable  the pagination information.
-	 * @param eagerload flag to eager load entities from relationships (This is
-	 *                  applicable for many-to-many).
+	 * @param pageable the pagination information.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
 	 *         of chapters in body.
 	 */
 	@GetMapping("/chapters")
 	public ResponseEntity<List<ChapterDTO>> getAllChapters(
-			@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
-			@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+			@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable) {
 		log.debug("REST request to get a page of Chapters");
 		Page<ChapterDTO> page;
-		if (eagerload) {
-			page = chapterService.findAllWithEagerRelationships(pageable);
-		} else {
+		if (SecurityConfiguration.IsAdmin()) {
 			page = chapterService.findAll(pageable);
+		} else {
+			page = chapterService.findAllByAuthorLogin(pageable, SecurityConfiguration.getUserLogin());
 		}
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -129,10 +131,12 @@ public class ChapterResource {
 	 * @param id the id of the chapterDTO to retrieve.
 	 * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
 	 *         the chapterDTO, or with status {@code 404 (Not Found)}.
+	 * @throws Exception bad request
 	 */
 	@GetMapping("/chapters/{id}")
-	public ResponseEntity<ChapterDTO> getChapter(@PathVariable Long id) {
+	public ResponseEntity<ChapterDTO> getChapterById(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Chapter : {}", id);
+		SecurityConfiguration.CheckLoggedUser(chapterService.findAuthorLoginByChapterId(id));
 		Optional<ChapterDTO> chapterDTO = chapterService.findOne(id);
 		return ResponseUtil.wrapOrNotFound(chapterDTO);
 	}
@@ -150,5 +154,17 @@ public class ChapterResource {
 		return ResponseEntity.noContent()
 				.headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
 				.build();
+	}
+
+	private void checkChapter(ChapterDTO chapterDTO) throws Exception {
+		if (chapterDTO.getId() != null) {
+			SecurityConfiguration.CheckLoggedUser(chapterService.findAuthorLoginByChapterId(chapterDTO.getId()));
+		}
+
+		Long partId = chapterDTO.getPartId();
+		String login = partService.findAuthorLoginByPartId(partId);
+		if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getUserLogin())) {
+			throw new Exception("You have no access to this resource (Part : " + partId + ")");
+		}
 	}
 }

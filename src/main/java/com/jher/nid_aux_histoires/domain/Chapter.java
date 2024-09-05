@@ -10,9 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,12 +19,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
 /**
  * A Chapter.
  */
 @Entity
 @Table(name = "chapter")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Data
 public class Chapter implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -49,39 +49,17 @@ public class Chapter implements Serializable {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Scene> scenes = new HashSet<>();
 
-	@ManyToMany
+	@OneToMany(mappedBy = "curentChapter", fetch = FetchType.LAZY)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	@JoinTable(name = "chapter_image", joinColumns = @JoinColumn(name = "chapter_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id"))
-	private Set<Image> images = new HashSet<>();
+	private Set<BookStatus> bookStatuses = new HashSet<>();
 
 	@ManyToOne
 	@JsonIgnoreProperties(value = "chapters", allowSetters = true)
 	private Part part;
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 	public Chapter name(String name) {
 		this.name = name;
 		return this;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public Chapter description(String description) {
@@ -89,25 +67,9 @@ public class Chapter implements Serializable {
 		return this;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
 	public Chapter number(Integer number) {
 		this.number = number;
 		return this;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-
-	public Set<Scene> getScenes() {
-		return scenes;
 	}
 
 	public Chapter scenes(Set<Scene> scenes) {
@@ -127,49 +89,10 @@ public class Chapter implements Serializable {
 		return this;
 	}
 
-	public void setScenes(Set<Scene> scenes) {
-		this.scenes = scenes;
-	}
-
-	public Set<Image> getImages() {
-		return images;
-	}
-
-	public Chapter images(Set<Image> images) {
-		this.images = images;
-		return this;
-	}
-
-	public Chapter addImage(Image image) {
-		this.images.add(image);
-		image.getChapters().add(this);
-		return this;
-	}
-
-	public Chapter removeImage(Image image) {
-		this.images.remove(image);
-		image.getChapters().remove(this);
-		return this;
-	}
-
-	public void setImages(Set<Image> images) {
-		this.images = images;
-	}
-
-	public Part getPart() {
-		return part;
-	}
-
 	public Chapter part(Part part) {
 		this.part = part;
 		return this;
 	}
-
-	public void setPart(Part part) {
-		this.part = part;
-	}
-	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-	// setters here
 
 	@Override
 	public boolean equals(Object o) {

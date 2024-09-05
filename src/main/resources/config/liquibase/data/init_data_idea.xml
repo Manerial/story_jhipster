@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="JHER" id="insertData_idea_common_name">
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Froideur" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Chaleur" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Rêve" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Nuit" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Vie" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Mort" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Cauchemars" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Soleil" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Jour" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Silence" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Destin" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Pleurs" />
+			<column name="complement" value="P" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Ténèbres" />
+			<column name="complement" value="P" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Lumière" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Coeur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Monde" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Amour" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Luxure" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Haine" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Destruction" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Peur" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Ombre" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Sagesse" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Tempête" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Avenir" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Art" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Ouragan" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Guerre" />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Lien" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="common_name" />
+			<column name="value" value="Fidélité" />
+			<column name="complement" value="M" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_adjective">
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Froid" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Intangible" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Éternel" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Impétueux" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Purrulent" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Maléfique" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Dénudé" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Lubrique" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Sanglant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Intrépide" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Bâtisseur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Conquérant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Omnipotent" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Silencieux" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Bienfaisant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Ardent" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Glacé" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Colérique" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Affamé" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Impie" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Immortel" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Arrogant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Bienheureux" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Assoiffé" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Aveugle" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Muet" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Héroïque" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Flamboyant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Patient" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Attentif" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Méticuleux" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Dément" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Déchu" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Fou" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Brisé" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Mort" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Mort-vivant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Multiple" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Superbe" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Avenant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Avide" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Amer" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Végétal" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Impatient" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Argenté" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Doré" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Ambitieux" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Saint" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Maudit" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Sublime" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Radieux" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Enchanté" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Crochu" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Furieux" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Lourd" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Pendu" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Obscène" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Entraîné" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Étrange" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Hasardeux" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Prolixe" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Agité" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Excité" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Imprudent" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Absent" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Présent" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Abberrant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Lumineux" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Ravageur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Final" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Premier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Désarmé" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Sage" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Joueur" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Humilié" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Prisonier" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Enchaîné" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Déchaîné" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Stupide" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Énervant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Fatigué" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Rouillé" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Miroitant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Mélomane" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Terrestre" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Aérien" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Terrien" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Perfide" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Volant" />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="adjective" />
+			<column name="value" value="Meurtrier" />
+			<column name="complement" value="M" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_article">
+		<insert tableName="idea">
+			<column name="type" value="article_defini" />
+			<column name="value" value="Le " />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_defini" />
+			<column name="value" value="La " />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_defini" />
+			<column name="value" value="Les " />
+			<column name="complement" value="P" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_defini" />
+			<column name="value" value="L'" />
+			<column name="complement" value="A" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_indefini" />
+			<column name="value" value="Un " />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_indefini" />
+			<column name="value" value="Une " />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_indefini" />
+			<column name="value" value="Des " />
+			<column name="complement" value="P" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_partitif" />
+			<column name="value" value="Du " />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_partitif" />
+			<column name="value" value="De la " />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_partitif" />
+			<column name="value" value="Des " />
+			<column name="complement" value="P" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_partitif" />
+			<column name="value" value="D'" />
+			<column name="complement" value="A" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_partitif_second" />
+			<column name="value" value="De " />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_partitif_second" />
+			<column name="value" value="De " />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_partitif_second" />
+			<column name="value" value="Des " />
+			<column name="complement" value="P" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_partitif_second" />
+			<column name="value" value="D'" />
+			<column name="complement" value="A" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_contractif" />
+			<column name="value" value="Au " />
+			<column name="complement" value="M" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_contractif" />
+			<column name="value" value="À la " />
+			<column name="complement" value="F" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_contractif" />
+			<column name="value" value="Aux " />
+			<column name="complement" value="P" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="article_contractif" />
+			<column name="value" value="À l'" />
+			<column name="complement" value="A" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

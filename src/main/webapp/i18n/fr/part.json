@@ -4,7 +4,7 @@
       "home": {
         "title": "Parties",
         "createLabel": "Créer une nouvelle Partie",
-        "createOrEditLabel": "Créer ou éditer un Partie",
+        "createOrEditLabel": "Créer ou éditer une Partie",
         "notFound": "Aucun Partie trouvé"
       },
       "created": "Une nouveau Partie a été créé avec l'identifiant {{ param }}",
@@ -19,9 +19,14 @@
       "name": "Nom",
       "description": "Description",
       "number": "Numéro",
-      "chapter": "Chapitre",
-      "image": "Image",
-      "book": "Livre"
+      "numberAuto": "(si < 1, sera renseigné automatiquement)",
+      "chapters": "Chapitres",
+      "book": "Livre",
+      "required": {
+        "name": "Le champ Nom est requis",
+        "number": "Le champ Numéro est requis",
+        "book": "Le champ Livre est requis"
+      }
     }
   }
 }

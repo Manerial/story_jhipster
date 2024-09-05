@@ -20,16 +20,21 @@
                 <dd>
                     <span>{{ chapter.number }}</span>
                 </dd>
-                <dt><span jhiTranslate="nidAuxHistoiresApp.chapter.image">Image</span></dt>
-                <dd>
-                    <span *ngFor="let image of chapter.images; let last = last">
-                        <a [routerLink]="['/entities/image', image?.id, 'view']">{{ image.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
                 <dt><span jhiTranslate="nidAuxHistoiresApp.chapter.part">Part</span></dt>
                 <dd>
                     <div *ngIf="chapter.partId">
                         <a [routerLink]="['/entities/part', chapter.partId, 'view']">{{ chapter.partId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="nidAuxHistoiresApp.chapter.scenes">Scenes</span></dt>
+                <dd>
+                    <div *ngFor="let scene of chapter.scenes">
+                        <a [routerLink]="['/entities/scene', scene.id, 'view']">{{ scene.id }} - {{ scene.name }}</a>
+                    </div>
+                    <div>
+                        <a [routerLink]="['/entities/scene/new']" [queryParams]="{chapterId: chapter.id}">
+                            <fa-icon icon="plus"></fa-icon>
+                        </a>
                     </div>
                 </dd>
             </dl>

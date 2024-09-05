@@ -1,12 +1,14 @@
 {
   "settings": {
-    "title": "User settings for [<strong>{{username}}</strong>]",
+    "title": "User settings for <strong>{{username}}</strong>",
     "form": {
       "firstname": "First Name",
       "firstname.placeholder": "Your first name",
       "lastname": "Last Name",
       "lastname.placeholder": "Your last name",
       "language": "Language",
+      "introduction": "Introduction",
+      "introduction.placeholder": "Your introduction",
       "button": "Save"
     },
     "messages": {

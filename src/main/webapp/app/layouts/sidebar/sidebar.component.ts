@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ReaderService } from 'app/library/reader/reader.service';
 import { Book, IBook } from 'app/shared/model/book.model';
+import { ResponsiveService } from 'app/shared/util/responsive.service';
 import { NavbarService } from 'app/shared/util/search.service';
 import { UtilService } from 'app/shared/util/util.service';
 
@@ -11,7 +12,6 @@ import { UtilService } from 'app/shared/util/util.service';
 })
 export class SidebarComponent implements OnInit {
   public book: IBook = new Book();
-  public forceOpenAllImage = false;
   public forceOpenAllSmall = false;
   public collapseSummary = false;
   public collapseParts: boolean[] = [];
@@ -19,7 +19,12 @@ export class SidebarComponent implements OnInit {
   public innerWidth: number = window.innerWidth;
   private saveScroll = 0;
 
-  constructor(public readerService: ReaderService, private navbarService: NavbarService, private utilService: UtilService) {}
+  constructor(
+    public readerService: ReaderService,
+    private navbarService: NavbarService,
+    private utilService: UtilService,
+    private responsiveService: ResponsiveService
+  ) {}
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
@@ -27,13 +32,9 @@ export class SidebarComponent implements OnInit {
     this.readerService.book.subscribe(book => {
       this.book = book;
       this.isLoading = false;
-      this.book.parts.forEach(part => {
-        this.collapseParts[part.id] = true;
+      this.book.parts?.forEach(part => {
+        this.collapseParts[part.id!] = true;
       });
-    });
-
-    this.navbarService.getCurrentIsViewBook().subscribe(isViewBook => {
-      this.forceOpenAllImage = !isViewBook;
     });
   }
 
@@ -73,14 +74,19 @@ export class SidebarComponent implements OnInit {
   }
 
   toggleSommaire(): void {
-    const currentScroll = this.utilService.scrollContainerLimitTop(0);
     this.collapseSummary = !this.collapseSummary;
-    if (this.collapseSummary) {
-      this.utilService.scrollContainerLimitTop(this.saveScroll);
-      this.saveScroll = 0;
-    } else {
-      this.saveScroll = currentScroll;
+
+    if (!this.responsiveService.isBigScreen) {
+      let currentScroll = 0;
+      currentScroll = this.utilService.scrollContainerLimitTop(0);
+      if (this.collapseSummary) {
+        this.utilService.scrollContainerLimitTop(this.saveScroll);
+        this.saveScroll = 0;
+      } else {
+        this.saveScroll = currentScroll;
+      }
     }
+
     this.toggleAddaptSummary();
   }
 
@@ -100,7 +106,7 @@ export class SidebarComponent implements OnInit {
   }
 
   forceOpenAll(): boolean {
-    return this.forceOpenAllImage || this.forceOpenAllSmall;
+    return this.forceOpenAllSmall;
   }
 
   toggleCollapsePart(id: number): void {

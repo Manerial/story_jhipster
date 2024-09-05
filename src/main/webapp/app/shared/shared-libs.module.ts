@@ -6,6 +6,7 @@ import { NgJhipsterModule } from 'ng-jhipster';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -23,5 +24,6 @@ import { TranslateModule } from '@ngx-translate/core';
 export class NidAuxHistoiresSharedLibsModule {
   constructor(library: FaIconLibrary) {
     library.addIconPacks(fas);
+    library.addIconPacks(far);
   }
 }

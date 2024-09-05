@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="JHER" id="insertData_idea_style">
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Science fiction" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Fantastique" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Fantasy" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Horreur" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Humour" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Tranche de vie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Mythologie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Medieval" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Space opera" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Anticipation" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Post apocalypse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Gore/Trash" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Drame" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Journal intime" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Nouvelle" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Poésie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Policier" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Romance" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Thriller" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="Dark fantasy" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="style" />
+			<column name="value" value="De cape et d'épée" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+	<changeSet author="JHER" id="insertData_idea_theme">
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Suicide" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Mariage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Voyage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Guerre" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Maladie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Introspection" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Mort" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Amitié" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Jalousie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Luxure" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Famille" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Amour" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Peur" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Aventure" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Quête" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Sexe" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Faim" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Avarice" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Sport" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Jeu" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Beauté" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Apprentissage" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Justice" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Bonheur" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Mal" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Bonté" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Perception" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Sensations" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Angoisse" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Cyberpunk" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Steampunk" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Homosexualité" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="LGBT" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Tragedie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Utopie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Dystopie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Ecologie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Mystère" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Nature" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Poesie" />
+			<column name="complement" />
+		</insert>
+		<insert tableName="idea">
+			<column name="type" value="theme" />
+			<column name="value" value="Ecole" />
+			<column name="complement" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

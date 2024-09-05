@@ -1,0 +1,25 @@
+{
+  "nidAuxHistoiresApp": {
+    "bookStatus": {
+      "home": {
+        "title": "Libraries",
+        "createLabel": "Create a new BookStatus",
+        "createOrEditLabel": "Create or edit a BookStatus",
+        "notFound": "No Libraries found"
+      },
+      "created": "A new BookStatus is created with identifier {{ param }}",
+      "updated": "A BookStatus is updated with identifier {{ param }}",
+      "deleted": "A BookStatus is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete BookStatus {{ id }}?"
+      },
+      "detail": {
+        "title": "BookStatus"
+      },
+      "finished": "Finished",
+      "favorit": "Favorit",
+      "book": "Book",
+      "curentChapter": "Curent Chapter"
+    }
+  }
+}

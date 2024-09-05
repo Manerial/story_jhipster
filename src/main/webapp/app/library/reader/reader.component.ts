@@ -34,7 +34,8 @@ export class ReaderComponent implements OnInit {
       this.readerService.getBookObservable().subscribe(book => {
         if (book.body) {
           this.readerService.book = of(book.body);
-          this.titleService.setTitle(book.body.name);
+          this.titleService.setTitle(book.body.name!);
+          this.readerService.changeBook(book.body.id!);
         }
         this.isLoaded = true;
       });

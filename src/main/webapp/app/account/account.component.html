@@ -1,0 +1,15 @@
+<div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 jhiTranslate="account.title" [translateValues]="{ username: account.login }" *ngIf="account">Profile of [<b>{{ account.login }}</b>]</h2>
+            <div>
+                <!--Profil-->
+                <p jhiTranslate="account.lastName" [translateValues]="{ lastName: account.lastName }" >Last name: {{account.lastName}}</p>
+                <p jhiTranslate="account.firstName" [translateValues]="{ firstName: account.firstName }" >First name: {{account.firstName}}</p>
+                <p jhiTranslate="account.email" [translateValues]="{ email: account.email }" >E-Mail: {{account.email}}</p>
+                <!--Présentation-->
+                <p jhiTranslate="account.introduction" [translateValues]="{ introduction: account.introduction }" >Introduction: {{account.introduction}}</p>
+            </div>
+        </div>
+    </div>
+</div>

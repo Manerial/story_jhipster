@@ -1,0 +1,36 @@
+{
+  "nidAuxHistoiresApp": {
+    "comment": {
+      "home": {
+        "title": "Comments",
+        "createLabel": "Create a new Comment",
+        "createOrEditLabel": "Create or edit a Comment",
+        "notFound": "No Comments found"
+      },
+      "created": "A new Comment is created with identifier {{ param }}",
+      "updated": "A Comment is updated with identifier {{ param }}",
+      "deleted": "A Comment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Comment {{ id }}?"
+      },
+      "detail": {
+        "title": "Comment"
+      },
+      "text": "Text",
+      "book": "Book",
+      "user": "User",
+      "list": {
+        "title": "Comments for {{ bookName }}"
+      },
+      "add": {
+        "title": "Add a comment",
+        "button": "Comment",
+        "question": "Your comment",
+        "validate": "Validate",
+        "cancel": "Cancel",
+        "read": "Read"
+      },
+      "empty": "No comments for this book"
+    }
+  }
+}

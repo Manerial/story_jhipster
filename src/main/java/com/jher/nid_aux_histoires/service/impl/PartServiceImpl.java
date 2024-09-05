@@ -43,6 +43,9 @@ public class PartServiceImpl implements PartService {
 	public PartDTO save(PartDTO partDTO) {
 		log.debug("Request to save Part : {}", partDTO);
 		Part part = partMapper.toEntity(partDTO);
+		if (part.getNumber() <= 0) {
+			part.setNumber(findNextNumberForBookId(part.getBook().getId()));
+		}
 		part = partRepository.save(part);
 		return partMapper.toDto(part);
 	}
@@ -66,24 +69,44 @@ public class PartServiceImpl implements PartService {
 		return partRepository.findAll(pageable).map(partMapper::toDto);
 	}
 
-	public Page<PartDTO> findAllWithEagerRelationships(Pageable pageable) {
-		return partRepository.findAllWithEagerRelationships(pageable).map(partMapper::toDto);
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PartDTO> findAllByAuthorLogin(Pageable pageable, String login) {
+		return partRepository.findAllByAuthorLogin(pageable, login).map(partMapper::toDto);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<PartDTO> findOne(Long id) {
 		log.debug("Request to get Part : {}", id);
-		return partRepository.findOneWithEagerRelationships(id).map(partMapper::toDto);
+		return partRepository.findOne(id).map(partMapper::toDto);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public String findAuthorLoginByPartId(Long id) {
+		return partRepository.findAuthorLoginByPartId(id);
 	}
 
 	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Part : {}", id);
-		Part part = partRepository.findById(id).get();
-		for (Chapter chapter : part.getChapters()) {
-			chapterService.delete(chapter.getId());
+		Optional<Part> optPart = partRepository.findById(id);
+		if (optPart.isPresent()) {
+			Part part = optPart.get();
+			for (Chapter chapter : part.getChapters()) {
+				chapterService.delete(chapter.getId());
+			}
+			partRepository.deleteById(id);
 		}
-		partRepository.deleteById(id);
+	}
+
+	private int findNextNumberForBookId(Long bookId) {
+		log.debug("Request to get all Parts");
+		int bigest = 1;
+		for (Part part : partRepository.findAllByBookId(bookId)) {
+			bigest = (bigest > part.getNumber()) ? bigest : part.getNumber() + 1;
+		}
+		return bigest;
 	}
 }

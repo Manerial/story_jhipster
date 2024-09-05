@@ -2,18 +2,13 @@ package com.jher.nid_aux_histoires.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,12 +17,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
 /**
  * A Scene.
  */
 @Entity
 @Table(name = "scene")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Data
 public class Scene implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -49,39 +47,13 @@ public class Scene implements Serializable {
 	@Column(name = "timestamp_start")
 	private Date timestampStart;
 
-	@ManyToMany
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	@JoinTable(name = "scene_image", joinColumns = @JoinColumn(name = "scene_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id"))
-	private Set<Image> images = new HashSet<>();
-
 	@ManyToOne
 	@JsonIgnoreProperties(value = "scenes", allowSetters = true)
 	private Chapter chapter;
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 	public Scene name(String name) {
 		this.name = name;
 		return this;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getNumber() {
-		return number;
 	}
 
 	public Scene number(Integer number) {
@@ -89,25 +61,9 @@ public class Scene implements Serializable {
 		return this;
 	}
 
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-
-	public String getText() {
-		return text;
-	}
-
 	public Scene text(String text) {
 		this.text = text;
 		return this;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public Date getTimestampStart() {
-		return timestampStart;
 	}
 
 	public Scene timestampStart(Date timestampStart) {
@@ -115,49 +71,10 @@ public class Scene implements Serializable {
 		return this;
 	}
 
-	public void setTimestampStart(Date timestampStart) {
-		this.timestampStart = timestampStart;
-	}
-
-	public Set<Image> getImages() {
-		return images;
-	}
-
-	public Scene images(Set<Image> images) {
-		this.images = images;
-		return this;
-	}
-
-	public Scene addImage(Image image) {
-		this.images.add(image);
-		image.getScenes().add(this);
-		return this;
-	}
-
-	public Scene removeImage(Image image) {
-		this.images.remove(image);
-		image.getScenes().remove(this);
-		return this;
-	}
-
-	public void setImages(Set<Image> images) {
-		this.images = images;
-	}
-
-	public Chapter getChapter() {
-		return chapter;
-	}
-
 	public Scene chapter(Chapter chapter) {
 		this.chapter = chapter;
 		return this;
 	}
-
-	public void setChapter(Chapter chapter) {
-		this.chapter = chapter;
-	}
-	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-	// setters here
 
 	@Override
 	public boolean equals(Object o) {
