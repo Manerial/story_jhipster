@@ -30,6 +30,7 @@ export class User implements IUser {
   public password: string;
 
   constructor();
+
   constructor(
     id?: any,
     login?: string,
@@ -61,7 +62,7 @@ export class User implements IUser {
     lastModifiedDate?: Date,
     password?: string
   ) {
-    this.id = id || 0;
+    this.id = id || null;
     this.login = login || '';
     this.firstName = firstName || '';
     this.lastName = lastName || '';

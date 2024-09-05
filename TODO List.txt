@@ -1,12 +1,32 @@
 OBLIGATOIRE
 
-Get Part / Chapter / Scene by parent id (pas sûr)
+Page recherche auteur
+	Similaire à Librairie
+	Lien vers page de présentation Auteur
 
-Commentaires (pas de notes)
+Page de présentation Auteur
+	Profil
+	Résumé
+	Oeuvres
+
+Interface Compte
+	Gestion des livres (ajouter - supprimer - activer - désactiver)
+
+Page Accueil :
+	- Nouvelles sorties
+	- News du moment
+	
+Mots clés recherche Google
+
+Outils :
+	Demande de Beta-Lecture
+
+Import de livres
+	Gestion des styles
+	Import docx - odt - txt
+
+Commentaires
 	Interface utilisateur GUI (bouton commenter + page / popup commentaire)
-
-Lier Auteur et User
-	Lier les auteurs sur interface Admin
 
 Tri/sélection
 	Nouveau
@@ -15,14 +35,9 @@ Tri/sélection
 	Auteur
 	Aléatoire
 
-Page de présentation Auteur
-	Profil
-	Résumé
-	Oeuvres
-
 Section Contact
 
-CONTINUEL
+CONTINU
 
 Traduire le site
 
