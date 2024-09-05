@@ -73,6 +73,13 @@ export class AccountService {
     return this.userIdentity !== null;
   }
 
+  getUserIdentity(): Account {
+    if (this.userIdentity === null) {
+      throw new Error('User not identified');
+    }
+    return this.userIdentity;
+  }
+
   getAuthenticationState(): Observable<Account | null> {
     return this.authenticationState.asObservable();
   }

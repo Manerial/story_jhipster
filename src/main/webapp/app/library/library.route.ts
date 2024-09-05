@@ -20,7 +20,7 @@ export const FAVORITS_ROUTE: Route = {
   path: 'favorits',
   component: LibraryComponent,
   data: {
-    pageTitle: 'library.favorits.title',
+    pageTitle: 'favorits.title',
     authorities: [Authority.USER],
   },
   canActivate: [UserRouteAccessService],
@@ -29,23 +29,14 @@ export const FAVORITS_ROUTE: Route = {
 export const READER_ROUTE: Route = {
   path: 'reader/book/:bookId',
   component: ReaderComponent,
-  data: {
-    pageTitle: 'library.reader.title',
-  },
 };
 
 export const BONUSES_ROUTE: Route = {
   path: 'bonus/book/:bookId',
   component: BonusListComponent,
-  data: {
-    pageTitle: 'library.bonuses.title',
-  },
 };
 
 export const COMMENTS_ROUTE: Route = {
   path: 'comments/book/:bookId',
   component: CommentsComponent,
-  data: {
-    pageTitle: 'library.comments.title',
-  },
 };

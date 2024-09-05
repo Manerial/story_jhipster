@@ -1,5 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AccountService } from 'app/core/auth/account.service';
 import { BookStatusService } from 'app/entities/bookStatus/bookStatus.service';
 import { IBook } from 'app/shared/model/book.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -29,7 +30,7 @@ export class ReaderService {
   public currentEntityNameObs = this.entitySource.asObservable();
   public currentEntityName: string | undefined;
 
-  constructor(private bookStatusService: BookStatusService) {}
+  constructor(private bookStatusService: BookStatusService, private accountService: AccountService) {}
 
   getBookObservable(): Observable<EntityResponseType> {
     return this.bookObservable;
@@ -58,7 +59,9 @@ export class ReaderService {
     this.partSource.next('');
     this.currentChapterId = chapterId;
     this.chapterSource.next(chapterId.toString());
-    this.saveCurrentChapter();
+    if (this.accountService.isAuthenticated()) {
+      this.saveCurrentChapter();
+    }
   }
 
   saveCurrentChapter(): void {

@@ -51,47 +51,43 @@ export class LibraryComponent implements OnInit {
     } else {
       this.getBooks();
     }
-    this.getSearchAccount();
+    this.getSearch();
+    if (this.accountService.isAuthenticated()) {
+      this.account = this.accountService.getUserIdentity();
+    }
   }
 
-  getSearchAccount(): void {
+  getSearch(): void {
     this.navbarService.getCurrentSearch().subscribe(search => {
       this.searchText = search;
-    });
-
-    this.accountService.identity().subscribe(account => {
-      if (account) {
-        this.account = account;
-      }
     });
   }
 
   getBooks(): void {
     this.bookService.query().subscribe((books: HttpResponse<IBook[]>) => {
-      this.books = books.body || [];
-      this.books.forEach(book => {
-        if (book.id !== undefined) {
-          this.collapseBooks[book.id] = true;
-        }
-      });
-      this.bookStatusService.query().subscribe((bookStatusList: HttpResponse<IBookStatus[]>) => {
-        this.bookStatusList = bookStatusList.body || [];
-      });
+      this.saveBookList(books);
     });
   }
 
   getFavorits(): void {
     this.bookService.findAllFavorits().subscribe((books: HttpResponse<IBook[]>) => {
-      this.books = books.body || [];
-      this.books.forEach(book => {
-        if (book.id !== undefined) {
-          this.collapseBooks[book.id] = true;
-        }
-      });
+      this.saveBookList(books);
+    });
+  }
+
+  saveBookList(books: HttpResponse<IBook[]>): void {
+    this.books = books.body || [];
+    this.books.forEach(book => {
+      if (book.id !== undefined) {
+        this.collapseBooks[book.id] = true;
+      }
+    });
+
+    if (this.accountService.isAuthenticated()) {
       this.bookStatusService.query().subscribe((bookStatusList: HttpResponse<IBookStatus[]>) => {
         this.bookStatusList = bookStatusList.body || [];
       });
-    });
+    }
   }
 
   flip(event: MouseEvent): void {
