@@ -13,11 +13,12 @@ import com.jher.nid_aux_histoires.service.dto.CommentDTO;
 public interface CommentMapper extends EntityMapper<CommentDTO, Comment> {
 
 	@Mapping(source = "book.id", target = "bookId")
+	@Mapping(source = "user.id", target = "userId")
 	@Mapping(source = "user.login", target = "userLogin")
 	CommentDTO toDto(Comment comment);
 
-	@Mapping(target = "book", ignore = true)
-	@Mapping(target = "user", ignore = true)
+	@Mapping(source = "bookId", target = "book")
+	@Mapping(source = "userId", target = "user")
 	Comment toEntity(CommentDTO commentDTO);
 
 	default Comment fromId(Long id) {

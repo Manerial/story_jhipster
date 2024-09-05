@@ -32,6 +32,7 @@
                     <td><a [routerLink]="['/entities/comment', comment.id, 'view']">{{ comment.id }}</a></td>
                     <td>{{ comment.text }}</td>
                     <td><a [routerLink]="['/entities/book', comment.bookId, 'view']">{{ comment.bookId }}</a></td>
+                    <td><a [routerLink]="['/admin/user-management', comment.userLogin, 'view']">{{ comment.userLogin }}</a></td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

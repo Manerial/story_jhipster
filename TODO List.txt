@@ -1,6 +1,6 @@
 OBLIGATOIRE
 
-Get Part / Chapter / Scene by parent id
+Get Part / Chapter / Scene by parent id (pas sûr)
 
 Commentaires (pas de notes)
 	Interface d'entité admin
