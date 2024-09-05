@@ -3,7 +3,7 @@ export interface IBonus {
   name: string;
   ownerId: number;
   ownerLogin: string;
-  extension: string;
+  dataContentType: string;
   data: any;
   bookId: number;
   description: string;
@@ -14,7 +14,7 @@ export class Bonus implements IBonus {
   public name: string;
   public ownerId: number;
   public ownerLogin: string;
-  public extension: string;
+  public dataContentType: string;
   public data: any;
   public bookId: number;
   public description: string;
@@ -25,7 +25,7 @@ export class Bonus implements IBonus {
     name?: string,
     ownerId?: number,
     ownerLogin?: string,
-    extension?: string,
+    dataContentType?: string,
     data?: any,
     bookId?: any,
     description?: string
@@ -36,7 +36,7 @@ export class Bonus implements IBonus {
     name?: string,
     ownerId?: number,
     ownerLogin?: string,
-    extension?: string,
+    dataContentType?: string,
     data?: any,
     bookId?: any,
     description?: string
@@ -45,7 +45,7 @@ export class Bonus implements IBonus {
     this.name = name || '';
     this.ownerId = ownerId || 0;
     this.ownerLogin = ownerLogin || '';
-    this.extension = extension || '';
+    this.dataContentType = dataContentType || '';
     this.data = data || null;
     this.bookId = bookId || 0;
     this.description = description || '';

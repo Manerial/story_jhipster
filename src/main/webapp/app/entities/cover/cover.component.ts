@@ -94,7 +94,7 @@ export class CoverComponent implements OnInit, OnDestroy {
 
   delete(cover: ICover): void {
     const modalRef = this.modalService.open(CoverDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.image = cover;
+    modalRef.componentInstance.cover = cover;
   }
 
   sort(): string[] {

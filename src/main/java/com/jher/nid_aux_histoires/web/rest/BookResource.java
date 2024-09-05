@@ -250,7 +250,7 @@ public class BookResource {
 		SecurityConfiguration.CheckLoggedUser(bookDTO.getAuthorLogin());
 
 		Long coverId = bookDTO.getCoverId();
-		if (coverId != null) {
+		if (coverId != null && coverId != 0) {
 			String login = coverService.findOne(coverId).get().getOwnerLogin();
 			if (!SecurityConfiguration.IsAdmin() && !login.equals(SecurityConfiguration.getLoggedUser().getName())) {
 				throw new Exception("You have no access to this resource (Cover : " + coverId + ")");

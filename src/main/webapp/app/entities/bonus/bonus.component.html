@@ -24,7 +24,7 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="nidAuxHistoiresApp.bonus.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="extension"><span jhiTranslate="nidAuxHistoiresApp.bonus.extension">Extension</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dataContentType"><span jhiTranslate="nidAuxHistoiresApp.bonus.dataContentType">Content Data Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -32,7 +32,7 @@
                 <tr *ngFor="let bonus of bonuses ;trackBy: trackId">
                     <td><a [routerLink]="['/entities/bonus', bonus.id, 'view']">{{ bonus.id }}</a></td>
                     <td>{{ bonus.name }}</td>
-                    <td>{{ bonus.extension }}</td>
+                    <td>{{ bonus.dataContentType }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

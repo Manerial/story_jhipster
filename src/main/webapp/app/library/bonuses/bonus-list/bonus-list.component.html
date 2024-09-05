@@ -5,7 +5,7 @@
 		<div *ngFor="let bonus of bonusList" class="col-sm-6 mt-2">
 			<div class="card">
 				<div class="card-body">
-					<h3>{{ bonus.name }}.{{ bonus.extension }}</h3>
+					<h3>{{ bonus.name }}.{{ bonus.dataContentType.split("/")[1] }}</h3>
 					<p *ngIf="showDescription[bonus.id]">{{ bonus.description }}</p>
 					<a (click)="toggleDescription(bonus.id)"
 						class="btn bkg-gold">

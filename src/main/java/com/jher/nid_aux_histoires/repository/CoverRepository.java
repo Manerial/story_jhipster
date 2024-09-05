@@ -17,6 +17,6 @@ public interface CoverRepository extends JpaRepository<Cover, Long> {
 	@Query("select distinct cover from Cover cover where cover.owner.id =:id")
 	Page<Cover> findAllByOwnerId(Pageable pageable, @Param("id") Long id);
 
-	@Query("select distinct bonus from Bonus bonus where bonus.owner.login =:login")
+	@Query("select distinct cover from Cover cover where cover.owner.login =:login")
 	Page<Cover> findAllByOwnerLogin(Pageable pageable, @Param("login") String login);
 }

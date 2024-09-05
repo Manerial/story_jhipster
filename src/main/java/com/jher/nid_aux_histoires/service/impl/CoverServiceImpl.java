@@ -9,7 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jher.nid_aux_histoires.domain.Book;
 import com.jher.nid_aux_histoires.domain.Cover;
+import com.jher.nid_aux_histoires.repository.BookRepository;
 import com.jher.nid_aux_histoires.repository.CoverRepository;
 import com.jher.nid_aux_histoires.service.CoverService;
 import com.jher.nid_aux_histoires.service.dto.CoverDTO;
@@ -31,11 +33,14 @@ public class CoverServiceImpl implements CoverService {
 
 	private final CoverMapperLight coverMapperLight;
 
-	public CoverServiceImpl(CoverRepository coverRepository, CoverMapper coverMapper,
-			CoverMapperLight coverMapperLight) {
+	private final BookRepository bookRepository;
+
+	public CoverServiceImpl(CoverRepository coverRepository, CoverMapper coverMapper, CoverMapperLight coverMapperLight,
+			BookRepository bookRepository) {
 		this.coverRepository = coverRepository;
 		this.coverMapper = coverMapper;
 		this.coverMapperLight = coverMapperLight;
+		this.bookRepository = bookRepository;
 	}
 
 	@Override
@@ -77,6 +82,12 @@ public class CoverServiceImpl implements CoverService {
 	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Cover : {}", id);
+		Cover cover = coverRepository.findById(id).get();
+		for (Book book : cover.getBookToCovers()) {
+			book.setCover(null);
+		}
+		bookRepository.saveAll(cover.getBookToCovers());
 		coverRepository.deleteById(id);
+
 	}
 }

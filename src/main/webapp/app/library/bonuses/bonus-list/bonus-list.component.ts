@@ -47,7 +47,7 @@ export class BonusListComponent implements OnInit {
       if (data.body != null) {
         const downloadURL = window.URL.createObjectURL(data.body);
         const anchor = document.createElement('a');
-        anchor.download = bonus.name + '.' + bonus.extension;
+        anchor.download = bonus.name + '.' + bonus.dataContentType;
         anchor.href = downloadURL;
         anchor.click();
       }

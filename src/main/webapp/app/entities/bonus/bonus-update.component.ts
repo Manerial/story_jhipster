@@ -64,7 +64,7 @@ export class BonusUpdateComponent implements OnInit {
       ownerId: bonus.ownerId !== 0 ? bonus.ownerId : this.account.id,
       ownerLogin: bonus.ownerLogin !== '' ? bonus.ownerLogin : this.account.login,
       file: bonus.data,
-      fileContentType: bonus.extension,
+      fileContentType: bonus.dataContentType,
       description: bonus.description,
       bookId: bonus.bookId !== 0 ? bonus.bookId : null,
     });
@@ -97,7 +97,7 @@ export class BonusUpdateComponent implements OnInit {
       ownerId: this.editForm.get(['ownerId'])!.value,
       ownerLogin: this.editForm.get(['ownerLogin'])!.value,
       data: this.editForm.get(['file'])!.value,
-      extension: this.editForm.get(['fileContentType'])!.value,
+      dataContentType: this.editForm.get(['fileContentType'])!.value,
       description: this.editForm.get(['description'])!.value,
       bookId: this.editForm.get(['bookId'])!.value,
     };

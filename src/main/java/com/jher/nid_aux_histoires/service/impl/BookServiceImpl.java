@@ -9,10 +9,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jher.nid_aux_histoires.domain.Bonus;
 import com.jher.nid_aux_histoires.domain.Book;
 import com.jher.nid_aux_histoires.domain.Comment;
 import com.jher.nid_aux_histoires.domain.Part;
 import com.jher.nid_aux_histoires.repository.BookRepository;
+import com.jher.nid_aux_histoires.service.BonusService;
 import com.jher.nid_aux_histoires.service.BookService;
 import com.jher.nid_aux_histoires.service.CommentService;
 import com.jher.nid_aux_histoires.service.PartService;
@@ -30,23 +32,26 @@ public class BookServiceImpl implements BookService {
 
 	private final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
 
-	private final PartService partService;
-
-	private final CommentService commentService;
-
 	private final BookRepository bookRepository;
 
 	private final BookMapper bookMapper;
 
 	private final BookMapperLight bookMapperLight;
 
-	public BookServiceImpl(BookRepository bookRepository, BookMapper bookMapper, PartService partService,
-			BookMapperLight bookMapperLight, CommentService commentService) {
+	private final PartService partService;
+
+	private final CommentService commentService;
+
+	private final BonusService bonusService;
+
+	public BookServiceImpl(BookRepository bookRepository, BookMapper bookMapper, BookMapperLight bookMapperLight,
+			PartService partService, CommentService commentService, BonusService bonusService) {
 		this.partService = partService;
 		this.bookRepository = bookRepository;
 		this.bookMapper = bookMapper;
 		this.bookMapperLight = bookMapperLight;
 		this.commentService = commentService;
+		this.bonusService = bonusService;
 	}
 
 	@Override
@@ -126,6 +131,9 @@ public class BookServiceImpl implements BookService {
 		}
 		for (Part part : book.getParts()) {
 			partService.delete(part.getId());
+		}
+		for (Bonus bonus : book.getBonuses()) {
+			bonusService.delete(bonus.getId());
 		}
 		bookRepository.deleteById(id);
 	}

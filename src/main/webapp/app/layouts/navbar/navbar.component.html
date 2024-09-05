@@ -72,7 +72,8 @@
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
                         <fa-icon icon="th-list"></fa-icon>
-                        <span jhiTranslate="global.menu.entities.main">Entities</span>
+                        <span *jhiHasAnyAuthority="['ROLE_ADMIN']" jhiTranslate="global.menu.entities.main">Entities</span>
+                        <span *jhiHasNoAuthority="['ROLE_ADMIN']" jhiTranslate="global.menu.entities.main2">Entities</span>
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
