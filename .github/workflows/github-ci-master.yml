@@ -38,7 +38,9 @@ jobs:
             - name: Install node.js packages
               run: npm install
             - name: Package application
-              run: ./mvnw -ntp package -Pprod -DskipTests
+              run: |
+                chmod +x mvnw
+                ./mvnw -ntp package -Pprod -DskipTests
             - name: Upload artifact
               uses: actions/upload-artifact@v2
               with:
