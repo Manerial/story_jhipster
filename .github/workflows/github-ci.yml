@@ -37,10 +37,10 @@ jobs:
                 restore-keys: ${{ runner.os }}-m2
             - name: Install node.js packages
               run: npm install
-            - name: Echo runner.temp
-              run: echo "runner.temp = ${{ runner.temp }}"
-            - name: LS
-              run: ls -l /home/
+            - name: Create BooksExports
+              run: mkdir -m 777 /home/runner/BooksExports
+            - name: LS Runner
+              run: ls -l /home/runner
             - name: Run backend test
               run: |
                 chmod +x mvnw
