@@ -8,7 +8,7 @@ import { IType, Type } from 'app/shared/model/type.model';
   styleUrls: ['./word-generator.component.scss'],
 })
 export class WordGeneratorComponent implements OnInit {
-  public words: {}[] = [];
+  public words: string[] = [];
   public typeList: IType[] = [];
   public currentType: IType = new Type();
   public numberOfWords = 5;

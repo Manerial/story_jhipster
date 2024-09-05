@@ -37,8 +37,7 @@
 				<div class="col-sm mw-50">
 					<ul class="list-group">
 						<li *ngFor="let word of words" class="list-group-item list-group-item-action long-text-ellipsis"
-							data-toggle="tooltip" data-placement="left" title="Click to copy">
-							(click)="copyToClipboard(word)"
+							data-toggle="tooltip" data-placement="left" title="Click to copy" (click)="copyToClipboard(word)">
 							{{ word }}
 						</li>
 					</ul>

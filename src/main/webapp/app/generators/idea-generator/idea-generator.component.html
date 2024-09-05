@@ -88,13 +88,13 @@
 											</dd>
 										</dl>
 										<dl>
-											<dt>Taille:</dt>
+											<dt>Taille (cm):</dt>
 											<dd><input class="form-control" type="number"
 													[(ngModel)]="personaConstraint.physical.height">
 											</dd>
 										</dl>
 										<dl>
-											<dt>Poids:</dt>
+											<dt>Poids (g):</dt>
 											<dd><input class="form-control" type="number"
 													[(ngModel)]="personaConstraint.physical.weight">
 											</dd>
@@ -232,7 +232,7 @@
 								</dl>
 								<dl>
 									<dt>Poids:</dt>
-									<dd>{{(persona.physical.weight / 100).toFixed(2)}}kg</dd>
+									<dd>{{(persona.physical.weight / 1000).toFixed(2)}}kg</dd>
 								</dl>
 								<dl>
 									<dt>Couleur cheveux:</dt>
