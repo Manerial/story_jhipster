@@ -1,25 +1,10 @@
 OBLIGATOIRE
 
-Page recherche auteur
-	Similaire à Librairie
-	Lien vers page de présentation Auteur
-
 Page de présentation Auteur
-	Profil
 	Résumé
-	Oeuvres
 
 Interface Compte
 	Gestion des livres (ajouter - supprimer - activer - désactiver)
-
-Page Accueil :
-	- Nouvelles sorties
-	- News du moment
-	
-Mots clés recherche Google
-
-Outils :
-	Demande de Beta-Lecture
 
 Import de livres
 	Gestion des styles
@@ -28,14 +13,27 @@ Import de livres
 Commentaires
 	Interface utilisateur GUI (bouton commenter + page / popup commentaire)
 
+Outils :
+	Demande de Beta-Lecture
+
+Section Contact
+
+Mots clés recherche Google
+
+Page Accueil :
+	- Nouvelles sorties
+	- News du moment
+
+Page recherche auteur
+	Similaire à Librairie
+	Lien vers page de présentation Auteur
+
 Tri/sélection
 	Nouveau
 	Nom
 	Genre
 	Auteur
 	Aléatoire
-
-Section Contact
 
 CONTINU
 

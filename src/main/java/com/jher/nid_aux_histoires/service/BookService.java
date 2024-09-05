@@ -39,6 +39,14 @@ public interface BookService {
 	Page<BookDTO> findAll(Pageable pageable);
 
 	/**
+	 * Get all the books.
+	 *
+	 * @param pageable the pagination information.
+	 * @return the list of entities.
+	 */
+	List<BookDTO> findAllByAuthorId(String login);
+
+	/**
 	 * Get all the books with eager load of many-to-many relationships.
 	 *
 	 * @return the list of entities.
