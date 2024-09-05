@@ -2,7 +2,7 @@
     <h2 id="page-heading">
         <span jhiTranslate="nidAuxHistoiresApp.chapter.home.title">Chapters</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-chapter" [routerLink]="['/chapter/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-chapter" [routerLink]="['/entities/chapter/new']">
             <fa-icon icon="plus"></fa-icon>
             <span  jhiTranslate="nidAuxHistoiresApp.chapter.home.createLabel">
             Create a new Chapter
@@ -32,26 +32,26 @@
             </thead>
             <tbody>
                 <tr *ngFor="let chapter of chapters ;trackBy: trackId">
-                    <td><a [routerLink]="['/chapter', chapter.id, 'view']">{{ chapter.id }}</a></td>
+                    <td><a [routerLink]="['/entities/chapter', chapter.id, 'view']">{{ chapter.id }}</a></td>
                     <td>{{ chapter.name }}</td>
                     <td>{{ chapter.description }}</td>
                     <td>{{ chapter.number }}</td>
                     <td>
                         <div *ngIf="chapter.partId">
-                            <a [routerLink]="['/part', chapter.partId , 'view']" >{{ chapter.partId }}</a>
+                            <a [routerLink]="['/entities/part', chapter.partId , 'view']" >{{ chapter.partId }}</a>
                         </div>
                     </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
-                                    [routerLink]="['/chapter', chapter.id, 'view']"
+                                    [routerLink]="['/entities/chapter', chapter.id, 'view']"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
                             <button type="submit"
-                                    [routerLink]="['/chapter', chapter.id, 'edit']"
+                                    [routerLink]="['/entities/chapter', chapter.id, 'edit']"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>

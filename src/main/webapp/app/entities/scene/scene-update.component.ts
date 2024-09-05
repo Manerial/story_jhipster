@@ -26,6 +26,7 @@ export class SceneUpdateComponent implements OnInit {
   images: IImage[] = [];
   chapters: IChapter[] = [];
   timestampStartDp: any;
+  datetimeFormat = Regex.datetimeFormat;
 
   editForm = this.fb.group({
     id: [],

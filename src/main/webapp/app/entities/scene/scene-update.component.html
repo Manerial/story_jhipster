@@ -15,12 +15,24 @@
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.scene.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
+                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)" >
+                        <small class="form-text text-danger"
+                                jhiTranslate="nidAuxHistoiresApp.scene.required.name">
+                            Name field is required
+                        </small>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.scene.number" for="field_number">Number</label>
                     <input type="number" class="form-control" name="number" id="field_number"
                            formControlName="number"/>
+                    <div *ngIf="editForm.get('number')!.invalid && (editForm.get('number')!.dirty || editForm.get('number')!.touched)" >
+                        <small class="form-text text-danger"
+                                jhiTranslate="nidAuxHistoiresApp.scene.required.number">
+                            Number field is required
+                        </small>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -34,14 +46,18 @@
                     <div class="input-group">
                         <input id="field_timestampStart" type="text" class="form-control" name="timestampStart"  formControlName="timestampStart"/>
                     </div>
+                    <div *ngIf="editForm.get('timestampStart')!.invalid && (editForm.get('timestampStart')!.dirty || editForm.get('timestampStart')!.touched)" >
+                        <small class="form-text text-danger"
+                               jhiTranslate="nidAuxHistoiresApp.scene.format.timestampStart" [translateValues]="{ format: datetimeFormat }">
+                               Date / Time fied must be in the format {{ datetimeFormat }}
+                        </small>
+                    </div>
                 </div>
-
-
 
                 <div class="form-group">
                     <label jhiTranslate="nidAuxHistoiresApp.scene.image" for="field_images">Image</label>
                     <select class="form-control" id="field_images" multiple name="images" formControlName="images">
-                        <option [ngValue]="getSelected(editForm.get('images')!.value, imageOption)" *ngFor="let imageOption of images; trackBy: trackById">{{ imageOption.id }}</option>
+                        <option [ngValue]="getSelected(editForm.get('images')!.value, imageOption)" *ngFor="let imageOption of images; trackBy: trackById">{{ imageOption.name }}</option>
                     </select>
                 </div>
 
@@ -49,8 +65,14 @@
                     <label class="form-control-label" jhiTranslate="nidAuxHistoiresApp.scene.chapter" for="field_chapter">Chapter</label>
                     <select class="form-control" id="field_chapter" name="chapter" formControlName="chapterId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="chapterOption.id" *ngFor="let chapterOption of chapters; trackBy: trackById">{{ chapterOption.id }}</option>
+                        <option [ngValue]="chapterOption.id" *ngFor="let chapterOption of chapters; trackBy: trackById">{{ chapterOption.number + " " + chapterOption.name }}</option>
                     </select>
+                    <div *ngIf="editForm.get('chapterId')!.invalid && (editForm.get('chapterId')!.dirty || editForm.get('chapterId')!.touched)" >
+                        <small class="form-text text-danger"
+                                jhiTranslate="nidAuxHistoiresApp.scene.required.chapter">
+                            Chapter field is required
+                        </small>
+                    </div>
                 </div>
             </div>
 
