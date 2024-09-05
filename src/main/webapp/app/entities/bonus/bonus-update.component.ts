@@ -46,14 +46,10 @@ export class BonusUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.accountService.identity().subscribe(account => {
-      if (account) {
-        this.account = account;
-        this.activatedRoute.data.subscribe(({ bonus }) => {
-          this.updateForm(bonus);
-          this.bookService.findAllByAuthor(account.login).subscribe((res: HttpResponse<IBook[]>) => (this.books = res.body || []));
-        });
-      }
+    this.account = this.accountService.getUserIdentity();
+    this.activatedRoute.data.subscribe(({ bonus }) => {
+      this.updateForm(bonus);
+      this.bookService.findAllByAuthor(this.account.login).subscribe((res: HttpResponse<IBook[]>) => (this.books = res.body || []));
     });
   }
 

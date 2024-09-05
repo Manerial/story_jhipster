@@ -6,15 +6,20 @@ import { LoginModalComponent } from 'app/shared/login/login.component';
 @Injectable({ providedIn: 'root' })
 export class LoginModalService {
   private isOpen = false;
+  private modalRef!: NgbModalRef;
 
   constructor(private modalService: NgbModal) {}
 
-  open(): void {
+  open(callback?: () => void): NgbModalRef {
     if (this.isOpen) {
-      return;
+      return this.modalRef;
     }
     this.isOpen = true;
-    const modalRef: NgbModalRef = this.modalService.open(LoginModalComponent);
-    modalRef.result.finally(() => (this.isOpen = false));
+    this.modalRef = this.modalService.open(LoginModalComponent);
+    this.modalRef.result
+      .then(callback)
+      .finally(() => (this.isOpen = false))
+      .catch(() => {});
+    return this.modalRef;
   }
 }

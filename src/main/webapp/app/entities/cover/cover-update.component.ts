@@ -40,13 +40,10 @@ export class CoverUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.accountService.identity().subscribe(account => {
-      if (account) {
-        this.account = account;
-        this.activatedRoute.data.subscribe(({ cover }) => {
-          this.updateForm(cover);
-        });
-      }
+    this.account = this.accountService.getUserIdentity();
+
+    this.activatedRoute.data.subscribe(({ cover }) => {
+      this.updateForm(cover);
     });
   }
 
